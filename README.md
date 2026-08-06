@@ -9,7 +9,7 @@ Calendario iCalendar sottoscrivibile con le partite della Prima Squadra maschile
 ## Come sottoscrivere il calendario su iPhone
 
 1. Apri <https://dizzle0987.github.io/milan-calendar/> con Safari su iPhone.
-2. Tocca **Prova iscrizione automatica** e conferma se iOS mostra la schermata d'iscrizione.
+2. Tocca **Iscriviti su iPhone** e conferma se iOS mostra la schermata d'iscrizione.
 3. Se Calendario si apre senza aggiungere il feed, torna alla pagina e tocca **Copia link calendario**.
 4. In Calendario, tocca **Calendari → Aggiungi calendario → Aggiungi calendario con iscrizione**.
 5. Incolla il link, tocca **Trova**, scegli **iCloud** come account e tocca **Fine**.
@@ -30,6 +30,8 @@ Il generatore non usa SofaScore.
 2. **Fallback e integrazione — ESPN**: endpoint JSON pubblici per Serie A, Coppa Italia, Supercoppa, competizioni UEFA e amichevoli. ESPN integra anche incontri non ancora presenti nella risposta ufficiale.
 3. **Ultimo risultato valido**: se nessuna fonte remota risponde con eventi validi, il programma termina con errore prima di scrivere. `calendar.ics` e `data/events.json` rimangono quindi intatti.
 4. **Eventi manuali**: `data/manual_events.json` può integrare o correggere le fonti. A parità di partita, i dati manuali hanno precedenza.
+
+Il [calendario DAZN](https://www.dazn.com/it-IT/schedule) viene usato come verifica aggiuntiva per amichevoli e disponibilità televisiva. Non è la fonte primaria perché espone una finestra mobile limitata di eventi futuri.
 
 Le richieste HTTP hanno timeout, retry con backoff e un User-Agent identificabile. Le fonti sono interrogate ogni 6 ore da GitHub Actions.
 
@@ -110,9 +112,10 @@ Dopo la modifica esegui test e generatore, quindi committa sia il file manuale s
 ## Automazione GitHub
 
 - `.github/workflows/update.yml` viene eseguito alle ore `00:17`, `06:17`, `12:17` e `18:17` UTC. Installa le dipendenze, esegue i test, rigenera il feed e committa solo quando gli output cambiano.
-- `.github/workflows/pages.yml` pubblica `index.html` e `calendar.ics` con GitHub Pages dopo modifiche su `main` e dopo ogni aggiornamento automatico riuscito.
+- GitHub Pages pubblica direttamente la cartella radice del branch `main`; ogni commit generato dall'aggiornamento rende quindi disponibile anche il nuovo feed.
+- `.github/workflows/pages.yml` resta disponibile come workflow di pubblicazione alternativo.
 
-Nel repository GitHub, apri **Settings → Pages** e imposta **Source: GitHub Actions** se non è già selezionato. In **Settings → Actions → General → Workflow permissions**, abilita **Read and write permissions** affinché il workflow di aggiornamento possa effettuare il commit.
+Nel repository GitHub, apri **Settings → Pages** e imposta **Source: Deploy from a branch**, branch `main`, cartella `/ (root)`. In **Settings → Actions → General → Workflow permissions**, abilita **Read and write permissions** affinché il workflow di aggiornamento possa effettuare il commit.
 
 ## Test
 
