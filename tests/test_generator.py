@@ -11,11 +11,65 @@ from milan_calendar.generator import (
     FetchResult,
     UpdateError,
     build_ical,
+    merge_manual_events,
     merge_remote_events,
     parse_espn_json,
+    parse_thesportsdb_json,
     parse_official_html,
     update_calendar,
 )
+
+
+def test_parse_thesportsdb_json_finds_friendlies() -> None:
+    payload = {
+        "events": [
+            {
+                "idEvent": "2477373",
+                "strTimestamp": "2026-08-08T12:00:00",
+                "strHomeTeam": "Chelsea",
+                "strAwayTeam": "AC Milan",
+                "strLeague": "Club Friendlies",
+                "intRound": "0",
+                "strVenue": "Stamford Bridge",
+                "strStatus": "NS",
+            }
+        ]
+    }
+
+    events = parse_thesportsdb_json(payload)
+
+    assert len(events) == 1
+    assert events[0]["source"] == "TheSportsDB"
+    assert events[0]["start"] == "2026-08-08T12:00:00+00:00"
+    assert events[0]["competition"] == "Club Friendlies"
+
+
+def test_team_suffix_does_not_create_duplicate() -> None:
+    remote = [
+        {
+            "source": "TheSportsDB",
+            "home_team": "Chelsea",
+            "away_team": "AC Milan",
+            "competition": "Club Friendlies",
+            "start": "2026-08-08T12:00:00+00:00",
+        }
+    ]
+    manual = [
+        {
+            "source": "Manuale",
+            "home_team": "Chelsea FC",
+            "away_team": "AC Milan",
+            "competition": "Amichevole",
+            "start": "2026-08-08T14:00:00+02:00",
+            "venue": "Gelora Bung Karno Stadium, Jakarta",
+        }
+    ]
+
+    merged = merge_manual_events(remote, manual)
+
+    assert len(merged) == 1
+    assert merged[0]["home_team"] == "Chelsea FC"
+    assert merged[0]["venue"] == "Gelora Bung Karno Stadium, Jakarta"
 
 
 def official_html(matches: list[dict]) -> str:
