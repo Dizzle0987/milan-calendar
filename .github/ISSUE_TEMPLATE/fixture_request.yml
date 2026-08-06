@@ -1,0 +1,42 @@
+name: Partita mancante o errata
+description: Segnala un incontro, un orario, uno stadio o un broadcaster da correggere
+title: "[Partita]: "
+labels: ["data"]
+body:
+  - type: input
+    id: fixture
+    attributes:
+      label: Partita
+      placeholder: Chelsea FC - AC Milan
+    validations:
+      required: true
+  - type: input
+    id: competition
+    attributes:
+      label: Competizione
+      placeholder: Amichevole / Serie A / Champions League
+    validations:
+      required: true
+  - type: input
+    id: datetime
+    attributes:
+      label: Data e ora in Italia
+      placeholder: 8 agosto 2026, 14:00
+    validations:
+      required: true
+  - type: input
+    id: venue
+    attributes:
+      label: Stadio
+  - type: input
+    id: broadcaster
+    attributes:
+      label: Dove vederla in Italia
+  - type: textarea
+    id: sources
+    attributes:
+      label: Fonti
+      description: Inserisci almeno un link pubblico affidabile, preferibilmente ufficiale.
+    validations:
+      required: true
+
