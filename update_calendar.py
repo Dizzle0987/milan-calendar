@@ -45,9 +45,9 @@ ITALIAN_MONTHS = {
     "lug": 7, "ago": 8, "set": 9, "ott": 10, "nov": 11, "dic": 12,
 }
 DATE_LINE_RE = re.compile(
-    r"^(?:lun|mar|mer|gio|ven|sab|dom)\\.?\\s*(\\d{1,2})\\s+"
-    r"(gen|feb|mar|apr|mag|giu|lug|ago|set|ott|nov|dic)\\s*-\\s*"
-    r"(\\d{1,2}):(\\d{2})(?:\\s+GMT[+-]\\d+)?$",
+    r"^(?:lun|mar|mer|gio|ven|sab|dom)\.?\s*(\d{1,2})\s+"
+    r"(gen|feb|mar|apr|mag|giu|lug|ago|set|ott|nov|dic)\s*-\s*"
+    r"(\d{1,2}):(\d{2})(?:\s+GMT[+-]\d+)?$",
     re.IGNORECASE,
 )
 
@@ -55,8 +55,8 @@ DATE_LINE_RE = re.compile(
 def clean_text_lines(soup: BeautifulSoup) -> list[str]:
     """Return visible text as compact one-value-per-line tokens."""
     lines: list[str] = []
-    for raw in soup.get_text("\\n").splitlines():
-        value = re.sub(r"\\s+", " ", raw).strip()
+    for raw in soup.get_text("\n").splitlines():
+        value = re.sub(r"\s+", " ", raw).strip()
         if value:
             lines.append(value)
     return lines
@@ -64,7 +64,7 @@ def clean_text_lines(soup: BeautifulSoup) -> list[str]:
 
 def season_years(lines: list[str]) -> tuple[int, int]:
     for line in lines:
-        m = re.search(r"Calendario e risultati AC Milan\\s+(20\\d{2})/(\\d{2})", line, re.I)
+        m = re.search(r"Calendario e risultati AC Milan\s+(20\d{2})/(\d{2})", line, re.I)
         if m:
             first = int(m.group(1))
             return first, first + 1
