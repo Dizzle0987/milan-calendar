@@ -41,10 +41,23 @@ Gli eventi AC Milan ed ESPN con stesse squadre, stessa famiglia di competizione 
 - stadio;
 - indicazione casa/trasferta del Milan;
 - URL della fonte;
+- emittente o piattaforma che trasmette la partita in Italia;
 - fuso `Europe/Rome`;
 - promemoria 2 ore e 30 minuti prima.
 
 Gli orari indicati come TBC/TBD sono pubblicati come eventi giornalieri. Quando l'orario viene confermato, lo stesso UID viene trasformato in un evento con orario.
+
+## Dove vedere le partite in Italia
+
+Il campo `broadcast_it` viene aggiunto automaticamente in base ai diritti nazionali noti della competizione:
+
+- Serie A: DAZN;
+- Coppa Italia e Supercoppa Italiana: reti Mediaset, Mediaset Infinity e SportMediaset.it;
+- Europa League e Conference League: Sky Sport e NOW;
+- Champions League: Sky Sport/NOW, con avviso di verificare l'eventuale selezione esclusiva Prime Video;
+- amichevoli e altre competizioni: `Da definire` finché non viene pubblicato un palinsesto affidabile.
+
+La piattaforma esatta può essere precisata manualmente quando viene annunciato il palinsesto della singola partita. La correzione manuale ha sempre precedenza sulla mappatura per competizione.
 
 ## Esecuzione locale
 
@@ -80,7 +93,9 @@ Modifica `data/manual_events.json`. Il file accetta un oggetto con la proprietà
       "start": "2026-08-14T20:45:00+02:00",
       "venue": "Stadio San Siro",
       "round": "Trofeo estivo",
-      "source_url": "https://www.acmilan.com/"
+      "source_url": "https://www.acmilan.com/",
+      "broadcast_it": "Canale 5 e Mediaset Infinity",
+      "broadcast_source_url": "https://mediasetinfinity.mediaset.it/"
     }
   ]
 }
