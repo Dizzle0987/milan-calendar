@@ -25,6 +25,7 @@ ESPN_URL = (
     "https://site.api.espn.com/apis/site/v2/sports/soccer/"
     "{competition}/teams/103/schedule?season={season}"
 )
+THESPORTSDB_URL = "https://www.thesportsdb.com/api/v1/json/123/eventsnext.php?id=133667"
 ESPN_COMPETITIONS = {
     "ita.1": "Serie A",
     "ita.coppa_italia": "Coppa Italia",
@@ -120,6 +121,12 @@ def _competition_family(name: str) -> str:
 
 def _is_milan(team: str) -> bool:
     return _normalize(team).replace("-", " ") in MILAN_ALIASES
+
+
+def _team_match_key(team: str) -> str:
+    tokens = _normalize(team).split("-")
+    ignored = {"afc", "cf", "fc", "football", "club"}
+    return "-".join(token for token in tokens if token not in ignored)
 
 
 def _parse_flight_chunks(html: str) -> Iterable[str]:
@@ -235,6 +242,47 @@ def parse_espn_json(payload: dict[str, Any], default_competition: str) -> list[d
     return events
 
 
+def parse_thesportsdb_json(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    events: list[dict[str, Any]] = []
+    for item in payload.get("events") or []:
+        home = str(item.get("strHomeTeam") or "").strip()
+        away = str(item.get("strAwayTeam") or "").strip()
+        if not home or not away or not (_is_milan(home) or _is_milan(away)):
+            continue
+
+        raw_timestamp = str(item.get("strTimestamp") or "").strip()
+        if raw_timestamp:
+            parsed_start = datetime.fromisoformat(raw_timestamp.replace("Z", "+00:00"))
+            if parsed_start.tzinfo is None:
+                parsed_start = parsed_start.replace(tzinfo=timezone.utc)
+            start = parsed_start.isoformat()
+            all_day = False
+        else:
+            raw_date = str(item.get("dateEvent") or "").strip()
+            if not raw_date:
+                continue
+            start = raw_date
+            all_day = True
+
+        event_id = str(item.get("idEvent") or "")
+        events.append(
+            {
+                "source_id": event_id,
+                "source": "TheSportsDB",
+                "source_url": f"https://www.thesportsdb.com/event/{event_id}" if event_id else "https://www.thesportsdb.com/",
+                "home_team": home,
+                "away_team": away,
+                "competition": str(item.get("strLeague") or "Partita"),
+                "round": str(item.get("intRound") or ""),
+                "venue": str(item.get("strVenue") or ""),
+                "start": start,
+                "all_day": all_day,
+                "status": str(item.get("strStatus") or "scheduled"),
+            }
+        )
+    return events
+
+
 def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
     events: list[dict[str, Any]] = []
     successful: list[str] = []
@@ -270,6 +318,15 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
                 errors.append(f"ESPN {competition}/{season}: {exc}")
     if espn_ok:
         successful.append("ESPN")
+
+    try:
+        response = session.get(THESPORTSDB_URL, timeout=20)
+        response.raise_for_status()
+        events.extend(parse_thesportsdb_json(response.json()))
+        successful.append("TheSportsDB")
+    except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"TheSportsDB: {exc}")
+        LOGGER.warning("Fonte TheSportsDB non disponibile: %s", exc)
 
     return FetchResult(events=events, successful_sources=successful, errors=errors)
 
@@ -314,9 +371,9 @@ def _add_italian_broadcaster(event: dict[str, Any]) -> None:
 
 
 def _same_fixture(left: dict[str, Any], right: dict[str, Any]) -> bool:
-    if _normalize(str(left.get("home_team"))) != _normalize(str(right.get("home_team"))):
+    if _team_match_key(str(left.get("home_team"))) != _team_match_key(str(right.get("home_team"))):
         return False
-    if _normalize(str(left.get("away_team"))) != _normalize(str(right.get("away_team"))):
+    if _team_match_key(str(left.get("away_team"))) != _team_match_key(str(right.get("away_team"))):
         return False
     if _competition_family(str(left.get("competition"))) != _competition_family(str(right.get("competition"))):
         return False
@@ -327,7 +384,7 @@ def merge_remote_events(events: Iterable[dict[str, Any]]) -> list[dict[str, Any]
     merged: list[dict[str, Any]] = []
     # Official data wins; ESPN still contributes competitions and friendlies
     # missing from the official page.
-    priority = {"AC Milan": 0, "ESPN": 1}
+    priority = {"AC Milan": 0, "ESPN": 1, "TheSportsDB": 2}
     for candidate in sorted(events, key=lambda item: priority.get(str(item.get("source")), 9)):
         existing = next((event for event in merged if _same_fixture(event, candidate)), None)
         if existing is None:
@@ -379,6 +436,10 @@ def _canonical_event(event: dict[str, Any], previous: list[dict[str, Any]], chan
     result["title"] = f"{result['home_team']} - {result['away_team']}"
     comparable = {key: value for key, value in result.items() if key != "last_modified"}
     old = next((item for item in previous if item.get("uid") == result["uid"]), None)
+    if old is None:
+        old = next((item for item in previous if _same_fixture(item, result)), None)
+        if old and old.get("uid"):
+            result["uid"] = str(old["uid"])
     old_comparable = {key: value for key, value in (old or {}).items() if key != "last_modified"}
     result["last_modified"] = (
         str(old.get("last_modified")) if old and comparable == old_comparable else changed_at
