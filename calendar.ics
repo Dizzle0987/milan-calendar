@@ -51,6 +51,55 @@ TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:⚽ Chelsea FC - AC Milan
+DTSTART;TZID=Europe/Rome:20260808T140000
+DTEND;TZID=Europe/Rome:20260808T160000
+DTSTAMP:20260806T143903Z
+UID:0df5243c01d34a9dd219ffc2@milan-calendar
+SEQUENCE:0
+CATEGORIES:Amichevole,AC Milan
+DESCRIPTION:Competizione: Amichevole\nMilan: Trasferta\nTurno: Pre-Season 
+ Tour 2026\nStadio: Gelora Bung Karno Stadium\, Jakarta\nDove vederla in It
+ alia: DAZN e Sky Sport\nFonte TV: https://www.dazn.com/it-IT/fixture/Conte
+ ntId:19pa8a9ojur1b1iisfxn3ysuvc/19pa8a9ojur1b1iisfxn3ysuvc\nFonte: https:/
+ /www.acmilan.com/it/news/articoli/tournee/2026-04-30/il-pre-season-tour-20
+ 26-di-ac-milan-fa-tappa-in-indonesia
+LAST-MODIFIED:20260806T143903Z
+LOCATION:Gelora Bung Karno Stadium\, Jakarta
+TRANSP:OPAQUE
+URL:https://www.acmilan.com/it/news/articoli/tournee/2026-04-30/il-pre-sea
+ son-tour-2026-di-ac-milan-fa-tappa-in-indonesia
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tra 2 ore e 30 minuti: Chelsea FC - AC Milan
+TRIGGER:-PT2H30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⚽ AC Milan - Manchester United
+DTSTART;VALUE=DATE:20260815
+DTEND;VALUE=DATE:20260816
+DTSTAMP:20260806T143903Z
+UID:20e096ff80c5846c27ab8a18@milan-calendar
+SEQUENCE:0
+CATEGORIES:Amichevole,AC Milan
+DESCRIPTION:Competizione: Amichevole\nMilan: Casa\nTurno: Amichevole pre-c
+ ampionato 2026/27\nStadio: Tarczyński Arena\, Wrocław\nDove vederla in I
+ talia: Da definire\nFonte: https://www.acmilan.com/en/news/articles/friend
+ ly/2026-06-09/ac-milan-will-take-on-celtic-and-manchester-united-in-summer
+ -2026
+LAST-MODIFIED:20260806T143903Z
+LOCATION:Tarczyński Arena\, Wrocław
+TRANSP:OPAQUE
+URL:https://www.acmilan.com/en/news/articles/friendly/2026-06-09/ac-milan-
+ will-take-on-celtic-and-manchester-united-in-summer-2026
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tra 2 ore e 30 minuti: AC Milan - Manchester United
+TRIGGER:-PT2H30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:⚽ Torino - Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
