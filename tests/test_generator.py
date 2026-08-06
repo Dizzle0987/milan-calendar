@@ -108,6 +108,7 @@ def test_deduplication_prefers_official_and_uid_survives_time_change(tmp_path: P
     second = update_calendar(tmp_path, session=object(), today=date(2026, 8, 1))
     assert first[0]["uid"] == second[0]["uid"]
     assert second[0]["start"] == "2026-09-12T19:45:00+00:00"
+    assert second[0]["broadcast_it"] == "DAZN"
 
 
 def test_ical_timezone_fields_and_alarm() -> None:
@@ -120,6 +121,8 @@ def test_ical_timezone_fields_and_alarm() -> None:
         "competition": "Serie A",
         "round": "3",
         "venue": "Stadio San Siro",
+        "broadcast_it": "DAZN",
+        "broadcast_source_url": "https://www.dazn.com/it-IT",
         "source_url": "https://example.com/match",
         "start": "2026-09-12T18:45:00+00:00",
         "all_day": False,
@@ -133,6 +136,7 @@ def test_ical_timezone_fields_and_alarm() -> None:
     assert parsed.decoded("dtstart").tzinfo is not None
     assert getattr(parsed.decoded("dtstart").tzinfo, "key", None) == "Europe/Rome"
     assert alarm.decoded("trigger").total_seconds() == -(2 * 60 + 30) * 60
+    assert "Dove vederla in Italia: DAZN" in parsed.decoded("description").decode()
     assert b"X-WR-TIMEZONE:Europe/Rome" in payload
 
 
@@ -147,6 +151,8 @@ def test_manual_event_overrides_remote(tmp_path: Path, monkeypatch: pytest.Monke
                 "competition": "Serie A",
                 "start": "2026-09-12T21:00:00+02:00",
                 "venue": "San Siro - aggiornato manualmente",
+                "broadcast_it": "Canale di prova",
+                "broadcast_source_url": "https://example.com/palinsesto",
             }
         ]
     }
@@ -159,6 +165,7 @@ def test_manual_event_overrides_remote(tmp_path: Path, monkeypatch: pytest.Monke
     assert len(events) == 1
     assert events[0]["venue"] == "San Siro - aggiornato manualmente"
     assert events[0]["source"] == "Manuale"
+    assert events[0]["broadcast_it"] == "Canale di prova"
 
 
 def test_total_fetch_failure_preserves_previous_files(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
