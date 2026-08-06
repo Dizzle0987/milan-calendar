@@ -30,10 +30,13 @@ Il generatore non usa SofaScore.
 
 1. **Fonte primaria — AC Milan**: la pagina ufficiale del calendario della stagione. Il programma legge i dati JSON strutturati incorporati dalla web app ufficiale, non interpreta il testo o il layout visivo della pagina.
 2. **Fallback e integrazione — ESPN**: endpoint JSON pubblici per Serie A, Coppa Italia, Supercoppa, competizioni UEFA e amichevoli. ESPN integra anche incontri non ancora presenti nella risposta ufficiale.
-3. **Ultimo risultato valido**: se nessuna fonte remota risponde con eventi validi, il programma termina con errore prima di scrivere. `calendar.ics` e `data/events.json` rimangono quindi intatti.
-4. **Eventi manuali**: `data/manual_events.json` può integrare o correggere le fonti. A parità di partita, i dati manuali hanno precedenza.
+3. **Controllo aggiuntivo — TheSportsDB**: API JSON pubblica usata per individuare la prossima partita, comprese amichevoli e tournée non ancora esposte dagli altri feed.
+4. **Ultimo risultato valido**: se nessuna fonte remota risponde con eventi validi, il programma termina con errore prima di scrivere. `calendar.ics` e `data/events.json` rimangono quindi intatti.
+5. **Eventi manuali**: `data/manual_events.json` può integrare o correggere le fonti. A parità di partita, i dati manuali hanno precedenza.
 
 Il [calendario DAZN](https://www.dazn.com/it-IT/schedule) viene usato come verifica aggiuntiva per amichevoli e disponibilità televisiva. Non è la fonte primaria perché espone una finestra mobile limitata di eventi futuri.
+
+Palinsesti come Sisal possono essere consultati come segnalazione ulteriore, ma non vengono analizzati automaticamente: non offrono un'API pubblica documentata e uno scraping del sito sarebbe fragile. Prima della pubblicazione, una segnalazione viene confermata con una fonte ufficiale o strutturata.
 
 Le richieste HTTP hanno timeout, retry con backoff e un User-Agent identificabile. Le fonti sono interrogate ogni 6 ore da GitHub Actions.
 
