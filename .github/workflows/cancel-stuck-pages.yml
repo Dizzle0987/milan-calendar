@@ -1,0 +1,26 @@
+name: Cancel stuck Pages deployment
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/cancel-stuck-pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel ghost Pages deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl --fail-with-body --silent --show-error --location --request POST \
+            --header 'Accept: application/vnd.github+json' \
+            --header "Authorization: Bearer $GH_TOKEN" \
+            --header 'X-GitHub-Api-Version: 2026-03-10' \
+            'https://api.github.com/repos/Dizzle0987/milan-calendar/pages/deployments/c0547f7ec474097a5acf30bd3b842ee211e31aa1/cancel'
