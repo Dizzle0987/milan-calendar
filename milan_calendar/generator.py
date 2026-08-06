@@ -34,6 +34,32 @@ ESPN_COMPETITIONS = {
     "uefa.europa.conf": "UEFA Conference League",
     "club.friendly": "Amichevole",
 }
+BROADCASTERS_IT = {
+    "serie-a": (
+        "DAZN",
+        "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
+    ),
+    "coppa-italia": (
+        "Mediaset (canali in chiaro), Mediaset Infinity e SportMediaset.it",
+        "https://mediasetinfinity.mediaset.it/calcio-e-sport/coppaitaliacalcio_SE000000001529",
+    ),
+    "supercoppa-italiana": (
+        "Mediaset (canali in chiaro), Mediaset Infinity e SportMediaset.it",
+        "https://mediasetinfinity.mediaset.it/calcio-e-sport/supercoppaditaliacalcio_SE000000001643",
+    ),
+    "champions-league": (
+        "Sky Sport/NOW; possibile esclusiva Prime Video da verificare",
+        "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
+    ),
+    "europa-league": (
+        "Sky Sport e NOW",
+        "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
+    ),
+    "conference-league": (
+        "Sky Sport e NOW",
+        "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
+    ),
+}
 
 
 class UpdateError(RuntimeError):
@@ -276,6 +302,17 @@ def _uid_for(event: dict[str, Any]) -> str:
     return f"{digest}@milan-calendar"
 
 
+def _add_italian_broadcaster(event: dict[str, Any]) -> None:
+    if event.get("broadcast_it"):
+        return
+    broadcaster, source_url = BROADCASTERS_IT.get(
+        _competition_family(str(event.get("competition") or "")),
+        ("Da definire", ""),
+    )
+    event["broadcast_it"] = broadcaster
+    event.setdefault("broadcast_source_url", source_url)
+
+
 def _same_fixture(left: dict[str, Any], right: dict[str, Any]) -> bool:
     if _normalize(str(left.get("home_team"))) != _normalize(str(right.get("home_team"))):
         return False
@@ -336,6 +373,7 @@ def load_manual_events(path: Path) -> list[dict[str, Any]]:
 
 def _canonical_event(event: dict[str, Any], previous: list[dict[str, Any]], changed_at: str) -> dict[str, Any]:
     result = deepcopy(event)
+    _add_italian_broadcaster(result)
     result["uid"] = _uid_for(result)
     result["home_away"] = "Casa" if _is_milan(str(result["home_team"])) else "Trasferta"
     result["title"] = f"{result['home_team']} - {result['away_team']}"
@@ -402,6 +440,10 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
             details.append(f"Turno: {data['round']}")
         if data.get("venue"):
             details.append(f"Stadio: {data['venue']}")
+        if data.get("broadcast_it"):
+            details.append(f"Dove vederla in Italia: {data['broadcast_it']}")
+        if data.get("broadcast_source_url"):
+            details.append(f"Fonte TV: {data['broadcast_source_url']}")
         if data.get("source_url"):
             details.append(f"Fonte: {data['source_url']}")
         component.add("description", "\n".join(details))
