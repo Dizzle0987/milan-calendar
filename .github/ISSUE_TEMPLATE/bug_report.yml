@@ -1,0 +1,23 @@
+name: Segnala un problema
+description: Segnala un errore nel sito, nel feed o nell'automazione
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrizione
+      description: Spiega cosa non funziona e cosa ti aspettavi.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Come riprodurlo
+      description: Indica dispositivo, applicazione e passaggi eseguiti.
+  - type: input
+    id: source
+    attributes:
+      label: Link utile
+      description: Inserisci un URL o il link a un workflow, se disponibile.
+
