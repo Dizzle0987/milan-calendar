@@ -22,6 +22,8 @@ https://dizzle0987.github.io/milan-calendar/calendar.ics
 
 Non importare il file come calendario statico: usa sempre **Aggiungi calendario con iscrizione**, così iPhone riceverà gli aggiornamenti di date e orari.
 
+Dopo la pubblicazione di un aggiornamento, l'app Calendario può impiegare qualche minuto per sincronizzare i nuovi eventi; non è necessario iscriversi di nuovo.
+
 ## Fonti e strategia di aggiornamento
 
 Il generatore non usa SofaScore.
