@@ -183,3 +183,10 @@ def test_total_fetch_failure_preserves_previous_files(tmp_path: Path, monkeypatc
         update_calendar(tmp_path, session=object(), today=date(2026, 8, 1))
     assert events_path.read_text(encoding="utf-8") == '{"events": [{"sentinel": true}]}\n'
     assert calendar_path.read_text(encoding="utf-8") == "LAST VALID CALENDAR\n"
+
+
+def test_subscription_page_has_iphone_fallback() -> None:
+    html = (Path(__file__).parents[1] / "index.html").read_text(encoding="utf-8")
+    assert "webcal://dizzle0987.github.io/milan-calendar/calendar.ics" in html
+    assert "Aggiungi calendario con iscrizione" in html
+    assert "navigator.clipboard.writeText(calendarUrl)" in html

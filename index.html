@@ -16,8 +16,14 @@
       p { color: #c9c9c9; font-size: 1.08rem; line-height: 1.65; }
       .button { display: inline-flex; align-items: center; justify-content: center; margin-top: 20px; min-height: 54px; padding: 0 24px; border-radius: 999px; background: #d71920; color: white; text-decoration: none; font-weight: 800; box-shadow: 0 8px 24px #d7192040; }
       .button:hover { background: #ed1c24; transform: translateY(-1px); }
+      .button.secondary { margin-left: 8px; background: #292929; box-shadow: none; border: 1px solid #444; cursor: pointer; }
+      .steps { margin-top: 28px; padding: 20px; border-radius: 16px; background: #0b0b0b; border: 1px solid #2d2d2d; }
+      .steps h2 { margin: 0 0 12px; font-size: 1.1rem; }
+      .steps ol { margin: 0; padding-left: 20px; color: #c9c9c9; line-height: 1.65; }
+      .copied { min-height: 1.5em; margin: 10px 0 0; color: #8fd694; font-size: .92rem; }
       small { display: block; margin-top: 24px; color: #888; line-height: 1.5; }
       code { color: #ddd; overflow-wrap: anywhere; }
+      @media (max-width: 560px) { .button, .button.secondary { width: 100%; margin-left: 0; } }
     </style>
   </head>
   <body>
@@ -25,8 +31,31 @@
       <div class="eyebrow">Sempre Milan</div>
       <h1>Milan<br>Calendar</h1>
       <p>Serie A, coppe, competizioni europee, amichevoli e tournée della Prima Squadra maschile, con l'indicazione di dove vedere la partita in Italia.</p>
-      <a class="button" href="webcal://dizzle0987.github.io/milan-calendar/calendar.ics">Sottoscrivi su iPhone</a>
-      <small>Il calendario si aggiorna ogni 6 ore. In alternativa, usa <code>https://dizzle0987.github.io/milan-calendar/calendar.ics</code> nella tua app calendario.</small>
+      <a class="button" href="webcal://dizzle0987.github.io/milan-calendar/calendar.ics">Prova iscrizione automatica</a>
+      <button class="button secondary" id="copy-link" type="button">Copia link calendario</button>
+      <p class="copied" id="copy-status" role="status" aria-live="polite"></p>
+      <section class="steps">
+        <h2>Se Calendario si apre ma non aggiunge l'iscrizione</h2>
+        <ol>
+          <li>Tocca <strong>Copia link calendario</strong>.</li>
+          <li>Apri l'app <strong>Calendario</strong> e tocca <strong>Calendari</strong>.</li>
+          <li>Tocca <strong>Aggiungi calendario</strong>, poi <strong>Aggiungi calendario con iscrizione</strong>.</li>
+          <li>Incolla il link, tocca <strong>Trova</strong>, scegli <strong>iCloud</strong> come account e tocca <strong>Fine</strong>.</li>
+        </ol>
+      </section>
+      <small>Il calendario è in sola lettura e si aggiorna automaticamente ogni 6 ore.</small>
     </main>
+    <script>
+      const calendarUrl = "https://dizzle0987.github.io/milan-calendar/calendar.ics";
+      document.getElementById("copy-link").addEventListener("click", async () => {
+        const status = document.getElementById("copy-status");
+        try {
+          await navigator.clipboard.writeText(calendarUrl);
+          status.textContent = "Link copiato. Ora apri Calendario e segui i passaggi qui sopra.";
+        } catch {
+          window.prompt("Copia questo link calendario:", calendarUrl);
+        }
+      });
+    </script>
   </body>
 </html>

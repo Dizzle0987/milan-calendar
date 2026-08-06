@@ -9,8 +9,10 @@ Calendario iCalendar sottoscrivibile con le partite della Prima Squadra maschile
 ## Come sottoscrivere il calendario su iPhone
 
 1. Apri <https://dizzle0987.github.io/milan-calendar/> con Safari su iPhone.
-2. Tocca **Sottoscrivi su iPhone**.
-3. Conferma con **Iscriviti** nell'app Calendario.
+2. Tocca **Prova iscrizione automatica** e conferma se iOS mostra la schermata d'iscrizione.
+3. Se Calendario si apre senza aggiungere il feed, torna alla pagina e tocca **Copia link calendario**.
+4. In Calendario, tocca **Calendari → Aggiungi calendario → Aggiungi calendario con iscrizione**.
+5. Incolla il link, tocca **Trova**, scegli **iCloud** come account e tocca **Fine**.
 
 In alternativa, vai in **Impostazioni → App → Calendario → Account calendario → Aggiungi account → Altro → Aggiungi calendario con sottoscrizione** e incolla:
 
@@ -18,7 +20,7 @@ In alternativa, vai in **Impostazioni → App → Calendario → Account calenda
 https://dizzle0987.github.io/milan-calendar/calendar.ics
 ```
 
-Non importare il file come calendario statico: la sottoscrizione permette a iPhone di ricevere gli aggiornamenti di date e orari.
+Non importare il file come calendario statico: usa sempre **Aggiungi calendario con iscrizione**, così iPhone riceverà gli aggiornamenti di date e orari.
 
 ## Fonti e strategia di aggiornamento
 
