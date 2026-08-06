@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#b5121b">
+    <title>Milan Calendar</title>
+    <meta name="description" content="Il calendario iPhone aggiornato con tutte le partite della Prima Squadra maschile dell'AC Milan.">
+    <style>
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; background: #090909; color: #fff; }
+      main { width: min(100%, 680px); padding: clamp(32px, 7vw, 72px); border: 1px solid #303030; border-radius: 24px; background: linear-gradient(145deg, #1b1b1b, #101010); box-shadow: 0 24px 80px #0008; }
+      .eyebrow { color: #ef3340; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; font-size: .76rem; }
+      h1 { margin: 12px 0 16px; font-size: clamp(2.5rem, 10vw, 5rem); line-height: .92; letter-spacing: -.06em; }
+      p { color: #c9c9c9; font-size: 1.08rem; line-height: 1.65; }
+      .button { display: inline-flex; align-items: center; justify-content: center; margin-top: 20px; min-height: 54px; padding: 0 24px; border-radius: 999px; background: #d71920; color: white; text-decoration: none; font-weight: 800; box-shadow: 0 8px 24px #d7192040; }
+      .button:hover { background: #ed1c24; transform: translateY(-1px); }
+      small { display: block; margin-top: 24px; color: #888; line-height: 1.5; }
+      code { color: #ddd; overflow-wrap: anywhere; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">Sempre Milan</div>
+      <h1>Milan<br>Calendar</h1>
+      <p>Serie A, coppe, competizioni europee, amichevoli e tournée della Prima Squadra maschile, aggiornate automaticamente sul tuo iPhone.</p>
+      <a class="button" href="webcal://dizzle0987.github.io/milan-calendar/calendar.ics">Sottoscrivi su iPhone</a>
+      <small>Il calendario si aggiorna ogni 6 ore. In alternativa, usa <code>https://dizzle0987.github.io/milan-calendar/calendar.ics</code> nella tua app calendario.</small>
+    </main>
+  </body>
+</html>
