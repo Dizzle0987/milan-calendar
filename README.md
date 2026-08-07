@@ -126,6 +126,19 @@ Modifica `data/manual_events.json`. Il file accetta un oggetto con la proprietà
 
 Campi obbligatori: `home_team`, `away_team`, `competition`, `start`. `start` può essere un timestamp ISO 8601 con offset oppure una data `YYYY-MM-DD` per un evento senza orario. È possibile specificare un `uid` esplicito; in caso contrario viene generato automaticamente. Per correggere un evento recuperato, usa stesse squadre e competizione e una data entro 72 ore. Imposta `"enabled": false` per sospendere una voce senza cancellarla.
 
+Per annotare manualmente un rinvio senza creare una seconda partita:
+
+```json
+{
+  "postponed": true,
+  "postponed_from": "2026-09-12T20:45:00+02:00",
+  "postponed_to": "",
+  "postponement_reason": "Maltempo"
+}
+```
+
+Con `postponed_to` vuoto l'evento diventa giornaliero sulla data originaria, viene mostrato come **RINVIATA — DATA DA DESTINARSI** e il promemoria viene sospeso. Quando la nuova data è nota, aggiorna `start` e `postponed_to` con lo stesso valore: l'UID resta invariato, il titolo mostra **RINVIATA AL gg/mm/aaaa** e il promemoria torna attivo. Gli stati equivalenti pubblicati dalle fonti (`postponed`, `PST`, `rinviata`) vengono riconosciuti automaticamente.
+
 Dopo la modifica esegui test e generatore, quindi committa sia il file manuale sia gli output aggiornati.
 
 ## Automazione GitHub
@@ -144,6 +157,7 @@ La suite verifica:
 - parsing della risposta JSON ESPN;
 - esclusione delle squadre femminili, Futuro e giovanili;
 - deduplicazione, alias e stabilità dell'UID dopo un cambio d'orario;
+- rinvii a data da destinarsi e riprogrammazioni di più mesi con lo stesso UID;
 - incremento di `SEQUENCE` dopo modifiche significative;
 - priorità e tracciamento dei conflitti fra fonti orarie;
 - fuso `Europe/Rome` e promemoria iCalendar;
