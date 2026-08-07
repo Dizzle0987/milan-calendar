@@ -317,6 +317,55 @@ def test_uid_survives_multi_month_postponement_and_changed_source_id(
     assert second[0]["start"] == "2026-08-20T18:45:00Z"
 
 
+def test_postponed_match_is_annotated_then_rescheduled_with_same_uid(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    (tmp_path / "data").mkdir()
+    (tmp_path / "data" / "manual_events.json").write_text(
+        '{"events": []}\n', encoding="utf-8"
+    )
+    original = parse_official_html(
+        official_html([official_match(providerId="rain-delay")]),
+        "https://www.acmilan.com/schedule",
+    )[0]
+    monkeypatch.setattr(
+        "milan_calendar.generator.fetch_remote_events",
+        lambda session, today: FetchResult([original], ["AC Milan"], []),
+    )
+    scheduled = update_calendar(tmp_path, session=object(), today=date(2026, 8, 1))[0]
+
+    pending = dict(original, status="STATUS_POSTPONED")
+    monkeypatch.setattr(
+        "milan_calendar.generator.fetch_remote_events",
+        lambda session, today: FetchResult([pending], ["AC Milan"], []),
+    )
+    postponed = update_calendar(tmp_path, session=object(), today=date(2026, 8, 1))[0]
+    pending_ical = Calendar.from_ical((tmp_path / "calendar.ics").read_bytes())
+    pending_component = next(
+        component for component in pending_ical.walk() if component.name == "VEVENT"
+    )
+
+    assert postponed["uid"] == scheduled["uid"]
+    assert postponed["all_day"] is True
+    assert "RINVIATA — DATA DA DESTINARSI" in postponed["title"]
+    assert pending_component.decoded("status") == b"TENTATIVE"
+    assert not any(item.name == "VALARM" for item in pending_component.subcomponents)
+
+    new_start = "2027-01-20T19:45:00+01:00"
+    rescheduled_source = dict(original, start=new_start, status="Fixture")
+    monkeypatch.setattr(
+        "milan_calendar.generator.fetch_remote_events",
+        lambda session, today: FetchResult([rescheduled_source], ["AC Milan"], []),
+    )
+    rescheduled = update_calendar(tmp_path, session=object(), today=date(2026, 8, 1))[0]
+
+    assert rescheduled["uid"] == scheduled["uid"]
+    assert rescheduled["start"] == new_start
+    assert rescheduled["postponed_to"] == new_start
+    assert "RINVIATA AL 20/01/2027" in rescheduled["title"]
+    assert rescheduled["sequence"] == 2
+
+
 def test_ical_timezone_fields_and_alarm() -> None:
     event = {
         "uid": "test@milan-calendar",
