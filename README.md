@@ -28,13 +28,15 @@ Dopo la pubblicazione di un aggiornamento, l'app Calendario può impiegare qualc
 
 Il generatore non usa SofaScore.
 
-1. **Fonte primaria — AC Milan**: la pagina ufficiale del calendario della stagione. Il programma legge i dati JSON strutturati incorporati dalla web app ufficiale, non interpreta il testo o il layout visivo della pagina.
+1. **Scoperta delle partite — AC Milan**: la pagina ufficiale del calendario della stagione rimane il riferimento principale per l'esistenza dell'incontro, le squadre, la competizione e lo stadio. Il programma legge i dati JSON strutturati incorporati dalla web app ufficiale.
 2. **Fallback e integrazione — ESPN**: endpoint JSON pubblici per Serie A, Coppa Italia, Supercoppa, competizioni UEFA e amichevoli. ESPN integra anche incontri non ancora presenti nella risposta ufficiale.
 3. **Controllo aggiuntivo — TheSportsDB**: API JSON pubblica usata per individuare la prossima partita, comprese amichevoli e tournée non ancora esposte dagli altri feed.
-4. **Ultimo risultato valido**: se nessuna fonte remota risponde con eventi validi, il programma termina con errore prima di scrivere. `calendar.ics` e `data/events.json` rimangono quindi intatti.
-5. **Eventi manuali**: `data/manual_events.json` può integrare o correggere le fonti. A parità di partita, i dati manuali hanno precedenza.
+4. **Priorità degli orari — broadcaster italiani**: gli orari espliciti pubblicati nei palinsesti strutturati di DAZN e NOW possono completare o correggere un evento TBC. NOW ha precedenza su una fonte editoriale; il sito Milan non prevale su un orario confermato dal broadcaster.
+5. **Fallback editoriale degli orari — Gazzetta dello Sport**: viene consultato il programma delle amichevoli. Un orario viene usato soltanto se è scritto esplicitamente insieme a data e squadre; diciture come “da stabilire” vengono ignorate.
+6. **Ultimo risultato valido**: se nessuna fonte remota risponde con eventi validi, il programma termina con errore prima di scrivere. `calendar.ics` e `data/events.json` rimangono quindi intatti.
+7. **Eventi manuali**: `data/manual_events.json` può integrare o correggere le fonti. A parità di partita, i dati manuali hanno precedenza.
 
-Il [calendario DAZN](https://www.dazn.com/it-IT/schedule) viene usato come verifica aggiuntiva per amichevoli e disponibilità televisiva. Non è la fonte primaria perché espone una finestra mobile limitata di eventi futuri.
+Il [calendario DAZN](https://www.dazn.com/it-IT/schedule), la [pagina Milan di NOW](https://www.nowtv.it/sport/calcio/milan) e il calendario delle amichevoli della Gazzetta vengono interrogati ogni sei ore. Si preferiscono i dati strutturati presenti nella pagina; il riconoscimento testuale è limitato a righe che contengono squadre, data e ora complete.
 
 Palinsesti come Sisal possono essere consultati come segnalazione ulteriore, ma non vengono analizzati automaticamente: non offrono un'API pubblica documentata e uno scraping del sito sarebbe fragile. Prima della pubblicazione, una segnalazione viene confermata con una fonte ufficiale o strutturata.
 
@@ -44,7 +46,7 @@ Le richieste HTTP hanno timeout, retry con backoff e un User-Agent identificabil
 
 Ogni UID è un hash stabile di stagione, squadre e competizione. Data, ora e turno non fanno parte dell'UID: quando una partita viene spostata o ne viene precisata la fase, l'app Calendario aggiorna lo stesso evento invece di crearne uno nuovo.
 
-Gli eventi AC Milan ed ESPN con stesse squadre, stessa famiglia di competizione e orari entro 48 ore vengono unificati. La fonte ufficiale ha precedenza; i campi mancanti possono essere completati dal fallback. Ogni evento include, quando disponibile:
+Gli eventi con stesse squadre, stessa famiglia di competizione e orari entro 48 ore vengono unificati. AC Milan ha precedenza per i dati descrittivi; i broadcaster hanno precedenza specificamente per l'orario e la copertura televisiva. Ogni evento include, quando disponibile:
 
 - competizione e turno;
 - stadio;
