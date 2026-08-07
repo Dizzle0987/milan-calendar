@@ -583,6 +583,34 @@ def _add_italian_broadcaster(event: dict[str, Any]) -> None:
     event.setdefault("broadcast_source_url", source_url)
 
 
+def _merge_broadcaster_overlay(event: dict[str, Any], overlay: dict[str, Any]) -> None:
+    rights = BROADCASTERS_IT.get(
+        _competition_family(str(event.get("competition") or ""))
+    )
+    if rights and not event.get("broadcast_it"):
+        event["broadcast_it"], event["broadcast_source_url"] = rights
+
+    candidate = str(overlay.get("broadcast_it") or "").strip()
+    existing = str(event.get("broadcast_it") or "").strip()
+    if candidate:
+        if not existing:
+            event["broadcast_it"] = candidate
+        elif candidate.lower() not in existing.lower() and existing.lower() not in candidate.lower():
+            event["broadcast_it"] = f"{existing}; {candidate}"
+
+    source_urls = [
+        str(value)
+        for value in (
+            event.get("broadcast_source_url"),
+            overlay.get("broadcast_source_url"),
+        )
+        if value
+    ]
+    if source_urls:
+        event["broadcast_source_urls"] = list(dict.fromkeys(source_urls))
+        event["broadcast_source_url"] = event["broadcast_source_urls"][-1]
+
+
 def _same_source_id(left: dict[str, Any], right: dict[str, Any]) -> bool:
     return bool(
         left.get("source")
@@ -707,8 +735,7 @@ def merge_remote_events(events: Iterable[dict[str, Any]]) -> list[dict[str, Any]
         existing["time_source"] = candidate["source"]
         existing["time_source_url"] = candidate["source_url"]
         if candidate.get("broadcast_it"):
-            existing["broadcast_it"] = candidate["broadcast_it"]
-            existing["broadcast_source_url"] = candidate.get("broadcast_source_url", "")
+            _merge_broadcaster_overlay(existing, candidate)
     return sorted(merged, key=_event_datetime)
 
 
@@ -939,8 +966,11 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
             details.append(f"Località: {data['location']}")
         if data.get("broadcast_it"):
             details.append(f"Dove vederla in Italia: {data['broadcast_it']}")
-        if data.get("broadcast_source_url"):
-            details.append(f"Fonte TV: {data['broadcast_source_url']}")
+        broadcast_urls = data.get("broadcast_source_urls") or (
+            [data["broadcast_source_url"]] if data.get("broadcast_source_url") else []
+        )
+        for broadcast_url in dict.fromkeys(str(value) for value in broadcast_urls if value):
+            details.append(f"Fonte TV: {broadcast_url}")
         if data.get("time_source"):
             details.append(f"Fonte orario: {data['time_source']}")
         if data.get("time_source_url"):
