@@ -17,11 +17,14 @@
       "home_team": "AC Milan",
       "away_team": "Manchester United",
       "competition": "Amichevole",
-      "start": "2026-08-15",
+      "start": "2026-08-15T14:00:00+02:00",
       "venue": "Tarczyński Arena, Wrocław",
       "round": "Amichevole pre-campionato 2026/27",
       "source_url": "https://www.acmilan.com/en/news/articles/friendly/2026-06-09/ac-milan-will-take-on-celtic-and-manchester-united-in-summer-2026",
-      "broadcast_it": "Da definire"
+      "broadcast_it": "DAZN, Sky Sport e NOW",
+      "broadcast_source_url": "https://www.nowtv.it/sport/calcio/milan",
+      "time_source": "NOW",
+      "time_source_url": "https://www.nowtv.it/sport/calcio/milan"
     }
   ]
 }
