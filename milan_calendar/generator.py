@@ -617,6 +617,27 @@ def _same_fixture(
     return abs((_event_datetime(left) - _event_datetime(right)).total_seconds()) <= 60 * 60 * 72
 
 
+def _same_long_range_fixture(left: dict[str, Any], right: dict[str, Any]) -> bool:
+    """Recognize a uniquely identifiable postponement even across season boundaries."""
+    left_teams = tuple(
+        _team_match_key(str(left.get(key) or "")) for key in ("home_team", "away_team")
+    )
+    right_teams = tuple(
+        _team_match_key(str(right.get(key) or "")) for key in ("home_team", "away_team")
+    )
+    if left_teams != right_teams:
+        return False
+    left_family = _competition_family(str(left.get("competition") or ""))
+    right_family = _competition_family(str(right.get("competition") or ""))
+    if left_family != right_family or left_family in {"partita", "altra-competizione"}:
+        return False
+    left_round = _normalize(str(left.get("round") or ""))
+    right_round = _normalize(str(right.get("round") or ""))
+    if left_round and right_round and left_round != right_round:
+        return False
+    return abs((_event_datetime(left) - _event_datetime(right)).total_seconds()) <= 60 * 60 * 24 * 240
+
+
 def merge_remote_events(events: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
     candidates = list(events)
     merged: list[dict[str, Any]] = []
@@ -626,7 +647,19 @@ def merge_remote_events(events: Iterable[dict[str, Any]]) -> list[dict[str, Any]
     base_events = [event for event in candidates if not event.get("_time_overlay")]
     time_overlays = [event for event in candidates if event.get("_time_overlay")]
     for candidate in sorted(base_events, key=lambda item: priority.get(str(item.get("source")), 9)):
-        existing = next((event for event in merged if _same_fixture(event, candidate)), None)
+        existing = next(
+            (
+                event
+                for event in merged
+                if _same_source_id(event, candidate) or _same_fixture(event, candidate)
+            ),
+            None,
+        )
+        if existing is None:
+            long_range_matches = [
+                event for event in merged if _same_long_range_fixture(event, candidate)
+            ]
+            existing = long_range_matches[0] if len(long_range_matches) == 1 else None
         if existing is None:
             merged.append(deepcopy(candidate))
             continue
@@ -729,6 +762,11 @@ def _canonical_event(event: dict[str, Any], previous: list[dict[str, Any]], chan
     if old is None:
         old = next((item for item in previous if _same_source_id(item, result)), None)
     if old is None:
+        long_range_matches = [
+            item for item in previous if _same_long_range_fixture(item, result)
+        ]
+        old = long_range_matches[0] if len(long_range_matches) == 1 else None
+    if old is None:
         old = next(
             (item for item in previous if _same_fixture(item, result, unordered=True)), None
         )
@@ -760,6 +798,13 @@ def merge_manual_events(remote: list[dict[str, Any]], manual: list[dict[str, Any
             ),
             None,
         )
+        if existing_index is None:
+            long_range_matches = [
+                index
+                for index, event in enumerate(merged)
+                if _same_long_range_fixture(event, candidate)
+            ]
+            existing_index = long_range_matches[0] if len(long_range_matches) == 1 else None
         if existing_index is None:
             merged.append(deepcopy(candidate))
         else:
