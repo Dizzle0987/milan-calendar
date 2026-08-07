@@ -317,6 +317,51 @@ def test_uid_survives_multi_month_postponement_and_changed_source_id(
     assert second[0]["start"] == "2026-08-20T18:45:00Z"
 
 
+def test_home_and_away_legs_have_unique_uids_and_legacy_collision_is_migrated(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    (tmp_path / "data").mkdir()
+    (tmp_path / "data" / "manual_events.json").write_text(
+        '{"events": []}\n', encoding="utf-8"
+    )
+    home_leg = parse_official_html(
+        official_html([official_match(providerId="home-leg")]),
+        "https://www.acmilan.com/schedule",
+    )[0]
+    away_leg = parse_official_html(
+        official_html(
+            [
+                official_match(
+                    providerId="away-leg",
+                    datetime="2027-02-14T19:45:00Z",
+                    matchDay="24",
+                    homeTeam={"name": "Roma"},
+                    awayTeam={"name": "Milan"},
+                )
+            ]
+        ),
+        "https://www.acmilan.com/schedule",
+    )[0]
+    monkeypatch.setattr(
+        "milan_calendar.generator.fetch_remote_events",
+        lambda session, today: FetchResult([home_leg, away_leg], ["AC Milan"], []),
+    )
+    first = update_calendar(tmp_path, session=object(), today=date(2026, 8, 1))
+    assert len({event["uid"] for event in first}) == 2
+
+    events_path = tmp_path / "data" / "events.json"
+    legacy_payload = json.loads(events_path.read_text(encoding="utf-8"))
+    legacy_payload["events"][1]["uid"] = legacy_payload["events"][0]["uid"]
+    events_path.write_text(json.dumps(legacy_payload), encoding="utf-8")
+
+    migrated = update_calendar(tmp_path, session=object(), today=date(2026, 8, 1))
+    assert len(migrated) == 2
+    assert len({event["uid"] for event in migrated}) == 2
+    calendar = Calendar.from_ical((tmp_path / "calendar.ics").read_bytes())
+    uids = [str(component["uid"]) for component in calendar.walk() if component.name == "VEVENT"]
+    assert len(uids) == len(set(uids)) == 2
+
+
 def test_postponed_match_is_annotated_then_rescheduled_with_same_uid(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
