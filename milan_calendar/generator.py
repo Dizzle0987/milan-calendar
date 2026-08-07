@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import html as html_module
 import json
 import logging
 import re
@@ -26,6 +27,17 @@ ESPN_URL = (
     "{competition}/teams/103/schedule?season={season}"
 )
 THESPORTSDB_URL = "https://www.thesportsdb.com/api/v1/json/123/eventsnext.php?id=133667"
+NOW_MILAN_URL = "https://www.nowtv.it/sport/calcio/milan"
+DAZN_SCHEDULE_URL = "https://www.dazn.com/it-IT/schedule"
+GAZZETTA_FRIENDLIES_URL = (
+    "https://www.gazzetta.it/Calcio/Serie-A/storie/01-07-2026/"
+    "raduni-ritiri-e-amichevoli-delle-20-squadre-di-serie-a/milan.shtml"
+)
+TIME_SOURCE_PRIORITY = {
+    "Gazzetta dello Sport": 10,
+    "DAZN": 20,
+    "NOW": 30,
+}
 ESPN_COMPETITIONS = {
     "ita.1": "Serie A",
     "ita.coppa_italia": "Coppa Italia",
@@ -283,6 +295,112 @@ def parse_thesportsdb_json(payload: dict[str, Any]) -> list[dict[str, Any]]:
     return events
 
 
+def _json_strings(value: Any) -> Iterable[str]:
+    if isinstance(value, str):
+        yield value
+    elif isinstance(value, dict):
+        for child in value.values():
+            yield from _json_strings(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from _json_strings(child)
+
+
+def parse_schedule_html(html: str, source: str, source_url: str, year: int) -> list[dict[str, Any]]:
+    """Read explicit Milan kick-off times from structured broadcaster/editorial pages."""
+    fragments: list[str] = []
+    for raw in re.findall(
+        r"<script[^>]+type=[\"']application/ld\+json[\"'][^>]*>(.*?)</script>",
+        html,
+        re.IGNORECASE | re.DOTALL,
+    ):
+        try:
+            fragments.extend(_json_strings(json.loads(html_module.unescape(raw))))
+        except (json.JSONDecodeError, TypeError):
+            continue
+
+    # Some publishers embed the same structured copy in application state
+    # rather than JSON-LD. Tags are removed only as a fallback; match parsing
+    # still requires a full date, explicit time and both teams.
+    fragments.append(html_module.unescape(re.sub(r"<[^>]+>", " ", html)))
+    text = " ".join(re.sub(r"\s+", " ", item) for item in fragments)
+    months = {
+        "gennaio": 1,
+        "febbraio": 2,
+        "marzo": 3,
+        "aprile": 4,
+        "maggio": 5,
+        "giugno": 6,
+        "luglio": 7,
+        "agosto": 8,
+        "settembre": 9,
+        "ottobre": 10,
+        "novembre": 11,
+        "dicembre": 12,
+    }
+    weekday = r"(?:lun(?:ed[iì])?|mar(?:ted[iì])?|mer(?:coled[iì])?|gio(?:ved[iì])?|ven(?:erd[iì])?|sab(?:ato)?|dom(?:enica)?)"
+    date_then_match = re.compile(
+        rf"(?:{weekday}\s+)?(?P<day>\d{{1,2}})\s+(?P<month>{'|'.join(months)})"
+        r"\s*[,\-]?\s*(?:ore\s*)?(?P<hour>\d{1,2})[:.](?P<minute>\d{2})"
+        r"\s*[-–:]\s*(?P<home>[A-Za-zÀ-ÿ .']+?)\s+(?:vs|[-–])\s+(?P<away>[A-Za-zÀ-ÿ .']+?)(?=[.;]|\s{2,}|$)",
+        re.IGNORECASE,
+    )
+    match_then_date = re.compile(
+        rf"(?P<home>[A-Za-zÀ-ÿ .']+?)\s+(?:vs|[-–])\s+(?P<away>[A-Za-zÀ-ÿ .']+?)"
+        rf"\s*[:,\-]\s*(?:{weekday}\s+)?(?P<day>\d{{1,2}})\s+(?P<month>{'|'.join(months)})"
+        r"\s*[,\-]?\s*(?:ore\s*)?(?P<hour>\d{1,2})[:.](?P<minute>\d{2})",
+        re.IGNORECASE,
+    )
+
+    events: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, str]] = set()
+    for pattern in (date_then_match, match_then_date):
+        for match in pattern.finditer(text):
+            home = match.group("home").strip(" .,-–")
+            away = match.group("away").strip(" .,-–")
+            if not (_is_milan(home) or _is_milan(away)):
+                continue
+            month = months[match.group("month").lower()]
+            start = datetime(
+                year,
+                month,
+                int(match.group("day")),
+                int(match.group("hour")),
+                int(match.group("minute")),
+                tzinfo=ROME,
+            )
+            key = (_team_match_key(home), _team_match_key(away), start.isoformat())
+            if key in seen:
+                continue
+            seen.add(key)
+            event = {
+                "source_id": f"{_normalize(source)}-{start.date()}-{_team_match_key(home)}-{_team_match_key(away)}",
+                "source": source,
+                "source_url": source_url,
+                "home_team": home,
+                "away_team": away,
+                "competition": "Amichevole",
+                "round": "",
+                "venue": "",
+                "start": start.isoformat(),
+                "all_day": False,
+                "status": "scheduled",
+                "_time_overlay": True,
+                "_time_priority": TIME_SOURCE_PRIORITY.get(source, 0),
+            }
+            if source == "NOW":
+                event.update(
+                    {
+                        "broadcast_it": "Sky Sport e NOW",
+                        "broadcast_source_url": source_url,
+                    }
+                )
+            elif source == "DAZN":
+                event.update({"broadcast_it": "DAZN", "broadcast_source_url": source_url})
+            events.append(event)
+    return events
+
+
 def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
     events: list[dict[str, Any]] = []
     successful: list[str] = []
@@ -327,6 +445,24 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
     except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
         errors.append(f"TheSportsDB: {exc}")
         LOGGER.warning("Fonte TheSportsDB non disponibile: %s", exc)
+
+    time_sources = (
+        ("Gazzetta dello Sport", GAZZETTA_FRIENDLIES_URL),
+        ("DAZN", DAZN_SCHEDULE_URL),
+        ("NOW", NOW_MILAN_URL),
+    )
+    for source, url in time_sources:
+        try:
+            response = session.get(url, timeout=20)
+            response.raise_for_status()
+            schedule_events = parse_schedule_html(response.text, source, url, start_year)
+            if not schedule_events:
+                raise ValueError("nessun orario esplicito per il Milan")
+            events.extend(schedule_events)
+            successful.append(source)
+        except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
+            errors.append(f"{source}: {exc}")
+            LOGGER.info("Fonte orari %s non disponibile: %s", source, exc)
 
     return FetchResult(events=events, successful_sources=successful, errors=errors)
 
@@ -380,12 +516,27 @@ def _same_fixture(left: dict[str, Any], right: dict[str, Any]) -> bool:
     return abs((_event_datetime(left) - _event_datetime(right)).total_seconds()) <= 60 * 60 * 48
 
 
+def _same_fixture_for_time(left: dict[str, Any], right: dict[str, Any]) -> bool:
+    left_teams = sorted(
+        (_team_match_key(str(left.get("home_team"))), _team_match_key(str(left.get("away_team"))))
+    )
+    right_teams = sorted(
+        (_team_match_key(str(right.get("home_team"))), _team_match_key(str(right.get("away_team"))))
+    )
+    if left_teams != right_teams:
+        return False
+    return abs((_event_datetime(left) - _event_datetime(right)).total_seconds()) <= 60 * 60 * 48
+
+
 def merge_remote_events(events: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
+    candidates = list(events)
     merged: list[dict[str, Any]] = []
     # Official data wins; ESPN still contributes competitions and friendlies
     # missing from the official page.
     priority = {"AC Milan": 0, "ESPN": 1, "TheSportsDB": 2}
-    for candidate in sorted(events, key=lambda item: priority.get(str(item.get("source")), 9)):
+    base_events = [event for event in candidates if not event.get("_time_overlay")]
+    time_overlays = [event for event in candidates if event.get("_time_overlay")]
+    for candidate in sorted(base_events, key=lambda item: priority.get(str(item.get("source")), 9)):
         existing = next((event for event in merged if _same_fixture(event, candidate)), None)
         if existing is None:
             merged.append(deepcopy(candidate))
@@ -393,6 +544,22 @@ def merge_remote_events(events: Iterable[dict[str, Any]]) -> list[dict[str, Any]
         for key, value in candidate.items():
             if not existing.get(key) and value:
                 existing[key] = value
+
+    # Apply time-only sources after fixture discovery. Broadcasters can update
+    # the kick-off and TV fields without replacing club metadata such as venue.
+    for candidate in sorted(time_overlays, key=lambda item: int(item.get("_time_priority") or 0)):
+        existing = next((event for event in merged if _same_fixture_for_time(event, candidate)), None)
+        if existing is None:
+            # Palinsesti ed articoli servono ad arricchire incontri già
+            # scoperti dalle fonti sportive, non a creare nuove partite.
+            continue
+        existing["start"] = candidate["start"]
+        existing["all_day"] = False
+        existing["time_source"] = candidate["source"]
+        existing["time_source_url"] = candidate["source_url"]
+        if candidate.get("broadcast_it"):
+            existing["broadcast_it"] = candidate["broadcast_it"]
+            existing["broadcast_source_url"] = candidate.get("broadcast_source_url", "")
     return sorted(merged, key=_event_datetime)
 
 
@@ -430,6 +597,8 @@ def load_manual_events(path: Path) -> list[dict[str, Any]]:
 
 def _canonical_event(event: dict[str, Any], previous: list[dict[str, Any]], changed_at: str) -> dict[str, Any]:
     result = deepcopy(event)
+    result.pop("_time_overlay", None)
+    result.pop("_time_priority", None)
     _add_italian_broadcaster(result)
     result["uid"] = _uid_for(result)
     result["home_away"] = "Casa" if _is_milan(str(result["home_team"])) else "Trasferta"
@@ -505,6 +674,10 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
             details.append(f"Dove vederla in Italia: {data['broadcast_it']}")
         if data.get("broadcast_source_url"):
             details.append(f"Fonte TV: {data['broadcast_source_url']}")
+        if data.get("time_source"):
+            details.append(f"Fonte orario: {data['time_source']}")
+        if data.get("time_source_url"):
+            details.append(f"Link orario: {data['time_source_url']}")
         if data.get("source_url"):
             details.append(f"Fonte: {data['source_url']}")
         component.add("description", "\n".join(details))
