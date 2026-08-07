@@ -594,6 +594,15 @@ def _same_source_id(left: dict[str, Any], right: dict[str, Any]) -> bool:
     )
 
 
+def _is_postponed(event: dict[str, Any]) -> bool:
+    if event.get("postponed") is True:
+        return True
+    status = _normalize(str(event.get("status") or ""))
+    return status in {"pst", "ppd"} or any(
+        marker in status for marker in ("postponed", "rinviat", "suspended")
+    )
+
+
 def _same_fixture(
     left: dict[str, Any], right: dict[str, Any], *, unordered: bool = False
 ) -> bool:
@@ -757,7 +766,7 @@ def _canonical_event(event: dict[str, Any], previous: list[dict[str, Any]], chan
         if result.get("neutral")
         else ("Casa" if _is_milan(str(result["home_team"])) else "Trasferta")
     )
-    result["title"] = f"{result['home_team']} - {result['away_team']}"
+    base_title = f"{result['home_team']} - {result['away_team']}"
     old = next((item for item in previous if item.get("uid") == result["uid"]), None)
     if old is None:
         old = next((item for item in previous if _same_source_id(item, result)), None)
@@ -773,6 +782,39 @@ def _canonical_event(event: dict[str, Any], previous: list[dict[str, Any]], chan
     if old is not None:
         if old and old.get("uid"):
             result["uid"] = str(old["uid"])
+
+    explicitly_cleared = result.get("postponed") is False
+    if not explicitly_cleared and _is_postponed(result):
+        result["postponed"] = True
+        result.setdefault(
+            "postponed_from",
+            str((old or {}).get("postponed_from") or (old or {}).get("start") or result["start"]),
+        )
+        result.setdefault("postponed_to", "")
+    elif not explicitly_cleared and old and old.get("postponed"):
+        if str(result.get("start")) != str(old.get("start")):
+            result["postponed"] = True
+            result["postponed_from"] = str(old.get("postponed_from") or old.get("start") or "")
+            result["postponed_to"] = str(result["start"])
+            if old.get("postponement_reason") and not result.get("postponement_reason"):
+                result["postponement_reason"] = old["postponement_reason"]
+        elif old.get("postponed_to"):
+            for key in ("postponed", "postponed_from", "postponed_to", "postponement_reason"):
+                if old.get(key) and not result.get(key):
+                    result[key] = old[key]
+
+    if result.get("postponed"):
+        postponed_to = str(result.get("postponed_to") or "")
+        if postponed_to:
+            new_date = date.fromisoformat(postponed_to[:10]).strftime("%d/%m/%Y")
+            result["title"] = f"RINVIATA AL {new_date} — {base_title}"
+        else:
+            result["title"] = f"RINVIATA — DATA DA DESTINARSI — {base_title}"
+            result["start"] = str(result.get("postponed_from") or result["start"])[:10]
+            result["all_day"] = True
+    else:
+        result.pop("postponed", None)
+        result["title"] = base_title
     ignored = {"last_modified", "sequence"}
     comparable = {key: value for key, value in result.items() if key not in ignored}
     old_comparable = {key: value for key, value in (old or {}).items() if key not in ignored}
@@ -827,7 +869,7 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
     for data in events:
         component = Event()
         component.add("uid", data["uid"])
-        component.add("summary", f"⚽ {data['title']}")
+        component.add("summary", f"⏸ {data['title']}" if data.get("postponed") else f"⚽ {data['title']}")
         start = _event_datetime(data).astimezone(ROME)
         if data.get("all_day"):
             component.add("dtstart", start.date())
@@ -839,6 +881,8 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
         component.add("dtstamp", modified.astimezone(timezone.utc))
         component.add("last-modified", modified.astimezone(timezone.utc))
         component.add("sequence", int(data.get("sequence") or 0))
+        if data.get("postponed"):
+            component.add("status", "CONFIRMED" if data.get("postponed_to") else "TENTATIVE")
         place = ", ".join(
             dict.fromkeys(
                 value for value in (str(data.get("venue") or ""), str(data.get("location") or "")) if value
@@ -854,6 +898,19 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
         ]
         if data.get("round"):
             details.append(f"Turno: {data['round']}")
+        if data.get("postponed"):
+            details.append(
+                "Rinvio: "
+                + (
+                    f"nuova data {str(data['postponed_to'])[:10]}"
+                    if data.get("postponed_to")
+                    else "data da destinarsi"
+                )
+            )
+            if data.get("postponed_from"):
+                details.append(f"Data originaria: {str(data['postponed_from'])[:10]}")
+            if data.get("postponement_reason"):
+                details.append(f"Motivo: {data['postponement_reason']}")
         if data.get("venue"):
             details.append(f"Stadio: {data['venue']}")
         if data.get("location"):
@@ -871,11 +928,12 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
         component.add("description", "\n".join(details))
         component.add("categories", [str(data["competition"]), "AC Milan"])
         component.add("transp", "OPAQUE")
-        alarm = Alarm()
-        alarm.add("action", "DISPLAY")
-        alarm.add("description", f"Tra 2 ore e 30 minuti: {data['title']}")
-        alarm.add("trigger", timedelta(hours=-2, minutes=-30))
-        component.add_component(alarm)
+        if not data.get("postponed") or data.get("postponed_to"):
+            alarm = Alarm()
+            alarm.add("action", "DISPLAY")
+            alarm.add("description", f"Tra 2 ore e 30 minuti: {data['title']}")
+            alarm.add("trigger", timedelta(hours=-2, minutes=-30))
+            component.add_component(alarm)
         calendar.add_component(component)
     return calendar.to_ical()
 
