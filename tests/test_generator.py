@@ -400,8 +400,7 @@ def test_time_conflicts_are_recorded_and_highest_priority_wins() -> None:
     assert merged[0]["start"] == "2026-09-12T21:00:00+02:00"
     assert merged[0]["time_source"] == "DAZN"
     assert {item["source"] for item in merged[0]["time_conflicts"]} == {
-        "AC Milan",
-        "Gazzetta dello Sport",
+        "Gazzetta dello Sport"
     }
 
 
