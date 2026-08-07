@@ -109,6 +109,36 @@ def test_broadcaster_time_overrides_official_tbc_without_replacing_metadata() ->
     assert merged[0]["venue"] == "Tarczyński Arena, Wrocław"
 
 
+def test_now_overlay_keeps_dazn_as_primary_serie_a_broadcaster() -> None:
+    official = parse_official_html(
+        official_html(
+            [
+                official_match(
+                    providerId="torino-milan",
+                    datetime="2026-08-23T18:45:00Z",
+                    matchDay="1",
+                    homeTeam={"name": "Torino"},
+                    awayTeam={"name": "Milan"},
+                )
+            ]
+        ),
+        "https://www.acmilan.com/schedule",
+    )[0]
+    overlay = parse_schedule_html(
+        '<script type="application/ld+json">'
+        '{"text":"Domenica 23 agosto ore 20:45 - Torino vs Milan."}'
+        "</script>",
+        "NOW",
+        "https://www.nowtv.it/sport/calcio/milan",
+        2026,
+    )[0]
+
+    merged = merge_remote_events([official, overlay])
+
+    assert merged[0]["broadcast_it"] == "DAZN; Sky Sport e NOW"
+    assert len(merged[0]["broadcast_source_urls"]) == 2
+
+
 def test_time_overlay_matches_reversed_teams_and_does_not_create_fixtures() -> None:
     base = {
         "source": "AC Milan",
