@@ -275,6 +275,48 @@ def test_deduplication_prefers_official_and_uid_survives_time_change(tmp_path: P
     assert second[0]["broadcast_it"] == "DAZN"
 
 
+def test_uid_survives_multi_month_postponement_and_changed_source_id(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    (tmp_path / "data").mkdir()
+    (tmp_path / "data" / "manual_events.json").write_text(
+        '{"events": []}\n', encoding="utf-8"
+    )
+    original = parse_official_html(
+        official_html(
+            [
+                official_match(
+                    providerId="old-id",
+                    datetime="2026-05-10T18:45:00Z",
+                    matchDay="Finale",
+                    competition={"name": "Coppa Italia"},
+                )
+            ]
+        ),
+        "https://www.acmilan.com/schedule",
+    )[0]
+    monkeypatch.setattr(
+        "milan_calendar.generator.fetch_remote_events",
+        lambda session, today: FetchResult([original], ["AC Milan"], []),
+    )
+    first = update_calendar(tmp_path, session=object(), today=date(2026, 5, 1))
+
+    postponed = dict(
+        original,
+        source_id="new-id",
+        start="2026-08-20T18:45:00Z",
+    )
+    monkeypatch.setattr(
+        "milan_calendar.generator.fetch_remote_events",
+        lambda session, today: FetchResult([postponed], ["AC Milan"], []),
+    )
+    second = update_calendar(tmp_path, session=object(), today=date(2026, 8, 1))
+
+    assert first[0]["uid"] == second[0]["uid"]
+    assert second[0]["sequence"] == 1
+    assert second[0]["start"] == "2026-08-20T18:45:00Z"
+
+
 def test_ical_timezone_fields_and_alarm() -> None:
     event = {
         "uid": "test@milan-calendar",
@@ -430,3 +472,7 @@ def test_subscription_page_has_iphone_fallback() -> None:
     assert "webcal://dizzle0987.github.io/milan-calendar/calendar.ics" in html
     assert "Aggiungi calendario con iscrizione" in html
     assert "navigator.clipboard.writeText(calendarUrl)" in html
+    assert "Android — Google Calendar" in html
+    assert "Mac — Calendario Apple" in html
+    assert "PC Windows — Outlook" in html
+    assert "Sottoscrivi dal Web" in html
