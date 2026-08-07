@@ -646,7 +646,14 @@ def merge_remote_events(events: Iterable[dict[str, Any]]) -> list[dict[str, Any]
             continue
         previous_start = str(existing.get("start") or "")
         candidate_start = str(candidate.get("start") or "")
-        if previous_start and not existing.get("all_day") and previous_start != candidate_start:
+        same_instant = (
+            previous_start
+            and candidate_start
+            and not existing.get("all_day")
+            and _event_datetime(existing).astimezone(timezone.utc)
+            == _event_datetime(candidate).astimezone(timezone.utc)
+        )
+        if previous_start and not existing.get("all_day") and not same_instant:
             conflict = {
                 "source": str(existing.get("time_source") or existing.get("source") or ""),
                 "source_url": str(existing.get("time_source_url") or existing.get("source_url") or ""),
