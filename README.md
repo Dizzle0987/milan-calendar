@@ -24,6 +24,15 @@ Non importare il file come calendario statico: usa sempre **Aggiungi calendario 
 
 Dopo la pubblicazione di un aggiornamento, l'app Calendario può impiegare qualche minuto per sincronizzare i nuovi eventi; non è necessario iscriversi di nuovo.
 
+## Android, Mac e PC
+
+- **Android / Google Calendar**: apri Google Calendar sul web, scegli **Altri calendari → + → Da URL**, incolla il feed HTTPS e aggiungilo. Su telefono può essere necessario attivare **Sito desktop**; il calendario comparirà poi nell'app Android.
+- **Mac**: nell'app Calendario scegli **File → Nuova iscrizione calendario**, incolla il feed HTTPS e abilita l'aggiornamento automatico.
+- **Windows / Outlook**: in Outlook sul web scegli **Aggiungi calendario → Sottoscrivi dal Web**, incolla il feed e conferma.
+- **PC o Linux / Google Calendar**: usa **Altri calendari → + → Da URL**.
+
+Usa sempre la sottoscrizione tramite URL. Scaricare o importare una copia statica di `calendar.ics` non consente di ricevere gli spostamenti successivi.
+
 ## Fonti e strategia di aggiornamento
 
 Il generatore non usa SofaScore.
@@ -45,6 +54,8 @@ Le richieste HTTP hanno timeout, retry con backoff e un User-Agent identificabil
 ## UID, aggiornamenti e deduplicazione
 
 Ogni UID è un hash stabile di stagione, squadre e competizione, indipendente dall'ordine casa/trasferta. Data, ora e turno non fanno parte dell'UID: quando una partita viene spostata o ne viene precisata la fase, l'app Calendario aggiorna lo stesso evento invece di crearne uno nuovo. A ogni modifica significativa aumenta anche il campo iCalendar `SEQUENCE`, migliorando il riconoscimento dell'aggiornamento da parte dei client.
+
+Gli spostamenti di settimane o mesi sono riconosciuti senza limiti di 72 ore quando la fonte mantiene il proprio `source_id`. Se l'identificativo della fonte cambia, il generatore tenta un recupero prudente usando squadre in casa/trasferta, competizione e turno entro 240 giorni, ma riutilizza l'UID soltanto se trova una singola corrispondenza. Questo copre rinvii per meteo, ordine pubblico o ricalendarizzazioni di coppa senza confondere andata, ritorno o incontri diversi.
 
 Gli eventi con stesse squadre, stessa famiglia di competizione e orari entro 72 ore vengono unificati. Sono riconosciute anche varianti comuni dei nomi delle squadre. Le voci di Milan Femminile, Milan Futuro, Primavera e categorie giovanili vengono escluse. AC Milan ha precedenza per i dati descrittivi; i broadcaster hanno precedenza specificamente per l'orario e la copertura televisiva. Ogni evento include, quando disponibile:
 
