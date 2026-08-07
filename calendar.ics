@@ -109,16 +109,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Torino - Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260807T083844Z
+DTSTAMP:20260807T092153Z
 UID:53ab99ccd879619beefb1915@milan-calendar
-SEQUENCE:2
+SEQUENCE:3
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 1\nStadio: Sta
- dio Olimpico\nDove vederla in Italia: Sky Sport e NOW\nFonte TV: https://w
- ww.nowtv.it/sport/calcio/milan\nFonte orario: NOW\nLink orario: https://ww
- w.nowtv.it/sport/calcio/milan\nFonte: https://www.acmilan.com/en/season/20
- 26/schedule/all
-LAST-MODIFIED:20260807T083844Z
+ dio Olimpico\nDove vederla in Italia: DAZN\; Sky Sport e NOW\nFonte TV: ht
+ tps://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizza
+ zione-gestione-e-controllo-modello-231\nFonte TV: https://www.nowtv.it/spo
+ rt/calcio/milan\nFonte orario: NOW\nLink orario: https://www.nowtv.it/spor
+ t/calcio/milan\nFonte: https://www.acmilan.com/en/season/2026/schedule/all
+LAST-MODIFIED:20260807T092153Z
 LOCATION:Stadio Olimpico
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all

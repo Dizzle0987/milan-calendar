@@ -102,16 +102,20 @@
     {
       "all_day": false,
       "away_team": "Milan",
-      "broadcast_it": "Sky Sport e NOW",
+      "broadcast_it": "DAZN; Sky Sport e NOW",
       "broadcast_source_url": "https://www.nowtv.it/sport/calcio/milan",
+      "broadcast_source_urls": [
+        "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
+        "https://www.nowtv.it/sport/calcio/milan"
+      ],
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Torino",
-      "last_modified": "2026-08-07T08:38:44Z",
+      "last_modified": "2026-08-07T09:21:53Z",
       "location": "",
       "neutral": false,
       "round": "1",
-      "sequence": 2,
+      "sequence": 3,
       "source": "AC Milan",
       "source_id": "6w3tljosjb0q1hvcb08eo33tg",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -1012,7 +1016,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-07T09:17:47Z",
+  "last_changed": "2026-08-07T09:21:53Z",
   "schema_version": 1,
   "source_errors": [
     "AC Milan: nessun orario esplicito per il Milan",
