@@ -77,18 +77,19 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Manchester United
-DTSTART;VALUE=DATE:20260815
-DTEND;VALUE=DATE:20260816
-DTSTAMP:20260806T143903Z
+DTSTART;TZID=Europe/Rome:20260815T140000
+DTEND;TZID=Europe/Rome:20260815T160000
+DTSTAMP:20260807T061545Z
 UID:20e096ff80c5846c27ab8a18@milan-calendar
 SEQUENCE:0
 CATEGORIES:Amichevole,AC Milan
 DESCRIPTION:Competizione: Amichevole\nMilan: Casa\nTurno: Amichevole pre-c
  ampionato 2026/27\nStadio: Tarczyński Arena\, Wrocław\nDove vederla in I
- talia: Da definire\nFonte: https://www.acmilan.com/en/news/articles/friend
- ly/2026-06-09/ac-milan-will-take-on-celtic-and-manchester-united-in-summer
- -2026
-LAST-MODIFIED:20260806T143903Z
+ talia: DAZN\, Sky Sport e NOW\nFonte TV: https://www.nowtv.it/sport/calcio
+ /milan\nFonte orario: NOW\nLink orario: https://www.nowtv.it/sport/calcio/
+ milan\nFonte: https://www.acmilan.com/en/news/articles/friendly/2026-06-09
+ /ac-milan-will-take-on-celtic-and-manchester-united-in-summer-2026
+LAST-MODIFIED:20260807T061545Z
 LOCATION:Tarczyński Arena\, Wrocław
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/news/articles/friendly/2026-06-09/ac-milan-
@@ -103,16 +104,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Torino - Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260806T120525Z
+DTSTAMP:20260807T061545Z
 UID:c4a8dca2f7da4ac306231f60@milan-calendar
 SEQUENCE:0
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 1\nStadio: Sta
- dio Olimpico\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com
- /it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-c
- ontrollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedu
- le/all
-LAST-MODIFIED:20260806T120525Z
+ dio Olimpico\nDove vederla in Italia: Sky Sport e NOW\nFonte TV: https://w
+ ww.nowtv.it/sport/calcio/milan\nFonte orario: NOW\nLink orario: https://ww
+ w.nowtv.it/sport/calcio/milan\nFonte: https://www.acmilan.com/en/season/20
+ 26/schedule/all
+LAST-MODIFIED:20260807T061545Z
 LOCATION:Stadio Olimpico
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all

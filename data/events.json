@@ -60,20 +60,23 @@
       "venue": "Gelora Bung Karno Stadium, Jakarta"
     },
     {
-      "all_day": true,
+      "all_day": false,
       "away_team": "Manchester United",
-      "broadcast_it": "Da definire",
+      "broadcast_it": "DAZN, Sky Sport e NOW",
+      "broadcast_source_url": "https://www.nowtv.it/sport/calcio/milan",
       "competition": "Amichevole",
       "home_away": "Casa",
       "home_team": "AC Milan",
       "id": "milan-manchester-united-wroclaw-2026",
-      "last_modified": "2026-08-06T14:39:03Z",
+      "last_modified": "2026-08-07T06:15:45Z",
       "round": "Amichevole pre-campionato 2026/27",
       "source": "Manuale",
       "source_id": "milan-manchester-united-wroclaw-2026",
       "source_url": "https://www.acmilan.com/en/news/articles/friendly/2026-06-09/ac-milan-will-take-on-celtic-and-manchester-united-in-summer-2026",
-      "start": "2026-08-15",
+      "start": "2026-08-15T14:00:00+02:00",
       "status": "scheduled",
+      "time_source": "NOW",
+      "time_source_url": "https://www.nowtv.it/sport/calcio/milan",
       "title": "AC Milan - Manchester United",
       "uid": "20e096ff80c5846c27ab8a18@milan-calendar",
       "venue": "Tarczyński Arena, Wrocław"
@@ -81,18 +84,20 @@
     {
       "all_day": false,
       "away_team": "Milan",
-      "broadcast_it": "DAZN",
-      "broadcast_source_url": "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
+      "broadcast_it": "Sky Sport e NOW",
+      "broadcast_source_url": "https://www.nowtv.it/sport/calcio/milan",
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Torino",
-      "last_modified": "2026-08-06T12:05:25Z",
+      "last_modified": "2026-08-07T06:15:45Z",
       "round": "1",
       "source": "AC Milan",
       "source_id": "6w3tljosjb0q1hvcb08eo33tg",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
-      "start": "2026-08-23T18:45:00+00:00",
+      "start": "2026-08-23T20:45:00+02:00",
       "status": "Fixture",
+      "time_source": "NOW",
+      "time_source_url": "https://www.nowtv.it/sport/calcio/milan",
       "title": "Torino - Milan",
       "uid": "c4a8dca2f7da4ac306231f60@milan-calendar",
       "venue": "Stadio Olimpico"
@@ -801,13 +806,17 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-06T14:39:03Z",
+  "last_changed": "2026-08-07T06:15:45Z",
   "schema_version": 1,
-  "source_errors": [],
+  "source_errors": [
+    "Gazzetta dello Sport: nessun orario esplicito per il Milan",
+    "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule"
+  ],
   "sources_used": [
     "AC Milan",
     "ESPN",
-    "TheSportsDB"
+    "TheSportsDB",
+    "NOW"
   ],
   "timezone": "Europe/Rome"
 }
