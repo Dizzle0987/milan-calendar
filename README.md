@@ -53,7 +53,7 @@ Le richieste HTTP hanno timeout, retry con backoff e un User-Agent identificabil
 
 ## UID, aggiornamenti e deduplicazione
 
-Ogni UID è un hash stabile di stagione, squadre e competizione, indipendente dall'ordine casa/trasferta. Data, ora e turno non fanno parte dell'UID: quando una partita viene spostata o ne viene precisata la fase, l'app Calendario aggiorna lo stesso evento invece di crearne uno nuovo. A ogni modifica significativa aumenta anche il campo iCalendar `SEQUENCE`, migliorando il riconoscimento dell'aggiornamento da parte dei client.
+Ogni UID è un hash stabile di stagione, squadra di casa, squadra in trasferta e competizione. L'ordine casa/trasferta distingue correttamente andata e ritorno; eventuali inversioni presenti soltanto nei feed di supporto vengono riconciliate durante la deduplicazione. Data, ora e turno non fanno parte dell'UID: quando una partita viene spostata o ne viene precisata la fase, l'app Calendario aggiorna lo stesso evento invece di crearne uno nuovo. A ogni modifica significativa aumenta anche il campo iCalendar `SEQUENCE`, migliorando il riconoscimento dell'aggiornamento da parte dei client.
 
 Gli spostamenti di settimane o mesi sono riconosciuti senza limiti di 72 ore quando la fonte mantiene il proprio `source_id`. Se l'identificativo della fonte cambia, il generatore tenta un recupero prudente usando squadre in casa/trasferta, competizione e turno entro 240 giorni, ma riutilizza l'UID soltanto se trova una singola corrispondenza. Questo copre rinvii per meteo, ordine pubblico o ricalendarizzazioni di coppa senza confondere andata, ritorno o incontri diversi.
 
