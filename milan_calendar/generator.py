@@ -555,12 +555,10 @@ def _event_datetime(event: dict[str, Any]) -> datetime:
 def _semantic_base(event: dict[str, Any]) -> str:
     start = _event_datetime(event).astimezone(ROME)
     active_season = start.year if start.month >= 7 else start.year - 1
-    teams = sorted(
-        (_team_match_key(str(event.get("home_team") or "")), _team_match_key(str(event.get("away_team") or "")))
-    )
     parts = (
         str(active_season),
-        *teams,
+        _team_match_key(str(event.get("home_team") or "")),
+        _team_match_key(str(event.get("away_team") or "")),
         _competition_family(str(event.get("competition") or "")),
     )
     return "|".join(parts)
@@ -751,7 +749,12 @@ def load_manual_events(path: Path) -> list[dict[str, Any]]:
     return result
 
 
-def _canonical_event(event: dict[str, Any], previous: list[dict[str, Any]], changed_at: str) -> dict[str, Any]:
+def _canonical_event(
+    event: dict[str, Any],
+    previous: list[dict[str, Any]],
+    changed_at: str,
+    used_uids: set[str] | None = None,
+) -> dict[str, Any]:
     result = deepcopy(event)
     result.pop("_time_overlay", None)
     result.pop("_time_priority", None)
@@ -761,15 +764,14 @@ def _canonical_event(event: dict[str, Any], previous: list[dict[str, Any]], chan
     result.setdefault("time_source_url", "")
     _add_italian_broadcaster(result)
     result["uid"] = _uid_for(result)
+    generated_uid = result["uid"]
     result["home_away"] = (
         "Campo neutro"
         if result.get("neutral")
         else ("Casa" if _is_milan(str(result["home_team"])) else "Trasferta")
     )
     base_title = f"{result['home_team']} - {result['away_team']}"
-    old = next((item for item in previous if item.get("uid") == result["uid"]), None)
-    if old is None:
-        old = next((item for item in previous if _same_source_id(item, result)), None)
+    old = next((item for item in previous if _same_source_id(item, result)), None)
     if old is None:
         long_range_matches = [
             item for item in previous if _same_long_range_fixture(item, result)
@@ -779,9 +781,25 @@ def _canonical_event(event: dict[str, Any], previous: list[dict[str, Any]], chan
         old = next(
             (item for item in previous if _same_fixture(item, result, unordered=True)), None
         )
+    if old is None:
+        old = next((item for item in previous if item.get("uid") == generated_uid), None)
     if old is not None:
-        if old and old.get("uid"):
+        if old.get("uid") and str(old["uid"]) not in (used_uids or set()):
             result["uid"] = str(old["uid"])
+        else:
+            # Migrate legacy feeds where home and away legs accidentally shared
+            # one UID. The ordered semantic UID remains stable on later runs.
+            result["uid"] = generated_uid
+    if used_uids is not None and result["uid"] in used_uids:
+        collision_base = "|".join(
+            (
+                _semantic_base(result),
+                str(result.get("source") or ""),
+                str(result.get("source_id") or ""),
+                str(result.get("start") or ""),
+            )
+        )
+        result["uid"] = f"{hashlib.sha256(collision_base.encode()).hexdigest()[:24]}@milan-calendar"
 
     explicitly_cleared = result.get("postponed") is False
     if not explicitly_cleared and _is_postponed(result):
@@ -823,6 +841,10 @@ def _canonical_event(event: dict[str, Any], previous: list[dict[str, Any]], chan
     result["last_modified"] = (
         str(old.get("last_modified")) if old and not changed else changed_at
     )
+    if used_uids is not None:
+        if result["uid"] in used_uids:
+            raise ValueError(f"UID duplicato non risolvibile: {result['uid']}")
+        used_uids.add(result["uid"])
     return result
 
 
@@ -983,7 +1005,12 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     remote = merge_remote_events(fetched.events)
     manual = load_manual_events(manual_path)
     combined = merge_manual_events(remote, manual)
-    canonical = [_canonical_event(event, previous, changed_at) for event in combined]
+    canonical: list[dict[str, Any]] = []
+    used_uids: set[str] = set()
+    for event in combined:
+        canonical.append(_canonical_event(event, previous, changed_at, used_uids))
+    if len({event["uid"] for event in canonical}) != len(canonical):
+        raise ValueError("Il calendario contiene UID duplicati; output precedente conservato")
 
     ignored = {"last_modified", "sequence"}
     old_without_meta = [{key: value for key, value in item.items() if key not in ignored} for item in previous]
