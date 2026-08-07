@@ -4,7 +4,9 @@ import hashlib
 import html as html_module
 import json
 import logging
+import os
 import re
+import tempfile
 import unicodedata
 from copy import deepcopy
 from dataclasses import dataclass
@@ -20,7 +22,18 @@ from urllib3.util.retry import Retry
 
 LOGGER = logging.getLogger(__name__)
 ROME = ZoneInfo("Europe/Rome")
-MILAN_ALIASES = {"ac milan", "milan"}
+MILAN_ALIASES = {"ac milan", "milan", "milan fc"}
+EXCLUDED_SQUADS = (
+    "women", "femminile", "primavera", "next gen", "futuro",
+    "under 23", "u23", "under 20", "u20", "under 19", "u19",
+)
+TEAM_EQUIVALENTS = {
+    "internazionale": "inter",
+    "inter-milan": "inter",
+    "manchester-utd": "manchester-united",
+    "man-utd": "manchester-united",
+    "psg": "paris-saint-germain",
+}
 OFFICIAL_URL = "https://www.acmilan.com/en/season/{season}/schedule/all"
 ESPN_URL = (
     "https://site.api.espn.com/apis/site/v2/sports/soccer/"
@@ -30,13 +43,19 @@ THESPORTSDB_URL = "https://www.thesportsdb.com/api/v1/json/123/eventsnext.php?id
 NOW_MILAN_URL = "https://www.nowtv.it/sport/calcio/milan"
 DAZN_SCHEDULE_URL = "https://www.dazn.com/it-IT/schedule"
 GAZZETTA_FRIENDLIES_URL = (
-    "https://www.gazzetta.it/Calcio/Serie-A/storie/01-07-2026/"
-    "raduni-ritiri-e-amichevoli-delle-20-squadre-di-serie-a/milan.shtml"
+    "https://www.gazzetta.it/Calcio/Serie-A/Milan/"
 )
+SKY_SERIE_A_URL = "https://sport.sky.it/calcio/serie-a"
+MEDIASET_SPORT_URL = "https://mediasetinfinity.mediaset.it/sport"
+PRIME_SPORT_URL = "https://www.primevideo.com/sports"
 TIME_SOURCE_PRIORITY = {
-    "Gazzetta dello Sport": 10,
-    "DAZN": 20,
-    "NOW": 30,
+    "AC Milan": 10,
+    "Gazzetta dello Sport": 20,
+    "DAZN": 40,
+    "Sky Sport": 40,
+    "Mediaset": 40,
+    "Prime Video": 40,
+    "NOW": 50,
 }
 ESPN_COMPETITIONS = {
     "ita.1": "Serie A",
@@ -138,7 +157,15 @@ def _is_milan(team: str) -> bool:
 def _team_match_key(team: str) -> str:
     tokens = _normalize(team).split("-")
     ignored = {"afc", "cf", "fc", "football", "club"}
-    return "-".join(token for token in tokens if token not in ignored)
+    key = "-".join(token for token in tokens if token not in ignored)
+    return TEAM_EQUIVALENTS.get(key, key)
+
+
+def _valid_first_team_fixture(home: str, away: str, *labels: str) -> bool:
+    combined = " ".join((home, away, *labels)).lower()
+    return (_is_milan(home) or _is_milan(away)) and not any(
+        marker in combined for marker in EXCLUDED_SQUADS
+    )
 
 
 def _parse_flight_chunks(html: str) -> Iterable[str]:
@@ -185,7 +212,13 @@ def parse_official_html(html: str, source_url: str) -> list[dict[str, Any]]:
     for match in matches:
         home = str((match.get("homeTeam") or {}).get("name") or "").strip()
         away = str((match.get("awayTeam") or {}).get("name") or "").strip()
-        if not home or not away or not (_is_milan(home) or _is_milan(away)):
+        if not home or not away or not _valid_first_team_fixture(
+            home,
+            away,
+            str(match.get("teamCategory") or ""),
+            str(match.get("category") or ""),
+            str((match.get("competition") or {}).get("name") or ""),
+        ):
             continue
         source_id = str(match.get("providerId") or match.get("id") or "")
         if source_id and source_id in seen_ids:
@@ -207,9 +240,13 @@ def parse_official_html(html: str, source_url: str) -> list[dict[str, Any]]:
                 "competition": competition,
                 "round": str(match.get("matchDay") or (match.get("stage") or {}).get("name") or ""),
                 "venue": str(match.get("stadiumName") or ""),
+                "location": str(match.get("stadiumCity") or match.get("city") or ""),
+                "neutral": bool(match.get("neutralVenue") or match.get("isNeutralVenue")),
                 "start": parsed_start.astimezone(ROME).date().isoformat() if is_tbc else parsed_start.isoformat(),
                 "all_day": is_tbc,
                 "status": str(match.get("status") or "scheduled"),
+                "time_source": "" if is_tbc else "AC Milan",
+                "time_source_url": "" if is_tbc else source_url,
             }
         )
     return events
@@ -226,8 +263,6 @@ def parse_espn_json(payload: dict[str, Any], default_competition: str) -> list[d
             continue
         home = str((home_entry.get("team") or {}).get("displayName") or "").strip()
         away = str((away_entry.get("team") or {}).get("displayName") or "").strip()
-        if not (_is_milan(home) or _is_milan(away)):
-            continue
         raw_start = str(item.get("date") or "")
         if not raw_start:
             continue
@@ -236,19 +271,30 @@ def parse_espn_json(payload: dict[str, Any], default_competition: str) -> list[d
         time_valid = status_type.get("detail") not in {"TBD", "TBA"}
         venue = (competition_entry.get("venue") or {}).get("fullName") or ""
         league = (item.get("league") or {}).get("name") or default_competition
+        if not _valid_first_team_fixture(home, away, str(league)):
+            continue
+        address = (competition_entry.get("venue") or {}).get("address") or {}
+        event_url = str(
+            (item.get("links") or [{}])[0].get("href")
+            or "https://www.espn.com/soccer/team/fixtures/_/id/103/ac-milan"
+        )
         events.append(
             {
                 "source_id": str(item.get("id") or ""),
                 "source": "ESPN",
-                "source_url": str((item.get("links") or [{}])[0].get("href") or "https://www.espn.com/soccer/team/fixtures/_/id/103/ac-milan"),
+                "source_url": event_url,
                 "home_team": home,
                 "away_team": away,
                 "competition": str(league),
                 "round": str(competition_entry.get("round") or ""),
                 "venue": str(venue),
+                "location": str(address.get("city") or ""),
+                "neutral": bool(competition_entry.get("neutralSite")),
                 "start": parsed_start.isoformat() if time_valid else parsed_start.astimezone(ROME).date().isoformat(),
                 "all_day": not time_valid,
                 "status": str(status_type.get("name") or "scheduled"),
+                "time_source": "ESPN" if time_valid else "",
+                "time_source_url": event_url if time_valid else "",
             }
         )
     return events
@@ -259,7 +305,9 @@ def parse_thesportsdb_json(payload: dict[str, Any]) -> list[dict[str, Any]]:
     for item in payload.get("events") or []:
         home = str(item.get("strHomeTeam") or "").strip()
         away = str(item.get("strAwayTeam") or "").strip()
-        if not home or not away or not (_is_milan(home) or _is_milan(away)):
+        if not home or not away or not _valid_first_team_fixture(
+            home, away, str(item.get("strLeague") or ""), str(item.get("strSeason") or "")
+        ):
             continue
 
         raw_timestamp = str(item.get("strTimestamp") or "").strip()
@@ -287,9 +335,19 @@ def parse_thesportsdb_json(payload: dict[str, Any]) -> list[dict[str, Any]]:
                 "competition": str(item.get("strLeague") or "Partita"),
                 "round": str(item.get("intRound") or ""),
                 "venue": str(item.get("strVenue") or ""),
+                "location": ", ".join(
+                    value
+                    for value in (str(item.get("strCity") or ""), str(item.get("strCountry") or ""))
+                    if value
+                ),
+                "neutral": False,
                 "start": start,
                 "all_day": all_day,
                 "status": str(item.get("strStatus") or "scheduled"),
+                "time_source": "TheSportsDB" if not all_day else "",
+                "time_source_url": (
+                    f"https://www.thesportsdb.com/event/{event_id}" if not all_day and event_id else ""
+                ),
             }
         )
     return events
@@ -306,7 +364,14 @@ def _json_strings(value: Any) -> Iterable[str]:
             yield from _json_strings(child)
 
 
-def parse_schedule_html(html: str, source: str, source_url: str, year: int) -> list[dict[str, Any]]:
+def parse_schedule_html(
+    html: str,
+    source: str,
+    source_url: str,
+    year: int,
+    priority: int | None = None,
+    broadcaster: str = "",
+) -> list[dict[str, Any]]:
     """Read explicit Milan kick-off times from structured broadcaster/editorial pages."""
     fragments: list[str] = []
     for raw in re.findall(
@@ -358,7 +423,7 @@ def parse_schedule_html(html: str, source: str, source_url: str, year: int) -> l
         for match in pattern.finditer(text):
             home = match.group("home").strip(" .,-–")
             away = match.group("away").strip(" .,-–")
-            if not (_is_milan(home) or _is_milan(away)):
+            if not _valid_first_team_fixture(home, away):
                 continue
             month = months[match.group("month").lower()]
             start = datetime(
@@ -379,24 +444,26 @@ def parse_schedule_html(html: str, source: str, source_url: str, year: int) -> l
                 "source_url": source_url,
                 "home_team": home,
                 "away_team": away,
-                "competition": "Amichevole",
+                "competition": "Partita",
                 "round": "",
                 "venue": "",
                 "start": start.isoformat(),
                 "all_day": False,
                 "status": "scheduled",
                 "_time_overlay": True,
-                "_time_priority": TIME_SOURCE_PRIORITY.get(source, 0),
+                "_time_priority": TIME_SOURCE_PRIORITY.get(source, 0) if priority is None else priority,
             }
-            if source == "NOW":
+            inferred_broadcaster = broadcaster or {
+                "NOW": "Sky Sport e NOW",
+                "Sky Sport": "Sky Sport e NOW",
+                "DAZN": "DAZN",
+                "Mediaset": "Mediaset e Mediaset Infinity",
+                "Prime Video": "Prime Video",
+            }.get(source, "")
+            if inferred_broadcaster:
                 event.update(
-                    {
-                        "broadcast_it": "Sky Sport e NOW",
-                        "broadcast_source_url": source_url,
-                    }
+                    {"broadcast_it": inferred_broadcaster, "broadcast_source_url": source_url}
                 )
-            elif source == "DAZN":
-                event.update({"broadcast_it": "DAZN", "broadcast_source_url": source_url})
             events.append(event)
     return events
 
@@ -430,8 +497,9 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
                 response = session.get(url, timeout=20)
                 response.raise_for_status()
                 payload = response.json()
-                events.extend(parse_espn_json(payload, default_name))
-                espn_ok = True
+                parsed = parse_espn_json(payload, default_name)
+                events.extend(parsed)
+                espn_ok = espn_ok or bool(parsed)
             except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
                 errors.append(f"ESPN {competition}/{season}: {exc}")
     if espn_ok:
@@ -440,22 +508,31 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
     try:
         response = session.get(THESPORTSDB_URL, timeout=20)
         response.raise_for_status()
-        events.extend(parse_thesportsdb_json(response.json()))
+        parsed = parse_thesportsdb_json(response.json())
+        if not parsed:
+            raise ValueError("nessun evento valido nella risposta")
+        events.extend(parsed)
         successful.append("TheSportsDB")
     except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
         errors.append(f"TheSportsDB: {exc}")
         LOGGER.warning("Fonte TheSportsDB non disponibile: %s", exc)
 
     time_sources = (
-        ("Gazzetta dello Sport", GAZZETTA_FRIENDLIES_URL),
-        ("DAZN", DAZN_SCHEDULE_URL),
-        ("NOW", NOW_MILAN_URL),
+        ("AC Milan", official_url, 10, ""),
+        ("Gazzetta dello Sport", GAZZETTA_FRIENDLIES_URL, 20, ""),
+        ("DAZN", DAZN_SCHEDULE_URL, 40, "DAZN"),
+        ("Sky Sport", SKY_SERIE_A_URL, 40, "Sky Sport e NOW"),
+        ("Mediaset", MEDIASET_SPORT_URL, 40, "Mediaset e Mediaset Infinity"),
+        ("Prime Video", PRIME_SPORT_URL, 40, "Prime Video"),
+        ("NOW", NOW_MILAN_URL, 50, "Sky Sport e NOW"),
     )
-    for source, url in time_sources:
+    for source, url, source_priority, broadcaster in time_sources:
         try:
             response = session.get(url, timeout=20)
             response.raise_for_status()
-            schedule_events = parse_schedule_html(response.text, source, url, start_year)
+            schedule_events = parse_schedule_html(
+                response.text, source, url, start_year, source_priority, broadcaster
+            )
             if not schedule_events:
                 raise ValueError("nessun orario esplicito per il Milan")
             events.extend(schedule_events)
@@ -478,10 +555,12 @@ def _event_datetime(event: dict[str, Any]) -> datetime:
 def _semantic_base(event: dict[str, Any]) -> str:
     start = _event_datetime(event).astimezone(ROME)
     active_season = start.year if start.month >= 7 else start.year - 1
+    teams = sorted(
+        (_team_match_key(str(event.get("home_team") or "")), _team_match_key(str(event.get("away_team") or "")))
+    )
     parts = (
         str(active_season),
-        _normalize(str(event.get("home_team") or "")),
-        _normalize(str(event.get("away_team") or "")),
+        *teams,
         _competition_family(str(event.get("competition") or "")),
     )
     return "|".join(parts)
@@ -506,26 +585,36 @@ def _add_italian_broadcaster(event: dict[str, Any]) -> None:
     event.setdefault("broadcast_source_url", source_url)
 
 
-def _same_fixture(left: dict[str, Any], right: dict[str, Any]) -> bool:
-    if _team_match_key(str(left.get("home_team"))) != _team_match_key(str(right.get("home_team"))):
-        return False
-    if _team_match_key(str(left.get("away_team"))) != _team_match_key(str(right.get("away_team"))):
-        return False
-    if _competition_family(str(left.get("competition"))) != _competition_family(str(right.get("competition"))):
-        return False
-    return abs((_event_datetime(left) - _event_datetime(right)).total_seconds()) <= 60 * 60 * 48
+def _same_source_id(left: dict[str, Any], right: dict[str, Any]) -> bool:
+    return bool(
+        left.get("source")
+        and left.get("source") == right.get("source")
+        and left.get("source_id")
+        and str(left.get("source_id")) == str(right.get("source_id"))
+    )
 
 
-def _same_fixture_for_time(left: dict[str, Any], right: dict[str, Any]) -> bool:
-    left_teams = sorted(
-        (_team_match_key(str(left.get("home_team"))), _team_match_key(str(left.get("away_team"))))
+def _same_fixture(
+    left: dict[str, Any], right: dict[str, Any], *, unordered: bool = False
+) -> bool:
+    left_teams = (
+        _team_match_key(str(left.get("home_team") or "")),
+        _team_match_key(str(left.get("away_team") or "")),
     )
-    right_teams = sorted(
-        (_team_match_key(str(right.get("home_team"))), _team_match_key(str(right.get("away_team"))))
+    right_teams = (
+        _team_match_key(str(right.get("home_team") or "")),
+        _team_match_key(str(right.get("away_team") or "")),
     )
-    if left_teams != right_teams:
+    if (sorted(left_teams) if unordered else left_teams) != (
+        sorted(right_teams) if unordered else right_teams
+    ):
         return False
-    return abs((_event_datetime(left) - _event_datetime(right)).total_seconds()) <= 60 * 60 * 48
+    left_family = _competition_family(str(left.get("competition") or ""))
+    right_family = _competition_family(str(right.get("competition") or ""))
+    generic = {"partita", "altra-competizione"}
+    if left_family != right_family and not ({left_family, right_family} & generic):
+        return False
+    return abs((_event_datetime(left) - _event_datetime(right)).total_seconds()) <= 60 * 60 * 72
 
 
 def merge_remote_events(events: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -548,12 +637,25 @@ def merge_remote_events(events: Iterable[dict[str, Any]]) -> list[dict[str, Any]
     # Apply time-only sources after fixture discovery. Broadcasters can update
     # the kick-off and TV fields without replacing club metadata such as venue.
     for candidate in sorted(time_overlays, key=lambda item: int(item.get("_time_priority") or 0)):
-        existing = next((event for event in merged if _same_fixture_for_time(event, candidate)), None)
+        existing = next(
+            (event for event in merged if _same_fixture(event, candidate, unordered=True)), None
+        )
         if existing is None:
             # Palinsesti ed articoli servono ad arricchire incontri già
             # scoperti dalle fonti sportive, non a creare nuove partite.
             continue
-        existing["start"] = candidate["start"]
+        previous_start = str(existing.get("start") or "")
+        candidate_start = str(candidate.get("start") or "")
+        if previous_start and not existing.get("all_day") and previous_start != candidate_start:
+            conflict = {
+                "source": str(existing.get("time_source") or existing.get("source") or ""),
+                "source_url": str(existing.get("time_source_url") or existing.get("source_url") or ""),
+                "start": previous_start,
+            }
+            conflicts = existing.setdefault("time_conflicts", [])
+            if conflict not in conflicts:
+                conflicts.append(conflict)
+        existing["start"] = candidate_start
         existing["all_day"] = False
         existing["time_source"] = candidate["source"]
         existing["time_source_url"] = candidate["source_url"]
@@ -579,16 +681,21 @@ def load_manual_events(path: Path) -> list[dict[str, Any]]:
     for index, event in enumerate(events):
         if not isinstance(event, dict):
             raise ValueError(f"Evento manuale #{index + 1} non valido")
+        if event.get("enabled") is False:
+            continue
         required = {"home_team", "away_team", "competition", "start"}
         missing = sorted(required - event.keys())
         if missing:
             raise ValueError(f"Evento manuale #{index + 1}: campi mancanti: {', '.join(missing)}")
         normalized = deepcopy(event)
+        normalized.pop("enabled", None)
         normalized.setdefault("source", "Manuale")
         normalized.setdefault("source_url", "")
         normalized.setdefault("source_id", str(event.get("id") or f"manual-{index + 1}"))
         normalized.setdefault("round", "")
         normalized.setdefault("venue", "")
+        normalized.setdefault("location", "")
+        normalized.setdefault("neutral", False)
         normalized.setdefault("all_day", len(str(event["start"])) == 10)
         normalized.setdefault("status", "scheduled")
         result.append(normalized)
@@ -599,19 +706,35 @@ def _canonical_event(event: dict[str, Any], previous: list[dict[str, Any]], chan
     result = deepcopy(event)
     result.pop("_time_overlay", None)
     result.pop("_time_priority", None)
+    result.setdefault("location", "")
+    result.setdefault("neutral", False)
+    result.setdefault("time_source", "")
+    result.setdefault("time_source_url", "")
     _add_italian_broadcaster(result)
     result["uid"] = _uid_for(result)
-    result["home_away"] = "Casa" if _is_milan(str(result["home_team"])) else "Trasferta"
+    result["home_away"] = (
+        "Campo neutro"
+        if result.get("neutral")
+        else ("Casa" if _is_milan(str(result["home_team"])) else "Trasferta")
+    )
     result["title"] = f"{result['home_team']} - {result['away_team']}"
-    comparable = {key: value for key, value in result.items() if key != "last_modified"}
     old = next((item for item in previous if item.get("uid") == result["uid"]), None)
     if old is None:
-        old = next((item for item in previous if _same_fixture(item, result)), None)
+        old = next((item for item in previous if _same_source_id(item, result)), None)
+    if old is None:
+        old = next(
+            (item for item in previous if _same_fixture(item, result, unordered=True)), None
+        )
+    if old is not None:
         if old and old.get("uid"):
             result["uid"] = str(old["uid"])
-    old_comparable = {key: value for key, value in (old or {}).items() if key != "last_modified"}
+    ignored = {"last_modified", "sequence"}
+    comparable = {key: value for key, value in result.items() if key not in ignored}
+    old_comparable = {key: value for key, value in (old or {}).items() if key not in ignored}
+    changed = old is None or comparable != old_comparable
+    result["sequence"] = int((old or {}).get("sequence") or 0) + (1 if old and changed else 0)
     result["last_modified"] = (
-        str(old.get("last_modified")) if old and comparable == old_comparable else changed_at
+        str(old.get("last_modified")) if old and not changed else changed_at
     )
     return result
 
@@ -621,7 +744,13 @@ def merge_manual_events(remote: list[dict[str, Any]], manual: list[dict[str, Any
     for candidate in manual:
         uid = _uid_for(candidate)
         existing_index = next(
-            (index for index, event in enumerate(merged) if _uid_for(event) == uid or _same_fixture(event, candidate)),
+            (
+                index
+                for index, event in enumerate(merged)
+                if _uid_for(event) == uid
+                or _same_source_id(event, candidate)
+                or _same_fixture(event, candidate, unordered=True)
+            ),
             None,
         )
         if existing_index is None:
@@ -657,9 +786,14 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
         modified = datetime.fromisoformat(str(data["last_modified"]).replace("Z", "+00:00"))
         component.add("dtstamp", modified.astimezone(timezone.utc))
         component.add("last-modified", modified.astimezone(timezone.utc))
-        component.add("sequence", 0)
-        if data.get("venue"):
-            component.add("location", str(data["venue"]))
+        component.add("sequence", int(data.get("sequence") or 0))
+        place = ", ".join(
+            dict.fromkeys(
+                value for value in (str(data.get("venue") or ""), str(data.get("location") or "")) if value
+            )
+        )
+        if place:
+            component.add("location", place)
         if data.get("source_url"):
             component.add("url", str(data["source_url"]))
         details = [
@@ -670,6 +804,8 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
             details.append(f"Turno: {data['round']}")
         if data.get("venue"):
             details.append(f"Stadio: {data['venue']}")
+        if data.get("location"):
+            details.append(f"Località: {data['location']}")
         if data.get("broadcast_it"):
             details.append(f"Dove vederla in Italia: {data['broadcast_it']}")
         if data.get("broadcast_source_url"):
@@ -692,11 +828,27 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
     return calendar.to_ical()
 
 
-def _write_if_changed(path: Path, content: bytes) -> None:
-    if path.exists() and path.read_bytes() == content:
-        return
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes(content)
+def _atomic_write_many(outputs: list[tuple[Path, bytes]]) -> None:
+    staged: list[tuple[Path, Path]] = []
+    try:
+        for path, content in outputs:
+            if path.exists() and path.read_bytes() == content:
+                continue
+            path.parent.mkdir(parents=True, exist_ok=True)
+            descriptor, temporary_name = tempfile.mkstemp(
+                prefix=f".{path.name}.", dir=path.parent
+            )
+            temporary = Path(temporary_name)
+            with os.fdopen(descriptor, "wb") as handle:
+                handle.write(content)
+                handle.flush()
+                os.fsync(handle.fileno())
+            staged.append((temporary, path))
+        for temporary, path in staged:
+            os.replace(temporary, path)
+    finally:
+        for temporary, _ in staged:
+            temporary.unlink(missing_ok=True)
 
 
 def update_calendar(root: Path, session: requests.Session | None = None, today: date | None = None) -> list[dict[str, Any]]:
@@ -710,7 +862,9 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     changed_at = now.isoformat().replace("+00:00", "Z")
 
     fetched = fetch_remote_events(session or build_session(), today or datetime.now(ROME).date())
-    if not fetched.successful_sources or not fetched.events:
+    discovery_sources = {"AC Milan", "ESPN", "TheSportsDB"}
+    discovered_events = [event for event in fetched.events if not event.get("_time_overlay")]
+    if not discovery_sources.intersection(fetched.successful_sources) or not discovered_events:
         raise UpdateError(
             "Nessuna fonte remota disponibile; calendar.ics e data/events.json sono rimasti invariati. "
             + "; ".join(fetched.errors[:3])
@@ -721,8 +875,9 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     combined = merge_manual_events(remote, manual)
     canonical = [_canonical_event(event, previous, changed_at) for event in combined]
 
-    old_without_meta = [{key: value for key, value in item.items() if key != "last_modified"} for item in previous]
-    new_without_meta = [{key: value for key, value in item.items() if key != "last_modified"} for item in canonical]
+    ignored = {"last_modified", "sequence"}
+    old_without_meta = [{key: value for key, value in item.items() if key not in ignored} for item in previous]
+    new_without_meta = [{key: value for key, value in item.items() if key not in ignored} for item in canonical]
     last_changed = (
         str(previous_payload.get("last_changed"))
         if isinstance(previous_payload, dict) and old_without_meta == new_without_meta and previous_payload.get("last_changed")
@@ -742,7 +897,6 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
 
     # Write only after every parsing and rendering step succeeds. A failed run
     # therefore cannot truncate or replace the last valid published calendar.
-    _write_if_changed(events_path, json_bytes)
-    _write_if_changed(root / "calendar.ics", ical_bytes)
+    _atomic_write_many([(events_path, json_bytes), (root / "calendar.ics", ical_bytes)])
     LOGGER.info("Generati %d eventi da %s", len(canonical), ", ".join(fetched.successful_sources))
     return canonical
