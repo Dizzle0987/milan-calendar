@@ -31,12 +31,12 @@ Il generatore non usa SofaScore.
 1. **Scoperta delle partite — AC Milan**: la pagina ufficiale del calendario della stagione rimane il riferimento principale per l'esistenza dell'incontro, le squadre, la competizione e lo stadio. Il programma legge i dati JSON strutturati incorporati dalla web app ufficiale.
 2. **Fallback e integrazione — ESPN**: endpoint JSON pubblici per Serie A, Coppa Italia, Supercoppa, competizioni UEFA e amichevoli. ESPN integra anche incontri non ancora presenti nella risposta ufficiale.
 3. **Controllo aggiuntivo — TheSportsDB**: API JSON pubblica usata per individuare la prossima partita, comprese amichevoli e tournée non ancora esposte dagli altri feed.
-4. **Priorità degli orari — broadcaster italiani**: gli orari espliciti pubblicati nei palinsesti strutturati di DAZN e NOW possono completare o correggere un evento TBC. NOW ha precedenza su una fonte editoriale; il sito Milan non prevale su un orario confermato dal broadcaster.
+4. **Priorità degli orari — broadcaster italiani**: gli orari espliciti pubblicati da DAZN, Sky Sport/NOW, Mediaset e Prime Video possono completare o correggere un evento TBC. I broadcaster prevalgono sulle fonti editoriali e sul sito Milan per il solo orario; i metadati della partita restano quelli della fonte sportiva.
 5. **Fallback editoriale degli orari — Gazzetta dello Sport**: viene consultato il programma delle amichevoli. Un orario viene usato soltanto se è scritto esplicitamente insieme a data e squadre; diciture come “da stabilire” vengono ignorate.
-6. **Ultimo risultato valido**: se nessuna fonte remota risponde con eventi validi, il programma termina con errore prima di scrivere. `calendar.ics` e `data/events.json` rimangono quindi intatti.
-7. **Eventi manuali**: `data/manual_events.json` può integrare o correggere le fonti. A parità di partita, i dati manuali hanno precedenza.
+6. **Ultimo risultato valido**: almeno una fonte di scoperta (AC Milan, ESPN o TheSportsDB) deve restituire partite valide. Una risposta dei soli palinsesti TV non può sostituire o svuotare il calendario. Gli output vengono preparati su file temporanei e sostituiti atomicamente solo a elaborazione conclusa.
+7. **Eventi manuali**: `data/manual_events.json` può integrare o correggere le fonti. A parità di partita, i dati manuali hanno precedenza e possono essere disattivati con `"enabled": false`.
 
-Il [calendario DAZN](https://www.dazn.com/it-IT/schedule), la [pagina Milan di NOW](https://www.nowtv.it/sport/calcio/milan) e il calendario delle amichevoli della Gazzetta vengono interrogati ogni sei ore. Si preferiscono i dati strutturati presenti nella pagina; il riconoscimento testuale è limitato a righe che contengono squadre, data e ora complete.
+Il [calendario DAZN](https://www.dazn.com/it-IT/schedule), la [pagina Milan di NOW](https://www.nowtv.it/sport/calcio/milan), Sky Sport, Mediaset, Prime Video e Gazzetta vengono interrogati ogni sei ore. Si preferiscono i dati strutturati presenti nella pagina; il riconoscimento testuale è limitato a righe che contengono squadre, data e ora complete. Se due fonti indicano orari diversi, vince quella con priorità maggiore e le alternative restano in `time_conflicts` dentro `data/events.json` per il debug.
 
 Palinsesti come Sisal possono essere consultati come segnalazione ulteriore, ma non vengono analizzati automaticamente: non offrono un'API pubblica documentata e uno scraping del sito sarebbe fragile. Prima della pubblicazione, una segnalazione viene confermata con una fonte ufficiale o strutturata.
 
@@ -44,9 +44,9 @@ Le richieste HTTP hanno timeout, retry con backoff e un User-Agent identificabil
 
 ## UID, aggiornamenti e deduplicazione
 
-Ogni UID è un hash stabile di stagione, squadre e competizione. Data, ora e turno non fanno parte dell'UID: quando una partita viene spostata o ne viene precisata la fase, l'app Calendario aggiorna lo stesso evento invece di crearne uno nuovo.
+Ogni UID è un hash stabile di stagione, squadre e competizione, indipendente dall'ordine casa/trasferta. Data, ora e turno non fanno parte dell'UID: quando una partita viene spostata o ne viene precisata la fase, l'app Calendario aggiorna lo stesso evento invece di crearne uno nuovo. A ogni modifica significativa aumenta anche il campo iCalendar `SEQUENCE`, migliorando il riconoscimento dell'aggiornamento da parte dei client.
 
-Gli eventi con stesse squadre, stessa famiglia di competizione e orari entro 48 ore vengono unificati. AC Milan ha precedenza per i dati descrittivi; i broadcaster hanno precedenza specificamente per l'orario e la copertura televisiva. Ogni evento include, quando disponibile:
+Gli eventi con stesse squadre, stessa famiglia di competizione e orari entro 72 ore vengono unificati. Sono riconosciute anche varianti comuni dei nomi delle squadre. Le voci di Milan Femminile, Milan Futuro, Primavera e categorie giovanili vengono escluse. AC Milan ha precedenza per i dati descrittivi; i broadcaster hanno precedenza specificamente per l'orario e la copertura televisiva. Ogni evento include, quando disponibile:
 
 - competizione e turno;
 - stadio;
@@ -98,6 +98,7 @@ Modifica `data/manual_events.json`. Il file accetta un oggetto con la proprietà
   "events": [
     {
       "id": "trofeo-estivo-2026",
+      "enabled": true,
       "home_team": "AC Milan",
       "away_team": "Real Madrid",
       "competition": "Amichevole",
@@ -112,7 +113,7 @@ Modifica `data/manual_events.json`. Il file accetta un oggetto con la proprietà
 }
 ```
 
-Campi obbligatori: `home_team`, `away_team`, `competition`, `start`. `start` può essere un timestamp ISO 8601 con offset oppure una data `YYYY-MM-DD` per un evento senza orario. È possibile specificare un `uid` esplicito; in caso contrario viene generato automaticamente. Per correggere un evento recuperato, usa stesse squadre e competizione e una data entro 48 ore.
+Campi obbligatori: `home_team`, `away_team`, `competition`, `start`. `start` può essere un timestamp ISO 8601 con offset oppure una data `YYYY-MM-DD` per un evento senza orario. È possibile specificare un `uid` esplicito; in caso contrario viene generato automaticamente. Per correggere un evento recuperato, usa stesse squadre e competizione e una data entro 72 ore. Imposta `"enabled": false` per sospendere una voce senza cancellarla.
 
 Dopo la modifica esegui test e generatore, quindi committa sia il file manuale sia gli output aggiornati.
 
@@ -130,10 +131,13 @@ La suite verifica:
 
 - parsing del JSON incorporato nella pagina ufficiale;
 - parsing della risposta JSON ESPN;
-- deduplicazione e stabilità dell'UID dopo un cambio d'orario;
+- esclusione delle squadre femminili, Futuro e giovanili;
+- deduplicazione, alias e stabilità dell'UID dopo un cambio d'orario;
+- incremento di `SEQUENCE` dopo modifiche significative;
+- priorità e tracciamento dei conflitti fra fonti orarie;
 - fuso `Europe/Rome` e promemoria iCalendar;
-- precedenza degli eventi manuali;
-- conservazione degli output quando tutte le fonti falliscono.
+- precedenza e disattivazione degli eventi manuali;
+- conservazione degli output quando tutte le fonti falliscono o rispondono solo fonti TV.
 
 Esecuzione:
 
