@@ -14,6 +14,7 @@ from milan_calendar.generator import (
     merge_manual_events,
     merge_remote_events,
     parse_espn_json,
+    parse_schedule_html,
     parse_thesportsdb_json,
     parse_official_html,
     update_calendar,
@@ -42,6 +43,94 @@ def test_parse_thesportsdb_json_finds_friendlies() -> None:
     assert events[0]["source"] == "TheSportsDB"
     assert events[0]["start"] == "2026-08-08T12:00:00+00:00"
     assert events[0]["competition"] == "Club Friendlies"
+
+
+def test_parse_now_structured_schedule_time() -> None:
+    payload = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Quali sono le amichevoli estive del Milan trasmesse su NOW?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": (
+                        "Sabato 8 agosto ore 14:00 - Milan vs Chelsea. "
+                        "Sabato 15 agosto ore 14:00 - Milan vs Manchester United."
+                    ),
+                },
+            }
+        ],
+    }
+    html = f'<script type="application/ld+json">{json.dumps(payload)}</script>'
+
+    events = parse_schedule_html(html, "NOW", "https://www.nowtv.it/sport/calcio/milan", 2026)
+
+    manchester = next(event for event in events if event["away_team"] == "Manchester United")
+    assert manchester["start"] == "2026-08-15T14:00:00+02:00"
+    assert manchester["broadcast_it"] == "Sky Sport e NOW"
+    assert manchester["_time_overlay"] is True
+
+
+def test_broadcaster_time_overrides_official_tbc_without_replacing_metadata() -> None:
+    official = parse_official_html(
+        official_html(
+            [
+                official_match(
+                    providerId="man-utd",
+                    datetime="2026-08-15T00:00:00Z",
+                    datetimeTBC="TBC",
+                    homeTeam={"name": "Milan"},
+                    awayTeam={"name": "Manchester United"},
+                    competition={"name": "Amichevole"},
+                    stadiumName="Tarczyński Arena, Wrocław",
+                )
+            ]
+        ),
+        "https://www.acmilan.com/schedule",
+    )[0]
+    now_html = (
+        '<script type="application/ld+json">'
+        '{"text":"Sabato 15 agosto ore 14:00 - Milan vs Manchester United."}'
+        "</script>"
+    )
+    overlay = parse_schedule_html(now_html, "NOW", "https://www.nowtv.it/sport/calcio/milan", 2026)[0]
+
+    merged = merge_remote_events([overlay, official])
+
+    assert len(merged) == 1
+    assert merged[0]["start"] == "2026-08-15T14:00:00+02:00"
+    assert merged[0]["all_day"] is False
+    assert merged[0]["source"] == "AC Milan"
+    assert merged[0]["source_url"] == "https://www.acmilan.com/schedule"
+    assert merged[0]["time_source"] == "NOW"
+    assert merged[0]["venue"] == "Tarczyński Arena, Wrocław"
+
+
+def test_time_overlay_matches_reversed_teams_and_does_not_create_fixtures() -> None:
+    base = {
+        "source": "AC Milan",
+        "source_url": "https://www.acmilan.com/schedule",
+        "home_team": "Chelsea",
+        "away_team": "Milan",
+        "competition": "Amichevole",
+        "start": "2026-08-08",
+        "all_day": True,
+    }
+    overlay = parse_schedule_html(
+        '<script type="application/ld+json">{"text":"Sabato 8 agosto ore 14:00 - Milan vs Chelsea."}</script>',
+        "NOW",
+        "https://www.nowtv.it/sport/calcio/milan",
+        2026,
+    )[0]
+    unrelated = dict(overlay, home_team="Milan", away_team="Real Madrid")
+
+    merged = merge_remote_events([base, overlay, unrelated])
+
+    assert len(merged) == 1
+    assert merged[0]["home_team"] == "Chelsea"
+    assert merged[0]["start"] == "2026-08-08T14:00:00+02:00"
 
 
 def test_team_suffix_does_not_create_duplicate() -> None:
