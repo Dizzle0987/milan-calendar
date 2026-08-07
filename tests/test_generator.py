@@ -11,6 +11,7 @@ from milan_calendar.generator import (
     FetchResult,
     UpdateError,
     build_ical,
+    load_manual_events,
     merge_manual_events,
     merge_remote_events,
     parse_espn_json,
@@ -204,6 +205,24 @@ def test_parse_official_embedded_json_and_tbc() -> None:
     assert events[1]["start"] == "2026-09-20"
 
 
+def test_filters_non_first_team_matches() -> None:
+    matches = [
+        official_match(providerId="men"),
+        official_match(
+            providerId="women",
+            homeTeam={"name": "AC Milan Women"},
+            awayTeam={"name": "Roma Femminile"},
+        ),
+        official_match(
+            providerId="futuro",
+            homeTeam={"name": "Milan Futuro"},
+            awayTeam={"name": "Lecco"},
+        ),
+    ]
+    events = parse_official_html(official_html(matches), "https://www.acmilan.com/schedule")
+    assert [event["source_id"] for event in events] == ["men"]
+
+
 def test_parse_espn_structured_event() -> None:
     payload = {
         "events": [
@@ -250,6 +269,8 @@ def test_deduplication_prefers_official_and_uid_survives_time_change(tmp_path: P
     )
     second = update_calendar(tmp_path, session=object(), today=date(2026, 8, 1))
     assert first[0]["uid"] == second[0]["uid"]
+    assert first[0]["sequence"] == 0
+    assert second[0]["sequence"] == 1
     assert second[0]["start"] == "2026-09-12T19:45:00+00:00"
     assert second[0]["broadcast_it"] == "DAZN"
 
@@ -270,6 +291,7 @@ def test_ical_timezone_fields_and_alarm() -> None:
         "start": "2026-09-12T18:45:00+00:00",
         "all_day": False,
         "last_modified": "2026-08-01T10:00:00Z",
+        "sequence": 3,
     }
     payload = build_ical([event])
     calendar = Calendar.from_ical(payload)
@@ -280,6 +302,7 @@ def test_ical_timezone_fields_and_alarm() -> None:
     assert getattr(parsed.decoded("dtstart").tzinfo, "key", None) == "Europe/Rome"
     assert alarm.decoded("trigger").total_seconds() == -(2 * 60 + 30) * 60
     assert "Dove vederla in Italia: DAZN" in parsed.decoded("description").decode()
+    assert parsed.decoded("sequence") == 3
     assert b"X-WR-TIMEZONE:Europe/Rome" in payload
 
 
@@ -326,6 +349,81 @@ def test_total_fetch_failure_preserves_previous_files(tmp_path: Path, monkeypatc
         update_calendar(tmp_path, session=object(), today=date(2026, 8, 1))
     assert events_path.read_text(encoding="utf-8") == '{"events": [{"sentinel": true}]}\n'
     assert calendar_path.read_text(encoding="utf-8") == "LAST VALID CALENDAR\n"
+
+
+def test_tv_only_success_preserves_previous_files(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    (tmp_path / "data").mkdir()
+    events_path = tmp_path / "data" / "events.json"
+    calendar_path = tmp_path / "calendar.ics"
+    events_path.write_text('{"events": [{"sentinel": true}]}\n', encoding="utf-8")
+    calendar_path.write_text("LAST VALID CALENDAR\n", encoding="utf-8")
+    overlay = {
+        "source": "DAZN",
+        "source_url": "https://www.dazn.com/it-IT/schedule",
+        "home_team": "Milan",
+        "away_team": "Roma",
+        "competition": "Partita",
+        "start": "2026-09-12T20:45:00+02:00",
+        "all_day": False,
+        "_time_overlay": True,
+    }
+    monkeypatch.setattr(
+        "milan_calendar.generator.fetch_remote_events",
+        lambda session, today: FetchResult([overlay], ["DAZN"], []),
+    )
+
+    with pytest.raises(UpdateError):
+        update_calendar(tmp_path, session=object(), today=date(2026, 8, 1))
+    assert events_path.read_text(encoding="utf-8") == '{"events": [{"sentinel": true}]}\n'
+    assert calendar_path.read_text(encoding="utf-8") == "LAST VALID CALENDAR\n"
+
+
+def test_time_conflicts_are_recorded_and_highest_priority_wins() -> None:
+    base = parse_official_html(official_html([official_match()]), "https://www.acmilan.com/schedule")[0]
+    low = dict(
+        base,
+        source="Gazzetta dello Sport",
+        source_url="https://www.gazzetta.it/",
+        start="2026-09-12T20:45:00+02:00",
+        _time_overlay=True,
+        _time_priority=20,
+    )
+    high = dict(
+        base,
+        source="DAZN",
+        source_url="https://www.dazn.com/it-IT/schedule",
+        start="2026-09-12T21:00:00+02:00",
+        _time_overlay=True,
+        _time_priority=40,
+    )
+    merged = merge_remote_events([base, high, low])
+    assert merged[0]["start"] == "2026-09-12T21:00:00+02:00"
+    assert merged[0]["time_source"] == "DAZN"
+    assert {item["source"] for item in merged[0]["time_conflicts"]} == {
+        "AC Milan",
+        "Gazzetta dello Sport",
+    }
+
+
+def test_manual_event_can_be_disabled(tmp_path: Path) -> None:
+    path = tmp_path / "manual_events.json"
+    path.write_text(
+        json.dumps(
+            {
+                "events": [
+                    {
+                        "enabled": False,
+                        "home_team": "Milan",
+                        "away_team": "Roma",
+                        "competition": "Serie A",
+                        "start": "2026-09-12",
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    assert load_manual_events(path) == []
 
 
 def test_subscription_page_has_iphone_fallback() -> None:
