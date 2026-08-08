@@ -58,18 +58,18 @@
       "home_away": "Trasferta",
       "home_team": "Chelsea FC",
       "id": "chelsea-milan-jakarta-2026",
-      "last_modified": "2026-08-07T08:36:20Z",
+      "last_modified": "2026-08-08T19:48:02Z",
       "location": "",
       "neutral": false,
       "round": "Pre-Season Tour 2026",
-      "sequence": 1,
+      "sequence": 2,
       "source": "Manuale",
       "source_id": "chelsea-milan-jakarta-2026",
       "source_url": "https://www.acmilan.com/it/news/articoli/tournee/2026-04-30/il-pre-season-tour-2026-di-ac-milan-fa-tappa-in-indonesia",
       "start": "2026-08-08T14:00:00+02:00",
       "status": "scheduled",
-      "time_source": "TheSportsDB",
-      "time_source_url": "https://www.thesportsdb.com/event/2477373",
+      "time_source": "ESPN",
+      "time_source_url": "https://www.espn.com/soccer/match/_/gameId/401871495/ac-milan-chelsea",
       "title": "Chelsea FC - AC Milan",
       "uid": "0df5243c01d34a9dd219ffc2@milan-calendar",
       "venue": "Gelora Bung Karno Stadium, Jakarta"
@@ -1016,7 +1016,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-07T09:21:53Z",
+  "last_changed": "2026-08-08T19:48:02Z",
   "schema_version": 1,
   "source_errors": [
     "AC Milan: nessun orario esplicito per il Milan",
