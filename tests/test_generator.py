@@ -301,7 +301,7 @@ def test_deduplication_prefers_official_and_uid_survives_time_change(tmp_path: P
     assert first[0]["uid"] == second[0]["uid"]
     assert first[0]["sequence"] == 0
     assert second[0]["sequence"] == 1
-    assert second[0]["start"] == "2026-09-12T19:45:00+00:00"
+    assert second[0]["start"] == "2026-09-12T21:45:00+02:00"
     assert second[0]["broadcast_it"] == "DAZN"
 
 
@@ -344,7 +344,7 @@ def test_uid_survives_multi_month_postponement_and_changed_source_id(
 
     assert first[0]["uid"] == second[0]["uid"]
     assert second[0]["sequence"] == 1
-    assert second[0]["start"] == "2026-08-20T18:45:00Z"
+    assert second[0]["start"] == "2026-08-20T20:45:00+02:00"
 
 
 def test_home_and_away_legs_have_unique_uids_and_legacy_collision_is_migrated(
@@ -500,6 +500,104 @@ def test_manual_event_overrides_remote(tmp_path: Path, monkeypatch: pytest.Monke
     assert events[0]["broadcast_it"] == "Canale di prova"
 
 
+def test_live_dazn_time_corrects_stale_manual_now() -> None:
+    remote = {
+        "source": "AC Milan",
+        "source_id": "friendly-1",
+        "source_url": "https://www.acmilan.com/",
+        "home_team": "Manchester United",
+        "away_team": "AC Milan",
+        "competition": "Amichevole",
+        "start": "2026-08-15T16:45:00+02:00",
+        "all_day": False,
+        "time_source": "DAZN",
+        "time_source_url": "https://www.dazn.com/it-IT/schedule",
+        "broadcast_it": "DAZN",
+        "broadcast_source_url": "https://www.dazn.com/it-IT/schedule",
+    }
+    manual = {
+        "source": "Manuale",
+        "source_id": "friendly-manual",
+        "home_team": "AC Milan",
+        "away_team": "Manchester United",
+        "competition": "Amichevole",
+        "start": "2026-08-15T14:00:00+02:00",
+        "all_day": False,
+        "time_source": "NOW",
+        "time_source_url": "https://www.nowtv.it/sport/calcio/milan",
+        "broadcast_it": "Sky Sport e NOW",
+        "venue": "Tarczyński Arena, Wrocław",
+    }
+
+    merged = merge_manual_events([remote], [manual])
+
+    assert merged[0]["start"] == "2026-08-15T16:45:00+02:00"
+    assert merged[0]["time_source"] == "DAZN"
+    assert merged[0]["broadcast_it"] == "DAZN"
+    assert merged[0]["venue"] == "Tarczyński Arena, Wrocław"
+
+
+def test_explicitly_locked_manual_time_can_override_dazn() -> None:
+    remote = {
+        "source": "AC Milan",
+        "source_id": "friendly-1",
+        "home_team": "Manchester United",
+        "away_team": "AC Milan",
+        "competition": "Amichevole",
+        "start": "2026-08-15T16:45:00+02:00",
+        "all_day": False,
+        "time_source": "DAZN",
+    }
+    manual = {
+        "source": "Manuale",
+        "source_id": "friendly-manual",
+        "home_team": "Manchester United",
+        "away_team": "AC Milan",
+        "competition": "Amichevole",
+        "start": "2026-08-15T17:00:00+02:00",
+        "all_day": False,
+        "time_source": "Organizzatore",
+        "lock_time": True,
+    }
+
+    merged = merge_manual_events([remote], [manual])
+
+    assert merged[0]["start"] == "2026-08-15T17:00:00+02:00"
+    assert merged[0]["time_source"] == "Organizzatore"
+
+
+def test_events_json_is_normalized_to_rome_with_dst(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    (tmp_path / "data").mkdir()
+    (tmp_path / "data" / "manual_events.json").write_text('{"events": []}\n', encoding="utf-8")
+    summer, winter = parse_official_html(
+        official_html(
+            [
+                official_match(providerId="summer", datetime="2026-09-12T18:45:00Z"),
+                official_match(
+                    providerId="winter",
+                    datetime="2027-01-12T19:45:00Z",
+                    homeTeam={"name": "Napoli"},
+                    awayTeam={"name": "AC Milan"},
+                ),
+            ]
+        ),
+        "https://www.acmilan.com/schedule",
+    )
+    monkeypatch.setattr(
+        "milan_calendar.generator.fetch_remote_events",
+        lambda session, today: FetchResult([summer, winter], ["AC Milan"], []),
+    )
+
+    events = update_calendar(tmp_path, session=object(), today=date(2026, 8, 1))
+
+    assert [event["start"] for event in events] == [
+        "2026-09-12T20:45:00+02:00",
+        "2027-01-12T20:45:00+01:00",
+    ]
+
+
 def test_total_fetch_failure_preserves_previous_files(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     (tmp_path / "data").mkdir()
     events_path = tmp_path / "data" / "events.json"
@@ -567,6 +665,37 @@ def test_time_conflicts_are_recorded_and_highest_priority_wins() -> None:
     assert merged[0]["time_source"] == "DAZN"
     assert {item["source"] for item in merged[0]["time_conflicts"]} == {
         "Gazzetta dello Sport"
+    }
+
+
+def test_dazn_time_has_priority_over_now() -> None:
+    base = parse_official_html(official_html([official_match()]), "https://www.acmilan.com/schedule")[0]
+    now = dict(
+        base,
+        source="NOW",
+        source_url="https://www.nowtv.it/sport/calcio/milan",
+        start="2026-09-12T14:00:00+02:00",
+        _time_overlay=True,
+        _time_priority=50,
+    )
+    dazn = dict(
+        base,
+        source="DAZN",
+        source_url="https://www.dazn.com/it-IT/schedule",
+        start="2026-09-12T16:45:00+02:00",
+        _time_overlay=True,
+        _time_priority=60,
+        broadcast_it="DAZN",
+    )
+
+    merged = merge_remote_events([base, dazn, now])
+
+    assert merged[0]["start"] == "2026-09-12T16:45:00+02:00"
+    assert merged[0]["time_source"] == "DAZN"
+    assert merged[0]["broadcast_it"] == "DAZN"
+    assert {item["source"] for item in merged[0]["time_conflicts"]} == {
+        "AC Milan",
+        "NOW",
     }
 
 
