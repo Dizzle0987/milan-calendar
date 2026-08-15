@@ -81,27 +81,26 @@ TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ AC Milan - Manchester United
-DTSTART;TZID=Europe/Rome:20260815T140000
-DTEND;TZID=Europe/Rome:20260815T160000
-DTSTAMP:20260807T083620Z
+SUMMARY:⚽ Manchester United - AC Milan
+DTSTART;TZID=Europe/Rome:20260815T164500
+DTEND;TZID=Europe/Rome:20260815T184500
+DTSTAMP:20260815T152128Z
 UID:20e096ff80c5846c27ab8a18@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:Amichevole,AC Milan
-DESCRIPTION:Competizione: Amichevole\nMilan: Casa\nTurno: Amichevole pre-c
- ampionato 2026/27\nStadio: Tarczyński Arena\, Wrocław\nDove vederla in I
- talia: DAZN\, Sky Sport e NOW\nFonte TV: https://www.nowtv.it/sport/calcio
- /milan\nFonte orario: NOW\nLink orario: https://www.nowtv.it/sport/calcio/
- milan\nFonte: https://www.acmilan.com/en/news/articles/friendly/2026-06-09
- /ac-milan-will-take-on-celtic-and-manchester-united-in-summer-2026
-LAST-MODIFIED:20260807T083620Z
+DESCRIPTION:Competizione: Amichevole\nMilan: Trasferta\nTurno: Amichevole 
+ pre-campionato 2026/27\nStadio: Tarczyński Arena\, Wrocław\nDove vederla
+  in Italia: DAZN\; Sky Sport Calcio e NOW\nFonte TV: https://www.dazn.com/
+ it-IT/schedule\nFonte orario: Sky Sport\nLink orario: https://sport.sky.it
+ /calcio/serie-a/2026/07/18/inter-juventus-milan-napoli-amichevoli-estive-2
+ 026-sky\nFonte: https://www.supermecz.pl/
+LAST-MODIFIED:20260815T152128Z
 LOCATION:Tarczyński Arena\, Wrocław
 TRANSP:OPAQUE
-URL:https://www.acmilan.com/en/news/articles/friendly/2026-06-09/ac-milan-
- will-take-on-celtic-and-manchester-united-in-summer-2026
+URL:https://www.supermecz.pl/
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: AC Milan - Manchester United
+DESCRIPTION:Tra 2 ore e 30 minuti: Manchester United - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
