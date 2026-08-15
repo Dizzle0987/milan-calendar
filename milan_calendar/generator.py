@@ -520,7 +520,7 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
     time_sources = (
         ("AC Milan", official_url, 10, ""),
         ("Gazzetta dello Sport", GAZZETTA_FRIENDLIES_URL, 20, ""),
-        "DAZN": 
+
         ("Sky Sport", SKY_SERIE_A_URL, 40, "Sky Sport e NOW"),
         ("Mediaset", MEDIASET_SPORT_URL, 40, "Mediaset e Mediaset Infinity"),
         ("Prime Video", PRIME_SPORT_URL, 40, "Prime Video"),
