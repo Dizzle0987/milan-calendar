@@ -14,6 +14,36 @@
     },
     {
       "id": "milan-manchester-united-wroclaw-2026",
+      "home_team": "Manchester United",
+      "away_team": "AC Milan",
+      "competition": "Amichevole",
+      "start": "2026-08-15T16:45:00+02:00",
+      "venue": "Tarczyński Arena, Wrocław",
+      "round": "Amichevole pre-campionato 2026/27",
+      "source_url": "https://www.supermecz.pl/",
+      "broadcast_it": "DAZN; Sky Sport Calcio e NOW",
+      "broadcast_source_url": "https://www.dazn.com/it-IT/schedule",
+      "time_source": "Sky Sport",
+      "time_source_url": "https://sport.sky.it/calcio/serie-a/2026/07/18/inter-juventus-milan-napoli-amichevoli-estive-2026-sky"
+    }
+  ]
+}
+{
+  "events": [
+    {
+      "id": "chelsea-milan-jakarta-2026",
+      "home_team": "Chelsea FC",
+      "away_team": "AC Milan",
+      "competition": "Amichevole",
+      "start": "2026-08-08T14:00:00+02:00",
+      "venue": "Gelora Bung Karno Stadium, Jakarta",
+      "round": "Pre-Season Tour 2026",
+      "source_url": "https://www.acmilan.com/it/news/articoli/tournee/2026-04-30/il-pre-season-tour-2026-di-ac-milan-fa-tappa-in-indonesia",
+      "broadcast_it": "DAZN e Sky Sport",
+      "broadcast_source_url": "https://www.dazn.com/it-IT/fixture/ContentId:19pa8a9ojur1b1iisfxn3ysuvc/19pa8a9ojur1b1iisfxn3ysuvc"
+    },
+    {
+      "id": "milan-manchester-united-wroclaw-2026",
       "home_team": "AC Milan",
       "away_team": "Manchester United",
       "competition": "Amichevole",
