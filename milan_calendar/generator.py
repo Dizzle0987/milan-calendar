@@ -520,8 +520,7 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
     time_sources = (
         ("AC Milan", official_url, 10, ""),
         ("Gazzetta dello Sport", GAZZETTA_FRIENDLIES_URL, 20, ""),
-                ("DAZN", DAZN_SCHEDULE_URL, 60, "DAZN"),
-
+        ("DAZN", DAZN_SCHEDULE_URL, 60, "DAZN"),
         ("Sky Sport", SKY_SERIE_A_URL, 40, "Sky Sport e NOW"),
         ("Mediaset", MEDIASET_SPORT_URL, 40, "Mediaset e Mediaset Infinity"),
         ("Prime Video", PRIME_SPORT_URL, 40, "Prime Video"),
@@ -551,6 +550,14 @@ def _event_datetime(event: dict[str, Any]) -> datetime:
         return datetime.combine(date.fromisoformat(raw[:10]), time.min, tzinfo=ROME)
     value = datetime.fromisoformat(raw.replace("Z", "+00:00"))
     return value if value.tzinfo else value.replace(tzinfo=ROME)
+
+
+def _event_time_priority(event: dict[str, Any]) -> int:
+    explicit = event.get("_time_priority")
+    if explicit is not None:
+        return int(explicit)
+    source = str(event.get("time_source") or event.get("source") or "")
+    return TIME_SOURCE_PRIORITY.get(source, 0)
 
 
 def _semantic_base(event: dict[str, Any]) -> str:
@@ -786,10 +793,18 @@ def _canonical_event(
     result = deepcopy(event)
     result.pop("_time_overlay", None)
     result.pop("_time_priority", None)
+    result.pop("lock_time", None)
     result.setdefault("location", "")
     result.setdefault("neutral", False)
     result.setdefault("time_source", "")
     result.setdefault("time_source_url", "")
+    if result.get("all_day"):
+        result["start"] = str(result["start"])[:10]
+    else:
+        # Persist the debug snapshot in the same timezone used by the ICS.
+        # This prevents source-specific UTC/local offsets from leaking into
+        # data/events.json and makes DST conversion explicit and testable.
+        result["start"] = _event_datetime(result).astimezone(ROME).isoformat()
     _add_italian_broadcaster(result)
     result["uid"] = _uid_for(result)
     generated_uid = result["uid"]
@@ -900,8 +915,36 @@ def merge_manual_events(remote: list[dict[str, Any]], manual: list[dict[str, Any
         if existing_index is None:
             merged.append(deepcopy(candidate))
         else:
-            # Manual entries intentionally override fetched values.
-            merged[existing_index].update(deepcopy(candidate))
+            existing = merged[existing_index]
+            candidate_copy = deepcopy(candidate)
+            # A static manual fixture may be needed before broadcasters list
+            # it. Once a freshly fetched broadcaster publishes the same match,
+            # let an equal/higher-priority live source correct the manual time.
+            # `lock_time` remains available for exceptional, explicitly
+            # verified manual corrections.
+            manual_time_source = str(candidate.get("time_source") or "")
+            prefer_live_time = (
+                not candidate.get("lock_time")
+                and bool(manual_time_source)
+                and bool(existing.get("time_source"))
+                and _event_time_priority(existing) >= _event_time_priority(candidate)
+            )
+            preserved: dict[str, Any] = {}
+            if prefer_live_time:
+                for key in (
+                    "start",
+                    "all_day",
+                    "time_source",
+                    "time_source_url",
+                    "time_conflicts",
+                    "broadcast_it",
+                    "broadcast_source_url",
+                    "broadcast_source_urls",
+                ):
+                    if key in existing:
+                        preserved[key] = deepcopy(existing[key])
+            existing.update(candidate_copy)
+            existing.update(preserved)
     return sorted(merged, key=_event_datetime)
 
 
