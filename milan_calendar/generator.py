@@ -51,7 +51,7 @@ PRIME_SPORT_URL = "https://www.primevideo.com/sports"
 TIME_SOURCE_PRIORITY = {
     "AC Milan": 10,
     "Gazzetta dello Sport": 20,
-    "DAZN": 40,
+    "DAZN": 60,
     "Sky Sport": 40,
     "Mediaset": 40,
     "Prime Video": 40,
@@ -520,7 +520,7 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
     time_sources = (
         ("AC Milan", official_url, 10, ""),
         ("Gazzetta dello Sport", GAZZETTA_FRIENDLIES_URL, 20, ""),
-        ("DAZN", DAZN_SCHEDULE_URL, 40, "DAZN"),
+        "DAZN": 60,,
         ("Sky Sport", SKY_SERIE_A_URL, 40, "Sky Sport e NOW"),
         ("Mediaset", MEDIASET_SPORT_URL, 40, "Mediaset e Mediaset Infinity"),
         ("Prime Video", PRIME_SPORT_URL, 40, "Prime Video"),
