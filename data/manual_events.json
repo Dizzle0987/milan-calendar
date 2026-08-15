@@ -28,33 +28,3 @@
     }
   ]
 }
-{
-  "events": [
-    {
-      "id": "chelsea-milan-jakarta-2026",
-      "home_team": "Chelsea FC",
-      "away_team": "AC Milan",
-      "competition": "Amichevole",
-      "start": "2026-08-08T14:00:00+02:00",
-      "venue": "Gelora Bung Karno Stadium, Jakarta",
-      "round": "Pre-Season Tour 2026",
-      "source_url": "https://www.acmilan.com/it/news/articoli/tournee/2026-04-30/il-pre-season-tour-2026-di-ac-milan-fa-tappa-in-indonesia",
-      "broadcast_it": "DAZN e Sky Sport",
-      "broadcast_source_url": "https://www.dazn.com/it-IT/fixture/ContentId:19pa8a9ojur1b1iisfxn3ysuvc/19pa8a9ojur1b1iisfxn3ysuvc"
-    },
-    {
-      "id": "milan-manchester-united-wroclaw-2026",
-      "home_team": "AC Milan",
-      "away_team": "Manchester United",
-      "competition": "Amichevole",
-      "start": "2026-08-15T14:00:00+02:00",
-      "venue": "Tarczyński Arena, Wrocław",
-      "round": "Amichevole pre-campionato 2026/27",
-      "source_url": "https://www.acmilan.com/en/news/articles/friendly/2026-06-09/ac-milan-will-take-on-celtic-and-manchester-united-in-summer-2026",
-      "broadcast_it": "DAZN, Sky Sport e NOW",
-      "broadcast_source_url": "https://www.nowtv.it/sport/calcio/milan",
-      "time_source": "NOW",
-      "time_source_url": "https://www.nowtv.it/sport/calcio/milan"
-    }
-  ]
-}
