@@ -11,16 +11,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Celtic - AC Milan
 DTSTART;TZID=Europe/Rome:20260725T160000
 DTEND;TZID=Europe/Rome:20260725T180000
-DTSTAMP:20260807T083620Z
+DTSTAMP:20260815T152652Z
 UID:9a53c482eb00484effadee23@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:Club Friendly,AC Milan
 DESCRIPTION:Competizione: Club Friendly\nMilan: Trasferta\nStadio: Celtic 
  Park\nLocalità: Glasgow\nDove vederla in Italia: Da definire\nFonte orari
  o: ESPN\nLink orario: https://www.espn.com/soccer/match/_/gameId/401886529
  /ac-milan-celtic\nFonte: https://www.espn.com/soccer/match/_/gameId/401886
  529/ac-milan-celtic
-LAST-MODIFIED:20260807T083620Z
+LAST-MODIFIED:20260815T152652Z
 LOCATION:Celtic Park\, Glasgow
 TRANSP:OPAQUE
 URL:https://www.espn.com/soccer/match/_/gameId/401886529/ac-milan-celtic
@@ -34,16 +34,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Internazionale
 DTSTART;TZID=Europe/Rome:20260805T130000
 DTEND;TZID=Europe/Rome:20260805T150000
-DTSTAMP:20260807T083620Z
+DTSTAMP:20260815T152652Z
 UID:e40c3704d9ff86d5bf45b12d@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:Club Friendly,AC Milan
 DESCRIPTION:Competizione: Club Friendly\nMilan: Casa\nStadio: Optus Stadiu
  m\nLocalità: Perth\nDove vederla in Italia: Da definire\nFonte orario: ES
  PN\nLink orario: https://www.espn.com/soccer/match/_/gameId/401869428/inte
  rnazionale-ac-milan\nFonte: https://www.espn.com/soccer/match/_/gameId/401
  869428/internazionale-ac-milan
-LAST-MODIFIED:20260807T083620Z
+LAST-MODIFIED:20260815T152652Z
 LOCATION:Optus Stadium\, Perth
 TRANSP:OPAQUE
 URL:https://www.espn.com/soccer/match/_/gameId/401869428/internazionale-ac
@@ -132,9 +132,9 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Venezia
 DTSTART;TZID=Europe/Rome:20260828T204500
 DTEND;TZID=Europe/Rome:20260828T224500
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260815T152652Z
 UID:c842b581e5d1cee0db8d5794@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 2\nStadio: Stadio S
  an Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-I
@@ -142,7 +142,7 @@ DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 2\nStadio: Stadio S
  llo-modello-231\nFonte orario: AC Milan\nLink orario: https://www.acmilan.
  com/en/season/2026/schedule/all\nFonte: https://www.acmilan.com/en/season/
  2026/schedule/all
-LAST-MODIFIED:20260810T202541Z
+LAST-MODIFIED:20260815T152652Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -156,9 +156,9 @@ BEGIN:VEVENT
 SUMMARY:⚽ Juventus - Milan
 DTSTART;TZID=Europe/Rome:20260906T204500
 DTEND;TZID=Europe/Rome:20260906T224500
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260815T152652Z
 UID:f6a0e961c790cc99304f973a@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 3\nStadio: All
  ianz Stadium\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com
@@ -166,7 +166,7 @@ DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 3\nStadio: All
  ontrollo-modello-231\nFonte orario: AC Milan\nLink orario: https://www.acm
  ilan.com/en/season/2026/schedule/all\nFonte: https://www.acmilan.com/en/se
  ason/2026/schedule/all
-LAST-MODIFIED:20260810T202541Z
+LAST-MODIFIED:20260815T152652Z
 LOCATION:Allianz Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -180,9 +180,9 @@ BEGIN:VEVENT
 SUMMARY:⚽ Lazio - Milan
 DTSTART;TZID=Europe/Rome:20260913T184500
 DTEND;TZID=Europe/Rome:20260913T204500
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260815T152652Z
 UID:9bd99a4e5de2da2051ebcc15@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 4\nStadio: Sta
  dio Olimpico\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com
@@ -190,7 +190,7 @@ DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 4\nStadio: Sta
  ontrollo-modello-231\nFonte orario: AC Milan\nLink orario: https://www.acm
  ilan.com/en/season/2026/schedule/all\nFonte: https://www.acmilan.com/en/se
  ason/2026/schedule/all
-LAST-MODIFIED:20260810T202541Z
+LAST-MODIFIED:20260815T152652Z
 LOCATION:Stadio Olimpico
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -204,9 +204,9 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Lecce
 DTSTART;TZID=Europe/Rome:20260920T204500
 DTEND;TZID=Europe/Rome:20260920T224500
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260815T152652Z
 UID:72ccbea5301e86dea083451c@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 5\nStadio: Stadio S
  an Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-I
@@ -214,7 +214,7 @@ DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 5\nStadio: Stadio S
  llo-modello-231\nFonte orario: AC Milan\nLink orario: https://www.acmilan.
  com/en/season/2026/schedule/all\nFonte: https://www.acmilan.com/en/season/
  2026/schedule/all
-LAST-MODIFIED:20260810T202541Z
+LAST-MODIFIED:20260815T152652Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
