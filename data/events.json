@@ -1,5 +1,5 @@
 {
-  "event_count": 43,
+  "event_count": 42,
   "events": [
     {
       "all_day": false,
@@ -126,30 +126,6 @@
       "title": "Torino - Milan",
       "uid": "c4a8dca2f7da4ac306231f60@milan-calendar",
       "venue": "Stadio Olimpico"
-    },
-    {
-      "all_day": false,
-      "away_team": "AC Milan",
-      "broadcast_it": "DAZN",
-      "broadcast_source_url": "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
-      "competition": "Italian Serie A",
-      "home_away": "Trasferta",
-      "home_team": "Torino",
-      "last_modified": "2026-08-16T03:30:05Z",
-      "location": "Italy",
-      "neutral": false,
-      "round": "1",
-      "sequence": 0,
-      "source": "TheSportsDB",
-      "source_id": "2482143",
-      "source_url": "https://www.thesportsdb.com/event/2482143",
-      "start": "2026-08-23T20:45:00+02:00",
-      "status": "NS",
-      "time_source": "TheSportsDB",
-      "time_source_url": "https://www.thesportsdb.com/event/2482143",
-      "title": "Torino - AC Milan",
-      "uid": "964bd91d49f1b069925e6c39@milan-calendar",
-      "venue": "Stadio Olimpico Grande Torino"
     },
     {
       "all_day": false,
@@ -1040,9 +1016,10 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-16T03:30:05Z",
+  "last_changed": "2026-08-16T19:10:27Z",
   "schema_version": 1,
   "source_errors": [
+    "TheSportsDB: HTTPSConnectionPool(host='www.thesportsdb.com', port=443): Max retries exceeded with url: /api/v1/json/123/eventsnext.php?id=133667 (Caused by ResponseError('too many 503 error responses'))",
     "AC Milan: nessun orario esplicito per il Milan",
     "Gazzetta dello Sport: 404 Client Error: Not Found for url: https://www.gazzetta.it/Calcio/Serie-A/Milan/",
     "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
@@ -1053,7 +1030,6 @@
   "sources_used": [
     "AC Milan",
     "ESPN",
-    "TheSportsDB",
     "NOW"
   ],
   "timezone": "Europe/Rome"
