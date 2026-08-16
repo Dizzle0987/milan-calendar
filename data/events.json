@@ -1,5 +1,5 @@
 {
-  "event_count": 42,
+  "event_count": 43,
   "events": [
     {
       "all_day": false,
@@ -126,6 +126,30 @@
       "title": "Torino - Milan",
       "uid": "c4a8dca2f7da4ac306231f60@milan-calendar",
       "venue": "Stadio Olimpico"
+    },
+    {
+      "all_day": false,
+      "away_team": "AC Milan",
+      "broadcast_it": "DAZN",
+      "broadcast_source_url": "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
+      "competition": "Italian Serie A",
+      "home_away": "Trasferta",
+      "home_team": "Torino",
+      "last_modified": "2026-08-16T03:30:05Z",
+      "location": "Italy",
+      "neutral": false,
+      "round": "1",
+      "sequence": 0,
+      "source": "TheSportsDB",
+      "source_id": "2482143",
+      "source_url": "https://www.thesportsdb.com/event/2482143",
+      "start": "2026-08-23T20:45:00+02:00",
+      "status": "NS",
+      "time_source": "TheSportsDB",
+      "time_source_url": "https://www.thesportsdb.com/event/2482143",
+      "title": "Torino - AC Milan",
+      "uid": "964bd91d49f1b069925e6c39@milan-calendar",
+      "venue": "Stadio Olimpico Grande Torino"
     },
     {
       "all_day": false,
@@ -1016,7 +1040,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-15T15:26:52Z",
+  "last_changed": "2026-08-16T03:30:05Z",
   "schema_version": 1,
   "source_errors": [
     "AC Milan: nessun orario esplicito per il Milan",

@@ -129,6 +129,30 @@ TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:⚽ Torino - AC Milan
+DTSTART;TZID=Europe/Rome:20260823T204500
+DTEND;TZID=Europe/Rome:20260823T224500
+DTSTAMP:20260816T033005Z
+UID:964bd91d49f1b069925e6c39@milan-calendar
+SEQUENCE:0
+CATEGORIES:Italian Serie A,AC Milan
+DESCRIPTION:Competizione: Italian Serie A\nMilan: Trasferta\nTurno: 1\nSta
+ dio: Stadio Olimpico Grande Torino\nLocalità: Italy\nDove vederla in Ital
+ ia: DAZN\nFonte TV: https://www.dazn.com/it-IT/help/articles/1917709852457
+ 3-modello-di-organizzazione-gestione-e-controllo-modello-231\nFonte orario
+ : TheSportsDB\nLink orario: https://www.thesportsdb.com/event/2482143\nFon
+ te: https://www.thesportsdb.com/event/2482143
+LAST-MODIFIED:20260816T033005Z
+LOCATION:Stadio Olimpico Grande Torino\, Italy
+TRANSP:OPAQUE
+URL:https://www.thesportsdb.com/event/2482143
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tra 2 ore e 30 minuti: Torino - AC Milan
+TRIGGER:-PT2H30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:⚽ Milan - Venezia
 DTSTART;TZID=Europe/Rome:20260828T204500
 DTEND;TZID=Europe/Rome:20260828T224500
