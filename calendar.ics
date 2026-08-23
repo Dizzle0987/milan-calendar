@@ -108,9 +108,9 @@ BEGIN:VEVENT
 SUMMARY:⚽ Torino - Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260823T134922Z
+DTSTAMP:20260823T191206Z
 UID:c4a8dca2f7da4ac306231f60@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 1\nStadio: Sta
  dio Olimpico Grande Torino\nDove vederla in Italia: DAZN\; Sky Sport e NOW
@@ -119,7 +119,7 @@ DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 1\nStadio: Sta
  w.nowtv.it/sport/calcio/milan\nFonte orario: NOW\nLink orario: https://www
  .nowtv.it/sport/calcio/milan\nFonte: https://www.acmilan.com/en/season/202
  6/schedule/all
-LAST-MODIFIED:20260823T134922Z
+LAST-MODIFIED:20260823T191206Z
 LOCATION:Stadio Olimpico Grande Torino
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -133,9 +133,9 @@ BEGIN:VEVENT
 SUMMARY:⚽ Torino - AC Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260817T033034Z
+DTSTAMP:20260823T191206Z
 UID:964bd91d49f1b069925e6c39@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Italian Serie A,AC Milan
 DESCRIPTION:Competizione: Italian Serie A\nMilan: Trasferta\nTurno: 1\nSta
  dio: Stadio Olimpico Grande Torino\nLocalità: Italy\nDove vederla in Ital
@@ -143,7 +143,7 @@ DESCRIPTION:Competizione: Italian Serie A\nMilan: Trasferta\nTurno: 1\nSta
  3-modello-di-organizzazione-gestione-e-controllo-modello-231\nFonte orario
  : TheSportsDB\nLink orario: https://www.thesportsdb.com/event/2482143\nFon
  te: https://www.thesportsdb.com/event/2482143
-LAST-MODIFIED:20260817T033034Z
+LAST-MODIFIED:20260823T191206Z
 LOCATION:Stadio Olimpico Grande Torino\, Italy
 TRANSP:OPAQUE
 URL:https://www.thesportsdb.com/event/2482143
