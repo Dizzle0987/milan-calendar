@@ -111,11 +111,11 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Torino",
-      "last_modified": "2026-08-10T20:25:41Z",
+      "last_modified": "2026-08-23T13:49:22Z",
       "location": "",
       "neutral": false,
       "round": "1",
-      "sequence": 0,
+      "sequence": 1,
       "source": "AC Milan",
       "source_id": "6w3tljosjb0q1hvcb08eo33tg",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -125,7 +125,7 @@
       "time_source_url": "https://www.nowtv.it/sport/calcio/milan",
       "title": "Torino - Milan",
       "uid": "c4a8dca2f7da4ac306231f60@milan-calendar",
-      "venue": "Stadio Olimpico"
+      "venue": "Stadio Olimpico Grande Torino"
     },
     {
       "all_day": false,
@@ -1040,7 +1040,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-17T03:30:34Z",
+  "last_changed": "2026-08-23T13:49:22Z",
   "schema_version": 1,
   "source_errors": [
     "AC Milan: nessun orario esplicito per il Milan",

@@ -108,18 +108,19 @@ BEGIN:VEVENT
 SUMMARY:⚽ Torino - Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260823T134922Z
 UID:c4a8dca2f7da4ac306231f60@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 1\nStadio: Sta
- dio Olimpico\nDove vederla in Italia: DAZN\; Sky Sport e NOW\nFonte TV: ht
- tps://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizza
- zione-gestione-e-controllo-modello-231\nFonte TV: https://www.nowtv.it/spo
- rt/calcio/milan\nFonte orario: NOW\nLink orario: https://www.nowtv.it/spor
- t/calcio/milan\nFonte: https://www.acmilan.com/en/season/2026/schedule/all
-LAST-MODIFIED:20260810T202541Z
-LOCATION:Stadio Olimpico
+ dio Olimpico Grande Torino\nDove vederla in Italia: DAZN\; Sky Sport e NOW
+ \nFonte TV: https://www.dazn.com/it-IT/help/articles/19177098524573-modell
+ o-di-organizzazione-gestione-e-controllo-modello-231\nFonte TV: https://ww
+ w.nowtv.it/sport/calcio/milan\nFonte orario: NOW\nLink orario: https://www
+ .nowtv.it/sport/calcio/milan\nFonte: https://www.acmilan.com/en/season/202
+ 6/schedule/all
+LAST-MODIFIED:20260823T134922Z
+LOCATION:Stadio Olimpico Grande Torino
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
