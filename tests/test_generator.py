@@ -24,21 +24,30 @@ from milan_calendar.generator import (
 
 
 def test_parse_espn_standings_json_extracts_milan_row() -> None:
+    def entry(team_id: str, name: str, rank: int, points: int) -> dict:
+        return {
+            "team": {"id": team_id, "displayName": name},
+            "stats": [
+                {"name": "rank", "value": rank},
+                {"name": "points", "value": points},
+                {"name": "gamesPlayed", "value": 10},
+                {"name": "wins", "value": 5},
+                {"name": "ties", "value": 3},
+                {"name": "losses", "value": 2},
+                {"name": "pointDifferential", "value": 7},
+            ],
+        }
+
     payload = {
         "children": [{
             "standings": {
-                "entries": [{
-                    "team": {"id": "103", "displayName": "AC Milan"},
-                    "stats": [
-                        {"name": "rank", "value": 4},
-                        {"name": "points", "value": 18},
-                        {"name": "gamesPlayed", "value": 10},
-                        {"name": "wins", "value": 5},
-                        {"name": "ties", "value": 3},
-                        {"name": "losses", "value": 2},
-                        {"name": "pointDifferential", "value": 7},
-                    ],
-                }]
+                "entries": [
+                    entry("1", "Inter", 2, 21),
+                    entry("2", "Juventus", 3, 19),
+                    entry("103", "AC Milan", 4, 18),
+                    entry("3", "Roma", 5, 17),
+                    entry("4", "Napoli", 6, 16),
+                ]
             }
         }]
     }
@@ -53,6 +62,13 @@ def test_parse_espn_standings_json_extracts_milan_row() -> None:
         "draws": 3,
         "losses": 2,
         "goal_difference": 7,
+        "context": [
+            {"team": "Inter", "position": 2, "points": 21, "played": 10},
+            {"team": "Juventus", "position": 3, "points": 19, "played": 10},
+            {"team": "Milan", "position": 4, "points": 18, "played": 10},
+            {"team": "Roma", "position": 5, "points": 17, "played": 10},
+            {"team": "Napoli", "position": 6, "points": 16, "played": 10},
+        ],
         "source": "ESPN",
     }
 
@@ -522,6 +538,13 @@ def test_ical_timezone_fields_and_alarm() -> None:
             "played": 10,
             "goal_difference": 7,
             "updated_at": "2026-08-24T10:00:00Z",
+            "context": [
+                {"team": "Inter", "position": 2, "points": 21, "played": 10},
+                {"team": "Juventus", "position": 3, "points": 19, "played": 10},
+                {"team": "Milan", "position": 4, "points": 18, "played": 10},
+                {"team": "Roma", "position": 5, "points": 17, "played": 10},
+                {"team": "Napoli", "position": 6, "points": 16, "played": 10},
+            ],
         },
     }
     payload = build_ical([event])
@@ -535,7 +558,10 @@ def test_ical_timezone_fields_and_alarm() -> None:
     description = parsed.decoded("description").decode()
     assert "Orario (Roma): 12/09/2026 20:45" in description
     assert "Dove vederla in Italia: DAZN" in description
-    assert "Classifica Milan: 4º — 18 pt — 10 PG — DR +7" in description
+    assert "Classifica Serie A:" in description
+    assert "  2. Inter — 21 pt" in description
+    assert "▶ 4. Milan — 18 pt — 10 PG — DR +7" in description
+    assert "  6. Napoli — 16 pt" in description
     assert "https://" not in description
     assert parsed.decoded("url") == "https://example.com/match"
     assert parsed.decoded("sequence") == 3
