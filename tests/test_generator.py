@@ -144,6 +144,29 @@ def test_broadcaster_time_overrides_official_tbc_without_replacing_metadata() ->
     assert merged[0]["venue"] == "Tarczyński Arena, Wrocław"
 
 
+def test_milan_and_ac_milan_aliases_do_not_create_duplicates() -> None:
+    base = {
+        "home_team": "Torino",
+        "away_team": "Milan",
+        "competition": "Serie A",
+        "start": "2026-08-23T20:45:00+02:00",
+        "all_day": False,
+        "source": "AC Milan",
+        "source_url": "https://www.acmilan.com/schedule",
+    }
+    fallback = {
+        **base,
+        "away_team": "AC Milan",
+        "competition": "Italian Serie A",
+        "source": "ESPN",
+        "source_url": "https://www.espn.com/match",
+    }
+
+    merged = merge_remote_events([base, fallback])
+
+    assert len(merged) == 1
+
+
 def test_now_overlay_keeps_dazn_as_primary_serie_a_broadcaster() -> None:
     official = parse_official_html(
         official_html(
