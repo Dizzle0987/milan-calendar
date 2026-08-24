@@ -39,6 +39,9 @@ ESPN_URL = (
     "https://site.api.espn.com/apis/site/v2/sports/soccer/"
     "{competition}/teams/103/schedule?season={season}"
 )
+ESPN_STANDINGS_URL = (
+    "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season={season}"
+)
 THESPORTSDB_URL = "https://www.thesportsdb.com/api/v1/json/123/eventsnext.php?id=133667"
 NOW_MILAN_URL = "https://www.nowtv.it/sport/calcio/milan"
 DAZN_SCHEDULE_URL = "https://www.dazn.com/it-IT/schedule"
@@ -103,6 +106,7 @@ class FetchResult:
     events: list[dict[str, Any]]
     successful_sources: list[str]
     errors: list[str]
+    serie_a_standing: dict[str, Any] | None = None
 
 
 def build_session() -> requests.Session:
@@ -300,6 +304,59 @@ def parse_espn_json(payload: dict[str, Any], default_competition: str) -> list[d
     return events
 
 
+def parse_espn_standings_json(payload: dict[str, Any]) -> dict[str, Any] | None:
+    """Extract AC Milan's compact Serie A row from ESPN's structured standings."""
+    entries: list[dict[str, Any]] = []
+    for child in payload.get("children") or []:
+        entries.extend(((child.get("standings") or {}).get("entries") or []))
+    entries.extend(((payload.get("standings") or {}).get("entries") or []))
+
+    for entry in entries:
+        team = entry.get("team") or {}
+        team_names = {
+            _normalize(str(team.get(key) or ""))
+            for key in ("displayName", "shortDisplayName", "name", "abbreviation")
+        }
+        if str(team.get("id") or "") != "103" and not ({"ac-milan", "milan"} & team_names):
+            continue
+
+        stats: dict[str, Any] = {}
+        for stat in entry.get("stats") or []:
+            value = stat.get("value")
+            if value is None:
+                value = stat.get("displayValue")
+            for key in (stat.get("name"), stat.get("abbreviation"), stat.get("shortDisplayName")):
+                if key:
+                    stats[_normalize(str(key))] = value
+
+        def number(*names: str) -> int | None:
+            for name in names:
+                value = stats.get(_normalize(name))
+                if value not in (None, ""):
+                    try:
+                        return int(float(str(value).replace(",", ".")))
+                    except ValueError:
+                        continue
+            return None
+
+        position = number("rank", "position", "rk")
+        points = number("points", "pts")
+        played = number("gamesPlayed", "games played", "gp")
+        if position is None or points is None or played is None:
+            return None
+        return {
+            "position": position,
+            "points": points,
+            "played": played,
+            "wins": number("wins", "w"),
+            "draws": number("ties", "draws", "d"),
+            "losses": number("losses", "l"),
+            "goal_difference": number("pointDifferential", "goalDifference", "goal difference", "gd"),
+            "source": "ESPN",
+        }
+    return None
+
+
 def parse_thesportsdb_json(payload: dict[str, Any]) -> list[dict[str, Any]]:
     events: list[dict[str, Any]] = []
     for item in payload.get("events") or []:
@@ -473,6 +530,7 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
     successful: list[str] = []
     errors: list[str] = []
     start_year = season_start(today)
+    serie_a_standing: dict[str, Any] | None = None
 
     official_url = OFFICIAL_URL.format(season=start_year)
     try:
@@ -504,6 +562,19 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
                 errors.append(f"ESPN {competition}/{season}: {exc}")
     if espn_ok:
         successful.append("ESPN")
+
+    standings_url = ESPN_STANDINGS_URL.format(season=start_year)
+    try:
+        response = session.get(standings_url, timeout=20)
+        response.raise_for_status()
+        serie_a_standing = parse_espn_standings_json(response.json())
+        if not serie_a_standing:
+            raise ValueError("classifica Milan non presente nella risposta")
+        serie_a_standing["source_url"] = standings_url
+        successful.append("ESPN classifica")
+    except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"ESPN classifica: {exc}")
+        LOGGER.info("Classifica ESPN non disponibile: %s", exc)
 
     try:
         response = session.get(THESPORTSDB_URL, timeout=20)
@@ -541,7 +612,12 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
             errors.append(f"{source}: {exc}")
             LOGGER.info("Fonte orari %s non disponibile: %s", source, exc)
 
-    return FetchResult(events=events, successful_sources=successful, errors=errors)
+    return FetchResult(
+        events=events,
+        successful_sources=successful,
+        errors=errors,
+        serie_a_standing=serie_a_standing,
+    )
 
 
 def _event_datetime(event: dict[str, Any]) -> datetime:
@@ -989,6 +1065,11 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
             f"Competizione: {data['competition']}",
             f"Milan: {data['home_away']}",
         ]
+        details.append(
+            "Orario: da confermare"
+            if data.get("all_day")
+            else f"Orario (Roma): {start.strftime('%d/%m/%Y %H:%M')}"
+        )
         if data.get("round"):
             details.append(f"Turno: {data['round']}")
         if data.get("postponed"):
@@ -1010,17 +1091,23 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
             details.append(f"Località: {data['location']}")
         if data.get("broadcast_it"):
             details.append(f"Dove vederla in Italia: {data['broadcast_it']}")
-        broadcast_urls = data.get("broadcast_source_urls") or (
-            [data["broadcast_source_url"]] if data.get("broadcast_source_url") else []
-        )
-        for broadcast_url in dict.fromkeys(str(value) for value in broadcast_urls if value):
-            details.append(f"Fonte TV: {broadcast_url}")
         if data.get("time_source"):
             details.append(f"Fonte orario: {data['time_source']}")
-        if data.get("time_source_url"):
-            details.append(f"Link orario: {data['time_source_url']}")
-        if data.get("source_url"):
-            details.append(f"Fonte: {data['source_url']}")
+        standing = data.get("serie_a_standing") or {}
+        if _competition_family(str(data.get("competition") or "")) == "serie-a" and standing:
+            goal_difference = standing.get("goal_difference")
+            goal_difference_text = (
+                f" — DR {int(goal_difference):+d}" if goal_difference is not None else ""
+            )
+            details.append(
+                f"Classifica Milan: {standing['position']}º — {standing['points']} pt — "
+                f"{standing['played']} PG{goal_difference_text}"
+            )
+            if standing.get("updated_at"):
+                updated = datetime.fromisoformat(str(standing["updated_at"]).replace("Z", "+00:00"))
+                details.append(
+                    f"Classifica aggiornata: {updated.astimezone(ROME).strftime('%d/%m/%Y %H:%M')}"
+                )
         component.add("description", "\n".join(details))
         component.add("categories", [str(data["competition"]), "AC Milan"])
         component.add("transp", "OPAQUE")
@@ -1079,9 +1166,35 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     remote = merge_remote_events(fetched.events)
     manual = load_manual_events(manual_path)
     combined = merge_manual_events(remote, manual)
+    standing_with_timestamp: dict[str, Any] | None = None
+    if fetched.serie_a_standing:
+        standing_with_timestamp = deepcopy(fetched.serie_a_standing)
+        previous_standing = (
+            previous_payload.get("serie_a_standing")
+            if isinstance(previous_payload, dict)
+            else None
+        )
+        previous_without_timestamp = {
+            key: value
+            for key, value in (previous_standing or {}).items()
+            if key != "updated_at"
+        }
+        standing_with_timestamp["updated_at"] = (
+            str(previous_standing["updated_at"])
+            if previous_standing
+            and previous_without_timestamp == fetched.serie_a_standing
+            and previous_standing.get("updated_at")
+            else changed_at
+        )
     canonical: list[dict[str, Any]] = []
     used_uids: set[str] = set()
     for event in combined:
+        if (
+            _competition_family(str(event.get("competition") or "")) == "serie-a"
+            and standing_with_timestamp
+        ):
+            event = deepcopy(event)
+            event["serie_a_standing"] = deepcopy(standing_with_timestamp)
         canonical.append(_canonical_event(event, previous, changed_at, used_uids))
     if len({event["uid"] for event in canonical}) != len(canonical):
         raise ValueError("Il calendario contiene UID duplicati; output precedente conservato")
@@ -1100,6 +1213,7 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
         "last_changed": last_changed,
         "sources_used": fetched.successful_sources,
         "source_errors": fetched.errors,
+        "serie_a_standing": standing_with_timestamp,
         "event_count": len(canonical),
         "events": canonical,
     }
