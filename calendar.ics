@@ -99,16 +99,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Torino - Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260824T062443Z
+DTSTAMP:20260824T062640Z
 UID:c4a8dca2f7da4ac306231f60@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 23/08/
- 2026 20:45\nTurno: 1\nStadio: Stadio Olimpico Grande Torino\nDove vederla 
- in Italia: DAZN\; Sky Sport e NOW\nFonte orario: NOW\nClassifica Milan: 4
- º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 08:24
-LAST-MODIFIED:20260824T062443Z
-LOCATION:Stadio Olimpico Grande Torino
+ 2026 20:45\nTurno: 1\nStadio: Stadio Olimpico Grande Torino\nLocalità: To
+ rino\nDove vederla in Italia: DAZN\; Sky Sport e NOW\nFonte orario: NOW\nC
+ lassifica Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 2
+ 4/08/2026 08:24
+LAST-MODIFIED:20260824T062640Z
+LOCATION:Stadio Olimpico Grande Torino\, Torino
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
@@ -118,68 +119,24 @@ TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Torino - AC Milan
-DTSTART;TZID=Europe/Rome:20260823T204500
-DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260824T062443Z
-UID:964bd91d49f1b069925e6c39@milan-calendar
-SEQUENCE:3
-CATEGORIES:Italian Serie A,AC Milan
-DESCRIPTION:Competizione: Italian Serie A\nMilan: Trasferta\nOrario (Roma)
- : 23/08/2026 20:45\nStadio: Stadio Olimpico Grande Torino\nLocalità: Tori
- no\nDove vederla in Italia: DAZN\nFonte orario: ESPN\nClassifica Milan: 4
- º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 08:24
-LAST-MODIFIED:20260824T062443Z
-LOCATION:Stadio Olimpico Grande Torino\, Torino
-TRANSP:OPAQUE
-URL:https://www.espn.com/soccer/match/_/gameId/401874932/ac-milan-torino
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Torino - AC Milan
-TRIGGER:-PT2H30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:⚽ Milan - Venezia
 DTSTART;TZID=Europe/Rome:20260828T204500
 DTEND;TZID=Europe/Rome:20260828T224500
-DTSTAMP:20260824T062443Z
+DTSTAMP:20260824T062640Z
 UID:c842b581e5d1cee0db8d5794@milan-calendar
-SEQUENCE:2
+SEQUENCE:3
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 28/08/2026 
- 20:45\nTurno: 2\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nFo
- nte orario: AC Milan\nClassifica Milan: 4º — 3 pt — 1 PG — DR +1\nC
- lassifica aggiornata: 24/08/2026 08:24
-LAST-MODIFIED:20260824T062443Z
-LOCATION:Stadio San Siro
+ 20:45\nTurno: 2\nStadio: Stadio San Siro\nLocalità: Italy\nDove vederla i
+ n Italia: DAZN\nFonte orario: AC Milan\nClassifica Milan: 4º — 3 pt —
+  1 PG — DR +1\nClassifica aggiornata: 24/08/2026 08:24
+LAST-MODIFIED:20260824T062640Z
+LOCATION:Stadio San Siro\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Venezia
-TRIGGER:-PT2H30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:⚽ AC Milan - Venezia
-DTSTART;TZID=Europe/Rome:20260828T204500
-DTEND;TZID=Europe/Rome:20260828T224500
-DTSTAMP:20260824T062443Z
-UID:904f7409dd205a6cd4c0ff15@milan-calendar
-SEQUENCE:1
-CATEGORIES:Italian Serie A,AC Milan
-DESCRIPTION:Competizione: Italian Serie A\nMilan: Casa\nOrario (Roma): 28/
- 08/2026 20:45\nTurno: 2\nStadio: Stadio Giuseppe Meazza\nLocalità: Italy\
- nDove vederla in Italia: DAZN\nFonte orario: TheSportsDB\nClassifica Milan
- : 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 08:24
-LAST-MODIFIED:20260824T062443Z
-LOCATION:Stadio Giuseppe Meazza\, Italy
-TRANSP:OPAQUE
-URL:https://www.thesportsdb.com/event/2482150
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: AC Milan - Venezia
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
