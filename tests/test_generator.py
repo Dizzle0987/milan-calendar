@@ -15,11 +15,46 @@ from milan_calendar.generator import (
     merge_manual_events,
     merge_remote_events,
     parse_espn_json,
+    parse_espn_standings_json,
     parse_schedule_html,
     parse_thesportsdb_json,
     parse_official_html,
     update_calendar,
 )
+
+
+def test_parse_espn_standings_json_extracts_milan_row() -> None:
+    payload = {
+        "children": [{
+            "standings": {
+                "entries": [{
+                    "team": {"id": "103", "displayName": "AC Milan"},
+                    "stats": [
+                        {"name": "rank", "value": 4},
+                        {"name": "points", "value": 18},
+                        {"name": "gamesPlayed", "value": 10},
+                        {"name": "wins", "value": 5},
+                        {"name": "ties", "value": 3},
+                        {"name": "losses", "value": 2},
+                        {"name": "pointDifferential", "value": 7},
+                    ],
+                }]
+            }
+        }]
+    }
+
+    standing = parse_espn_standings_json(payload)
+
+    assert standing == {
+        "position": 4,
+        "points": 18,
+        "played": 10,
+        "wins": 5,
+        "draws": 3,
+        "losses": 2,
+        "goal_difference": 7,
+        "source": "ESPN",
+    }
 
 
 def test_parse_thesportsdb_json_finds_friendlies() -> None:
@@ -458,6 +493,13 @@ def test_ical_timezone_fields_and_alarm() -> None:
         "all_day": False,
         "last_modified": "2026-08-01T10:00:00Z",
         "sequence": 3,
+        "serie_a_standing": {
+            "position": 4,
+            "points": 18,
+            "played": 10,
+            "goal_difference": 7,
+            "updated_at": "2026-08-24T10:00:00Z",
+        },
     }
     payload = build_ical([event])
     calendar = Calendar.from_ical(payload)
@@ -467,7 +509,12 @@ def test_ical_timezone_fields_and_alarm() -> None:
     assert parsed.decoded("dtstart").tzinfo is not None
     assert getattr(parsed.decoded("dtstart").tzinfo, "key", None) == "Europe/Rome"
     assert alarm.decoded("trigger").total_seconds() == -(2 * 60 + 30) * 60
-    assert "Dove vederla in Italia: DAZN" in parsed.decoded("description").decode()
+    description = parsed.decoded("description").decode()
+    assert "Orario (Roma): 12/09/2026 20:45" in description
+    assert "Dove vederla in Italia: DAZN" in description
+    assert "Classifica Milan: 4º — 18 pt — 10 PG — DR +7" in description
+    assert "https://" not in description
+    assert parsed.decoded("url") == "https://example.com/match"
     assert parsed.decoded("sequence") == 3
     assert b"X-WR-TIMEZONE:Europe/Rome" in payload
 
