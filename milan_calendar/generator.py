@@ -159,6 +159,8 @@ def _is_milan(team: str) -> bool:
 
 
 def _team_match_key(team: str) -> str:
+    if _is_milan(team):
+        return "milan"
     tokens = _normalize(team).split("-")
     ignored = {"afc", "cf", "fc", "football", "club"}
     key = "-".join(token for token in tokens if token not in ignored)
