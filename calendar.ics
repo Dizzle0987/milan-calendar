@@ -15,11 +15,9 @@ DTSTAMP:20260815T152652Z
 UID:9a53c482eb00484effadee23@milan-calendar
 SEQUENCE:2
 CATEGORIES:Club Friendly,AC Milan
-DESCRIPTION:Competizione: Club Friendly\nMilan: Trasferta\nStadio: Celtic 
- Park\nLocalità: Glasgow\nDove vederla in Italia: Da definire\nFonte orari
- o: ESPN\nLink orario: https://www.espn.com/soccer/match/_/gameId/401886529
- /ac-milan-celtic\nFonte: https://www.espn.com/soccer/match/_/gameId/401886
- 529/ac-milan-celtic
+DESCRIPTION:Competizione: Club Friendly\nMilan: Trasferta\nOrario (Roma): 
+ 25/07/2026 16:00\nStadio: Celtic Park\nLocalità: Glasgow\nDove vederla in
+  Italia: Da definire\nFonte orario: ESPN
 LAST-MODIFIED:20260815T152652Z
 LOCATION:Celtic Park\, Glasgow
 TRANSP:OPAQUE
@@ -38,11 +36,9 @@ DTSTAMP:20260815T152652Z
 UID:e40c3704d9ff86d5bf45b12d@milan-calendar
 SEQUENCE:2
 CATEGORIES:Club Friendly,AC Milan
-DESCRIPTION:Competizione: Club Friendly\nMilan: Casa\nStadio: Optus Stadiu
- m\nLocalità: Perth\nDove vederla in Italia: Da definire\nFonte orario: ES
- PN\nLink orario: https://www.espn.com/soccer/match/_/gameId/401869428/inte
- rnazionale-ac-milan\nFonte: https://www.espn.com/soccer/match/_/gameId/401
- 869428/internazionale-ac-milan
+DESCRIPTION:Competizione: Club Friendly\nMilan: Casa\nOrario (Roma): 05/08
+ /2026 13:00\nStadio: Optus Stadium\nLocalità: Perth\nDove vederla in Ital
+ ia: Da definire\nFonte orario: ESPN
 LAST-MODIFIED:20260815T152652Z
 LOCATION:Optus Stadium\, Perth
 TRANSP:OPAQUE
@@ -62,13 +58,10 @@ DTSTAMP:20260808T194802Z
 UID:0df5243c01d34a9dd219ffc2@milan-calendar
 SEQUENCE:2
 CATEGORIES:Amichevole,AC Milan
-DESCRIPTION:Competizione: Amichevole\nMilan: Trasferta\nTurno: Pre-Season 
- Tour 2026\nStadio: Gelora Bung Karno Stadium\, Jakarta\nDove vederla in It
- alia: DAZN e Sky Sport\nFonte TV: https://www.dazn.com/it-IT/fixture/Conte
- ntId:19pa8a9ojur1b1iisfxn3ysuvc/19pa8a9ojur1b1iisfxn3ysuvc\nFonte orario: 
- ESPN\nLink orario: https://www.espn.com/soccer/match/_/gameId/401871495/ac
- -milan-chelsea\nFonte: https://www.acmilan.com/it/news/articoli/tournee/20
- 26-04-30/il-pre-season-tour-2026-di-ac-milan-fa-tappa-in-indonesia
+DESCRIPTION:Competizione: Amichevole\nMilan: Trasferta\nOrario (Roma): 08/
+ 08/2026 14:00\nTurno: Pre-Season Tour 2026\nStadio: Gelora Bung Karno Stad
+ ium\, Jakarta\nDove vederla in Italia: DAZN e Sky Sport\nFonte orario: ESP
+ N
 LAST-MODIFIED:20260808T194802Z
 LOCATION:Gelora Bung Karno Stadium\, Jakarta
 TRANSP:OPAQUE
@@ -88,12 +81,10 @@ DTSTAMP:20260815T152128Z
 UID:20e096ff80c5846c27ab8a18@milan-calendar
 SEQUENCE:2
 CATEGORIES:Amichevole,AC Milan
-DESCRIPTION:Competizione: Amichevole\nMilan: Trasferta\nTurno: Amichevole 
- pre-campionato 2026/27\nStadio: Tarczyński Arena\, Wrocław\nDove vederla
-  in Italia: DAZN\; Sky Sport Calcio e NOW\nFonte TV: https://www.dazn.com/
- it-IT/schedule\nFonte orario: Sky Sport\nLink orario: https://sport.sky.it
- /calcio/serie-a/2026/07/18/inter-juventus-milan-napoli-amichevoli-estive-2
- 026-sky\nFonte: https://www.supermecz.pl/
+DESCRIPTION:Competizione: Amichevole\nMilan: Trasferta\nOrario (Roma): 15/
+ 08/2026 16:45\nTurno: Amichevole pre-campionato 2026/27\nStadio: Tarczyńs
+ ki Arena\, Wrocław\nDove vederla in Italia: DAZN\; Sky Sport Calcio e NOW
+ \nFonte orario: Sky Sport
 LAST-MODIFIED:20260815T152128Z
 LOCATION:Tarczyński Arena\, Wrocław
 TRANSP:OPAQUE
@@ -108,18 +99,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Torino - Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260824T033844Z
+DTSTAMP:20260824T062443Z
 UID:c4a8dca2f7da4ac306231f60@milan-calendar
-SEQUENCE:3
+SEQUENCE:4
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 1\nStadio: Sta
- dio Olimpico Grande Torino\nDove vederla in Italia: DAZN\; Sky Sport e NOW
- \nFonte TV: https://www.dazn.com/it-IT/help/articles/19177098524573-modell
- o-di-organizzazione-gestione-e-controllo-modello-231\nFonte TV: https://ww
- w.nowtv.it/sport/calcio/milan\nFonte orario: NOW\nLink orario: https://www
- .nowtv.it/sport/calcio/milan\nFonte: https://www.acmilan.com/en/season/202
- 6/schedule/all
-LAST-MODIFIED:20260824T033844Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 23/08/
+ 2026 20:45\nTurno: 1\nStadio: Stadio Olimpico Grande Torino\nDove vederla 
+ in Italia: DAZN\; Sky Sport e NOW\nFonte orario: NOW\nClassifica Milan: 4
+ º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Olimpico Grande Torino
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -133,18 +121,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Torino - AC Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260824T033844Z
+DTSTAMP:20260824T062443Z
 UID:964bd91d49f1b069925e6c39@milan-calendar
-SEQUENCE:2
+SEQUENCE:3
 CATEGORIES:Italian Serie A,AC Milan
-DESCRIPTION:Competizione: Italian Serie A\nMilan: Trasferta\nStadio: Stadi
- o Olimpico Grande Torino\nLocalità: Torino\nDove vederla in Italia: DAZN\
- nFonte TV: https://www.dazn.com/it-IT/help/articles/19177098524573-modello
- -di-organizzazione-gestione-e-controllo-modello-231\nFonte orario: ESPN\nL
- ink orario: https://www.espn.com/soccer/match/_/gameId/401874932/ac-milan-
- torino\nFonte: https://www.espn.com/soccer/match/_/gameId/401874932/ac-mil
- an-torino
-LAST-MODIFIED:20260824T033844Z
+DESCRIPTION:Competizione: Italian Serie A\nMilan: Trasferta\nOrario (Roma)
+ : 23/08/2026 20:45\nStadio: Stadio Olimpico Grande Torino\nLocalità: Tori
+ no\nDove vederla in Italia: DAZN\nFonte orario: ESPN\nClassifica Milan: 4
+ º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Olimpico Grande Torino\, Torino
 TRANSP:OPAQUE
 URL:https://www.espn.com/soccer/match/_/gameId/401874932/ac-milan-torino
@@ -158,17 +143,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Venezia
 DTSTART;TZID=Europe/Rome:20260828T204500
 DTEND;TZID=Europe/Rome:20260828T224500
-DTSTAMP:20260815T152652Z
+DTSTAMP:20260824T062443Z
 UID:c842b581e5d1cee0db8d5794@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 2\nStadio: Stadio S
- an Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-I
- T/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contro
- llo-modello-231\nFonte orario: AC Milan\nLink orario: https://www.acmilan.
- com/en/season/2026/schedule/all\nFonte: https://www.acmilan.com/en/season/
- 2026/schedule/all
-LAST-MODIFIED:20260815T152652Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 28/08/2026 
+ 20:45\nTurno: 2\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nFo
+ nte orario: AC Milan\nClassifica Milan: 4º — 3 pt — 1 PG — DR +1\nC
+ lassifica aggiornata: 24/08/2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -182,17 +165,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Venezia
 DTSTART;TZID=Europe/Rome:20260828T204500
 DTEND;TZID=Europe/Rome:20260828T224500
-DTSTAMP:20260824T033844Z
+DTSTAMP:20260824T062443Z
 UID:904f7409dd205a6cd4c0ff15@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Italian Serie A,AC Milan
-DESCRIPTION:Competizione: Italian Serie A\nMilan: Casa\nTurno: 2\nStadio: 
- Stadio Giuseppe Meazza\nLocalità: Italy\nDove vederla in Italia: DAZN\nFo
- nte TV: https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di
- -organizzazione-gestione-e-controllo-modello-231\nFonte orario: TheSportsD
- B\nLink orario: https://www.thesportsdb.com/event/2482150\nFonte: https://
- www.thesportsdb.com/event/2482150
-LAST-MODIFIED:20260824T033844Z
+DESCRIPTION:Competizione: Italian Serie A\nMilan: Casa\nOrario (Roma): 28/
+ 08/2026 20:45\nTurno: 2\nStadio: Stadio Giuseppe Meazza\nLocalità: Italy\
+ nDove vederla in Italia: DAZN\nFonte orario: TheSportsDB\nClassifica Milan
+ : 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Giuseppe Meazza\, Italy
 TRANSP:OPAQUE
 URL:https://www.thesportsdb.com/event/2482150
@@ -206,17 +187,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Juventus - Milan
 DTSTART;TZID=Europe/Rome:20260906T204500
 DTEND;TZID=Europe/Rome:20260906T224500
-DTSTAMP:20260815T152652Z
+DTSTAMP:20260824T062443Z
 UID:f6a0e961c790cc99304f973a@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 3\nStadio: All
- ianz Stadium\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com
- /it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-c
- ontrollo-modello-231\nFonte orario: AC Milan\nLink orario: https://www.acm
- ilan.com/en/season/2026/schedule/all\nFonte: https://www.acmilan.com/en/se
- ason/2026/schedule/all
-LAST-MODIFIED:20260815T152652Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 06/09/
+ 2026 20:45\nTurno: 3\nStadio: Allianz Stadium\nDove vederla in Italia: DAZ
+ N\nFonte orario: AC Milan\nClassifica Milan: 4º — 3 pt — 1 PG — DR 
+ +1\nClassifica aggiornata: 24/08/2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Allianz Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -230,17 +209,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Lazio - Milan
 DTSTART;TZID=Europe/Rome:20260913T184500
 DTEND;TZID=Europe/Rome:20260913T204500
-DTSTAMP:20260815T152652Z
+DTSTAMP:20260824T062443Z
 UID:9bd99a4e5de2da2051ebcc15@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 4\nStadio: Sta
- dio Olimpico\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com
- /it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-c
- ontrollo-modello-231\nFonte orario: AC Milan\nLink orario: https://www.acm
- ilan.com/en/season/2026/schedule/all\nFonte: https://www.acmilan.com/en/se
- ason/2026/schedule/all
-LAST-MODIFIED:20260815T152652Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 13/09/
+ 2026 18:45\nTurno: 4\nStadio: Stadio Olimpico\nDove vederla in Italia: DAZ
+ N\nFonte orario: AC Milan\nClassifica Milan: 4º — 3 pt — 1 PG — DR 
+ +1\nClassifica aggiornata: 24/08/2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Olimpico
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -254,17 +231,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Lecce
 DTSTART;TZID=Europe/Rome:20260920T204500
 DTEND;TZID=Europe/Rome:20260920T224500
-DTSTAMP:20260815T152652Z
+DTSTAMP:20260824T062443Z
 UID:72ccbea5301e86dea083451c@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 5\nStadio: Stadio S
- an Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-I
- T/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contro
- llo-modello-231\nFonte orario: AC Milan\nLink orario: https://www.acmilan.
- com/en/season/2026/schedule/all\nFonte: https://www.acmilan.com/en/season/
- 2026/schedule/all
-LAST-MODIFIED:20260815T152652Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 20/09/2026 
+ 20:45\nTurno: 5\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nFo
+ nte orario: AC Milan\nClassifica Milan: 4º — 3 pt — 1 PG — DR +1\nC
+ lassifica aggiornata: 24/08/2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -278,16 +253,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Sassuolo - Milan
 DTSTART;VALUE=DATE:20261011
 DTEND;VALUE=DATE:20261012
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:efe8aeb093e233c7fe578a0b@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 6\nStadio: MAP
- EI Stadium\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/i
- t-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-con
- trollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule
- /all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 6\nStadio: MAPEI Stadium\nDove vederla in Italia: DAZN\nClassific
+ a Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/202
+ 6 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:MAPEI Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -301,16 +275,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Atalanta
 DTSTART;VALUE=DATE:20261018
 DTEND;VALUE=DATE:20261019
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:f4cca29e5c6dd6bae4edb995@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 7\nStadio: Stadio S
- an Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-I
- T/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contro
- llo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/al
- l
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 7\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica M
+ ilan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 0
+ 8:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -324,16 +297,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Udinese - Milan
 DTSTART;VALUE=DATE:20261025
 DTEND;VALUE=DATE:20261026
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:ed011e560d0939fa19ee726a@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 8\nStadio: Blu
- energy Stadium\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.c
- om/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e
- -controllo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/sche
- dule/all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 8\nStadio: Bluenergy Stadium\nDove vederla in Italia: DAZN\nClass
+ ifica Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08
+ /2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Bluenergy Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -347,16 +319,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Bologna
 DTSTART;VALUE=DATE:20261028
 DTEND;VALUE=DATE:20261029
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:14204818a1863bef3d12592f@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 9\nStadio: Stadio S
- an Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-I
- T/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contro
- llo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/al
- l
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 9\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica M
+ ilan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 0
+ 8:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -370,16 +341,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Inter
 DTSTART;VALUE=DATE:20261101
 DTEND;VALUE=DATE:20261102
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:8131b669c6acbfebbf8a5c63@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 10\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 10\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -393,16 +363,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Genoa - Milan
 DTSTART;VALUE=DATE:20261108
 DTEND;VALUE=DATE:20261109
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:4bcf433e05672498eda803a5@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 11\nStadio: St
- adio Ferraris\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.co
- m/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-
- controllo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/sched
- ule/all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 11\nStadio: Stadio Ferraris\nDove vederla in Italia: DAZN\nClassi
+ fica Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/
+ 2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Ferraris
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -416,16 +385,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Frosinone
 DTSTART;VALUE=DATE:20261122
 DTEND;VALUE=DATE:20261123
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:e0c247e803a33255e6ebefa8@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 12\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 12\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -439,16 +407,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Cagliari - Milan
 DTSTART;VALUE=DATE:20261129
 DTEND;VALUE=DATE:20261130
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:dbfe00a983f6937f6ba0d38d@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 13\nStadio: Un
- ipol Domus\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/i
- t-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-con
- trollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule
- /all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 13\nStadio: Unipol Domus\nDove vederla in Italia: DAZN\nClassific
+ a Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/202
+ 6 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Unipol Domus
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -462,16 +429,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Parma
 DTSTART;VALUE=DATE:20261206
 DTEND;VALUE=DATE:20261207
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:cbf473fd1fec79742484d004@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 14\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 14\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -485,16 +451,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Napoli - Milan
 DTSTART;VALUE=DATE:20261213
 DTEND;VALUE=DATE:20261214
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:002c1aed5d53467e55fbd053@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 15\nStadio: St
- adio Maradona\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.co
- m/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-
- controllo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/sched
- ule/all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 15\nStadio: Stadio Maradona\nDove vederla in Italia: DAZN\nClassi
+ fica Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/
+ 2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Maradona
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -508,16 +473,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Como
 DTSTART;VALUE=DATE:20261220
 DTEND;VALUE=DATE:20261221
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:abbc5591ee1fa9281de25865@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 16\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 16\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -531,16 +495,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Monza - Milan
 DTSTART;VALUE=DATE:20270103
 DTEND;VALUE=DATE:20270104
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:7fbe5f237ff0027359e82bec@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 17\nStadio: U-
- Power Stadium\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.co
- m/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-
- controllo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/sched
- ule/all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 17\nStadio: U-Power Stadium\nDove vederla in Italia: DAZN\nClassi
+ fica Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/
+ 2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:U-Power Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -554,16 +517,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Fiorentina
 DTSTART;VALUE=DATE:20270106
 DTEND;VALUE=DATE:20270107
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:7605afb902d86c5a1bbd49f7@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 18\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 18\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -577,16 +539,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Roma - Milan
 DTSTART;VALUE=DATE:20270110
 DTEND;VALUE=DATE:20270111
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:e3bd372f1347ed9ba3c39045@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 19\nStadio: St
- adio Olimpico\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.co
- m/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-
- controllo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/sched
- ule/all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 19\nStadio: Stadio Olimpico\nDove vederla in Italia: DAZN\nClassi
+ fica Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/
+ 2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Olimpico
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -600,16 +561,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Torino
 DTSTART;VALUE=DATE:20270117
 DTEND;VALUE=DATE:20270118
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:53ab99ccd879619beefb1915@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 20\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 20\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -623,16 +583,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Frosinone - Milan
 DTSTART;VALUE=DATE:20270124
 DTEND;VALUE=DATE:20270125
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:799e525a74ac3b9c8ff6a400@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 21\nStadio: St
- adio Stirpe\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/
- it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-co
- ntrollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedul
- e/all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 21\nStadio: Stadio Stirpe\nDove vederla in Italia: DAZN\nClassifi
+ ca Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/20
+ 26 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Stirpe
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -646,16 +605,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Juventus
 DTSTART;VALUE=DATE:20270131
 DTEND;VALUE=DATE:20270201
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:7901b36118e346044724f817@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 22\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 22\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -669,16 +627,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Bologna - Milan
 DTSTART;VALUE=DATE:20270207
 DTEND;VALUE=DATE:20270208
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:078423a9e403304bd012c980@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 23\nStadio: St
- adio Dall'Ara\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.co
- m/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-
- controllo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/sched
- ule/all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 23\nStadio: Stadio Dall'Ara\nDove vederla in Italia: DAZN\nClassi
+ fica Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/
+ 2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Dall'Ara
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -692,16 +649,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Inter - Milan
 DTSTART;VALUE=DATE:20270214
 DTEND;VALUE=DATE:20270215
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:ec72bb4d3a2195363bd8dac5@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 24\nStadio: St
- adio San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.co
- m/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-
- controllo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/sched
- ule/all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 24\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassi
+ fica Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/
+ 2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -715,16 +671,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Genoa
 DTSTART;VALUE=DATE:20270221
 DTEND;VALUE=DATE:20270222
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:affce368e5e16fe9cad76b67@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 25\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 25\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -738,16 +693,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Como - Milan
 DTSTART;VALUE=DATE:20270228
 DTEND;VALUE=DATE:20270301
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:2460ccfbf6f8b6e6dfa8e02c@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 26\nStadio: St
- adio Sinigaglia\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.
- com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-
- e-controllo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/sch
- edule/all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 26\nStadio: Stadio Sinigaglia\nDove vederla in Italia: DAZN\nClas
+ sifica Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/0
+ 8/2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Sinigaglia
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -761,16 +715,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Cagliari
 DTSTART;VALUE=DATE:20270307
 DTEND;VALUE=DATE:20270308
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:5bccac0865eda578a3694c96@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 27\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 27\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -784,16 +737,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Sassuolo
 DTSTART;VALUE=DATE:20270314
 DTEND;VALUE=DATE:20270315
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:729b58c1acba42008b12e293@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 28\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 28\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -807,16 +759,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Atalanta - Milan
 DTSTART;VALUE=DATE:20270321
 DTEND;VALUE=DATE:20270322
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:47745a86a738242f9f79287a@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 29\nStadio: Ne
- w Balance Arena\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.
- com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-
- e-controllo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/sch
- edule/all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 29\nStadio: New Balance Arena\nDove vederla in Italia: DAZN\nClas
+ sifica Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/0
+ 8/2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:New Balance Arena
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -830,16 +781,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Monza
 DTSTART;VALUE=DATE:20270404
 DTEND;VALUE=DATE:20270405
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:6e93cc177ecd88e5a3f47842@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 30\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 30\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -853,16 +803,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Fiorentina - Milan
 DTSTART;VALUE=DATE:20270411
 DTEND;VALUE=DATE:20270412
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:7dc1f2e91dad27a407b1183c@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 31\nStadio: St
- adio Franchi\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com
- /it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-c
- ontrollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedu
- le/all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 31\nStadio: Stadio Franchi\nDove vederla in Italia: DAZN\nClassif
+ ica Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2
+ 026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Franchi
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -876,16 +825,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Napoli
 DTSTART;VALUE=DATE:20270418
 DTEND;VALUE=DATE:20270419
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:b0b78c78ecdf7b76c14688a1@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 32\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 32\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -899,16 +847,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Lecce - Milan
 DTSTART;VALUE=DATE:20270425
 DTEND;VALUE=DATE:20270426
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:2ca518619efdf946e1d6159f@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 33\nStadio: St
- adio Via del Mare\nDove vederla in Italia: DAZN\nFonte TV: https://www.daz
- n.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestion
- e-e-controllo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/s
- chedule/all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 33\nStadio: Stadio Via del Mare\nDove vederla in Italia: DAZN\nCl
+ assifica Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24
+ /08/2026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Via del Mare
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -922,16 +869,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Lazio
 DTSTART;VALUE=DATE:20270502
 DTEND;VALUE=DATE:20270503
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:751ea659a0aec85f094d69ba@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 34\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 34\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -945,16 +891,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Parma - Milan
 DTSTART;VALUE=DATE:20270509
 DTEND;VALUE=DATE:20270510
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:1c3db48a8653c5ab1ef24294@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 35\nStadio: St
- adio Tardini\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com
- /it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-c
- ontrollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedu
- le/all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 35\nStadio: Stadio Tardini\nDove vederla in Italia: DAZN\nClassif
+ ica Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2
+ 026 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Tardini
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -968,16 +913,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Roma
 DTSTART;VALUE=DATE:20270516
 DTEND;VALUE=DATE:20270517
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:6cada07d7a55db21550f2dd1@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 36\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 36\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -991,16 +935,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Venezia - Milan
 DTSTART;VALUE=DATE:20270523
 DTEND;VALUE=DATE:20270524
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:38b49ac97ab9b5a36cc0e8f0@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 37\nStadio: St
- adio Penzo\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/i
- t-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-con
- trollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule
- /all
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 37\nStadio: Stadio Penzo\nDove vederla in Italia: DAZN\nClassific
+ a Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/202
+ 6 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio Penzo
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -1014,16 +957,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Udinese
 DTSTART;VALUE=DATE:20270530
 DTEND;VALUE=DATE:20270531
-DTSTAMP:20260810T202541Z
+DTSTAMP:20260824T062443Z
 UID:0eede0800f2c0314cd7442e1@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nTurno: 38\nStadio: Stadio 
- San Siro\nDove vederla in Italia: DAZN\nFonte TV: https://www.dazn.com/it-
- IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-contr
- ollo-modello-231\nFonte: https://www.acmilan.com/en/season/2026/schedule/a
- ll
-LAST-MODIFIED:20260810T202541Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
+ no: 38\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
+ Milan: 4º — 3 pt — 1 PG — DR +1\nClassifica aggiornata: 24/08/2026 
+ 08:24
+LAST-MODIFIED:20260824T062443Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
