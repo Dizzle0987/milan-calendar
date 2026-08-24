@@ -307,20 +307,24 @@ def parse_espn_json(payload: dict[str, Any], default_competition: str) -> list[d
 
 
 def parse_espn_standings_json(payload: dict[str, Any]) -> dict[str, Any] | None:
-    """Extract AC Milan's compact Serie A row from ESPN's structured standings."""
+    """Extract Milan and its nearest Serie A neighbours from ESPN standings."""
     entries: list[dict[str, Any]] = []
     for child in payload.get("children") or []:
         entries.extend(((child.get("standings") or {}).get("entries") or []))
     entries.extend(((payload.get("standings") or {}).get("entries") or []))
 
+    rows: list[dict[str, Any]] = []
+    milan_row: dict[str, Any] | None = None
+    seen_teams: set[str] = set()
     for entry in entries:
         team = entry.get("team") or {}
         team_names = {
             _normalize(str(team.get(key) or ""))
             for key in ("displayName", "shortDisplayName", "name", "abbreviation")
         }
-        if str(team.get("id") or "") != "103" and not ({"ac-milan", "milan"} & team_names):
-            continue
+        is_milan = str(team.get("id") or "") == "103" or bool(
+            {"ac-milan", "milan"} & team_names
+        )
 
         stats: dict[str, Any] = {}
         for stat in entry.get("stats") or []:
@@ -345,8 +349,19 @@ def parse_espn_standings_json(payload: dict[str, Any]) -> dict[str, Any] | None:
         points = number("points", "pts")
         played = number("gamesPlayed", "games played", "gp")
         if position is None or points is None or played is None:
-            return None
-        return {
+            continue
+        team_name = str(
+            team.get("shortDisplayName")
+            or team.get("displayName")
+            or team.get("name")
+            or ""
+        ).strip()
+        team_key = str(team.get("id") or _normalize(team_name))
+        if not team_name or team_key in seen_teams:
+            continue
+        seen_teams.add(team_key)
+        row = {
+            "team": "Milan" if is_milan else team_name,
             "position": position,
             "points": points,
             "played": played,
@@ -354,9 +369,29 @@ def parse_espn_standings_json(payload: dict[str, Any]) -> dict[str, Any] | None:
             "draws": number("ties", "draws", "d"),
             "losses": number("losses", "l"),
             "goal_difference": number("pointDifferential", "goalDifference", "goal difference", "gd"),
-            "source": "ESPN",
         }
-    return None
+        rows.append(row)
+        if is_milan:
+            milan_row = row
+
+    if not milan_row:
+        return None
+    rows.sort(key=lambda row: int(row["position"]))
+    milan_index = rows.index(milan_row)
+    window_start = max(0, min(milan_index - 2, len(rows) - 5))
+    result = deepcopy(milan_row)
+    result["context"] = [
+        {
+            "team": row["team"],
+            "position": row["position"],
+            "points": row["points"],
+            "played": row["played"],
+        }
+        for row in rows[window_start : window_start + 5]
+    ]
+    result.pop("team", None)
+    result["source"] = "ESPN"
+    return result
 
 
 def parse_thesportsdb_json(payload: dict[str, Any]) -> list[dict[str, Any]]:
@@ -1101,10 +1136,25 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
             goal_difference_text = (
                 f" — DR {int(goal_difference):+d}" if goal_difference is not None else ""
             )
-            details.append(
-                f"Classifica Milan: {standing['position']}º — {standing['points']} pt — "
-                f"{standing['played']} PG{goal_difference_text}"
-            )
+            context = standing.get("context") or []
+            if context:
+                details.append("Classifica Serie A:")
+                for row in context:
+                    is_milan_row = _is_milan(str(row.get("team") or ""))
+                    marker = "▶" if is_milan_row else " "
+                    extra = (
+                        f" — {standing['played']} PG{goal_difference_text}"
+                        if is_milan_row
+                        else ""
+                    )
+                    details.append(
+                        f"{marker} {row['position']}. {row['team']} — {row['points']} pt{extra}"
+                    )
+            else:
+                details.append(
+                    f"Classifica Milan: {standing['position']}º — {standing['points']} pt — "
+                    f"{standing['played']} PG{goal_difference_text}"
+                )
             if standing.get("updated_at"):
                 updated = datetime.fromisoformat(str(standing["updated_at"]).replace("Z", "+00:00"))
                 details.append(
