@@ -304,18 +304,18 @@
       "venue": "Allianz Stadium"
     },
     {
-      "all_day": false,
+      "all_day": true,
       "away_team": "Milan",
       "broadcast_it": "DAZN",
       "broadcast_source_url": "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Lazio",
-      "last_modified": "2026-08-24T06:46:27Z",
+      "last_modified": "2026-08-24T14:28:06Z",
       "location": "",
       "neutral": false,
       "round": "4",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
@@ -363,10 +363,10 @@
       "source": "AC Milan",
       "source_id": "74inwq2qcihry6rgk4sa5sr9w",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
-      "start": "2026-09-13T18:45:00+02:00",
+      "start": "2026-09-13",
       "status": "Fixture",
-      "time_source": "AC Milan",
-      "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
+      "time_source": "",
+      "time_source_url": "",
       "title": "Lazio - Milan",
       "uid": "9bd99a4e5de2da2051ebcc15@milan-calendar",
       "venue": "Stadio Olimpico"
@@ -2684,7 +2684,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-24T08:31:53Z",
+  "last_changed": "2026-08-24T14:28:06Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [

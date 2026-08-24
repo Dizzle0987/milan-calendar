@@ -168,18 +168,18 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:⚽ Lazio - Milan
-DTSTART;TZID=Europe/Rome:20260913T184500
-DTEND;TZID=Europe/Rome:20260913T204500
-DTSTAMP:20260824T064627Z
+DTSTART;VALUE=DATE:20260913
+DTEND;VALUE=DATE:20260914
+DTSTAMP:20260824T142806Z
 UID:9bd99a4e5de2da2051ebcc15@milan-calendar
-SEQUENCE:3
+SEQUENCE:4
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 13/09/
- 2026 18:45\nTurno: 4\nStadio: Stadio Olimpico\nDove vederla in Italia: DAZ
- N\nFonte orario: AC Milan\nClassifica Serie A:\n  2. Lecce — 3 pt\n  3. 
- Napoli — 3 pt\n▶ 4. Milan — 3 pt — 1 PG — DR +1\n  5. Atalanta 
- — 3 pt\n  6. Cagliari — 3 pt\nClassifica aggiornata: 24/08/2026 08:46
-LAST-MODIFIED:20260824T064627Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
+ \nTurno: 4\nStadio: Stadio Olimpico\nDove vederla in Italia: DAZN\nClassif
+ ica Serie A:\n  2. Lecce — 3 pt\n  3. Napoli — 3 pt\n▶ 4. Milan — 
+ 3 pt — 1 PG — DR +1\n  5. Atalanta — 3 pt\n  6. Cagliari — 3 pt\nC
+ lassifica aggiornata: 24/08/2026 08:46
+LAST-MODIFIED:20260824T142806Z
 LOCATION:Stadio Olimpico
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
