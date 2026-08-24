@@ -108,9 +108,9 @@ BEGIN:VEVENT
 SUMMARY:⚽ Torino - Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260823T191206Z
+DTSTAMP:20260824T033844Z
 UID:c4a8dca2f7da4ac306231f60@milan-calendar
-SEQUENCE:2
+SEQUENCE:3
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 1\nStadio: Sta
  dio Olimpico Grande Torino\nDove vederla in Italia: DAZN\; Sky Sport e NOW
@@ -119,7 +119,7 @@ DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nTurno: 1\nStadio: Sta
  w.nowtv.it/sport/calcio/milan\nFonte orario: NOW\nLink orario: https://www
  .nowtv.it/sport/calcio/milan\nFonte: https://www.acmilan.com/en/season/202
  6/schedule/all
-LAST-MODIFIED:20260823T191206Z
+LAST-MODIFIED:20260824T033844Z
 LOCATION:Stadio Olimpico Grande Torino
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -133,20 +133,21 @@ BEGIN:VEVENT
 SUMMARY:⚽ Torino - AC Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260823T191206Z
+DTSTAMP:20260824T033844Z
 UID:964bd91d49f1b069925e6c39@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:Italian Serie A,AC Milan
-DESCRIPTION:Competizione: Italian Serie A\nMilan: Trasferta\nTurno: 1\nSta
- dio: Stadio Olimpico Grande Torino\nLocalità: Italy\nDove vederla in Ital
- ia: DAZN\nFonte TV: https://www.dazn.com/it-IT/help/articles/1917709852457
- 3-modello-di-organizzazione-gestione-e-controllo-modello-231\nFonte orario
- : TheSportsDB\nLink orario: https://www.thesportsdb.com/event/2482143\nFon
- te: https://www.thesportsdb.com/event/2482143
-LAST-MODIFIED:20260823T191206Z
-LOCATION:Stadio Olimpico Grande Torino\, Italy
+DESCRIPTION:Competizione: Italian Serie A\nMilan: Trasferta\nStadio: Stadi
+ o Olimpico Grande Torino\nLocalità: Torino\nDove vederla in Italia: DAZN\
+ nFonte TV: https://www.dazn.com/it-IT/help/articles/19177098524573-modello
+ -di-organizzazione-gestione-e-controllo-modello-231\nFonte orario: ESPN\nL
+ ink orario: https://www.espn.com/soccer/match/_/gameId/401874932/ac-milan-
+ torino\nFonte: https://www.espn.com/soccer/match/_/gameId/401874932/ac-mil
+ an-torino
+LAST-MODIFIED:20260824T033844Z
+LOCATION:Stadio Olimpico Grande Torino\, Torino
 TRANSP:OPAQUE
-URL:https://www.thesportsdb.com/event/2482143
+URL:https://www.espn.com/soccer/match/_/gameId/401874932/ac-milan-torino
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Tra 2 ore e 30 minuti: Torino - AC Milan
@@ -174,6 +175,30 @@ URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Venezia
+TRIGGER:-PT2H30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:⚽ AC Milan - Venezia
+DTSTART;TZID=Europe/Rome:20260828T204500
+DTEND;TZID=Europe/Rome:20260828T224500
+DTSTAMP:20260824T033844Z
+UID:904f7409dd205a6cd4c0ff15@milan-calendar
+SEQUENCE:0
+CATEGORIES:Italian Serie A,AC Milan
+DESCRIPTION:Competizione: Italian Serie A\nMilan: Casa\nTurno: 2\nStadio: 
+ Stadio Giuseppe Meazza\nLocalità: Italy\nDove vederla in Italia: DAZN\nFo
+ nte TV: https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di
+ -organizzazione-gestione-e-controllo-modello-231\nFonte orario: TheSportsD
+ B\nLink orario: https://www.thesportsdb.com/event/2482150\nFonte: https://
+ www.thesportsdb.com/event/2482150
+LAST-MODIFIED:20260824T033844Z
+LOCATION:Stadio Giuseppe Meazza\, Italy
+TRANSP:OPAQUE
+URL:https://www.thesportsdb.com/event/2482150
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tra 2 ore e 30 minuti: AC Milan - Venezia
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
