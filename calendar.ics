@@ -99,17 +99,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Torino - Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260824T064627Z
+DTSTAMP:20260824T083153Z
 UID:c4a8dca2f7da4ac306231f60@milan-calendar
-SEQUENCE:6
+SEQUENCE:7
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 23/08/
  2026 20:45\nTurno: 1\nStadio: Stadio Olimpico Grande Torino\nLocalità: To
- rino\nDove vederla in Italia: DAZN\; Sky Sport e NOW\nFonte orario: NOW\nC
- lassifica Serie A:\n  2. Lecce — 3 pt\n  3. Napoli — 3 pt\n▶ 4. Mila
- n — 3 pt — 1 PG — DR +1\n  5. Atalanta — 3 pt\n  6. Cagliari — 3
-  pt\nClassifica aggiornata: 24/08/2026 08:46
-LAST-MODIFIED:20260824T064627Z
+ rino\nDove vederla in Italia: DAZN\nFonte orario: AC Milan\nClassifica Ser
+ ie A:\n  2. Lecce — 3 pt\n  3. Napoli — 3 pt\n▶ 4. Milan — 3 pt 
+ — 1 PG — DR +1\n  5. Atalanta — 3 pt\n  6. Cagliari — 3 pt\nClassi
+ fica aggiornata: 24/08/2026 08:46
+LAST-MODIFIED:20260824T083153Z
 LOCATION:Stadio Olimpico Grande Torino\, Torino
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all

@@ -102,20 +102,16 @@
     {
       "all_day": false,
       "away_team": "Milan",
-      "broadcast_it": "DAZN; Sky Sport e NOW",
-      "broadcast_source_url": "https://www.nowtv.it/sport/calcio/milan",
-      "broadcast_source_urls": [
-        "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
-        "https://www.nowtv.it/sport/calcio/milan"
-      ],
+      "broadcast_it": "DAZN",
+      "broadcast_source_url": "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Torino",
-      "last_modified": "2026-08-24T06:46:27Z",
+      "last_modified": "2026-08-24T08:31:53Z",
       "location": "Torino",
       "neutral": false,
       "round": "1",
-      "sequence": 6,
+      "sequence": 7,
       "serie_a_standing": {
         "context": [
           {
@@ -165,8 +161,8 @@
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-08-23T20:45:00+02:00",
       "status": "Played",
-      "time_source": "NOW",
-      "time_source_url": "https://www.nowtv.it/sport/calcio/milan",
+      "time_source": "AC Milan",
+      "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "title": "Torino - Milan",
       "uid": "c4a8dca2f7da4ac306231f60@milan-calendar",
       "venue": "Stadio Olimpico Grande Torino"
@@ -2688,7 +2684,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-24T06:46:27Z",
+  "last_changed": "2026-08-24T08:31:53Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -2740,14 +2736,14 @@
     "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
     "Sky Sport: nessun orario esplicito per il Milan",
     "Mediaset: 404 Client Error: Not Found for url: https://mediasetinfinity.mediaset.it/sport",
-    "Prime Video: nessun orario esplicito per il Milan"
+    "Prime Video: nessun orario esplicito per il Milan",
+    "NOW: nessun orario esplicito per il Milan"
   ],
   "sources_used": [
     "AC Milan",
     "ESPN",
     "ESPN classifica",
-    "TheSportsDB",
-    "NOW"
+    "TheSportsDB"
   ],
   "timezone": "Europe/Rome"
 }
