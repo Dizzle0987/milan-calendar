@@ -83,6 +83,9 @@ ESPN_COMPETITIONS = {
     "uefa.champions": "UEFA Champions League",
     "uefa.europa": "UEFA Europa League",
     "uefa.europa.conf": "UEFA Conference League",
+    "uefa.super_cup": "Supercoppa UEFA",
+    "fifa.cwc": "Coppa del Mondo per Club FIFA",
+    "fifa.intercontinental_cup": "Coppa Intercontinentale FIFA",
     "club.friendly": "Amichevole",
 }
 BROADCASTERS_IT = {
@@ -163,6 +166,9 @@ def _competition_family(name: str) -> str:
         (("champions",), "champions-league"),
         (("europa-conference", "conference-league"), "conference-league"),
         (("europa",), "europa-league"),
+        (("uefa-super-cup", "supercoppa-uefa"), "supercoppa-uefa"),
+        (("club-world-cup", "coppa-del-mondo-per-club"), "coppa-mondo-club-fifa"),
+        (("intercontinental",), "coppa-intercontinentale-fifa"),
         (("friendly", "amichevole", "friendlies"), "amichevole"),
     )
     for needles, family in mappings:
@@ -499,9 +505,7 @@ def find_lega_calendar_articles(html: str, source_url: str = LEGA_NEWS_URL) -> l
     for href in re.findall(r'href=["\']([^"\']+)["\']', html, re.IGNORECASE):
         url = urljoin(source_url, html_module.unescape(href))
         slug = _normalize(url.rsplit("/", 1)[-1])
-        if "/serie-a/news/" not in url or not any(
-            word in slug for word in ("calendario", "sorteggio", "tabellone")
-        ):
+        if "/serie-a/news/" not in url or "sorteggio" not in slug:
             continue
         if url not in links:
             links.append(url)
@@ -538,9 +542,7 @@ def parse_lega_calendar_article(html: str, source_url: str) -> list[dict[str, An
             published_year = int(published[:4])
         break
     normalized_headline = _normalize(headline)
-    if not headline or not any(
-        marker in normalized_headline for marker in ("calendario", "sorteggio", "tabellone")
-    ):
+    if not headline or "sorteggio" not in normalized_headline:
         return []
     if "coppa-italia" in normalized_headline:
         competition = "Coppa Italia"
@@ -585,13 +587,8 @@ def parse_lega_calendar_article(html: str, source_url: str) -> list[dict[str, An
     season = (
         f"{season_match.group(1)}/{season_match.group(2)[-2:]}" if season_match else str(year)
     )
-    kind = "draw" if "sorteggio" in normalized_headline else "calendar_publication"
-    if kind == "draw":
-        title = f"Sorteggio {competition} {season}"
-    elif competition == "Coppa Italia":
-        title = f"Pubblicazione tabellone Coppa Italia {season}"
-    else:
-        title = f"Presentazione calendario {competition} {season}"
+    kind = "draw"
+    title = f"Sorteggio {competition} {season}"
     return [{
         "source_id": f"lega-{_normalize(source_url.rsplit('/', 1)[-1])}",
         "source": "Lega Serie A",
@@ -1619,7 +1616,7 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     previous_calendar_events = [
         event
         for event in previous
-        if str(event.get("event_kind") or "match") != "match"
+        if str(event.get("event_kind") or "match") == "draw"
     ]
     combined.extend(
         merge_calendar_events(
