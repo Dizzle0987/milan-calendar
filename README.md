@@ -101,7 +101,9 @@ Output:
 - `data/events.json`: snapshot normalizzato utile per debug, con fonte, UID e metadati di ogni evento.
 - `data/calendar_events.json`: fallback strutturato per sorteggi e pubblicazioni ufficiali di calendari/tabelloni; le voci con `requires_participation: true` compaiono soltanto se il Milan partecipa alla competizione. `participation_confirmed: true` consente di inserirle già prima che le fonti abbiano pubblicato la prima partita del torneo.
 
-I nuovi sorteggi UEFA vengono cercati automaticamente ogni sei ore sulle pagine ufficiali di Champions League, Europa League e Conference League. Il parser accetta solo un `SportsEvent` strutturato con nome e timestamp completi, converte l'istante in `Europe/Rome` e pubblica soltanto la competizione del Milan. Un sorteggio già scoperto viene conservato quando UEFA aggiorna la pagina al turno successivo; il file `calendar_events.json` rimane il fallback in caso di indisponibilità temporanea della fonte.
+I nuovi sorteggi UEFA vengono cercati automaticamente ogni sei ore sulle pagine ufficiali di Champions League, Europa League e Conference League. Il parser accetta solo un `SportsEvent` strutturato con nome e timestamp completi, converte l'istante in `Europe/Rome` e pubblica soltanto la competizione del Milan. Un sorteggio già scoperto viene conservato quando UEFA aggiorna la pagina al turno successivo.
+
+Il generatore controlla anche gli articoli recenti della Lega Serie A. Considera soltanto URL ufficiali il cui titolo riguarda esplicitamente un calendario, sorteggio o tabellone e crea l'evento solo quando nel testo è presente una data completa; l'orario viene aggiunto esclusivamente se dichiarato. `calendar_events.json` rimane il fallback in caso di indisponibilità temporanea delle fonti.
 
 Il comando restituisce codice `1` se tutte le fonti remote falliscono e non sovrascrive gli output precedenti.
 
