@@ -78,6 +78,7 @@ TIME_SOURCE_PRIORITY = {
 }
 ESPN_COMPETITIONS = {
     "ita.1": "Serie A",
+    "ita.2": "Serie B",
     "ita.coppa_italia": "Coppa Italia",
     "ita.super_cup": "Supercoppa Italiana",
     "uefa.champions": "UEFA Champions League",
@@ -86,6 +87,7 @@ ESPN_COMPETITIONS = {
     "uefa.super_cup": "Supercoppa UEFA",
     "fifa.cwc": "Coppa del Mondo per Club FIFA",
     "fifa.intercontinental_cup": "Coppa Intercontinentale FIFA",
+    "global.club_challenge": "UEFA-CONMEBOL Club Challenge",
     "club.friendly": "Amichevole",
 }
 BROADCASTERS_IT = {
@@ -161,6 +163,7 @@ def _competition_family(name: str) -> str:
     value = _normalize(name)
     mappings = (
         (("serie-a", "italian-serie-a"), "serie-a"),
+        (("serie-b", "italian-serie-b"), "serie-b"),
         (("coppa-italia", "italian-coppa-italia"), "coppa-italia"),
         (("supercoppa", "italian-supercoppa"), "supercoppa-italiana"),
         (("champions",), "champions-league"),
@@ -169,6 +172,7 @@ def _competition_family(name: str) -> str:
         (("uefa-super-cup", "supercoppa-uefa"), "supercoppa-uefa"),
         (("club-world-cup", "coppa-del-mondo-per-club"), "coppa-mondo-club-fifa"),
         (("intercontinental",), "coppa-intercontinentale-fifa"),
+        (("club-challenge",), "uefa-conmebol-club-challenge"),
         (("friendly", "amichevole", "friendlies"), "amichevole"),
     )
     for needles, family in mappings:
