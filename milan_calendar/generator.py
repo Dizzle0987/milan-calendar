@@ -505,7 +505,9 @@ def find_lega_calendar_articles(html: str, source_url: str = LEGA_NEWS_URL) -> l
     for href in re.findall(r'href=["\']([^"\']+)["\']', html, re.IGNORECASE):
         url = urljoin(source_url, html_module.unescape(href))
         slug = _normalize(url.rsplit("/", 1)[-1])
-        if "/serie-a/news/" not in url or "sorteggio" not in slug:
+        if "/serie-a/news/" not in url or not any(
+            word in slug for word in ("sorteggio", "calendario", "tabellone")
+        ):
             continue
         if url not in links:
             links.append(url)
@@ -542,7 +544,9 @@ def parse_lega_calendar_article(html: str, source_url: str) -> list[dict[str, An
             published_year = int(published[:4])
         break
     normalized_headline = _normalize(headline)
-    if not headline or "sorteggio" not in normalized_headline:
+    if not headline or not any(
+        word in normalized_headline for word in ("sorteggio", "calendario", "tabellone")
+    ):
         return []
     if "coppa-italia" in normalized_headline:
         competition = "Coppa Italia"
@@ -587,8 +591,16 @@ def parse_lega_calendar_article(html: str, source_url: str) -> list[dict[str, An
     season = (
         f"{season_match.group(1)}/{season_match.group(2)[-2:]}" if season_match else str(year)
     )
-    kind = "draw"
-    title = f"Sorteggio {competition} {season}"
+    if "sorteggio" in normalized_headline:
+        kind = "draw"
+        title = f"Sorteggio {competition} {season}"
+    else:
+        kind = "calendar_publication"
+        title = (
+            f"Presentazione calendario {competition} {season}"
+            if competition == "Serie A"
+            else f"Pubblicazione tabellone {competition} {season}"
+        )
     return [{
         "source_id": f"lega-{_normalize(source_url.rsplit('/', 1)[-1])}",
         "source": "Lega Serie A",
@@ -1616,7 +1628,7 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     previous_calendar_events = [
         event
         for event in previous
-        if str(event.get("event_kind") or "match") == "draw"
+        if str(event.get("event_kind") or "match") != "match"
     ]
     combined.extend(
         merge_calendar_events(
