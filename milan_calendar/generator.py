@@ -676,6 +676,14 @@ def _event_time_priority(event: dict[str, Any]) -> int:
 def _semantic_base(event: dict[str, Any]) -> str:
     start = _event_datetime(event).astimezone(ROME)
     active_season = start.year if start.month >= 7 else start.year - 1
+    if str(event.get("event_kind") or "match") != "match":
+        parts = (
+            str(active_season),
+            str(event.get("event_kind") or "calendar-event"),
+            _normalize(str(event.get("source_id") or event.get("id") or event.get("title") or "")),
+            _competition_family(str(event.get("competition") or "")),
+        )
+        return "|".join(parts)
     parts = (
         str(active_season),
         _team_match_key(str(event.get("home_team") or "")),
@@ -694,6 +702,8 @@ def _uid_for(event: dict[str, Any]) -> str:
 
 
 def _add_italian_broadcaster(event: dict[str, Any]) -> None:
+    if str(event.get("event_kind") or "match") != "match":
+        return
     if event.get("broadcast_it"):
         return
     broadcaster, source_url = BROADCASTERS_IT.get(
@@ -753,6 +763,8 @@ def _is_postponed(event: dict[str, Any]) -> bool:
 def _same_fixture(
     left: dict[str, Any], right: dict[str, Any], *, unordered: bool = False
 ) -> bool:
+    if any(str(event.get("event_kind") or "match") != "match" for event in (left, right)):
+        return False
     left_teams = (
         _team_match_key(str(left.get("home_team") or "")),
         _team_match_key(str(left.get("away_team") or "")),
@@ -775,6 +787,8 @@ def _same_fixture(
 
 def _same_long_range_fixture(left: dict[str, Any], right: dict[str, Any]) -> bool:
     """Recognize a uniquely identifiable postponement even across season boundaries."""
+    if any(str(event.get("event_kind") or "match") != "match" for event in (left, right)):
+        return False
     left_teams = tuple(
         _team_match_key(str(left.get(key) or "")) for key in ("home_team", "away_team")
     )
@@ -897,6 +911,45 @@ def load_manual_events(path: Path) -> list[dict[str, Any]]:
     return result
 
 
+def load_calendar_events(
+    path: Path, participating_competitions: set[str]
+) -> list[dict[str, Any]]:
+    """Load official non-match dates, filtering competitions Milan does not play."""
+    payload = load_json(path, {"events": []})
+    events = payload.get("events", []) if isinstance(payload, dict) else payload
+    if not isinstance(events, list):
+        raise ValueError("data/calendar_events.json deve contenere una lista o un oggetto con 'events'")
+    result: list[dict[str, Any]] = []
+    for index, event in enumerate(events):
+        if not isinstance(event, dict):
+            raise ValueError(f"Evento calendario #{index + 1} non valido")
+        if event.get("enabled") is False:
+            continue
+        required = {"title", "competition", "start", "source_url"}
+        missing = sorted(required - event.keys())
+        if missing:
+            raise ValueError(
+                f"Evento calendario #{index + 1}: campi mancanti: {', '.join(missing)}"
+            )
+        family = _competition_family(str(event["competition"]))
+        if event.get("requires_participation", True) and family not in participating_competitions:
+            continue
+        normalized = deepcopy(event)
+        normalized.pop("enabled", None)
+        normalized.pop("requires_participation", None)
+        normalized.setdefault("event_kind", "draw")
+        normalized.setdefault("source", "Calendario ufficiale")
+        normalized.setdefault("source_id", str(event.get("id") or f"calendar-{index + 1}"))
+        normalized.setdefault("round", "")
+        normalized.setdefault("venue", "")
+        normalized.setdefault("location", "")
+        normalized.setdefault("all_day", len(str(event["start"])) == 10)
+        normalized.setdefault("status", "scheduled")
+        normalized.setdefault("reminder_minutes", 30)
+        result.append(normalized)
+    return sorted(result, key=_event_datetime)
+
+
 def _canonical_event(
     event: dict[str, Any],
     previous: list[dict[str, Any]],
@@ -911,6 +964,7 @@ def _canonical_event(
     result.setdefault("neutral", False)
     result.setdefault("time_source", "")
     result.setdefault("time_source_url", "")
+    is_match = str(result.get("event_kind") or "match") == "match"
     if result.get("all_day"):
         result["start"] = str(result["start"])[:10]
     else:
@@ -921,19 +975,23 @@ def _canonical_event(
     _add_italian_broadcaster(result)
     result["uid"] = _uid_for(result)
     generated_uid = result["uid"]
-    result["home_away"] = (
-        "Campo neutro"
-        if result.get("neutral")
-        else ("Casa" if _is_milan(str(result["home_team"])) else "Trasferta")
-    )
-    base_title = f"{result['home_team']} - {result['away_team']}"
+    if is_match:
+        result["home_away"] = (
+            "Campo neutro"
+            if result.get("neutral")
+            else ("Casa" if _is_milan(str(result["home_team"])) else "Trasferta")
+        )
+        base_title = f"{result['home_team']} - {result['away_team']}"
+    else:
+        result["home_away"] = ""
+        base_title = str(result["title"])
     old = next((item for item in previous if _same_source_id(item, result)), None)
-    if old is None:
+    if old is None and is_match:
         long_range_matches = [
             item for item in previous if _same_long_range_fixture(item, result)
         ]
         old = long_range_matches[0] if len(long_range_matches) == 1 else None
-    if old is None:
+    if old is None and is_match:
         old = next(
             (item for item in previous if _same_fixture(item, result, unordered=True)), None
         )
@@ -958,14 +1016,14 @@ def _canonical_event(
         result["uid"] = f"{hashlib.sha256(collision_base.encode()).hexdigest()[:24]}@milan-calendar"
 
     explicitly_cleared = result.get("postponed") is False
-    if not explicitly_cleared and _is_postponed(result):
+    if is_match and not explicitly_cleared and _is_postponed(result):
         result["postponed"] = True
         result.setdefault(
             "postponed_from",
             str((old or {}).get("postponed_from") or (old or {}).get("start") or result["start"]),
         )
         result.setdefault("postponed_to", "")
-    elif not explicitly_cleared and old and old.get("postponed"):
+    elif is_match and not explicitly_cleared and old and old.get("postponed"):
         if str(result.get("start")) != str(old.get("start")):
             result["postponed"] = True
             result["postponed_from"] = str(old.get("postponed_from") or old.get("start") or "")
@@ -977,7 +1035,7 @@ def _canonical_event(
                 if old.get(key) and not result.get(key):
                     result[key] = old[key]
 
-    if result.get("postponed"):
+    if is_match and result.get("postponed"):
         postponed_to = str(result.get("postponed_to") or "")
         if postponed_to:
             new_date = date.fromisoformat(postponed_to[:10]).strftime("%d/%m/%Y")
@@ -1075,14 +1133,23 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
     for data in events:
         component = Event()
         component.add("uid", data["uid"])
-        component.add("summary", f"⏸ {data['title']}" if data.get("postponed") else f"⚽ {data['title']}")
+        is_match = str(data.get("event_kind") or "match") == "match"
+        summary_icon = (
+            "⚽"
+            if is_match
+            else ("🎲" if data.get("event_kind") == "draw" else "🗓️")
+        )
+        component.add(
+            "summary",
+            f"⏸ {data['title']}" if data.get("postponed") else f"{summary_icon} {data['title']}",
+        )
         start = _event_datetime(data).astimezone(ROME)
         if data.get("all_day"):
             component.add("dtstart", start.date())
             component.add("dtend", start.date() + timedelta(days=1))
         else:
             component.add("dtstart", start)
-            component.add("dtend", start + timedelta(hours=2))
+            component.add("dtend", start + timedelta(hours=2 if is_match else 1))
         modified = datetime.fromisoformat(str(data["last_modified"]).replace("Z", "+00:00"))
         component.add("dtstamp", modified.astimezone(timezone.utc))
         component.add("last-modified", modified.astimezone(timezone.utc))
@@ -1098,10 +1165,15 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
             component.add("location", place)
         if data.get("source_url"):
             component.add("url", str(data["source_url"]))
-        details = [
-            f"Competizione: {data['competition']}",
-            f"Milan: {data['home_away']}",
-        ]
+        details = [f"Competizione: {data['competition']}"]
+        if is_match:
+            details.append(f"Milan: {data['home_away']}")
+        else:
+            details.append(
+                "Tipo: Sorteggio"
+                if data.get("event_kind") == "draw"
+                else "Tipo: Pubblicazione calendario/tabellone"
+            )
         details.append(
             "Orario: da confermare"
             if data.get("all_day")
@@ -1126,12 +1198,14 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
             details.append(f"Stadio: {data['venue']}")
         if data.get("location"):
             details.append(f"Località: {data['location']}")
-        if data.get("broadcast_it"):
+        if is_match and data.get("broadcast_it"):
             details.append(f"Dove vederla in Italia: {data['broadcast_it']}")
-        if data.get("time_source"):
+        if is_match and data.get("time_source"):
             details.append(f"Fonte orario: {data['time_source']}")
+        if not is_match and data.get("notes"):
+            details.append(str(data["notes"]))
         standing = data.get("serie_a_standing") or {}
-        if _competition_family(str(data.get("competition") or "")) == "serie-a" and standing:
+        if is_match and _competition_family(str(data.get("competition") or "")) == "serie-a" and standing:
             goal_difference = standing.get("goal_difference")
             goal_difference_text = (
                 f" — DR {int(goal_difference):+d}" if goal_difference is not None else ""
@@ -1164,10 +1238,11 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
         component.add("categories", [str(data["competition"]), "AC Milan"])
         component.add("transp", "OPAQUE")
         if not data.get("postponed") or data.get("postponed_to"):
+            reminder_minutes = int(data.get("reminder_minutes") or (150 if is_match else 30))
             alarm = Alarm()
             alarm.add("action", "DISPLAY")
-            alarm.add("description", f"Tra 2 ore e 30 minuti: {data['title']}")
-            alarm.add("trigger", timedelta(hours=-2, minutes=-30))
+            alarm.add("description", f"Tra {reminder_minutes} minuti: {data['title']}")
+            alarm.add("trigger", timedelta(minutes=-reminder_minutes))
             component.add_component(alarm)
         calendar.add_component(component)
     return calendar.to_ical()
@@ -1201,6 +1276,7 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     data_dir = root / "data"
     events_path = data_dir / "events.json"
     manual_path = data_dir / "manual_events.json"
+    calendar_events_path = data_dir / "calendar_events.json"
     previous_payload = load_json(events_path, {"events": []})
     previous = previous_payload.get("events", []) if isinstance(previous_payload, dict) else []
     now = datetime.now(timezone.utc).replace(microsecond=0)
@@ -1218,6 +1294,13 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     remote = merge_remote_events(fetched.events)
     manual = load_manual_events(manual_path)
     combined = merge_manual_events(remote, manual)
+    participating_competitions = {
+        _competition_family(str(event.get("competition") or ""))
+        for event in combined
+        if str(event.get("event_kind") or "match") == "match"
+    }
+    combined.extend(load_calendar_events(calendar_events_path, participating_competitions))
+    combined.sort(key=_event_datetime)
     standing_with_timestamp: dict[str, Any] | None = None
     if fetched.serie_a_standing:
         standing_with_timestamp = deepcopy(fetched.serie_a_standing)
@@ -1242,6 +1325,8 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     used_uids: set[str] = set()
     for event in combined:
         if (
+            str(event.get("event_kind") or "match") == "match"
+            and
             _competition_family(str(event.get("competition") or "")) == "serie-a"
             and standing_with_timestamp
         ):
