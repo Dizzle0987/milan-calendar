@@ -38,7 +38,7 @@ Usa sempre la sottoscrizione tramite URL. Scaricare o importare una copia static
 Il generatore non usa SofaScore.
 
 1. **Scoperta delle partite — AC Milan**: la pagina ufficiale del calendario della stagione rimane il riferimento principale per l'esistenza dell'incontro, le squadre, la competizione e lo stadio. Il programma legge i dati JSON strutturati incorporati dalla web app ufficiale.
-2. **Fallback e integrazione — ESPN**: endpoint JSON pubblici per Serie A, Coppa Italia, Supercoppa, competizioni UEFA e amichevoli. ESPN integra anche incontri non ancora presenti nella risposta ufficiale.
+2. **Fallback e integrazione — ESPN**: endpoint JSON pubblici per Serie A, Coppa Italia, Supercoppa Italiana, Champions League, Europa League, Conference League, Supercoppa UEFA, Coppa del Mondo per Club FIFA, Coppa Intercontinentale FIFA e amichevoli. ESPN integra anche incontri non ancora presenti nella risposta ufficiale.
 3. **Controllo aggiuntivo — TheSportsDB**: API JSON pubblica usata per individuare la prossima partita, comprese amichevoli e tournée non ancora esposte dagli altri feed.
 4. **Priorità degli orari — broadcaster italiani**: gli orari espliciti pubblicati da DAZN, Sky Sport/NOW, Mediaset e Prime Video possono completare o correggere un evento TBC. I broadcaster prevalgono sulle fonti editoriali e sul sito Milan per il solo orario; i metadati della partita restano quelli della fonte sportiva.
 5. **Fallback editoriale degli orari — Gazzetta dello Sport**: viene consultato il programma delle amichevoli. Un orario viene usato soltanto se è scritto esplicitamente insieme a data e squadre; diciture come “da stabilire” vengono ignorate.
@@ -99,11 +99,11 @@ Output:
 
 - `calendar.ics`: feed iCalendar pubblico;
 - `data/events.json`: snapshot normalizzato utile per debug, con fonte, UID e metadati di ogni evento.
-- `data/calendar_events.json`: fallback strutturato per sorteggi e pubblicazioni ufficiali di calendari/tabelloni; le voci con `requires_participation: true` compaiono soltanto se il Milan partecipa alla competizione. `participation_confirmed: true` consente di inserirle già prima che le fonti abbiano pubblicato la prima partita del torneo.
+- `data/calendar_events.json`: fallback strutturato per i sorteggi ufficiali; le voci con `requires_participation: true` compaiono soltanto se il Milan partecipa alla competizione. `participation_confirmed: true` consente di inserirle già prima che le fonti abbiano pubblicato la prima partita del torneo.
 
-I nuovi sorteggi UEFA vengono cercati automaticamente ogni sei ore sulle pagine ufficiali di Champions League, Europa League e Conference League. Il parser accetta solo un `SportsEvent` strutturato con nome e timestamp completi, converte l'istante in `Europe/Rome` e pubblica soltanto la competizione del Milan. Un sorteggio già scoperto viene conservato quando UEFA aggiorna la pagina al turno successivo.
+I nuovi sorteggi UEFA vengono cercati automaticamente ogni sei ore sulle pagine ufficiali di Champions League, Europa League e Conference League. Il parser accetta solo un `SportsEvent` strutturato con nome e timestamp completi, converte l'istante in `Europe/Rome` e pubblica soltanto la competizione del Milan. Un sorteggio già scoperto viene conservato quando UEFA aggiorna la pagina al turno successivo. Supercoppa Italiana, Supercoppa UEFA e Coppa Intercontinentale FIFA non hanno normalmente un sorteggio per il Milan; le loro partite vengono comunque cercate tra le fonti strutturate. La Coppa del Mondo per Club FIFA è inclusa tra le competizioni monitorate e un suo futuro sorteggio può essere inserito in `calendar_events.json` quando FIFA ne pubblica i dettagli ufficiali.
 
-Il generatore controlla anche gli articoli recenti della Lega Serie A. Considera soltanto URL ufficiali il cui titolo riguarda esplicitamente un calendario, sorteggio o tabellone e crea l'evento solo quando nel testo è presente una data completa; l'orario viene aggiunto esclusivamente se dichiarato. `calendar_events.json` rimane il fallback in caso di indisponibilità temporanea delle fonti.
+Il generatore controlla anche gli articoli recenti della Lega Serie A, ma considera esclusivamente URL ufficiali che contengono `sorteggio` e crea l'evento solo quando nel testo è presente una data completa; l'orario viene aggiunto esclusivamente se dichiarato. Presentazioni dei calendari e pubblicazioni dei tabelloni non vengono inserite. `calendar_events.json` rimane il fallback in caso di indisponibilità temporanea delle fonti.
 
 Il comando restituisce codice `1` se tutte le fonti remote falliscono e non sovrascrive gli output precedenti.
 
