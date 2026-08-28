@@ -13,6 +13,7 @@ from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterable
+from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
 
 import requests
@@ -65,6 +66,7 @@ GAZZETTA_FRIENDLIES_URL = (
 SKY_SERIE_A_URL = "https://sport.sky.it/calcio/serie-a"
 MEDIASET_SPORT_URL = "https://mediasetinfinity.mediaset.it/sport"
 PRIME_SPORT_URL = "https://www.primevideo.com/sports"
+LEGA_NEWS_URL = "https://www.legaseriea.it/serie-a/news"
 TIME_SOURCE_PRIORITY = {
     "AC Milan": 10,
     "Gazzetta dello Sport": 20,
@@ -491,6 +493,122 @@ def parse_uefa_draw_html(
     return results
 
 
+def find_lega_calendar_articles(html: str, source_url: str = LEGA_NEWS_URL) -> list[str]:
+    """Find recent official Lega articles that may announce a calendar event."""
+    links: list[str] = []
+    for href in re.findall(r'href=["\']([^"\']+)["\']', html, re.IGNORECASE):
+        url = urljoin(source_url, html_module.unescape(href))
+        slug = _normalize(url.rsplit("/", 1)[-1])
+        if "/serie-a/news/" not in url or not any(
+            word in slug for word in ("calendario", "sorteggio", "tabellone")
+        ):
+            continue
+        if url not in links:
+            links.append(url)
+    return links
+
+
+def parse_lega_calendar_article(html: str, source_url: str) -> list[dict[str, Any]]:
+    """Parse only explicit dates from an official Lega calendar/draw article."""
+    headline = ""
+    published_year: int | None = None
+    for raw in re.findall(
+        r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+        html,
+        re.IGNORECASE | re.DOTALL,
+    ):
+        try:
+            value = json.loads(html_module.unescape(raw))
+        except (json.JSONDecodeError, TypeError):
+            continue
+        values = value if isinstance(value, list) else [value]
+        article = next(
+            (
+                item
+                for item in values
+                if isinstance(item, dict) and str(item.get("@type") or "") == "NewsArticle"
+            ),
+            None,
+        )
+        if not article:
+            continue
+        headline = str(article.get("headline") or "")
+        published = str(article.get("datePublished") or "")
+        if published[:4].isdigit():
+            published_year = int(published[:4])
+        break
+    normalized_headline = _normalize(headline)
+    if not headline or not any(
+        marker in normalized_headline for marker in ("calendario", "sorteggio", "tabellone")
+    ):
+        return []
+    if "coppa-italia" in normalized_headline:
+        competition = "Coppa Italia"
+    elif "supercoppa" in normalized_headline:
+        competition = "Supercoppa Italiana"
+    elif "serie-a" in normalized_headline:
+        competition = "Serie A"
+    else:
+        return []
+
+    text = html_module.unescape(re.sub(r"<[^>]+>", " ", html))
+    text = re.sub(r"\s+", " ", text)
+    months = {
+        "gennaio": 1, "febbraio": 2, "marzo": 3, "aprile": 4,
+        "maggio": 5, "giugno": 6, "luglio": 7, "agosto": 8,
+        "settembre": 9, "ottobre": 10, "novembre": 11, "dicembre": 12,
+    }
+    match = re.search(
+        rf"(?P<day>\d{{1,2}})\s+(?P<month>{'|'.join(months)})"
+        r"(?:\s+(?P<year>20\d{2}))?"
+        r"(?:.{0,45}?(?:alle\s+ore|ore)\s*(?P<hour>\d{1,2})[.:](?P<minute>\d{2}))?",
+        text,
+        re.IGNORECASE,
+    )
+    if not match:
+        return []
+    year = int(match.group("year") or published_year or 0)
+    if not year:
+        return []
+    month = months[match.group("month").lower()]
+    if match.group("hour") is not None:
+        start = datetime(
+            year, month, int(match.group("day")),
+            int(match.group("hour")), int(match.group("minute")), tzinfo=ROME,
+        )
+        start_value = start.isoformat()
+        all_day = False
+    else:
+        start_value = date(year, month, int(match.group("day"))).isoformat()
+        all_day = True
+    season_match = re.search(r"(20\d{2})[/\\-](\d{2,4})", headline)
+    season = (
+        f"{season_match.group(1)}/{season_match.group(2)[-2:]}" if season_match else str(year)
+    )
+    kind = "draw" if "sorteggio" in normalized_headline else "calendar_publication"
+    if kind == "draw":
+        title = f"Sorteggio {competition} {season}"
+    elif competition == "Coppa Italia":
+        title = f"Pubblicazione tabellone Coppa Italia {season}"
+    else:
+        title = f"Presentazione calendario {competition} {season}"
+    return [{
+        "source_id": f"lega-{_normalize(source_url.rsplit('/', 1)[-1])}",
+        "source": "Lega Serie A",
+        "source_url": source_url,
+        "event_kind": kind,
+        "title": title,
+        "competition": competition,
+        "start": start_value,
+        "all_day": all_day,
+        "venue": "",
+        "location": "",
+        "status": "scheduled",
+        "reminder_minutes": 30,
+        "notes": "Data e orario recuperati automaticamente da un annuncio ufficiale Lega Serie A.",
+    }]
+
+
 def parse_thesportsdb_json(payload: dict[str, Any]) -> list[dict[str, Any]]:
     events: list[dict[str, Any]] = []
     for item in payload.get("events") or []:
@@ -762,6 +880,24 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
             LOGGER.info("Fonte sorteggi UEFA %s non disponibile: %s", competition, exc)
     if uefa_draws_ok:
         successful.append("UEFA sorteggi")
+
+    try:
+        response = session.get(LEGA_NEWS_URL, timeout=20)
+        response.raise_for_status()
+        lega_events: list[dict[str, Any]] = []
+        for article_url in find_lega_calendar_articles(response.text)[:8]:
+            try:
+                article = session.get(article_url, timeout=20)
+                article.raise_for_status()
+                lega_events.extend(parse_lega_calendar_article(article.text, article_url))
+            except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
+                errors.append(f"Lega calendario {article_url}: {exc}")
+        if lega_events:
+            calendar_events.extend(lega_events)
+            successful.append("Lega calendario")
+    except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"Lega calendario: {exc}")
+        LOGGER.info("Fonte calendario Lega Serie A non disponibile: %s", exc)
 
     return FetchResult(
         events=events,
@@ -1471,8 +1607,14 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     automatic_calendar_events = [
         event
         for event in (fetched.calendar_events or [])
-        if _competition_family(str(event.get("competition") or ""))
-        in participating_competitions
+        if (
+            _competition_family(str(event.get("competition") or ""))
+            in participating_competitions
+            or (
+                _competition_family(str(event.get("competition") or "")) == "coppa-italia"
+                and "serie-a" in participating_competitions
+            )
+        )
     ]
     previous_calendar_events = [
         event
