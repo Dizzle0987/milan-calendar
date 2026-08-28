@@ -14,12 +14,14 @@ from milan_calendar.generator import (
     build_ical,
     load_manual_events,
     load_calendar_events,
+    find_lega_calendar_articles,
     merge_manual_events,
     merge_calendar_events,
     merge_remote_events,
     parse_espn_json,
     parse_espn_standings_json,
     parse_uefa_draw_html,
+    parse_lega_calendar_article,
     parse_schedule_html,
     parse_thesportsdb_json,
     parse_official_html,
@@ -53,6 +55,34 @@ def test_parse_uefa_draw_prefers_exact_localtime_timestamp() -> None:
     assert events[0]["source_id"] == "draw-123"
     assert events[0]["start"] == "2026-08-28T13:00:00+02:00"
     assert events[0]["title"] == "Sorteggio fase campionato UEFA Europa League 2026/27"
+
+
+def test_lega_news_discovery_and_explicit_calendar_datetime() -> None:
+    listing = """
+      <a href="/serie-a/news/una-notizia">Notizia</a>
+      <a href="/serie-a/news/aspettando-il-calendario-serie-a-2027-28">Calendario</a>
+      <a href="/serie-a/calendario-risultati">Risultati</a>
+    """
+    urls = find_lega_calendar_articles(listing)
+    assert urls == [
+        "https://www.legaseriea.it/serie-a/news/aspettando-il-calendario-serie-a-2027-28"
+    ]
+
+    article = """
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org", "@type": "NewsArticle",
+        "headline": "Aspettando il Calendario della Serie A Enilive 2027/28",
+        "datePublished": "2027-06-03T10:00:00Z"
+      }
+      </script>
+      <p>Il calendario verrà svelato venerdì 4 giugno alle ore 18.30.</p>
+    """
+    events = parse_lega_calendar_article(article, urls[0])
+
+    assert len(events) == 1
+    assert events[0]["start"] == "2027-06-04T18:30:00+02:00"
+    assert events[0]["title"] == "Presentazione calendario Serie A 2027/28"
 
 
 def test_automatic_draw_merges_with_configured_fallback_and_persists() -> None:
