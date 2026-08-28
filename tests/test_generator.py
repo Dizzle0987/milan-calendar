@@ -12,6 +12,7 @@ from milan_calendar.generator import (
     UpdateError,
     build_ical,
     load_manual_events,
+    load_calendar_events,
     merge_manual_events,
     merge_remote_events,
     parse_espn_json,
@@ -21,6 +22,68 @@ from milan_calendar.generator import (
     parse_official_html,
     update_calendar,
 )
+
+
+def test_calendar_events_are_filtered_by_milan_participation(tmp_path: Path) -> None:
+    path = tmp_path / "calendar_events.json"
+    path.write_text(
+        json.dumps({
+            "events": [
+                {
+                    "id": "uel-draw",
+                    "title": "Sorteggio Europa League",
+                    "competition": "UEFA Europa League",
+                    "start": "2026-08-28T13:00:00+02:00",
+                    "source_url": "https://www.uefa.com/uefaeuropaleague/draws/",
+                },
+                {
+                    "id": "ucl-draw",
+                    "title": "Sorteggio Champions League",
+                    "competition": "UEFA Champions League",
+                    "start": "2026-08-27T18:00:00+02:00",
+                    "source_url": "https://www.uefa.com/uefachampionsleague/draws/",
+                },
+            ]
+        }),
+        encoding="utf-8",
+    )
+
+    events = load_calendar_events(path, {"europa-league"})
+
+    assert [event["source_id"] for event in events] == ["uel-draw"]
+    assert events[0]["event_kind"] == "draw"
+    assert events[0]["reminder_minutes"] == 30
+
+
+def test_draw_ical_has_distinct_summary_and_30_minute_alarm() -> None:
+    event = {
+        "uid": "uel-draw@milan-calendar",
+        "event_kind": "draw",
+        "title": "Sorteggio fase campionato Europa League 2026/27",
+        "competition": "UEFA Europa League",
+        "start": "2026-08-28T13:00:00+02:00",
+        "all_day": False,
+        "venue": "Grimaldi Forum",
+        "location": "Monaco",
+        "source_url": "https://www.uefa.com/uefaeuropaleague/draws/",
+        "last_modified": "2026-08-28T08:00:00Z",
+        "sequence": 0,
+        "reminder_minutes": 30,
+    }
+
+    parsed = next(
+        component
+        for component in Calendar.from_ical(build_ical([event])).walk()
+        if component.name == "VEVENT"
+    )
+    alarm = next(component for component in parsed.subcomponents if component.name == "VALARM")
+    description = parsed.decoded("description").decode()
+
+    assert parsed.decoded("summary").decode().startswith("🎲")
+    assert "Tipo: Sorteggio" in description
+    assert "Orario (Roma): 28/08/2026 13:00" in description
+    assert "Milan:" not in description
+    assert alarm.decoded("trigger").total_seconds() == -30 * 60
 
 
 def test_parse_espn_standings_json_extracts_milan_row() -> None:
