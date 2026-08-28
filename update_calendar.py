@@ -15,7 +15,7 @@ def main() -> int:
     except (UpdateError, ValueError) as exc:
         logging.error("%s", exc)
         return 1
-    logging.info("Calendario aggiornato: %d partite", len(events))
+    logging.info("Calendario aggiornato: %d eventi", len(events))
     return 0
 
 
