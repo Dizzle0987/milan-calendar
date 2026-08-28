@@ -99,6 +99,7 @@ Output:
 
 - `calendar.ics`: feed iCalendar pubblico;
 - `data/events.json`: snapshot normalizzato utile per debug, con fonte, UID e metadati di ogni evento.
+- `data/calendar_events.json`: sorteggi e pubblicazioni ufficiali di calendari/tabelloni; le voci con `requires_participation: true` compaiono soltanto se il Milan partecipa alla competizione.
 
 Il comando restituisce codice `1` se tutte le fonti remote falliscono e non sovrascrive gli output precedenti.
 
