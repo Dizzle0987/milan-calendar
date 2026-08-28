@@ -35,6 +35,7 @@ def test_calendar_events_are_filtered_by_milan_participation(tmp_path: Path) -> 
                     "competition": "UEFA Europa League",
                     "start": "2026-08-28T13:00:00+02:00",
                     "source_url": "https://www.uefa.com/uefaeuropaleague/draws/",
+                    "participation_confirmed": True,
                 },
                 {
                     "id": "ucl-draw",
@@ -48,7 +49,7 @@ def test_calendar_events_are_filtered_by_milan_participation(tmp_path: Path) -> 
         encoding="utf-8",
     )
 
-    events = load_calendar_events(path, {"europa-league"})
+    events = load_calendar_events(path, set())
 
     assert [event["source_id"] for event in events] == ["uel-draw"]
     assert events[0]["event_kind"] == "draw"
