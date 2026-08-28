@@ -1,5 +1,5 @@
 {
-  "event_count": 43,
+  "event_count": 45,
   "events": [
     {
       "all_day": false,
@@ -24,6 +24,30 @@
       "title": "Presentazione calendario Serie A 2026/27",
       "uid": "f6356f0967079b878a053922@milan-calendar",
       "venue": "Teatro Regio"
+    },
+    {
+      "all_day": true,
+      "competition": "Coppa Italia",
+      "event_kind": "calendar_publication",
+      "home_away": "",
+      "id": "coppa-italia-bracket-2026-27",
+      "last_modified": "2026-08-28T10:50:28Z",
+      "location": "",
+      "neutral": false,
+      "notes": "Pubblicazione ufficiale del tabellone; l'orario non è stato comunicato.",
+      "reminder_minutes": 30,
+      "round": "",
+      "sequence": 0,
+      "source": "Lega Serie A",
+      "source_id": "coppa-italia-bracket-2026-27",
+      "source_url": "https://images.legaseriea.it/image/private/fl_attachment/prd/jviyjl2naohigmnprshx.pdf",
+      "start": "2026-06-24",
+      "status": "scheduled",
+      "time_source": "",
+      "time_source_url": "",
+      "title": "Pubblicazione tabellone Coppa Italia 2026/27",
+      "uid": "00efc870eed11032efd7fac2@milan-calendar",
+      "venue": ""
     },
     {
       "all_day": false,
@@ -190,6 +214,30 @@
       "title": "Torino - Milan",
       "uid": "c4a8dca2f7da4ac306231f60@milan-calendar",
       "venue": "Stadio Olimpico Grande Torino"
+    },
+    {
+      "all_day": false,
+      "competition": "UEFA Europa League",
+      "event_kind": "draw",
+      "home_away": "",
+      "id": "europa-league-league-phase-draw-2026-27",
+      "last_modified": "2026-08-28T10:50:28Z",
+      "location": "Monaco",
+      "neutral": false,
+      "notes": "Il Milan partecipa alla fase campionato. Orario ufficiale UEFA: 13:00 CET, coincidente con Europe/Rome in questa data.",
+      "reminder_minutes": 30,
+      "round": "",
+      "sequence": 0,
+      "source": "UEFA",
+      "source_id": "europa-league-league-phase-draw-2026-27",
+      "source_url": "https://www.uefa.com/uefaeuropaleague/draws/",
+      "start": "2026-08-28T13:00:00+02:00",
+      "status": "scheduled",
+      "time_source": "",
+      "time_source_url": "",
+      "title": "Sorteggio fase campionato Europa League 2026/27",
+      "uid": "49afa1729a4f555ae6bcc0ab@milan-calendar",
+      "venue": "Grimaldi Forum"
     },
     {
       "all_day": false,
@@ -2708,7 +2756,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-28T10:47:59Z",
+  "last_changed": "2026-08-28T10:50:28Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [

@@ -30,6 +30,27 @@ TRIGGER:-PT30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:🗓️ Pubblicazione tabellone Coppa Italia 2026/27
+DTSTART;VALUE=DATE:20260624
+DTEND;VALUE=DATE:20260625
+DTSTAMP:20260828T105028Z
+UID:00efc870eed11032efd7fac2@milan-calendar
+SEQUENCE:0
+CATEGORIES:Coppa Italia,AC Milan
+DESCRIPTION:Competizione: Coppa Italia\nTipo: Pubblicazione calendario/tab
+ ellone\nOrario: da confermare\nPubblicazione ufficiale del tabellone\; l'o
+ rario non è stato comunicato.
+LAST-MODIFIED:20260828T105028Z
+TRANSP:OPAQUE
+URL:https://images.legaseriea.it/image/private/fl_attachment/prd/jviyjl2na
+ ohigmnprshx.pdf
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tra 30 minuti: Pubblicazione tabellone Coppa Italia 2026/27
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:⚽ Celtic - AC Milan
 DTSTART;TZID=Europe/Rome:20260725T160000
 DTEND;TZID=Europe/Rome:20260725T180000
@@ -139,6 +160,28 @@ BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Tra 150 minuti: Torino - Milan
 TRIGGER:-PT2H30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🎲 Sorteggio fase campionato Europa League 2026/27
+DTSTART;TZID=Europe/Rome:20260828T130000
+DTEND;TZID=Europe/Rome:20260828T140000
+DTSTAMP:20260828T105028Z
+UID:49afa1729a4f555ae6bcc0ab@milan-calendar
+SEQUENCE:0
+CATEGORIES:UEFA Europa League,AC Milan
+DESCRIPTION:Competizione: UEFA Europa League\nTipo: Sorteggio\nOrario (Rom
+ a): 28/08/2026 13:00\nStadio: Grimaldi Forum\nLocalità: Monaco\nIl Milan 
+ partecipa alla fase campionato. Orario ufficiale UEFA: 13:00 CET\, coincid
+ ente con Europe/Rome in questa data.
+LAST-MODIFIED:20260828T105028Z
+LOCATION:Grimaldi Forum\, Monaco
+TRANSP:OPAQUE
+URL:https://www.uefa.com/uefaeuropaleague/draws/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tra 30 minuti: Sorteggio fase campionato Europa League 2026/27
+TRIGGER:-PT30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
