@@ -932,11 +932,16 @@ def load_calendar_events(
                 f"Evento calendario #{index + 1}: campi mancanti: {', '.join(missing)}"
             )
         family = _competition_family(str(event["competition"]))
-        if event.get("requires_participation", True) and family not in participating_competitions:
+        if (
+            event.get("requires_participation", True)
+            and not event.get("participation_confirmed", False)
+            and family not in participating_competitions
+        ):
             continue
         normalized = deepcopy(event)
         normalized.pop("enabled", None)
         normalized.pop("requires_participation", None)
+        normalized.pop("participation_confirmed", None)
         normalized.setdefault("event_kind", "draw")
         normalized.setdefault("source", "Calendario ufficiale")
         normalized.setdefault("source_id", str(event.get("id") or f"calendar-{index + 1}"))
