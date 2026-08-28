@@ -8,49 +8,6 @@ REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 X-WR-TIMEZONE:Europe/Rome
 BEGIN:VEVENT
-SUMMARY:🗓️ Presentazione calendario Serie A 2026/27
-DTSTART;TZID=Europe/Rome:20260605T183000
-DTEND;TZID=Europe/Rome:20260605T193000
-DTSTAMP:20260828T104759Z
-UID:f6356f0967079b878a053922@milan-calendar
-SEQUENCE:0
-CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nTipo: Pubblicazione calendario/tabellon
- e\nOrario (Roma): 05/06/2026 18:30\nStadio: Teatro Regio\nLocalità: Parma
- \nPresentazione ufficiale del calendario della Serie A Enilive 2026/27.
-LAST-MODIFIED:20260828T104759Z
-LOCATION:Teatro Regio\, Parma
-TRANSP:OPAQUE
-URL:https://www.legaseriea.it/serie-a/news/aspettando-il-calendario-della-
- serie-a-enilive-2026-27
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Tra 30 minuti: Presentazione calendario Serie A 2026/27
-TRIGGER:-PT30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🗓️ Pubblicazione tabellone Coppa Italia 2026/27
-DTSTART;VALUE=DATE:20260624
-DTEND;VALUE=DATE:20260625
-DTSTAMP:20260828T105028Z
-UID:00efc870eed11032efd7fac2@milan-calendar
-SEQUENCE:0
-CATEGORIES:Coppa Italia,AC Milan
-DESCRIPTION:Competizione: Coppa Italia\nTipo: Pubblicazione calendario/tab
- ellone\nOrario: da confermare\nPubblicazione ufficiale del tabellone\; l'o
- rario non è stato comunicato.
-LAST-MODIFIED:20260828T105028Z
-TRANSP:OPAQUE
-URL:https://images.legaseriea.it/image/private/fl_attachment/prd/jviyjl2na
- ohigmnprshx.pdf
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Tra 30 minuti: Pubblicazione tabellone Coppa Italia 2026/27
-TRIGGER:-PT30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:⚽ Celtic - AC Milan
 DTSTART;TZID=Europe/Rome:20260725T160000
 DTEND;TZID=Europe/Rome:20260725T180000
