@@ -11,6 +11,7 @@
       "source": "Lega Serie A",
       "source_url": "https://www.legaseriea.it/serie-a/news/aspettando-il-calendario-della-serie-a-enilive-2026-27",
       "notes": "Presentazione ufficiale del calendario della Serie A Enilive 2026/27.",
+      "participation_confirmed": true,
       "requires_participation": true
     },
     {
@@ -23,6 +24,7 @@
       "source": "Lega Serie A",
       "source_url": "https://images.legaseriea.it/image/private/fl_attachment/prd/jviyjl2naohigmnprshx.pdf",
       "notes": "Pubblicazione ufficiale del tabellone; l'orario non è stato comunicato.",
+      "participation_confirmed": true,
       "requires_participation": true
     },
     {
@@ -36,6 +38,7 @@
       "source": "UEFA",
       "source_url": "https://www.uefa.com/uefaeuropaleague/draws/",
       "notes": "Il Milan partecipa alla fase campionato. Orario ufficiale UEFA: 13:00 CET, coincidente con Europe/Rome in questa data.",
+      "participation_confirmed": true,
       "requires_participation": true
     }
   ]
