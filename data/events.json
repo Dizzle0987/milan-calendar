@@ -1,6 +1,54 @@
 {
-  "event_count": 43,
+  "event_count": 45,
   "events": [
+    {
+      "all_day": false,
+      "competition": "Serie A",
+      "event_kind": "calendar_publication",
+      "home_away": "",
+      "id": "serie-a-calendar-presentation-2026-27",
+      "last_modified": "2026-08-28T11:19:50Z",
+      "location": "Parma",
+      "neutral": false,
+      "notes": "Presentazione ufficiale del calendario della Serie A Enilive 2026/27.",
+      "reminder_minutes": 30,
+      "round": "",
+      "sequence": 0,
+      "source": "Lega Serie A",
+      "source_id": "serie-a-calendar-presentation-2026-27",
+      "source_url": "https://www.legaseriea.it/serie-a/news/aspettando-il-calendario-della-serie-a-enilive-2026-27",
+      "start": "2026-06-05T18:30:00+02:00",
+      "status": "scheduled",
+      "time_source": "",
+      "time_source_url": "",
+      "title": "Presentazione calendario Serie A 2026/27",
+      "uid": "f6356f0967079b878a053922@milan-calendar",
+      "venue": "Teatro Regio"
+    },
+    {
+      "all_day": true,
+      "competition": "Coppa Italia",
+      "event_kind": "calendar_publication",
+      "home_away": "",
+      "id": "coppa-italia-bracket-2026-27",
+      "last_modified": "2026-08-28T11:19:50Z",
+      "location": "",
+      "neutral": false,
+      "notes": "Pubblicazione ufficiale del tabellone; l'orario non è stato comunicato.",
+      "reminder_minutes": 30,
+      "round": "",
+      "sequence": 0,
+      "source": "Lega Serie A",
+      "source_id": "coppa-italia-bracket-2026-27",
+      "source_url": "https://images.legaseriea.it/image/private/fl_attachment/prd/jviyjl2naohigmnprshx.pdf",
+      "start": "2026-06-24",
+      "status": "scheduled",
+      "time_source": "",
+      "time_source_url": "",
+      "title": "Pubblicazione tabellone Coppa Italia 2026/27",
+      "uid": "00efc870eed11032efd7fac2@milan-calendar",
+      "venue": ""
+    },
     {
       "all_day": false,
       "away_team": "AC Milan",
@@ -2707,7 +2755,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-28T11:16:46Z",
+  "last_changed": "2026-08-28T11:19:50Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
