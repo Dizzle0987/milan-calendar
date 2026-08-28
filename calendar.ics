@@ -8,6 +8,28 @@ REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 X-WR-TIMEZONE:Europe/Rome
 BEGIN:VEVENT
+SUMMARY:🗓️ Presentazione calendario Serie A 2026/27
+DTSTART;TZID=Europe/Rome:20260605T183000
+DTEND;TZID=Europe/Rome:20260605T193000
+DTSTAMP:20260828T104759Z
+UID:f6356f0967079b878a053922@milan-calendar
+SEQUENCE:0
+CATEGORIES:Serie A,AC Milan
+DESCRIPTION:Competizione: Serie A\nTipo: Pubblicazione calendario/tabellon
+ e\nOrario (Roma): 05/06/2026 18:30\nStadio: Teatro Regio\nLocalità: Parma
+ \nPresentazione ufficiale del calendario della Serie A Enilive 2026/27.
+LAST-MODIFIED:20260828T104759Z
+LOCATION:Teatro Regio\, Parma
+TRANSP:OPAQUE
+URL:https://www.legaseriea.it/serie-a/news/aspettando-il-calendario-della-
+ serie-a-enilive-2026-27
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tra 30 minuti: Presentazione calendario Serie A 2026/27
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:⚽ Celtic - AC Milan
 DTSTART;TZID=Europe/Rome:20260725T160000
 DTEND;TZID=Europe/Rome:20260725T180000
@@ -24,7 +46,7 @@ TRANSP:OPAQUE
 URL:https://www.espn.com/soccer/match/_/gameId/401886529/ac-milan-celtic
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Celtic - AC Milan
+DESCRIPTION:Tra 150 minuti: Celtic - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -46,7 +68,7 @@ URL:https://www.espn.com/soccer/match/_/gameId/401869428/internazionale-ac
  -milan
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: AC Milan - Internazionale
+DESCRIPTION:Tra 150 minuti: AC Milan - Internazionale
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -69,7 +91,7 @@ URL:https://www.acmilan.com/it/news/articoli/tournee/2026-04-30/il-pre-sea
  son-tour-2026-di-ac-milan-fa-tappa-in-indonesia
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Chelsea FC - AC Milan
+DESCRIPTION:Tra 150 minuti: Chelsea FC - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -91,7 +113,7 @@ TRANSP:OPAQUE
 URL:https://www.supermecz.pl/
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Manchester United - AC Milan
+DESCRIPTION:Tra 150 minuti: Manchester United - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -115,7 +137,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Torino - Milan
+DESCRIPTION:Tra 150 minuti: Torino - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -139,7 +161,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Venezia
+DESCRIPTION:Tra 150 minuti: Milan - Venezia
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -162,7 +184,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Juventus - Milan
+DESCRIPTION:Tra 150 minuti: Juventus - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -185,7 +207,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Lazio - Milan
+DESCRIPTION:Tra 150 minuti: Lazio - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -208,7 +230,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Lecce
+DESCRIPTION:Tra 150 minuti: Milan - Lecce
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -231,7 +253,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Sassuolo - Milan
+DESCRIPTION:Tra 150 minuti: Sassuolo - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -254,7 +276,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Atalanta
+DESCRIPTION:Tra 150 minuti: Milan - Atalanta
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -277,7 +299,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Udinese - Milan
+DESCRIPTION:Tra 150 minuti: Udinese - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -300,7 +322,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Bologna
+DESCRIPTION:Tra 150 minuti: Milan - Bologna
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -323,7 +345,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Inter
+DESCRIPTION:Tra 150 minuti: Milan - Inter
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -346,7 +368,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Genoa - Milan
+DESCRIPTION:Tra 150 minuti: Genoa - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -369,7 +391,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Frosinone
+DESCRIPTION:Tra 150 minuti: Milan - Frosinone
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -392,7 +414,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Cagliari - Milan
+DESCRIPTION:Tra 150 minuti: Cagliari - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -415,7 +437,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Parma
+DESCRIPTION:Tra 150 minuti: Milan - Parma
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -438,7 +460,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Napoli - Milan
+DESCRIPTION:Tra 150 minuti: Napoli - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -461,7 +483,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Como
+DESCRIPTION:Tra 150 minuti: Milan - Como
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -484,7 +506,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Monza - Milan
+DESCRIPTION:Tra 150 minuti: Monza - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -507,7 +529,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Fiorentina
+DESCRIPTION:Tra 150 minuti: Milan - Fiorentina
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -530,7 +552,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Roma - Milan
+DESCRIPTION:Tra 150 minuti: Roma - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -553,7 +575,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Torino
+DESCRIPTION:Tra 150 minuti: Milan - Torino
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -576,7 +598,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Frosinone - Milan
+DESCRIPTION:Tra 150 minuti: Frosinone - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -599,7 +621,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Juventus
+DESCRIPTION:Tra 150 minuti: Milan - Juventus
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -622,7 +644,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Bologna - Milan
+DESCRIPTION:Tra 150 minuti: Bologna - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -645,7 +667,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Inter - Milan
+DESCRIPTION:Tra 150 minuti: Inter - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -668,7 +690,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Genoa
+DESCRIPTION:Tra 150 minuti: Milan - Genoa
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -691,7 +713,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Como - Milan
+DESCRIPTION:Tra 150 minuti: Como - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -714,7 +736,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Cagliari
+DESCRIPTION:Tra 150 minuti: Milan - Cagliari
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -737,7 +759,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Sassuolo
+DESCRIPTION:Tra 150 minuti: Milan - Sassuolo
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -760,7 +782,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Atalanta - Milan
+DESCRIPTION:Tra 150 minuti: Atalanta - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -783,7 +805,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Monza
+DESCRIPTION:Tra 150 minuti: Milan - Monza
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -806,7 +828,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Fiorentina - Milan
+DESCRIPTION:Tra 150 minuti: Fiorentina - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -829,7 +851,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Napoli
+DESCRIPTION:Tra 150 minuti: Milan - Napoli
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -852,7 +874,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Lecce - Milan
+DESCRIPTION:Tra 150 minuti: Lecce - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -875,7 +897,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Lazio
+DESCRIPTION:Tra 150 minuti: Milan - Lazio
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -898,7 +920,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Parma - Milan
+DESCRIPTION:Tra 150 minuti: Parma - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -921,7 +943,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Roma
+DESCRIPTION:Tra 150 minuti: Milan - Roma
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -944,7 +966,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Venezia - Milan
+DESCRIPTION:Tra 150 minuti: Venezia - Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -967,7 +989,7 @@ TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 2 ore e 30 minuti: Milan - Udinese
+DESCRIPTION:Tra 150 minuti: Milan - Udinese
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT

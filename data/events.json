@@ -1,6 +1,30 @@
 {
-  "event_count": 42,
+  "event_count": 43,
   "events": [
+    {
+      "all_day": false,
+      "competition": "Serie A",
+      "event_kind": "calendar_publication",
+      "home_away": "",
+      "id": "serie-a-calendar-presentation-2026-27",
+      "last_modified": "2026-08-28T10:47:59Z",
+      "location": "Parma",
+      "neutral": false,
+      "notes": "Presentazione ufficiale del calendario della Serie A Enilive 2026/27.",
+      "reminder_minutes": 30,
+      "round": "",
+      "sequence": 0,
+      "source": "Lega Serie A",
+      "source_id": "serie-a-calendar-presentation-2026-27",
+      "source_url": "https://www.legaseriea.it/serie-a/news/aspettando-il-calendario-della-serie-a-enilive-2026-27",
+      "start": "2026-06-05T18:30:00+02:00",
+      "status": "scheduled",
+      "time_source": "",
+      "time_source_url": "",
+      "title": "Presentazione calendario Serie A 2026/27",
+      "uid": "f6356f0967079b878a053922@milan-calendar",
+      "venue": "Teatro Regio"
+    },
     {
       "all_day": false,
       "away_team": "AC Milan",
@@ -2684,7 +2708,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-25T03:27:42Z",
+  "last_changed": "2026-08-28T10:47:59Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
