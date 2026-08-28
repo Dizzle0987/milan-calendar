@@ -10,18 +10,105 @@ from icalendar import Calendar
 from milan_calendar.generator import (
     FetchResult,
     UpdateError,
+    _canonical_event,
     build_ical,
     load_manual_events,
     load_calendar_events,
     merge_manual_events,
+    merge_calendar_events,
     merge_remote_events,
     parse_espn_json,
     parse_espn_standings_json,
+    parse_uefa_draw_html,
     parse_schedule_html,
     parse_thesportsdb_json,
     parse_official_html,
     update_calendar,
 )
+
+
+def test_parse_uefa_draw_prefers_exact_localtime_timestamp() -> None:
+    html = """
+    <html><head><title>UEFA Europa League league phase draw | 2026/27</title></head>
+    <body>
+      <span data-plugin="tolocaltime"
+            data-options="{&quot;targetDate&quot;:&quot;2026-08-28T11:00:00+00:00&quot;}"></span>
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org", "@type": "SportsEvent",
+        "@id": "https://www.uefa.com/draws/#draw-123",
+        "name": "UEFA Europa League - League phase draw",
+        "startDate": "2026-08-28T10:00:00+00:00",
+        "location": [{"@type": "Place", "name": "Monaco", "address": "Monaco"}]
+      }
+      </script>
+    </body></html>
+    """
+
+    events = parse_uefa_draw_html(
+        html, "UEFA Europa League", "https://www.uefa.com/uefaeuropaleague/draws/"
+    )
+
+    assert len(events) == 1
+    assert events[0]["source_id"] == "draw-123"
+    assert events[0]["start"] == "2026-08-28T13:00:00+02:00"
+    assert events[0]["title"] == "Sorteggio fase campionato UEFA Europa League 2026/27"
+
+
+def test_automatic_draw_merges_with_configured_fallback_and_persists() -> None:
+    automatic = {
+        "source_id": "uefa-draw-123",
+        "source": "UEFA",
+        "source_url": "https://www.uefa.com/draws/",
+        "event_kind": "draw",
+        "title": "Sorteggio fase campionato UEFA Europa League 2026/27",
+        "competition": "UEFA Europa League",
+        "start": "2026-08-28T13:00:00+02:00",
+        "all_day": False,
+    }
+    configured = {
+        **automatic,
+        "source_id": "configured-draw",
+        "venue": "Grimaldi Forum",
+        "notes": "Fallback verificato",
+    }
+
+    merged = merge_calendar_events([automatic], [configured], [configured])
+
+    assert len(merged) == 1
+    assert merged[0]["source_id"] == "uefa-draw-123"
+    assert merged[0]["venue"] == "Grimaldi Forum"
+    assert merged[0]["notes"] == "Fallback verificato"
+
+
+def test_automatic_draw_reuses_uid_from_configured_fallback() -> None:
+    previous = {
+        "uid": "stable-draw@milan-calendar",
+        "source_id": "configured-draw",
+        "source": "Calendario ufficiale",
+        "source_url": "https://www.uefa.com/draws/",
+        "event_kind": "draw",
+        "title": "Sorteggio fase campionato Europa League 2026/27",
+        "competition": "UEFA Europa League",
+        "start": "2026-08-28T13:00:00+02:00",
+        "all_day": False,
+        "last_modified": "2026-08-20T08:00:00Z",
+        "sequence": 0,
+    }
+    automatic = {
+        **previous,
+        "uid": "",
+        "source_id": "uefa-draw-123",
+        "source": "UEFA",
+        "title": "Sorteggio fase campionato UEFA Europa League 2026/27",
+    }
+
+    canonical = _canonical_event(
+        automatic, [previous], "2026-08-28T08:00:00Z", set()
+    )
+
+    assert canonical["uid"] == "stable-draw@milan-calendar"
+    assert canonical["sequence"] == 1
 
 
 def test_calendar_events_are_filtered_by_milan_participation(tmp_path: Path) -> None:
