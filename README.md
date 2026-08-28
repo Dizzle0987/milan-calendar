@@ -99,7 +99,9 @@ Output:
 
 - `calendar.ics`: feed iCalendar pubblico;
 - `data/events.json`: snapshot normalizzato utile per debug, con fonte, UID e metadati di ogni evento.
-- `data/calendar_events.json`: sorteggi e pubblicazioni ufficiali di calendari/tabelloni; le voci con `requires_participation: true` compaiono soltanto se il Milan partecipa alla competizione. `participation_confirmed: true` consente di inserirle già prima che le fonti abbiano pubblicato la prima partita del torneo.
+- `data/calendar_events.json`: fallback strutturato per sorteggi e pubblicazioni ufficiali di calendari/tabelloni; le voci con `requires_participation: true` compaiono soltanto se il Milan partecipa alla competizione. `participation_confirmed: true` consente di inserirle già prima che le fonti abbiano pubblicato la prima partita del torneo.
+
+I nuovi sorteggi UEFA vengono cercati automaticamente ogni sei ore sulle pagine ufficiali di Champions League, Europa League e Conference League. Il parser accetta solo un `SportsEvent` strutturato con nome e timestamp completi, converte l'istante in `Europe/Rome` e pubblica soltanto la competizione del Milan. Un sorteggio già scoperto viene conservato quando UEFA aggiorna la pagina al turno successivo; il file `calendar_events.json` rimane il fallback in caso di indisponibilità temporanea della fonte.
 
 Il comando restituisce codice `1` se tutte le fonti remote falliscono e non sovrascrive gli output precedenti.
 
