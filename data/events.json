@@ -155,54 +155,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Torino",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "Torino",
       "neutral": false,
       "round": "1",
-      "sequence": 8,
+      "sequence": 9,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "6w3tljosjb0q1hvcb08eo33tg",
@@ -246,60 +246,60 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
-      "location": "Italy",
+      "last_modified": "2026-08-28T21:56:33Z",
+      "location": "Milano",
       "neutral": false,
       "round": "2",
-      "sequence": 5,
+      "sequence": 6,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "6z047ttw57ehdkw9h2fy4jpxw",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-08-28T20:45:00+02:00",
-      "status": "Fixture",
+      "status": "Played",
       "time_source": "AC Milan",
       "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "title": "Milan - Venezia",
@@ -314,54 +314,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Juventus",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "3",
-      "sequence": 4,
+      "sequence": 5,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "7228nxqj1hyueovtnvc75j5zo",
@@ -382,54 +382,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Lazio",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "4",
-      "sequence": 5,
+      "sequence": 6,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "74inwq2qcihry6rgk4sa5sr9w",
@@ -450,54 +450,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "5",
-      "sequence": 4,
+      "sequence": 5,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "77l9geiwaiztbwyn4jqalw07o",
@@ -518,54 +518,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Sassuolo",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "6",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "7bvu4b4e5lezk0he7a4l3getw",
@@ -586,54 +586,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "7",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "7dqaeeptiswq1qp6sexkq8hsk",
@@ -654,54 +654,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Udinese",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "8",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "7idw4m4yhge2zekdmq1h7jjtg",
@@ -722,54 +722,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "9",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "7jmn1b8xv75554dmmgoc9mdck",
@@ -790,54 +790,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "10",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "7nzu7j1c3kifpvs6qb9t7rd3o",
@@ -858,54 +858,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Genoa",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "11",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "7pj0r9gg3y38td7qaeu7sha8k",
@@ -926,54 +926,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "12",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "7tihhdch6myqobao6oexk4gt0",
@@ -994,54 +994,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Cagliari",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "13",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "7v1indse0cqvt4pdx8grfe3v8",
@@ -1062,54 +1062,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "14",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "7zybf5vl8yomk7txslcpj14wk",
@@ -1130,54 +1130,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Napoli",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "15",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "83blnykt9oid8ui4h903drac4",
@@ -1198,54 +1198,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "16",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "85sx8dq3k4h8e3dhyhuo2qplg",
@@ -1266,54 +1266,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Monza",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "17",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "88vkxk6wmq3r6xv3z74skbllg",
@@ -1334,54 +1334,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "18",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "8c9krcs9lgtwhau1pvz2dzndg",
@@ -1402,54 +1402,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Roma",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "19",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "8fmmh6nqrywme0ydkzkn2oz6c",
@@ -1470,54 +1470,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "20",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "8i2ol46dfvogv79kzyu3rpzbo",
@@ -1538,54 +1538,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Frosinone",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "21",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "8kjqhip8yvd1s1tp1h8gwrllg",
@@ -1606,54 +1606,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "22",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "8nx9tzbb2aozyzlgk00r8213o",
@@ -1674,54 +1674,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Bologna",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "23",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "8q33qhkqngbksvl7yuln25kpg",
@@ -1742,54 +1742,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Inter",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "24",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "8u34vl6r8zfoy3cm4yirqbxuc",
@@ -1810,54 +1810,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "25",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "8xr4v2wgmdr177o4kn61pmvis",
@@ -1878,54 +1878,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Como",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "26",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "8zlmt4ij147qlhykidou4a8lw",
@@ -1946,54 +1946,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "27",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "93ofpwokl3gdah32k5lcyfndg",
@@ -2014,54 +2014,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "28",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "971tynwtma3jwvuq6irikhixg",
@@ -2082,54 +2082,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Atalanta",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "29",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "989tmsrmpzklodvb52nir8vtg",
@@ -2150,54 +2150,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "30",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "9cvltadi18mbojw1e0wyqdjis",
@@ -2218,54 +2218,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Fiorentina",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "31",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "9f108nhms4wqm3fwa2ikf9p1w",
@@ -2286,54 +2286,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "32",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "9ipuh3ce6xz7t92yu548ppvro",
@@ -2354,54 +2354,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Lecce",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "33",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "9med0mcgyk6oddw6g3gmf4wt0",
@@ -2422,54 +2422,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "34",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "9ovazsx2t5nadpy8fqdsu2bro",
@@ -2490,54 +2490,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Parma",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "35",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "9sksxbgb6oz4van4j4xge54wk",
@@ -2558,54 +2558,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "36",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "9vnwi31qnzi7gc5q2vo3nwhzo",
@@ -2626,54 +2626,54 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Venezia",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "37",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "9zo5n6x16vau8i7sjxlw1js44",
@@ -2694,54 +2694,54 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-25T03:27:42Z",
+      "last_modified": "2026-08-28T21:56:33Z",
       "location": "",
       "neutral": false,
       "round": "38",
-      "sequence": 3,
+      "sequence": 4,
       "serie_a_standing": {
         "context": [
           {
-            "played": 1,
-            "points": 3,
-            "position": 3,
-            "team": "Lecce"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 4,
-            "team": "Napoli"
-          },
-          {
-            "played": 1,
-            "points": 3,
-            "position": 5,
+            "played": 2,
+            "points": 6,
+            "position": 1,
             "team": "Milan"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 6,
-            "team": "Atalanta"
+            "position": 2,
+            "team": "AS Roma"
           },
           {
             "played": 1,
             "points": 3,
-            "position": 7,
-            "team": "Cagliari"
+            "position": 3,
+            "team": "Inter Milan"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 4,
+            "team": "Lecce"
+          },
+          {
+            "played": 1,
+            "points": 3,
+            "position": 5,
+            "team": "Napoli"
           }
         ],
         "draws": 0,
-        "goal_difference": 1,
+        "goal_difference": 3,
         "losses": 0,
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "source": "ESPN",
         "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-        "updated_at": "2026-08-25T03:27:42Z",
-        "wins": 1
+        "updated_at": "2026-08-28T21:56:33Z",
+        "wins": 2
       },
       "source": "AC Milan",
       "source_id": "a1tqbo871vlir9hju96tuxams",
@@ -2755,51 +2755,51 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-28T11:19:50Z",
+  "last_changed": "2026-08-28T21:56:33Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
       {
-        "played": 1,
-        "points": 3,
-        "position": 3,
-        "team": "Lecce"
-      },
-      {
-        "played": 1,
-        "points": 3,
-        "position": 4,
-        "team": "Napoli"
-      },
-      {
-        "played": 1,
-        "points": 3,
-        "position": 5,
+        "played": 2,
+        "points": 6,
+        "position": 1,
         "team": "Milan"
       },
       {
         "played": 1,
         "points": 3,
-        "position": 6,
-        "team": "Atalanta"
+        "position": 2,
+        "team": "AS Roma"
       },
       {
         "played": 1,
         "points": 3,
-        "position": 7,
-        "team": "Cagliari"
+        "position": 3,
+        "team": "Inter Milan"
+      },
+      {
+        "played": 1,
+        "points": 3,
+        "position": 4,
+        "team": "Lecce"
+      },
+      {
+        "played": 1,
+        "points": 3,
+        "position": 5,
+        "team": "Napoli"
       }
     ],
     "draws": 0,
-    "goal_difference": 1,
+    "goal_difference": 3,
     "losses": 0,
-    "played": 1,
-    "points": 3,
-    "position": 5,
+    "played": 2,
+    "points": 6,
+    "position": 1,
     "source": "ESPN",
     "source_url": "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season=2026",
-    "updated_at": "2026-08-25T03:27:42Z",
-    "wins": 1
+    "updated_at": "2026-08-28T21:56:33Z",
+    "wins": 2
   },
   "source_errors": [
     "AC Milan: nessun orario esplicito per il Milan",
