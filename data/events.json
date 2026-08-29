@@ -314,11 +314,11 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Juventus",
-      "last_modified": "2026-08-28T21:56:33Z",
-      "location": "",
+      "last_modified": "2026-08-29T00:25:46Z",
+      "location": "Italy",
       "neutral": false,
       "round": "3",
-      "sequence": 5,
+      "sequence": 6,
       "serie_a_standing": {
         "context": [
           {
@@ -2755,7 +2755,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-28T21:56:33Z",
+  "last_changed": "2026-08-29T00:25:46Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
