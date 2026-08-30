@@ -142,17 +142,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Torino - Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:c4a8dca2f7da4ac306231f60@milan-calendar
-SEQUENCE:9
+SEQUENCE:10
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 23/08/
  2026 20:45\nTurno: 1\nStadio: Stadio Olimpico Grande Torino\nLocalità: To
  rino\nDove vederla in Italia: DAZN\nFonte orario: AC Milan\nClassifica Ser
- ie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\n  
- 3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nClassi
- fica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ ie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt\n 
+  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\nCl
+ assifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio Olimpico Grande Torino\, Torino
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -188,17 +188,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Venezia
 DTSTART;TZID=Europe/Rome:20260828T204500
 DTEND;TZID=Europe/Rome:20260828T224500
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:c842b581e5d1cee0db8d5794@milan-calendar
-SEQUENCE:6
+SEQUENCE:7
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 28/08/2026 
  20:45\nTurno: 2\nStadio: Stadio San Siro\nLocalità: Milano\nDove vederla 
  in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A:\n▶ 1. Milan
-  — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\n  3. Inter Milan — 
- 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nClassifica aggiornata: 28
- /08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+  — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt\n  3. Udinese — 4 p
+ t\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\nClassifica aggiornata
+ : 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro\, Milano
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -212,17 +212,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Juventus - Milan
 DTSTART;TZID=Europe/Rome:20260906T204500
 DTEND;TZID=Europe/Rome:20260906T224500
-DTSTAMP:20260829T002546Z
+DTSTAMP:20260830T002536Z
 UID:f6a0e961c790cc99304f973a@milan-calendar
-SEQUENCE:6
+SEQUENCE:7
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 06/09/
  2026 20:45\nTurno: 3\nStadio: Allianz Stadium\nLocalità: Italy\nDove vede
  rla in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A:\n▶ 1. M
- ilan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\n  3. Inter Milan 
- — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nClassifica aggiornata
- : 28/08/2026 23:56
-LAST-MODIFIED:20260829T002546Z
+ ilan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt\n  3. Udinese —
+  4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\nClassifica aggior
+ nata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Allianz Stadium\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -234,18 +234,19 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:⚽ Lazio - Milan
-DTSTART;VALUE=DATE:20260913
-DTEND;VALUE=DATE:20260914
-DTSTAMP:20260828T215633Z
+DTSTART;TZID=Europe/Rome:20260912T180000
+DTEND;TZID=Europe/Rome:20260912T200000
+DTSTAMP:20260830T002536Z
 UID:9bd99a4e5de2da2051ebcc15@milan-calendar
-SEQUENCE:6
+SEQUENCE:7
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
- \nTurno: 4\nStadio: Stadio Olimpico\nDove vederla in Italia: DAZN\nClassif
- ica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3
-  pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\
- nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 12/09/
+ 2026 18:00\nTurno: 4\nStadio: Stadio Olimpico\nDove vederla in Italia: DAZ
+ N\nFonte orario: AC Milan\nClassifica Serie A:\n▶ 1. Milan — 6 pt — 
+ 2 PG — DR +3\n  2. Juventus — 6 pt\n  3. Udinese — 4 pt\n  4. AS Rom
+ a — 3 pt\n  5. Inter Milan — 3 pt\nClassifica aggiornata: 30/08/2026 0
+ 2:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio Olimpico
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -259,16 +260,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Lecce
 DTSTART;TZID=Europe/Rome:20260920T204500
 DTEND;TZID=Europe/Rome:20260920T224500
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:72ccbea5301e86dea083451c@milan-calendar
-SEQUENCE:5
+SEQUENCE:6
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 20/09/2026 
  20:45\nTurno: 5\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nFo
  nte orario: AC Milan\nClassifica Serie A:\n▶ 1. Milan — 6 pt — 2 PG 
- — DR +3\n  2. AS Roma — 3 pt\n  3. Inter Milan — 3 pt\n  4. Lecce 
- — 3 pt\n  5. Napoli — 3 pt\nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ — DR +3\n  2. Juventus — 6 pt\n  3. Udinese — 4 pt\n  4. AS Roma —
+  3 pt\n  5. Inter Milan — 3 pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -282,16 +283,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Sassuolo - Milan
 DTSTART;VALUE=DATE:20261011
 DTEND;VALUE=DATE:20261012
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:efe8aeb093e233c7fe578a0b@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 6\nStadio: MAPEI Stadium\nDove vederla in Italia: DAZN\nClassific
- a Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 p
- t\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nC
- lassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ a Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 
+ pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 p
+ t\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:MAPEI Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -305,16 +306,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Atalanta
 DTSTART;VALUE=DATE:20261018
 DTEND;VALUE=DATE:20261019
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:f4cca29e5c6dd6bae4edb995@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 7\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica S
- erie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\n
-   3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nClas
- sifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ erie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt\
+ n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\n
+ Classifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -328,16 +329,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Udinese - Milan
 DTSTART;VALUE=DATE:20261025
 DTEND;VALUE=DATE:20261026
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:ed011e560d0939fa19ee726a@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 8\nStadio: Bluenergy Stadium\nDove vederla in Italia: DAZN\nClass
- ifica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma —
-  3 pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 p
- t\nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ ifica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus 
+ — 6 pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan 
+ — 3 pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Bluenergy Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -351,16 +352,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Bologna
 DTSTART;VALUE=DATE:20261028
 DTEND;VALUE=DATE:20261029
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:14204818a1863bef3d12592f@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 9\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica S
- erie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\n
-   3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nClas
- sifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ erie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt\
+ n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\n
+ Classifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -374,16 +375,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Inter
 DTSTART;VALUE=DATE:20261101
 DTEND;VALUE=DATE:20261102
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:8131b669c6acbfebbf8a5c63@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 10\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -397,16 +398,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Genoa - Milan
 DTSTART;VALUE=DATE:20261108
 DTEND;VALUE=DATE:20261109
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:4bcf433e05672498eda803a5@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 11\nStadio: Stadio Ferraris\nDove vederla in Italia: DAZN\nClassi
- fica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 
- 3 pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt
- \nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ fica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus —
+  6 pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 
+ 3 pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio Ferraris
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -420,16 +421,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Frosinone
 DTSTART;VALUE=DATE:20261122
 DTEND;VALUE=DATE:20261123
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:e0c247e803a33255e6ebefa8@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 12\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -443,16 +444,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Cagliari - Milan
 DTSTART;VALUE=DATE:20261129
 DTEND;VALUE=DATE:20261130
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:dbfe00a983f6937f6ba0d38d@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 13\nStadio: Unipol Domus\nDove vederla in Italia: DAZN\nClassific
- a Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 p
- t\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nC
- lassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ a Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 
+ pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 p
+ t\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Unipol Domus
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -466,16 +467,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Parma
 DTSTART;VALUE=DATE:20261206
 DTEND;VALUE=DATE:20261207
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:cbf473fd1fec79742484d004@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 14\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -489,16 +490,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Napoli - Milan
 DTSTART;VALUE=DATE:20261213
 DTEND;VALUE=DATE:20261214
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:002c1aed5d53467e55fbd053@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 15\nStadio: Stadio Maradona\nDove vederla in Italia: DAZN\nClassi
- fica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 
- 3 pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt
- \nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ fica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus —
+  6 pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 
+ 3 pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio Maradona
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -512,16 +513,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Como
 DTSTART;VALUE=DATE:20261220
 DTEND;VALUE=DATE:20261221
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:abbc5591ee1fa9281de25865@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 16\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -535,16 +536,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Monza - Milan
 DTSTART;VALUE=DATE:20270103
 DTEND;VALUE=DATE:20270104
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:7fbe5f237ff0027359e82bec@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 17\nStadio: U-Power Stadium\nDove vederla in Italia: DAZN\nClassi
- fica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 
- 3 pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt
- \nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ fica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus —
+  6 pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 
+ 3 pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:U-Power Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -558,16 +559,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Fiorentina
 DTSTART;VALUE=DATE:20270106
 DTEND;VALUE=DATE:20270107
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:7605afb902d86c5a1bbd49f7@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 18\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -581,16 +582,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Roma - Milan
 DTSTART;VALUE=DATE:20270110
 DTEND;VALUE=DATE:20270111
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:e3bd372f1347ed9ba3c39045@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 19\nStadio: Stadio Olimpico\nDove vederla in Italia: DAZN\nClassi
- fica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 
- 3 pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt
- \nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ fica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus —
+  6 pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 
+ 3 pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio Olimpico
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -604,16 +605,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Torino
 DTSTART;VALUE=DATE:20270117
 DTEND;VALUE=DATE:20270118
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:53ab99ccd879619beefb1915@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 20\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -627,16 +628,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Frosinone - Milan
 DTSTART;VALUE=DATE:20270124
 DTEND;VALUE=DATE:20270125
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:799e525a74ac3b9c8ff6a400@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 21\nStadio: Stadio Stirpe\nDove vederla in Italia: DAZN\nClassifi
- ca Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 
- pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\n
- Classifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ ca Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6
+  pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 
+ pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio Stirpe
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -650,16 +651,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Juventus
 DTSTART;VALUE=DATE:20270131
 DTEND;VALUE=DATE:20270201
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:7901b36118e346044724f817@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 22\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -673,16 +674,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Bologna - Milan
 DTSTART;VALUE=DATE:20270207
 DTEND;VALUE=DATE:20270208
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:078423a9e403304bd012c980@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 23\nStadio: Stadio Dall'Ara\nDove vederla in Italia: DAZN\nClassi
- fica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 
- 3 pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt
- \nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ fica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus —
+  6 pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 
+ 3 pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio Dall'Ara
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -696,16 +697,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Inter - Milan
 DTSTART;VALUE=DATE:20270214
 DTEND;VALUE=DATE:20270215
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:ec72bb4d3a2195363bd8dac5@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 24\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassi
- fica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 
- 3 pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt
- \nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ fica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus —
+  6 pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 
+ 3 pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -719,16 +720,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Genoa
 DTSTART;VALUE=DATE:20270221
 DTEND;VALUE=DATE:20270222
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:affce368e5e16fe9cad76b67@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 25\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -742,16 +743,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Como - Milan
 DTSTART;VALUE=DATE:20270228
 DTEND;VALUE=DATE:20270301
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:2460ccfbf6f8b6e6dfa8e02c@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 26\nStadio: Stadio Sinigaglia\nDove vederla in Italia: DAZN\nClas
- sifica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma 
- — 3 pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 
- 3 pt\nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ sifica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus 
+ — 6 pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan 
+ — 3 pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio Sinigaglia
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -765,16 +766,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Cagliari
 DTSTART;VALUE=DATE:20270307
 DTEND;VALUE=DATE:20270308
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:5bccac0865eda578a3694c96@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 27\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -788,16 +789,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Sassuolo
 DTSTART;VALUE=DATE:20270314
 DTEND;VALUE=DATE:20270315
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:729b58c1acba42008b12e293@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 28\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -811,16 +812,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Atalanta - Milan
 DTSTART;VALUE=DATE:20270321
 DTEND;VALUE=DATE:20270322
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:47745a86a738242f9f79287a@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 29\nStadio: New Balance Arena\nDove vederla in Italia: DAZN\nClas
- sifica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma 
- — 3 pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 
- 3 pt\nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ sifica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus 
+ — 6 pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan 
+ — 3 pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:New Balance Arena
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -834,16 +835,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Monza
 DTSTART;VALUE=DATE:20270404
 DTEND;VALUE=DATE:20270405
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:6e93cc177ecd88e5a3f47842@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 30\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -857,16 +858,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Fiorentina - Milan
 DTSTART;VALUE=DATE:20270411
 DTEND;VALUE=DATE:20270412
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:7dc1f2e91dad27a407b1183c@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 31\nStadio: Stadio Franchi\nDove vederla in Italia: DAZN\nClassif
- ica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3
-  pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\
- nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ ica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 
+ 6 pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3
+  pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio Franchi
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -880,16 +881,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Napoli
 DTSTART;VALUE=DATE:20270418
 DTEND;VALUE=DATE:20270419
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:b0b78c78ecdf7b76c14688a1@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 32\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -903,16 +904,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Lecce - Milan
 DTSTART;VALUE=DATE:20270425
 DTEND;VALUE=DATE:20270426
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:2ca518619efdf946e1d6159f@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 33\nStadio: Stadio Via del Mare\nDove vederla in Italia: DAZN\nCl
- assifica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma 
- — 3 pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 
- 3 pt\nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ assifica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus
+  — 6 pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan 
+ — 3 pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio Via del Mare
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -926,16 +927,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Lazio
 DTSTART;VALUE=DATE:20270502
 DTEND;VALUE=DATE:20270503
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:751ea659a0aec85f094d69ba@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 34\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -949,16 +950,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Parma - Milan
 DTSTART;VALUE=DATE:20270509
 DTEND;VALUE=DATE:20270510
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:1c3db48a8653c5ab1ef24294@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 35\nStadio: Stadio Tardini\nDove vederla in Italia: DAZN\nClassif
- ica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3
-  pt\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\
- nClassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ ica Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 
+ 6 pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3
+  pt\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio Tardini
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -972,16 +973,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Roma
 DTSTART;VALUE=DATE:20270516
 DTEND;VALUE=DATE:20270517
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:6cada07d7a55db21550f2dd1@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 36\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -995,16 +996,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Venezia - Milan
 DTSTART;VALUE=DATE:20270523
 DTEND;VALUE=DATE:20270524
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:38b49ac97ab9b5a36cc0e8f0@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 37\nStadio: Stadio Penzo\nDove vederla in Italia: DAZN\nClassific
- a Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 p
- t\n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nC
- lassifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ a Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 
+ pt\n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 p
+ t\nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio Penzo
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -1018,16 +1019,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Udinese
 DTSTART;VALUE=DATE:20270530
 DTEND;VALUE=DATE:20270531
-DTSTAMP:20260828T215633Z
+DTSTAMP:20260830T002536Z
 UID:0eede0800f2c0314cd7442e1@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 38\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nClassifica 
- Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. AS Roma — 3 pt\
- n  3. Inter Milan — 3 pt\n  4. Lecce — 3 pt\n  5. Napoli — 3 pt\nCla
- ssifica aggiornata: 28/08/2026 23:56
-LAST-MODIFIED:20260828T215633Z
+ Serie A:\n▶ 1. Milan — 6 pt — 2 PG — DR +3\n  2. Juventus — 6 pt
+ \n  3. Udinese — 4 pt\n  4. AS Roma — 3 pt\n  5. Inter Milan — 3 pt\
+ nClassifica aggiornata: 30/08/2026 02:25
+LAST-MODIFIED:20260830T002536Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
