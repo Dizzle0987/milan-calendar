@@ -210,18 +210,19 @@ BEGIN:VEVENT
 SUMMARY:⚽ Juventus - Milan
 DTSTART;TZID=Europe/Rome:20260906T204500
 DTEND;TZID=Europe/Rome:20260906T224500
-DTSTAMP:20260831T154540Z
+DTSTAMP:20260831T161609Z
 UID:f6a0e961c790cc99304f973a@milan-calendar
-SEQUENCE:12
+SEQUENCE:13
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 06/09/
- 2026 20:45\nTurno: 3\nStadio: Allianz Stadium\nDove vederla in Italia: DAZ
- N\nFonte orario: AC Milan\nClassifica Serie A provvisoria — giornata in 
- corso:\n  1. Inter — 6 pt\n▶ 2. Milan — 6 pt — 2 PG — DR +3\n  3
- . Juventus — 6 pt\n  4. Lazio — 6 pt\n  5. Udinese — 4 pt\nClassific
- a aggiornata: 31/08/2026 16:10\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20260831T154540Z
-LOCATION:Allianz Stadium
+ 2026 20:45\nTurno: 3\nStadio: Allianz Stadium\nLocalità: Italy\nDove vede
+ rla in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provvisori
+ a — giornata in corso:\n  1. Inter — 6 pt\n▶ 2. Milan — 6 pt — 2
+  PG — DR +3\n  3. Juventus — 6 pt\n  4. Lazio — 6 pt\n  5. Udinese 
+ — 4 pt\nClassifica aggiornata: 31/08/2026 16:10\nFonte classifica: Lega 
+ Serie A
+LAST-MODIFIED:20260831T161609Z
+LOCATION:Allianz Stadium\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM

@@ -272,11 +272,11 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Juventus",
-      "last_modified": "2026-08-31T15:45:40Z",
-      "location": "",
+      "last_modified": "2026-08-31T16:16:09Z",
+      "location": "Italy",
       "neutral": false,
       "round": "3",
-      "sequence": 12,
+      "sequence": 13,
       "serie_a_standing": {
         "context": [
           {
@@ -1367,7 +1367,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-31T15:45:40Z",
+  "last_changed": "2026-08-31T16:16:09Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -1416,7 +1416,6 @@
     "wins": 2
   },
   "source_errors": [
-    "TheSportsDB: 522 Server Error: <none> for url: https://www.thesportsdb.com/api/v1/json/123/eventsnext.php?id=133667",
     "AC Milan: nessun orario esplicito per il Milan",
     "Gazzetta dello Sport: 404 Client Error: Not Found for url: https://www.gazzetta.it/Calcio/Serie-A/Milan/",
     "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
@@ -1431,6 +1430,7 @@
     "ESPN classifica",
     "Lega Serie A classifica",
     "ESPN recuperi Serie A",
+    "TheSportsDB",
     "UEFA sorteggi"
   ],
   "timezone": "Europe/Rome"
