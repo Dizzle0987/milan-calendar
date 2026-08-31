@@ -43,6 +43,10 @@ ESPN_URL = (
 ESPN_STANDINGS_URL = (
     "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season={season}"
 )
+ESPN_SERIE_A_SCOREBOARD_URL = (
+    "https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard"
+    "?dates={start_date}-{end_date}&limit=1000"
+)
 LEGA_STANDINGS_PAGE_URL = "https://www.legaseriea.it/serie-a/classifica"
 LEGA_SDP_BASE_URL = "https://api-sdp.legaseriea.it/v1/serie-a/football"
 LEGA_SERIE_A_COMPETITION_ID = (
@@ -491,6 +495,45 @@ def parse_lega_standings_json(payload: dict[str, Any]) -> dict[str, Any] | None:
     result["source"] = "Lega Serie A"
     result["source_url"] = LEGA_STANDINGS_PAGE_URL
     return result
+
+
+def parse_espn_pending_recoveries_json(payload: dict[str, Any]) -> list[str]:
+    """Return postponed or suspended Serie A fixtures still awaiting completion."""
+    recoveries: list[str] = []
+    for event in payload.get("events") or []:
+        status = (event.get("status") or {}).get("type") or {}
+        normalized_status = _normalize(
+            " ".join(
+                str(status.get(key) or "")
+                for key in ("name", "description", "detail", "shortDetail")
+            )
+        )
+        if not any(
+            marker in normalized_status
+            for marker in ("postponed", "suspended", "abandoned", "rinviat", "sospes")
+        ):
+            continue
+        competitions = event.get("competitions") or []
+        competitors = (competitions[0].get("competitors") or []) if competitions else []
+        names: dict[str, str] = {}
+        for competitor in competitors:
+            team = competitor.get("team") or {}
+            name = str(
+                team.get("shortDisplayName")
+                or team.get("displayName")
+                or team.get("name")
+                or ""
+            ).strip()
+            if name:
+                names[str(competitor.get("homeAway") or "")] = (
+                    "Milan" if _is_milan(name) else name
+                )
+        home, away = names.get("home"), names.get("away")
+        if home and away:
+            title = f"{home}–{away}"
+            if title not in recoveries:
+                recoveries.append(title)
+    return recoveries
 
 
 def parse_uefa_draw_html(
@@ -949,6 +992,21 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
         errors.append(f"Lega Serie A classifica: {exc}")
         LOGGER.info("Classifica ufficiale Lega Serie A non disponibile: %s", exc)
 
+    if serie_a_standing and serie_a_standing.get("provisional") is True:
+        scoreboard_url = ESPN_SERIE_A_SCOREBOARD_URL.format(
+            start_date=f"{start_year}0801", end_date=f"{start_year + 1}0630"
+        )
+        try:
+            response = session.get(scoreboard_url, timeout=20)
+            response.raise_for_status()
+            serie_a_standing["pending_recoveries"] = parse_espn_pending_recoveries_json(
+                response.json()
+            )
+            successful.append("ESPN recuperi Serie A")
+        except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
+            errors.append(f"ESPN recuperi Serie A: {exc}")
+            LOGGER.info("Recuperi Serie A ESPN non disponibili: %s", exc)
+
     try:
         response = session.get(THESPORTSDB_URL, timeout=20)
         response.raise_for_status()
@@ -1018,6 +1076,25 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
     except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
         errors.append(f"Lega calendario: {exc}")
         LOGGER.info("Fonte calendario Lega Serie A non disponibile: %s", exc)
+
+    if (
+        serie_a_standing
+        and serie_a_standing.get("provisional") is True
+        and "pending_recoveries" not in serie_a_standing
+    ):
+        fallback_recoveries: list[str] = []
+        for event in events:
+            if (
+                _competition_family(str(event.get("competition") or "")) == "serie-a"
+                and _is_postponed(event)
+            ):
+                home = str(event.get("home_team") or "").strip()
+                away = str(event.get("away_team") or "").strip()
+                if home and away:
+                    title = f"{home}–{away}"
+                    if title not in fallback_recoveries:
+                        fallback_recoveries.append(title)
+        serie_a_standing["pending_recoveries"] = fallback_recoveries
 
     return FetchResult(
         events=events,
@@ -1631,7 +1708,20 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
             context = standing.get("context") or []
             if context:
                 if standing.get("provisional") is True:
-                    details.append("Classifica Serie A provvisoria — giornata in corso:")
+                    pending_recoveries = standing.get("pending_recoveries") or []
+                    if len(pending_recoveries) == 1:
+                        details.append(
+                            "Classifica Serie A provvisoria — recupero "
+                            f"{pending_recoveries[0]} ancora da disputare:"
+                        )
+                    elif pending_recoveries:
+                        details.append(
+                            "Classifica Serie A provvisoria — recuperi "
+                            f"{', '.join(str(item) for item in pending_recoveries)} "
+                            "ancora da disputare:"
+                        )
+                    else:
+                        details.append("Classifica Serie A provvisoria — giornata in corso:")
                 elif standing.get("provisional") is False:
                     details.append("Classifica Serie A aggiornata — giornata completata:")
                 else:
