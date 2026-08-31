@@ -20,6 +20,7 @@ from milan_calendar.generator import (
     merge_remote_events,
     parse_espn_json,
     parse_espn_standings_json,
+    parse_lega_standings_json,
     parse_uefa_draw_html,
     parse_lega_calendar_article,
     parse_schedule_html,
@@ -252,6 +253,43 @@ def test_parse_espn_standings_json_extracts_milan_row() -> None:
         ],
         "source": "ESPN",
     }
+
+
+def test_parse_official_lega_standings_json_extracts_milan_window() -> None:
+    def team(name: str, rank: int, points: int) -> dict:
+        return {
+            "shortName": name,
+            "officialName": "AC Milan" if name == "Milan" else name,
+            "stats": [
+                {"statsId": "rank", "statsValue": rank},
+                {"statsId": "points", "statsValue": points},
+                {"statsId": "matches-played", "statsValue": 10},
+                {"statsId": "win", "statsValue": 5},
+                {"statsId": "draw", "statsValue": 3},
+                {"statsId": "lose", "statsValue": 2},
+                {"statsId": "goal-difference", "statsValue": 7},
+            ],
+        }
+
+    payload = {
+        "standings": [{
+            "teams": [
+                team("Inter", 2, 21), team("Juventus", 3, 19),
+                team("Milan", 4, 18), team("Roma", 5, 17),
+                team("Napoli", 6, 16),
+            ]
+        }]
+    }
+
+    standing = parse_lega_standings_json(payload)
+
+    assert standing is not None
+    assert standing["position"] == 4
+    assert standing["goal_difference"] == 7
+    assert standing["source"] == "Lega Serie A"
+    assert [row["team"] for row in standing["context"]] == [
+        "Inter", "Juventus", "Milan", "Roma", "Napoli"
+    ]
 
 
 def test_parse_thesportsdb_json_finds_friendlies() -> None:
@@ -747,6 +785,43 @@ def test_ical_timezone_fields_and_alarm() -> None:
     assert parsed.decoded("url") == "https://example.com/match"
     assert parsed.decoded("sequence") == 3
     assert b"X-WR-TIMEZONE:Europe/Rome" in payload
+
+
+def test_standing_is_attached_only_to_next_serie_a_match(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    (tmp_path / "data").mkdir()
+    (tmp_path / "data" / "manual_events.json").write_text(
+        '{"events": []}\n', encoding="utf-8"
+    )
+    first, second = parse_official_html(
+        official_html([
+            official_match(providerId="next", datetime="2026-09-12T18:45:00Z"),
+            official_match(
+                providerId="later",
+                datetime="2026-09-20T18:45:00Z",
+                homeTeam={"name": "Napoli"},
+                awayTeam={"name": "Milan"},
+            ),
+        ]),
+        "https://www.acmilan.com/schedule",
+    )
+    standing = {
+        "position": 4, "points": 4, "played": 2, "goal_difference": 1,
+        "source": "Lega Serie A",
+        "context": [{"team": "Milan", "position": 4, "points": 4, "played": 2}],
+    }
+    monkeypatch.setattr(
+        "milan_calendar.generator.fetch_remote_events",
+        lambda session, today: FetchResult(
+            [first, second], ["AC Milan"], [], serie_a_standing=standing
+        ),
+    )
+
+    events = update_calendar(tmp_path, session=object(), today=date(2026, 8, 1))
+
+    assert events[0]["serie_a_standing"]["source"] == "Lega Serie A"
+    assert "serie_a_standing" not in events[1]
 
 
 def test_manual_event_overrides_remote(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
