@@ -422,6 +422,7 @@ def parse_espn_standings_json(payload: dict[str, Any]) -> dict[str, Any] | None:
         for row in rows[window_start : window_start + 5]
     ]
     result.pop("team", None)
+    result["provisional"] = len({int(row["played"]) for row in rows}) > 1
     result["source"] = "ESPN"
     return result
 
@@ -486,6 +487,7 @@ def parse_lega_standings_json(payload: dict[str, Any]) -> dict[str, Any] | None:
         for row in rows[window_start : window_start + 5]
     ]
     result.pop("team", None)
+    result["provisional"] = len({int(row["played"]) for row in rows}) > 1
     result["source"] = "Lega Serie A"
     result["source_url"] = LEGA_STANDINGS_PAGE_URL
     return result
@@ -1628,7 +1630,12 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
             )
             context = standing.get("context") or []
             if context:
-                details.append("Classifica Serie A:")
+                if standing.get("provisional") is True:
+                    details.append("Classifica Serie A provvisoria — giornata in corso:")
+                elif standing.get("provisional") is False:
+                    details.append("Classifica Serie A aggiornata — giornata completata:")
+                else:
+                    details.append("Classifica Serie A:")
                 for row in context:
                     is_milan_row = _is_milan(str(row.get("team") or ""))
                     marker = "▶" if is_milan_row else " "
@@ -1770,13 +1777,31 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
             and previous_standing.get("updated_at")
             else changed_at
         )
+    serie_a_matches = [
+        event
+        for event in combined
+        if str(event.get("event_kind") or "match") == "match"
+        and _competition_family(str(event.get("competition") or "")) == "serie-a"
+    ]
+    matches_today = [
+        event for event in serie_a_matches if _event_datetime(event).date() == reference_today
+    ]
+    current_or_previous_serie_a_match = (
+        matches_today[-1]
+        if matches_today
+        else next(
+            (
+                event
+                for event in reversed(serie_a_matches)
+                if _event_datetime(event).date() < reference_today
+            ),
+            None,
+        )
+    )
     next_serie_a_match = next(
         (
-            event
-            for event in combined
-            if str(event.get("event_kind") or "match") == "match"
-            and _competition_family(str(event.get("competition") or "")) == "serie-a"
-            and _event_datetime(event).date() >= reference_today
+            event for event in serie_a_matches
+            if _event_datetime(event).date() > reference_today
             and _normalize(str(event.get("status") or ""))
             not in {"played", "final", "full-time", "ft", "completed", "status-final"}
         ),
@@ -1786,7 +1811,7 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     used_uids: set[str] = set()
     for event in combined:
         if (
-            event is next_serie_a_match
+            (event is current_or_previous_serie_a_match or event is next_serie_a_match)
             and standing_with_timestamp
         ):
             event = deepcopy(event)
