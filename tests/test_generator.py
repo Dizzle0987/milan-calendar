@@ -19,6 +19,7 @@ from milan_calendar.generator import (
     merge_calendar_events,
     merge_remote_events,
     parse_espn_json,
+    parse_espn_pending_recoveries_json,
     parse_espn_standings_json,
     parse_lega_standings_json,
     parse_uefa_draw_html,
@@ -292,6 +293,28 @@ def test_parse_official_lega_standings_json_extracts_milan_window() -> None:
     assert [row["team"] for row in standing["context"]] == [
         "Inter", "Juventus", "Milan", "Roma", "Napoli"
     ]
+
+
+def test_parse_espn_pending_recoveries_json_names_postponed_matches() -> None:
+    def event(home: str, away: str, status: str) -> dict:
+        return {
+            "status": {"type": {"name": status}},
+            "competitions": [{
+                "competitors": [
+                    {"homeAway": "home", "team": {"displayName": home}},
+                    {"homeAway": "away", "team": {"displayName": away}},
+                ]
+            }],
+        }
+
+    recoveries = parse_espn_pending_recoveries_json({
+        "events": [
+            event("SS Lazio", "AC Milan", "STATUS_POSTPONED"),
+            event("Roma", "Inter", "STATUS_SCHEDULED"),
+        ]
+    })
+
+    assert recoveries == ["SS Lazio–Milan"]
 
 
 def test_parse_thesportsdb_json_finds_friendlies() -> None:
@@ -759,6 +782,7 @@ def test_ical_timezone_fields_and_alarm() -> None:
             "played": 10,
             "goal_difference": 7,
             "provisional": True,
+            "pending_recoveries": ["Lazio–Milan"],
             "updated_at": "2026-08-24T10:00:00Z",
             "context": [
                 {"team": "Inter", "position": 2, "points": 21, "played": 10},
@@ -780,7 +804,10 @@ def test_ical_timezone_fields_and_alarm() -> None:
     description = parsed.decoded("description").decode()
     assert "Orario (Roma): 12/09/2026 20:45" in description
     assert "Dove vederla in Italia: DAZN" in description
-    assert "Classifica Serie A provvisoria — giornata in corso:" in description
+    assert (
+        "Classifica Serie A provvisoria — recupero Lazio–Milan ancora da disputare:"
+        in description
+    )
     assert "  2. Inter — 21 pt" in description
     assert "▶ 4. Milan — 18 pt — 10 PG — DR +7" in description
     assert "  6. Napoli — 16 pt" in description
