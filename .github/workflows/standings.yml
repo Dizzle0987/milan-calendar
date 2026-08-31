@@ -1,0 +1,43 @@
+name: Refresh Serie A standings
+
+on:
+  schedule:
+    # Frequent checks around the usual Italian kick-off windows. The generator
+    # commits only when the official table actually changes.
+    - cron: "7,22,37,52 17-23 * * *"
+      timezone: "Europe/Rome"
+    - cron: "7,22,37,52 11-16 * * 6,0"
+      timezone: "Europe/Rome"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-calendar
+  cancel-in-progress: false
+
+jobs:
+  standings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Refresh official standings
+        run: python update_calendar.py
+      - name: Commit standings change
+        run: |
+          if git diff --quiet -- calendar.ics data/events.json; then
+            echo "Standings already up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add calendar.ics data/events.json
+          git commit -m "chore: refresh Serie A standings"
+          git push
