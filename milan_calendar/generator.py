@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterable
-from urllib.parse import urljoin
+from urllib.parse import quote, urljoin
 from zoneinfo import ZoneInfo
 
 import requests
@@ -42,6 +42,11 @@ ESPN_URL = (
 )
 ESPN_STANDINGS_URL = (
     "https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings?season={season}"
+)
+LEGA_STANDINGS_PAGE_URL = "https://www.legaseriea.it/serie-a/classifica"
+LEGA_SDP_BASE_URL = "https://api-sdp.legaseriea.it/v1/serie-a/football"
+LEGA_SERIE_A_COMPETITION_ID = (
+    "serie-a::Football_Competition::ec93b94f74294dc98ab5bcfd67fc0d88"
 )
 UEFA_DRAW_URLS = {
     "champions-league": (
@@ -418,6 +423,71 @@ def parse_espn_standings_json(payload: dict[str, Any]) -> dict[str, Any] | None:
     ]
     result.pop("team", None)
     result["source"] = "ESPN"
+    return result
+
+
+def parse_lega_standings_json(payload: dict[str, Any]) -> dict[str, Any] | None:
+    """Extract Milan and its neighbours from the official Lega Serie A SDP feed."""
+    tables = payload.get("standings") or []
+    teams = (tables[0].get("teams") or []) if tables else []
+    rows: list[dict[str, Any]] = []
+    milan_row: dict[str, Any] | None = None
+    for team in teams:
+        stats = {
+            str(item.get("statsId") or ""): item.get("statsValue")
+            for item in team.get("stats") or []
+        }
+
+        def number(name: str) -> int | None:
+            value = stats.get(name)
+            try:
+                return int(value) if value is not None else None
+            except (TypeError, ValueError):
+                return None
+
+        position = number("rank")
+        points = number("points")
+        played = number("matches-played")
+        name = str(
+            team.get("shortName")
+            or team.get("mediaName")
+            or team.get("officialName")
+            or ""
+        ).strip()
+        if not name or position is None or points is None or played is None:
+            continue
+        is_milan = _is_milan(name) or _normalize(str(team.get("officialName") or "")) == "ac-milan"
+        row = {
+            "team": "Milan" if is_milan else name,
+            "position": position,
+            "points": points,
+            "played": played,
+            "wins": number("win"),
+            "draws": number("draw"),
+            "losses": number("lose"),
+            "goal_difference": number("goal-difference"),
+        }
+        rows.append(row)
+        if is_milan:
+            milan_row = row
+    if not milan_row:
+        return None
+    rows.sort(key=lambda row: int(row["position"]))
+    milan_index = rows.index(milan_row)
+    window_start = max(0, min(milan_index - 2, len(rows) - 5))
+    result = deepcopy(milan_row)
+    result["context"] = [
+        {
+            "team": row["team"],
+            "position": row["position"],
+            "points": row["points"],
+            "played": row["played"],
+        }
+        for row in rows[window_start : window_start + 5]
+    ]
+    result.pop("team", None)
+    result["source"] = "Lega Serie A"
+    result["source_url"] = LEGA_STANDINGS_PAGE_URL
     return result
 
 
@@ -841,6 +911,41 @@ def fetch_remote_events(session: requests.Session, today: date) -> FetchResult:
     except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
         errors.append(f"ESPN classifica: {exc}")
         LOGGER.info("Classifica ESPN non disponibile: %s", exc)
+
+    # The public SDP feed powers the official Lega Serie A standings page.
+    # Prefer it when available; ESPN remains the fast fallback.
+    try:
+        seasons_url = (
+            f"{LEGA_SDP_BASE_URL}/competitions/"
+            f"{quote(LEGA_SERIE_A_COMPETITION_ID, safe='')}/seasons?locale=it-IT"
+        )
+        response = session.get(seasons_url, timeout=20)
+        response.raise_for_status()
+        season_name = f"{start_year}/{start_year + 1}"
+        season = next(
+            (
+                item
+                for item in response.json().get("seasons") or []
+                if str(item.get("seasonName") or "") == season_name
+            ),
+            None,
+        )
+        if not season or not season.get("seasonId"):
+            raise ValueError(f"stagione ufficiale {season_name} non trovata")
+        official_standings_url = (
+            f"{LEGA_SDP_BASE_URL}/seasons/"
+            f"{quote(str(season['seasonId']), safe='')}/standings/overall?locale=it-IT"
+        )
+        response = session.get(official_standings_url, timeout=20)
+        response.raise_for_status()
+        official_standing = parse_lega_standings_json(response.json())
+        if not official_standing:
+            raise ValueError("classifica Milan non presente nella risposta ufficiale")
+        serie_a_standing = official_standing
+        successful.append("Lega Serie A classifica")
+    except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"Lega Serie A classifica: {exc}")
+        LOGGER.info("Classifica ufficiale Lega Serie A non disponibile: %s", exc)
 
     try:
         response = session.get(THESPORTSDB_URL, timeout=20)
@@ -1545,6 +1650,8 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
                 details.append(
                     f"Classifica aggiornata: {updated.astimezone(ROME).strftime('%d/%m/%Y %H:%M')}"
                 )
+            if standing.get("source"):
+                details.append(f"Fonte classifica: {standing['source']}")
         component.add("description", "\n".join(details))
         component.add("categories", [str(data["competition"]), "AC Milan"])
         component.add("transp", "OPAQUE")
@@ -1593,7 +1700,8 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     now = datetime.now(timezone.utc).replace(microsecond=0)
     changed_at = now.isoformat().replace("+00:00", "Z")
 
-    fetched = fetch_remote_events(session or build_session(), today or datetime.now(ROME).date())
+    reference_today = today or datetime.now(ROME).date()
+    fetched = fetch_remote_events(session or build_session(), reference_today)
     discovery_sources = {"AC Milan", "ESPN", "TheSportsDB"}
     discovered_events = [event for event in fetched.events if not event.get("_time_overlay")]
     if not discovery_sources.intersection(fetched.successful_sources) or not discovered_events:
@@ -1662,13 +1770,23 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
             and previous_standing.get("updated_at")
             else changed_at
         )
+    next_serie_a_match = next(
+        (
+            event
+            for event in combined
+            if str(event.get("event_kind") or "match") == "match"
+            and _competition_family(str(event.get("competition") or "")) == "serie-a"
+            and _event_datetime(event).date() >= reference_today
+            and _normalize(str(event.get("status") or ""))
+            not in {"played", "final", "full-time", "ft", "completed", "status-final"}
+        ),
+        None,
+    )
     canonical: list[dict[str, Any]] = []
     used_uids: set[str] = set()
     for event in combined:
         if (
-            str(event.get("event_kind") or "match") == "match"
-            and
-            _competition_family(str(event.get("competition") or "")) == "serie-a"
+            event is next_serie_a_match
             and standing_with_timestamp
         ):
             event = deepcopy(event)
