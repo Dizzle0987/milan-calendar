@@ -202,35 +202,11 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-31T07:26:43Z",
+      "last_modified": "2026-08-31T07:35:06Z",
       "location": "Milano",
       "neutral": false,
       "round": "2",
-      "sequence": 9,
-      "source": "AC Milan",
-      "source_id": "6z047ttw57ehdkw9h2fy4jpxw",
-      "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
-      "start": "2026-08-28T20:45:00+02:00",
-      "status": "Played",
-      "time_source": "AC Milan",
-      "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
-      "title": "Milan - Venezia",
-      "uid": "c842b581e5d1cee0db8d5794@milan-calendar",
-      "venue": "Stadio San Siro"
-    },
-    {
-      "all_day": false,
-      "away_team": "Milan",
-      "broadcast_it": "DAZN",
-      "broadcast_source_url": "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
-      "competition": "Serie A",
-      "home_away": "Trasferta",
-      "home_team": "Juventus",
-      "last_modified": "2026-08-31T07:26:43Z",
-      "location": "Italy",
-      "neutral": false,
-      "round": "3",
-      "sequence": 9,
+      "sequence": 10,
       "serie_a_standing": {
         "context": [
           {
@@ -270,9 +246,79 @@
         "played": 2,
         "points": 6,
         "position": 2,
+        "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-08-31T07:26:43Z",
+        "updated_at": "2026-08-31T07:35:06Z",
+        "wins": 2
+      },
+      "source": "AC Milan",
+      "source_id": "6z047ttw57ehdkw9h2fy4jpxw",
+      "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
+      "start": "2026-08-28T20:45:00+02:00",
+      "status": "Played",
+      "time_source": "AC Milan",
+      "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
+      "title": "Milan - Venezia",
+      "uid": "c842b581e5d1cee0db8d5794@milan-calendar",
+      "venue": "Stadio San Siro"
+    },
+    {
+      "all_day": false,
+      "away_team": "Milan",
+      "broadcast_it": "DAZN",
+      "broadcast_source_url": "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
+      "competition": "Serie A",
+      "home_away": "Trasferta",
+      "home_team": "Juventus",
+      "last_modified": "2026-08-31T07:35:06Z",
+      "location": "Italy",
+      "neutral": false,
+      "round": "3",
+      "sequence": 10,
+      "serie_a_standing": {
+        "context": [
+          {
+            "played": 2,
+            "points": 6,
+            "position": 1,
+            "team": "Inter"
+          },
+          {
+            "played": 2,
+            "points": 6,
+            "position": 2,
+            "team": "Milan"
+          },
+          {
+            "played": 2,
+            "points": 6,
+            "position": 3,
+            "team": "Juventus"
+          },
+          {
+            "played": 2,
+            "points": 6,
+            "position": 4,
+            "team": "Lazio"
+          },
+          {
+            "played": 2,
+            "points": 4,
+            "position": 5,
+            "team": "Udinese"
+          }
+        ],
+        "draws": 0,
+        "goal_difference": 3,
+        "losses": 0,
+        "played": 2,
+        "points": 6,
+        "position": 2,
+        "provisional": true,
+        "source": "Lega Serie A",
+        "source_url": "https://www.legaseriea.it/serie-a/classifica",
+        "updated_at": "2026-08-31T07:35:06Z",
         "wins": 2
       },
       "source": "AC Milan",
@@ -1127,7 +1173,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-31T07:26:43Z",
+  "last_changed": "2026-08-31T07:35:06Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -1168,9 +1214,10 @@
     "played": 2,
     "points": 6,
     "position": 2,
+    "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-08-31T07:26:43Z",
+    "updated_at": "2026-08-31T07:35:06Z",
     "wins": 2
   },
   "source_errors": [
