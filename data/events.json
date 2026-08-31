@@ -202,11 +202,11 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-08-31T18:45:59Z",
+      "last_modified": "2026-08-31T20:45:35Z",
       "location": "Milano",
       "neutral": false,
       "round": "2",
-      "sequence": 13,
+      "sequence": 14,
       "serie_a_standing": {
         "context": [
           {
@@ -237,7 +237,7 @@
             "played": 2,
             "points": 6,
             "position": 5,
-            "team": "Lazio"
+            "team": "Atalanta"
           }
         ],
         "draws": 0,
@@ -249,7 +249,7 @@
         "provisional": false,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-08-31T18:45:59Z",
+        "updated_at": "2026-08-31T20:45:35Z",
         "wins": 2
       },
       "source": "AC Milan",
@@ -271,11 +271,11 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Juventus",
-      "last_modified": "2026-08-31T18:45:59Z",
+      "last_modified": "2026-08-31T20:45:35Z",
       "location": "Italy",
       "neutral": false,
       "round": "3",
-      "sequence": 15,
+      "sequence": 16,
       "serie_a_standing": {
         "context": [
           {
@@ -306,7 +306,7 @@
             "played": 2,
             "points": 6,
             "position": 5,
-            "team": "Lazio"
+            "team": "Atalanta"
           }
         ],
         "draws": 0,
@@ -318,7 +318,7 @@
         "provisional": false,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-08-31T18:45:59Z",
+        "updated_at": "2026-08-31T20:45:35Z",
         "wins": 2
       },
       "source": "AC Milan",
@@ -1365,7 +1365,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-08-31T18:45:59Z",
+  "last_changed": "2026-08-31T20:45:35Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -1397,7 +1397,7 @@
         "played": 2,
         "points": 6,
         "position": 5,
-        "team": "Lazio"
+        "team": "Atalanta"
       }
     ],
     "draws": 0,
@@ -1409,7 +1409,7 @@
     "provisional": false,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-08-31T18:45:59Z",
+    "updated_at": "2026-08-31T20:45:35Z",
     "wins": 2
   },
   "source_errors": [
