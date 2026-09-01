@@ -1,0 +1,71 @@
+name: Calendar health alerts
+
+on:
+  workflow_run:
+    workflows:
+      - Update calendar
+      - Refresh Serie A standings
+      - Deploy GitHub Pages
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  issues: write
+
+concurrency:
+  group: calendar-health-${{ github.event.workflow_run.name }}
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      WORKFLOW_NAME: ${{ github.event.workflow_run.name }}
+      WORKFLOW_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+      WORKFLOW_URL: ${{ github.event.workflow_run.html_url }}
+      WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
+    steps:
+      - name: Open or resolve the health alert
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          case "$WORKFLOW_NAME" in
+            "Update calendar"|"Refresh Serie A standings"|"Deploy GitHub Pages") ;;
+            *) echo "Workflow non monitorato: $WORKFLOW_NAME"; exit 0 ;;
+          esac
+
+          ISSUE_TITLE="⚠️ Milan Calendar: errore in $WORKFLOW_NAME"
+          export ISSUE_TITLE
+          OPEN_ISSUE="$({
+            gh issue list \
+              --repo "$GITHUB_REPOSITORY" \
+              --state open \
+              --limit 100 \
+              --json number,title
+          } | python3 -c '
+          import json, os, sys
+          title = os.environ["ISSUE_TITLE"]
+          print(next((item["number"] for item in json.load(sys.stdin) if item["title"] == title), ""))
+          ')"
+
+          if [[ "$WORKFLOW_CONCLUSION" != "success" ]]; then
+            MESSAGE="❌ Il workflow **$WORKFLOW_NAME** è terminato con stato **$WORKFLOW_CONCLUSION**.\n\nEsecuzione: $WORKFLOW_URL\nRun ID: \`$WORKFLOW_RUN_ID\`\n\n@Dizzle0987 controlla il log. L'ultimo calendario valido non viene cancellato."
+            if [[ -n "$OPEN_ISSUE" ]]; then
+              printf '%b\n' "$MESSAGE" | gh issue comment "$OPEN_ISSUE" --repo "$GITHUB_REPOSITORY" --body-file -
+            else
+              printf '%b\n' "$MESSAGE" | gh issue create --repo "$GITHUB_REPOSITORY" --title "$ISSUE_TITLE" --body-file -
+            fi
+            exit 0
+          fi
+
+          if [[ -n "$OPEN_ISSUE" ]]; then
+            printf '✅ Il workflow **%s** è tornato operativo.\n\nEsecuzione riuscita: %s\n' \
+              "$WORKFLOW_NAME" "$WORKFLOW_URL" \
+              | gh issue comment "$OPEN_ISSUE" --repo "$GITHUB_REPOSITORY" --body-file -
+            gh issue close "$OPEN_ISSUE" --repo "$GITHUB_REPOSITORY" --reason completed
+          else
+            echo "Nessun problema aperto per $WORKFLOW_NAME"
+          fi
