@@ -71,7 +71,7 @@ Gli eventi con stesse squadre, stessa famiglia di competizione e orari entro 72 
 
 Gli orari indicati come TBC/TBD sono pubblicati come eventi giornalieri. Quando l'orario viene confermato, lo stesso UID viene trasformato in un evento con orario.
 
-## Dove vedere le partite in Italia
+## Dove vedere le partite
 
 Il campo `broadcast_it` viene aggiunto automaticamente in base ai diritti nazionali noti della competizione:
 
@@ -81,7 +81,13 @@ Il campo `broadcast_it` viene aggiunto automaticamente in base ai diritti nazion
 - Champions League: Sky Sport/NOW, con avviso di verificare l'eventuale selezione esclusiva Prime Video;
 - amichevoli e altre competizioni: `Da definire` finché non viene pubblicato un palinsesto affidabile.
 
-La piattaforma esatta può essere precisata manualmente quando viene annunciato il palinsesto della singola partita. La correzione manuale ha sempre precedenza sulla mappatura per competizione.
+Per le competizioni esclusivamente italiane resta valida questa mappatura. Per le partite ufficiali UEFA, FIFA o intercontinentali non ancora iniziate viene invece richiesta una conferma della **singola partita**: possedere i diritti generali di un torneo non basta.
+
+Le fonti ufficiali controllate sono configurate in `data/broadcast_sources.json`. Il generatore cerca nella stessa porzione di palinsesto entrambe le squadre, la data esatta e un'indicazione esplicita di diretta TV/streaming. Le opzioni italiane sono ordinate come gratuite, incluse in un abbonamento esistente e a pagamento; Prime Video non viene mai descritto come gratuito. Dopo l'Italia vengono mostrate al massimo tre alternative estere gratuite, con paese, lingua, eventuale registrazione e link ufficiale stabile. Non vengono forniti suggerimenti per aggirare i geoblocchi.
+
+I risultati verificati sono salvati in `broadcast_options` dentro `data/events.json`. Se una fonte diventa temporaneamente irraggiungibile, l'ultima conferma valida viene conservata e l'errore resta soltanto nei dati di debug. Un evento passato non viene riscritto. Se nessun palinsesto della singola partita è ancora disponibile compare `Da confermare`, senza deduzioni basate sui soli diritti generali o sulla nazionalità dell'avversaria.
+
+Una correzione manuale resta possibile quando viene pubblicato un annuncio ufficiale non leggibile automaticamente.
 
 ## Esecuzione locale
 
