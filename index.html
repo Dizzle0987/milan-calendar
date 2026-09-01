@@ -3,101 +3,206 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#b5121b">
-    <title>Milan Calendar</title>
-    <meta name="description" content="Calendario aggiornato dell'AC Milan per iPhone, Android, Mac e PC.">
+    <meta name="theme-color" content="#b20a16">
+    <title>Milan Calendar — Il Milan, sempre con te</title>
+    <meta name="description" content="Tutte le partite della Prima Squadra maschile dell'AC Milan, aggiornate automaticamente nel tuo calendario.">
     <style>
-      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      :root {
+        color-scheme: dark;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --red: #e01828; --red-deep: #a50713; --ink: #080808; --panel: #121212;
+        --line: #2b2b2b; --muted: #b8b8b8; --white: #fff;
+      }
       * { box-sizing: border-box; }
-      body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; background: #090909; color: #fff; }
-      main { width: min(100%, 760px); padding: clamp(32px, 7vw, 72px); border: 1px solid #303030; border-radius: 24px; background: linear-gradient(145deg, #1b1b1b, #101010); box-shadow: 0 24px 80px #0008; }
-      .eyebrow { color: #ef3340; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; font-size: .76rem; }
-      h1 { margin: 12px 0 16px; font-size: clamp(2.5rem, 10vw, 5rem); line-height: .92; letter-spacing: -.06em; }
-      p { color: #c9c9c9; font-size: 1.08rem; line-height: 1.65; }
-      .button { display: inline-flex; align-items: center; justify-content: center; margin-top: 20px; min-height: 54px; padding: 0 24px; border-radius: 999px; background: #d71920; color: white; text-decoration: none; font-weight: 800; box-shadow: 0 8px 24px #d7192040; }
-      .button:hover { background: #ed1c24; transform: translateY(-1px); }
-      .button.secondary { margin-left: 8px; background: #292929; box-shadow: none; border: 1px solid #444; cursor: pointer; }
-      .steps { margin-top: 28px; padding: 20px; border-radius: 16px; background: #0b0b0b; border: 1px solid #2d2d2d; }
-      .steps h2 { margin: 0 0 12px; font-size: 1.1rem; }
-      .steps ol { margin: 0; padding-left: 20px; color: #c9c9c9; line-height: 1.65; }
-      .guides { display: grid; gap: 10px; margin-top: 28px; }
-      details { border: 1px solid #2d2d2d; border-radius: 14px; background: #0b0b0b; }
-      summary { padding: 16px 18px; cursor: pointer; font-weight: 800; }
-      details ol, details p { margin: 0; padding: 0 38px 18px; color: #c9c9c9; font-size: .98rem; line-height: 1.65; }
-      details ol { padding-left: 54px; }
-      details a { color: #fff; }
-      .notice { margin: 16px 0 0; padding: 14px 16px; border-left: 3px solid #ef3340; border-radius: 8px; background: #241416; color: #eee; font-size: .95rem; }
-      .notice a { color: #fff; }
-      .copied { min-height: 1.5em; margin: 10px 0 0; color: #8fd694; font-size: .92rem; }
-      small { display: block; margin-top: 24px; color: #888; line-height: 1.5; }
-      code { color: #ddd; overflow-wrap: anywhere; }
-      @media (max-width: 560px) { .button, .button.secondary { width: 100%; margin-left: 0; } }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0; min-height: 100vh; overflow-x: hidden; color: var(--white);
+        background: radial-gradient(circle at 78% 8%, #5d0710 0, transparent 34rem), linear-gradient(180deg, #0e0e0e 0, var(--ink) 48rem);
+      }
+      body::before {
+        position: fixed; inset: 0; z-index: -1; content: ""; opacity: .16;
+        background: repeating-linear-gradient(105deg, transparent 0 72px, #df1525 72px 74px, transparent 74px 146px);
+        mask-image: linear-gradient(to bottom, #000, transparent 80%);
+      }
+      a { color: inherit; }
+      button, a { -webkit-tap-highlight-color: transparent; }
+      .shell { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+      .topbar { display: flex; align-items: center; justify-content: space-between; min-height: 82px; border-bottom: 1px solid #ffffff18; }
+      .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: -.02em; }
+      .brand-mark {
+        display: grid; width: 42px; aspect-ratio: 1; place-items: center; border: 1px solid #ffffff3d; border-radius: 50%;
+        background: linear-gradient(135deg, var(--red), #55070d); box-shadow: inset 0 0 0 4px #090909; font-size: .72rem; letter-spacing: -.06em;
+      }
+      .brand small { color: #8f8f8f; font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+      .brand-text { display: grid; }
+      .top-status { color: #a8a8a8; font-size: .8rem; }
+      .top-status::before { display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: #55cf7b; box-shadow: 0 0 12px #55cf7b; content: ""; }
+      .hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(290px, .75fr); gap: clamp(40px, 8vw, 100px); align-items: center; min-height: 650px; padding: 76px 0 84px; }
+      .kicker { margin: 0 0 18px; color: #ff5360; font-size: .78rem; font-weight: 900; letter-spacing: .2em; text-transform: uppercase; }
+      h1 { max-width: 760px; margin: 0; font-size: clamp(3.6rem, 9vw, 7.8rem); line-height: .82; letter-spacing: -.075em; }
+      h1 em { color: var(--red); font-style: normal; }
+      .lead { max-width: 650px; margin: 30px 0 0; color: #d1d1d1; font-size: clamp(1.06rem, 2vw, 1.3rem); line-height: 1.65; }
+      .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+      .button {
+        display: inline-flex; align-items: center; justify-content: center; min-height: 58px; padding: 0 25px; border: 1px solid transparent; border-radius: 9px;
+        background: linear-gradient(135deg, #ed2635, var(--red-deep)); color: white; box-shadow: 0 12px 34px #b20a164f; cursor: pointer;
+        font: inherit; font-weight: 900; text-decoration: none; transition: transform .2s ease, border-color .2s ease, background .2s ease;
+      }
+      .button:hover { transform: translateY(-2px); }
+      .button.secondary { border-color: #ffffff2d; background: #ffffff0a; box-shadow: none; }
+      .button.secondary:hover { border-color: #ffffff70; background: #ffffff10; }
+      .copied { min-height: 1.4em; margin: 12px 0 0; color: #8fe0a5; font-size: .9rem; }
+      .match-card {
+        position: relative; overflow: hidden; min-height: 390px; padding: 34px; border: 1px solid #ffffff24; border-radius: 22px;
+        background: linear-gradient(150deg, #1f1f1f, #0a0a0a 62%); box-shadow: 0 40px 100px #000a; transform: rotate(2deg);
+      }
+      .match-card::after { position: absolute; right: -60px; bottom: -80px; width: 260px; height: 260px; border: 34px solid #d50f20; border-radius: 50%; opacity: .16; content: ""; }
+      .card-label { color: #ff5360; font-size: .72rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+      .card-number { margin-top: 30px; font-size: clamp(4rem, 8vw, 6.6rem); font-weight: 950; line-height: .85; letter-spacing: -.08em; }
+      .card-number span { display: block; margin-top: 14px; color: #8d8d8d; font-size: 1rem; font-weight: 700; letter-spacing: 0; }
+      .card-copy { position: absolute; right: 34px; bottom: 32px; left: 34px; z-index: 1; margin: 0; color: #c7c7c7; line-height: 1.55; }
+      .proof { border-top: 1px solid #ffffff14; border-bottom: 1px solid #ffffff14; background: #050505a6; }
+      .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+      .proof article { padding: 35px clamp(18px, 4vw, 46px); border-right: 1px solid #ffffff14; }
+      .proof article:first-child { padding-left: 0; }
+      .proof article:last-child { border-right: 0; }
+      .proof strong { display: block; margin-bottom: 7px; font-size: 1.02rem; }
+      .proof p { margin: 0; color: #969696; font-size: .91rem; line-height: 1.55; }
+      .content { padding: 105px 0; }
+      .section-heading { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 42px; }
+      .section-heading h2 { max-width: 650px; margin: 0; font-size: clamp(2.2rem, 5vw, 4rem); line-height: .96; letter-spacing: -.055em; }
+      .section-heading p { margin: 0; color: var(--muted); line-height: 1.7; }
+      .iphone-guide { display: grid; grid-template-columns: .78fr 1.22fr; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: var(--panel); }
+      .guide-intro { padding: clamp(28px, 5vw, 55px); background: linear-gradient(145deg, #a80714, #3a0509); }
+      .guide-intro h3 { margin: 12px 0; font-size: 2rem; letter-spacing: -.04em; }
+      .guide-intro p { margin: 0; color: #f2c8cc; line-height: 1.6; }
+      .steps { margin: 0; padding: clamp(28px, 5vw, 55px); list-style: none; counter-reset: steps; }
+      .steps li { position: relative; min-height: 58px; padding: 0 0 25px 58px; color: #c9c9c9; line-height: 1.55; counter-increment: steps; }
+      .steps li:last-child { padding-bottom: 0; }
+      .steps li::before { position: absolute; top: -4px; left: 0; display: grid; width: 37px; height: 37px; place-items: center; border: 1px solid #ffffff2b; border-radius: 50%; color: #fff; font-size: .83rem; font-weight: 900; content: counter(steps, decimal-leading-zero); }
+      .steps strong { color: #fff; }
+      .notice { margin: 18px 0 0; padding: 14px 16px; border: 1px solid #ff7d8738; border-radius: 10px; background: #2d0e12; color: #f1c8cc; font-size: .92rem; line-height: 1.55; }
+      .notice strong { color: #fff; }
+      .devices { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 58px; }
+      details { overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: #0e0e0e; transition: border-color .2s ease, background .2s ease; }
+      details[open] { border-color: #6f2027; background: #141010; }
+      summary { display: flex; align-items: center; justify-content: space-between; padding: 22px; cursor: pointer; font-weight: 850; list-style: none; }
+      summary::-webkit-details-marker { display: none; }
+      summary::after { color: #ef4050; font-size: 1.35rem; content: "+"; }
+      details[open] summary::after { content: "−"; }
+      details ol, details p { margin: 0; padding: 0 24px 24px; color: #aaa; font-size: .94rem; line-height: 1.65; }
+      details ol { padding-left: 45px; }
+      details li + li { margin-top: 8px; }
+      details a { color: #fff; text-decoration-color: #e01828; text-underline-offset: 3px; }
+      .closing { padding: 70px 0 85px; border-top: 1px solid #ffffff16; text-align: center; }
+      .closing strong { display: block; font-size: clamp(2rem, 6vw, 4.5rem); line-height: 1; letter-spacing: -.06em; }
+      .closing p { max-width: 600px; margin: 20px auto 0; color: #999; line-height: 1.6; }
+      footer { padding: 24px 0 35px; border-top: 1px solid #ffffff12; color: #757575; font-size: .8rem; }
+      footer .shell { display: flex; justify-content: space-between; gap: 20px; }
+      @media (max-width: 820px) {
+        .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 60px; }
+        .match-card { min-height: 300px; transform: none; }
+        .proof-grid, .section-heading, .iphone-guide { grid-template-columns: 1fr; }
+        .proof article, .proof article:first-child { padding: 25px 0; border-right: 0; border-bottom: 1px solid #ffffff14; }
+        .proof article:last-child { border-bottom: 0; }
+      }
+      @media (max-width: 600px) {
+        .shell { width: min(100% - 28px, 1160px); }
+        .top-status { display: none; }
+        .hero { padding: 50px 0 65px; }
+        h1 { font-size: clamp(3.45rem, 19vw, 5.2rem); }
+        .actions, .button { width: 100%; }
+        .devices { grid-template-columns: 1fr; }
+        .content { padding: 78px 0; }
+        footer .shell { display: block; }
+        footer span { display: block; margin-top: 7px; }
+      }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
     </style>
   </head>
   <body>
+    <header class="shell topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">MC</span><span class="brand-text">Milan Calendar <small>Calendario indipendente</small></span></div>
+      <span class="top-status">Aggiornamento automatico attivo</span>
+    </header>
     <main>
-      <div class="eyebrow">Sempre Milan</div>
-      <h1>Milan<br>Calendar</h1>
-      <p>Serie A, coppe, competizioni europee, amichevoli e tournée della Prima Squadra maschile, con l'indicazione di dove vedere la partita in Italia.</p>
-      <a class="button" id="subscribe-link" rel="external" href="webcal://dizzle0987.github.io/milan-calendar/calendar.ics">Iscriviti al calendario</a>
-      <button class="button secondary" id="copy-link" type="button">Copia link calendario</button>
-      <p class="copied" id="copy-status" role="status" aria-live="polite"></p>
-      <p class="notice"><strong>Su iPhone apri questa pagina in Safari.</strong> I browser integrati possono aprire Calendario senza creare l'iscrizione.</p>
-      <section class="steps">
-        <h2>iPhone e iPad — metodo affidabile</h2>
-        <ol>
-          <li>Tocca <strong>Copia link calendario</strong>.</li>
-          <li>Apri l'app <strong>Calendario</strong> e tocca <strong>Calendari</strong>.</li>
-          <li>Tocca <strong>Aggiungi calendario</strong>, poi <strong>Aggiungi calendario con iscrizione</strong>.</li>
-          <li>Incolla il link, tocca <strong>Trova</strong>, scegli <strong>iCloud</strong> come account e tocca <strong>Fine</strong>.</li>
-        </ol>
+      <section class="shell hero">
+        <div>
+          <p class="kicker">Sempre Milan. Sempre aggiornato.</p>
+          <h1>Ogni partita.<br><em>Ovunque.</em></h1>
+          <p class="lead">Il cammino della Prima Squadra maschile, dalle notti europee alle trasferte d'agosto. Date, orari di Roma, stadio e TV arrivano direttamente nel calendario che usi ogni giorno.</p>
+          <div class="actions">
+            <a class="button" id="subscribe-link" rel="external" href="webcal://dizzle0987.github.io/milan-calendar/calendar.ics">Porta il Milan nel calendario</a>
+            <button class="button secondary" id="copy-link" type="button">Copia il link</button>
+          </div>
+          <p class="copied" id="copy-status" role="status" aria-live="polite"></p>
+        </div>
+        <aside class="match-card" aria-label="Informazioni sul calendario">
+          <span class="card-label">Una sola iscrizione</span>
+          <div class="card-number">06<span>controlli al giorno</span></div>
+          <p class="card-copy">Se cambia un calcio d'inizio, una partita viene rinviata o arriva una nuova amichevole, lo stesso evento si aggiorna senza creare doppioni.</p>
+        </aside>
       </section>
-      <section class="guides" aria-label="Guide per dispositivo">
-        <details>
-          <summary>Android — Google Calendar</summary>
-          <ol>
-            <li>Dal browser apri <a href="https://calendar.google.com/" rel="external">Google Calendar</a>; su telefono può essere necessario usare la modalità <strong>Sito desktop</strong>.</li>
-            <li>Accanto ad <strong>Altri calendari</strong> scegli <strong>+</strong>, poi <strong>Da URL</strong>.</li>
-            <li>Incolla il link copiato da questa pagina e scegli <strong>Aggiungi calendario</strong>.</li>
-            <li>Apri l'app Google Calendar su Android e assicurati che il nuovo calendario sia visibile e sincronizzato.</li>
-          </ol>
-        </details>
-        <details>
-          <summary>Mac — Calendario Apple</summary>
-          <ol>
-            <li>Apri l'app <strong>Calendario</strong>.</li>
-            <li>Scegli <strong>File → Nuova iscrizione calendario</strong>.</li>
-            <li>Incolla il link HTTPS copiato da questa pagina, scegli <strong>Iscriviti</strong> e imposta l'aggiornamento automatico.</li>
-          </ol>
-        </details>
-        <details>
-          <summary>PC Windows — Outlook</summary>
-          <ol>
-            <li>Apri il calendario di <a href="https://outlook.live.com/calendar/" rel="external">Outlook sul web</a>.</li>
-            <li>Scegli <strong>Aggiungi calendario → Sottoscrivi dal Web</strong>.</li>
-            <li>Incolla il link copiato da questa pagina, assegna un nome e scegli <strong>Importa</strong>.</li>
-          </ol>
-        </details>
-        <details>
-          <summary>PC o Linux — Google Calendar</summary>
-          <p>In Google Calendar usa <strong>Altri calendari → + → Da URL</strong> e incolla il link HTTPS. Non scaricare semplicemente il file: la sottoscrizione via URL è quella che riceve gli aggiornamenti.</p>
-        </details>
+      <section class="proof">
+        <div class="shell proof-grid">
+          <article><strong>Tutta la stagione</strong><p>Serie A, coppe, Europa, amichevoli e tournée della Prima Squadra.</p></article>
+          <article><strong>Orari italiani</strong><p>Ogni calcio d'inizio viene convertito e mostrato nel fuso Europe/Rome.</p></article>
+          <article><strong>Dove vederla</strong><p>Emittenti confermate per la singola partita, con priorità alle opzioni gratuite.</p></article>
+        </div>
       </section>
-      <small>Il calendario è in sola lettura e si aggiorna automaticamente ogni 6 ore.</small>
+      <section class="shell content" id="come-iscriversi">
+        <div class="section-heading">
+          <h2>Due minuti adesso.<br>Tutta la stagione dopo.</h2>
+          <p>Non importare il file una sola volta: iscriviti tramite URL. È così che variazioni di orario, rinvii, nuove gare e informazioni TV continueranno ad arrivare automaticamente.</p>
+        </div>
+        <div class="iphone-guide">
+          <div class="guide-intro">
+            <p class="kicker">iPhone e iPad</p>
+            <h3>Il metodo che non sbaglia</h3>
+            <p>Apple a volte apre il singolo evento invece dell'iscrizione. La procedura manuale richiede pochi tocchi e collega davvero il feed.</p>
+            <p class="notice"><strong>Apri questa pagina in Safari.</strong> I browser integrati nelle app possono aprire Calendario senza completare l'iscrizione.</p>
+          </div>
+          <ol class="steps">
+            <li>Tocca <strong>Copia il link</strong> qui sopra.</li>
+            <li>Apri <strong>Calendario</strong> e scegli <strong>Calendari</strong>.</li>
+            <li>Vai su <strong>Aggiungi calendario → Aggiungi calendario con iscrizione</strong>.</li>
+            <li>Incolla il link, tocca <strong>Trova</strong>, scegli <strong>iCloud</strong> e concludi con <strong>Fine</strong>.</li>
+          </ol>
+        </div>
+        <div class="devices" aria-label="Guide per gli altri dispositivi">
+          <details>
+            <summary>Android — Google Calendar</summary>
+            <ol><li>Apri <a href="https://calendar.google.com/" rel="external">Google Calendar</a> dal browser; sul telefono usa eventualmente <strong>Sito desktop</strong>.</li><li>Accanto ad <strong>Altri calendari</strong> scegli <strong>+ → Da URL</strong>.</li><li>Incolla il link e scegli <strong>Aggiungi calendario</strong>.</li><li>Nell'app Android verifica che il nuovo calendario sia visibile e sincronizzato.</li></ol>
+          </details>
+          <details>
+            <summary>Mac — Calendario Apple</summary>
+            <ol><li>Apri <strong>Calendario</strong>.</li><li>Scegli <strong>File → Nuova iscrizione calendario</strong>.</li><li>Incolla il link HTTPS, scegli <strong>Iscriviti</strong> e abilita l'aggiornamento automatico.</li></ol>
+          </details>
+          <details>
+            <summary>PC Windows — Outlook</summary>
+            <ol><li>Apri <a href="https://outlook.live.com/calendar/" rel="external">Outlook Calendar</a> sul web.</li><li>Scegli <strong>Aggiungi calendario → Sottoscrivi dal Web</strong>.</li><li>Incolla il link, assegna un nome al calendario e scegli <strong>Importa</strong>.</li></ol>
+          </details>
+          <details>
+            <summary>PC o Linux · Google Calendar</summary>
+            <p>In Google Calendar scegli <strong>Altri calendari → + → Da URL</strong> e incolla il link HTTPS. La sottoscrizione via URL, a differenza del semplice download, riceve gli aggiornamenti futuri.</p>
+          </details>
+        </div>
+      </section>
+      <section class="shell closing">
+        <strong>Il prossimo fischio<br>non ti sfuggirà.</strong>
+        <p>Il calendario è gratuito, in sola lettura e si aggiorna automaticamente. Tu devi solo pensare alla partita.</p>
+      </section>
     </main>
+    <footer><div class="shell">Progetto indipendente per i tifosi del Milan.<span>Fuso orario Europe/Rome · Aggiornamento ogni 6 ore</span></div></footer>
     <script>
       const calendarUrl = "https://dizzle0987.github.io/milan-calendar/calendar.ics";
       document.getElementById("subscribe-link").addEventListener("click", () => {
-        document.getElementById("copy-status").textContent = "Se l'iscrizione non parte, torna qui, copia il link e segui la guida del tuo dispositivo.";
+        document.getElementById("copy-status").textContent = "Se l'iscrizione non parte, copia il link e segui la guida del tuo dispositivo.";
       });
       document.getElementById("copy-link").addEventListener("click", async () => {
         const status = document.getElementById("copy-status");
-        try {
-          await navigator.clipboard.writeText(calendarUrl);
-          status.textContent = "Link copiato. Ora segui la guida del tuo dispositivo.";
-        } catch {
-          window.prompt("Copia questo link calendario:", calendarUrl);
-        }
+        try { await navigator.clipboard.writeText(calendarUrl); status.textContent = "Link copiato. Ora scegli il tuo dispositivo qui sotto."; }
+        catch { window.prompt("Copia questo link calendario:", calendarUrl); }
       });
     </script>
   </body>
