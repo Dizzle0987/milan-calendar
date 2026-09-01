@@ -159,6 +159,9 @@ Dopo la modifica esegui test e generatore, quindi committa sia il file manuale s
 - `.github/workflows/update.yml` viene eseguito alle ore `00:17`, `06:17`, `12:17` e `18:17` UTC. Installa le dipendenze, esegue i test, rigenera il feed e committa solo quando gli output cambiano.
 - GitHub Pages pubblica direttamente la cartella radice del branch `main`; ogni commit generato dall'aggiornamento rende quindi disponibile anche il nuovo feed.
 - `.github/workflows/pages.yml` resta disponibile come workflow di pubblicazione alternativo.
+- `.github/workflows/health-alerts.yml` controlla la conclusione di aggiornamento, classifica e pubblicazione Pages. In caso di errore apre una sola Issue per il workflow interessato, aggiunge i successivi errori alla stessa Issue e la chiude automaticamente quando il servizio torna operativo. L'Issue menziona il proprietario e contiene il link diretto al log; l'ultimo calendario valido resta disponibile.
+
+Per ricevere gli avvisi sia via email sia nell'app GitHub, nel repository seleziona **Watch → Custom → Issues**. Nelle impostazioni personali di GitHub, sotto **Notifications**, lascia abilitati **Email** e **GitHub Mobile** per le notifiche relative alle Issue. Non servono token o servizi esterni: il workflow usa il permesso `issues: write` del token GitHub Actions del repository.
 
 Nel repository GitHub, apri **Settings → Pages** e imposta **Source: Deploy from a branch**, branch `main`, cartella `/ (root)`. In **Settings → Actions → General → Workflow permissions**, abilita **Read and write permissions** affinché il workflow di aggiornamento possa effettuare il commit.
 
