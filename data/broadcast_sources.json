@@ -1,0 +1,195 @@
+{
+  "sources": [
+    {
+      "country": "Italia",
+      "country_code": "IT",
+      "broadcaster": "TV8",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "italiano",
+      "url": "https://www.tv8.it/sport",
+      "priority": 100
+    },
+    {
+      "country": "Italia",
+      "country_code": "IT",
+      "broadcaster": "Sky Sport / NOW",
+      "access": "paid",
+      "platforms": "TV + streaming",
+      "language": "italiano",
+      "url": "https://www.nowtv.it/sport/calcio/milan",
+      "priority": 80
+    },
+    {
+      "country": "Italia",
+      "country_code": "IT",
+      "broadcaster": "Prime Video",
+      "access": "included",
+      "platforms": "streaming",
+      "language": "italiano",
+      "url": "https://www.primevideo.com/sports",
+      "priority": 90
+    },
+    {
+      "country": "Italia",
+      "country_code": "IT",
+      "broadcaster": "Rai / RaiPlay",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "italiano",
+      "url": "https://www.raiplay.it/dirette/raisport",
+      "priority": 95
+    },
+    {
+      "country": "Italia",
+      "country_code": "IT",
+      "broadcaster": "Mediaset Infinity",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "italiano",
+      "url": "https://mediasetinfinity.mediaset.it/sport",
+      "priority": 90
+    },
+    {
+      "country": "Italia",
+      "country_code": "IT",
+      "broadcaster": "DAZN",
+      "access": "paid",
+      "platforms": "streaming",
+      "language": "italiano",
+      "url": "https://www.dazn.com/it-IT/schedule",
+      "priority": 70
+    },
+    {
+      "country": "Austria",
+      "country_code": "AT",
+      "broadcaster": "ServusTV",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "tedesco",
+      "url": "https://www.servustv.com/sport/",
+      "priority": 95,
+      "team_keywords": ["salzburg"]
+    },
+    {
+      "country": "Austria",
+      "country_code": "AT",
+      "broadcaster": "ORF",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "tedesco",
+      "url": "https://sport.orf.at/",
+      "priority": 90,
+      "team_keywords": ["salzburg"]
+    },
+    {
+      "country": "Portogallo",
+      "country_code": "PT",
+      "broadcaster": "RTP Play",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "portoghese",
+      "url": "https://www.rtp.pt/play/",
+      "priority": 90,
+      "team_keywords": ["benfica"]
+    },
+    {
+      "country": "Portogallo",
+      "country_code": "PT",
+      "broadcaster": "SIC",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "portoghese",
+      "url": "https://sic.pt/direto",
+      "priority": 85,
+      "team_keywords": ["benfica"]
+    },
+    {
+      "country": "Ungheria",
+      "country_code": "HU",
+      "broadcaster": "M4 Sport",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "ungherese",
+      "url": "https://m4sport.hu/",
+      "priority": 90,
+      "team_keywords": ["ferencvaros", "ferencvarosi"]
+    },
+    {
+      "country": "Grecia",
+      "country_code": "GR",
+      "broadcaster": "ERT",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "greco",
+      "url": "https://www.ertflix.gr/",
+      "priority": 90,
+      "team_keywords": ["olympiacos"]
+    },
+    {
+      "country": "Grecia",
+      "country_code": "GR",
+      "broadcaster": "ANT1",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "greco",
+      "url": "https://www.antenna.gr/live",
+      "priority": 85,
+      "team_keywords": ["olympiacos"]
+    },
+    {
+      "country": "Bulgaria",
+      "country_code": "BG",
+      "broadcaster": "bTV",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "bulgaro",
+      "url": "https://btvsport.bg/",
+      "priority": 85,
+      "team_keywords": ["levski"]
+    },
+    {
+      "country": "Regno Unito",
+      "country_code": "GB",
+      "broadcaster": "ITV",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "inglese",
+      "url": "https://www.itv.com/football",
+      "priority": 90,
+      "team_keywords": ["bournemouth", "sunderland"]
+    },
+    {
+      "country": "Regno Unito",
+      "country_code": "GB",
+      "broadcaster": "BBC",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "inglese",
+      "url": "https://www.bbc.com/sport/football",
+      "priority": 85,
+      "team_keywords": ["bournemouth", "sunderland"]
+    },
+    {
+      "country": "Armenia",
+      "country_code": "AM",
+      "broadcaster": "Armenian Public TV",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "armeno",
+      "url": "https://www.1tv.am/en/",
+      "priority": 85,
+      "team_keywords": ["ararat"]
+    },
+    {
+      "country": "Svizzera",
+      "country_code": "CH",
+      "broadcaster": "SRF",
+      "access": "free",
+      "platforms": "TV + streaming",
+      "language": "tedesco",
+      "url": "https://www.srf.ch/sport",
+      "priority": 80
+    }
+  ]
+}
