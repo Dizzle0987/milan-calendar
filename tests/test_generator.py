@@ -1,16 +1,20 @@
 from __future__ import annotations
 
 import json
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 import pytest
+import requests
 from icalendar import Calendar
 
 from milan_calendar.generator import (
     FetchResult,
     UpdateError,
+    _broadcast_description_lines,
     _canonical_event,
+    _is_official_international_match,
+    apply_verified_broadcasts,
     build_ical,
     load_manual_events,
     load_calendar_events,
@@ -27,6 +31,7 @@ from milan_calendar.generator import (
     parse_schedule_html,
     parse_thesportsdb_json,
     parse_official_html,
+    page_confirms_fixture,
     update_calendar,
 )
 
@@ -1112,6 +1117,165 @@ def test_manual_event_can_be_disabled(tmp_path: Path) -> None:
         encoding="utf-8",
     )
     assert load_manual_events(path) == []
+
+
+def test_official_international_classifier_excludes_domestic_and_friendlies() -> None:
+    base = {
+        "event_kind": "match",
+        "home_team": "Milan",
+        "away_team": "Benfica",
+        "title": "Milan - Benfica",
+        "round": "League phase",
+    }
+    assert _is_official_international_match(
+        dict(base, competition="UEFA Europa League")
+    )
+    assert _is_official_international_match(
+        dict(base, competition="Future FIFA International Club Cup")
+    )
+    assert not _is_official_international_match(dict(base, competition="Serie A"))
+    assert not _is_official_international_match(
+        dict(base, competition="International Club Friendly", round="Pre-season tour")
+    )
+
+
+def test_broadcast_page_requires_exact_fixture_date_and_viewing_evidence() -> None:
+    event = {
+        "event_kind": "match",
+        "home_team": "Milan",
+        "away_team": "Benfica",
+        "competition": "UEFA Europa League",
+        "start": "2026-09-16T21:00:00+02:00",
+    }
+    assert page_confirms_fixture(
+        "<p>Milan - Benfica, 16 settembre 2026: diretta TV8 e streaming.</p>",
+        event,
+        "TV8",
+    )
+    assert not page_confirms_fixture(
+        "<p>TV8 ha i diritti dell'Europa League. Milan e Benfica partecipano.</p>",
+        event,
+        "TV8",
+    )
+    assert not page_confirms_fixture(
+        "<p>Calendario: Milan-Benfica, 16 settembre 2026 alle 21.</p>",
+        event,
+        "Sky Sport / NOW",
+    )
+
+
+def test_confirmed_broadcast_survives_source_failure() -> None:
+    event = {
+        "event_kind": "match",
+        "home_team": "Milan",
+        "away_team": "Benfica",
+        "competition": "UEFA Europa League",
+        "round": "1",
+        "start": "2026-09-16T21:00:00+02:00",
+        "status": "Fixture",
+    }
+    option = {
+        "country": "Italia",
+        "country_code": "IT",
+        "broadcaster": "TV8",
+        "access": "free",
+        "platforms": "TV + streaming",
+        "language": "italiano",
+        "registration_required": False,
+        "url": "https://www.tv8.it/sport",
+        "source_url": "https://www.tv8.it/sport",
+        "status": "confirmed",
+        "verified_at": "2026-08-31T10:00:00Z",
+        "priority": 100,
+    }
+    previous = [dict(event, broadcast_options=[option])]
+
+    class FailingSession:
+        def get(self, url: str, timeout: int) -> None:
+            raise requests.RequestException("temporaneamente non disponibile")
+
+    updated, errors = apply_verified_broadcasts(
+        FailingSession(),
+        [event],
+        previous,
+        [{
+            "country": "Italia", "country_code": "IT", "broadcaster": "TV8",
+            "access": "free", "url": "https://www.tv8.it/sport",
+        }],
+        "2026-09-01T10:00:00Z",
+        datetime(2026, 9, 1, tzinfo=timezone.utc),
+    )
+
+    assert errors
+    assert updated[0]["broadcast_options"] == [option]
+    assert updated[0]["broadcast_italy_tbc"] is False
+
+
+def test_broadcast_verification_changes_only_international_broadcast_fields() -> None:
+    international = {
+        "event_kind": "match", "home_team": "Milan", "away_team": "Benfica",
+        "competition": "UEFA Europa League", "round": "1", "venue": "San Siro",
+        "start": "2026-09-16T21:00:00+02:00", "status": "Fixture",
+        "source_url": "https://www.acmilan.com/", "uid": "stable@milan-calendar",
+    }
+    domestic = dict(
+        international,
+        away_team="Roma",
+        competition="Serie A",
+        uid="domestic@milan-calendar",
+    )
+
+    class Response:
+        text = "Milan - Benfica, 16 settembre 2026: diretta TV8 e streaming."
+
+        def raise_for_status(self) -> None:
+            return None
+
+    class Session:
+        def get(self, url: str, timeout: int) -> Response:
+            return Response()
+
+    updated, errors = apply_verified_broadcasts(
+        Session(),
+        [international, domestic],
+        [],
+        [{
+            "country": "Italia", "country_code": "IT", "broadcaster": "TV8",
+            "access": "free", "platforms": "TV + streaming", "language": "italiano",
+            "url": "https://www.tv8.it/sport", "priority": 100,
+        }],
+        "2026-09-01T10:00:00Z",
+        datetime(2026, 9, 1, tzinfo=timezone.utc),
+    )
+
+    assert not errors
+    assert "broadcast_options" in updated[0]
+    assert updated[1] == domestic
+    for key, value in international.items():
+        assert updated[0][key] == value
+
+
+def test_structured_broadcast_description_orders_italy_and_foreign_links() -> None:
+    data = {
+        "broadcast_options": [
+            {
+                "country": "Italia", "country_code": "IT", "broadcaster": "Prime Video",
+                "access": "included", "platforms": "streaming", "language": "italiano",
+                "registration_required": False, "url": "https://www.primevideo.com/sports",
+            },
+            {
+                "country": "Austria", "country_code": "AT", "broadcaster": "ServusTV",
+                "access": "free", "platforms": "TV + streaming", "language": "tedesco",
+                "registration_required": False, "url": "https://www.servustv.com/sport/",
+            },
+        ],
+        "broadcast_international_tbc": False,
+    }
+    text = "\n".join(_broadcast_description_lines(data))
+    assert "🇮🇹 Italia — Prime Video" in text
+    assert "Incluso nell'abbonamento · streaming · italiano" in text
+    assert "🇦🇹 Austria — ServusTV" in text
+    assert "https://www.servustv.com/sport/" in text
 
 
 def test_subscription_page_has_iphone_fallback() -> None:
