@@ -125,6 +125,34 @@ BROADCASTERS_IT = {
         "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
     ),
 }
+INTERNATIONAL_COMPETITION_FAMILIES = {
+    "champions-league",
+    "europa-league",
+    "conference-league",
+    "supercoppa-uefa",
+    "coppa-mondo-club-fifa",
+    "coppa-intercontinentale-fifa",
+    "uefa-conmebol-club-challenge",
+}
+BROADCAST_EVIDENCE_MARKERS = {
+    "diretta", "live", "streaming", "tv", "televisione", "canale",
+    "channel", "watch", "guarda", "vederla", "palinsesto", "programma",
+    "programmazione", "broadcast", "ubertragung", "transmissao", "ao-vivo",
+}
+MONTH_NAMES = {
+    1: ("gennaio", "january", "januar", "janvier", "enero", "janeiro"),
+    2: ("febbraio", "february", "februar", "fevrier", "febrero", "fevereiro"),
+    3: ("marzo", "march", "marz", "mars", "marzo", "marco"),
+    4: ("aprile", "april", "avril", "abril"),
+    5: ("maggio", "may", "mai", "mayo", "maio"),
+    6: ("giugno", "june", "juni", "juin", "junio", "junho"),
+    7: ("luglio", "july", "juli", "juillet", "julio", "julho"),
+    8: ("agosto", "august", "aout", "agosto"),
+    9: ("settembre", "september", "septembre", "septiembre", "setembro"),
+    10: ("ottobre", "october", "oktober", "octobre", "octubre", "outubro"),
+    11: ("novembre", "november", "noviembre"),
+    12: ("dicembre", "december", "dezember", "decembre", "diciembre", "dezembro"),
+}
 
 
 class UpdateError(RuntimeError):
@@ -201,6 +229,216 @@ def _team_match_key(team: str) -> str:
     ignored = {"afc", "cf", "fc", "football", "club"}
     key = "-".join(token for token in tokens if token not in ignored)
     return TEAM_EQUIVALENTS.get(key, key)
+
+
+def _is_official_international_match(event: dict[str, Any]) -> bool:
+    if str(event.get("event_kind") or "match") != "match":
+        return False
+    searchable = _normalize(
+        " ".join(
+            str(event.get(key) or "")
+            for key in ("competition", "round", "title", "organizer", "source_url")
+        )
+    )
+    if any(marker in searchable for marker in ("friendly", "friendlies", "amichevole", "tournee", "pre-season")):
+        return False
+    family = _competition_family(str(event.get("competition") or ""))
+    if family in INTERNATIONAL_COMPETITION_FAMILIES:
+        return True
+    if family in {"serie-a", "serie-b", "coppa-italia", "supercoppa-italiana", "amichevole"}:
+        return False
+    return any(
+        marker in searchable
+        for marker in ("uefa", "fifa", "conmebol", "intercontinental", "international-club", "world-club")
+    )
+
+
+def load_broadcast_sources(path: Path) -> list[dict[str, Any]]:
+    payload = load_json(path, {"sources": []})
+    sources = payload.get("sources", []) if isinstance(payload, dict) else []
+    if not isinstance(sources, list):
+        raise ValueError("data/broadcast_sources.json deve contenere una lista 'sources'")
+    required = {"country", "country_code", "broadcaster", "access", "url"}
+    normalized: list[dict[str, Any]] = []
+    for index, source in enumerate(sources):
+        if not isinstance(source, dict) or required - source.keys():
+            raise ValueError(f"Fonte broadcast #{index + 1} non valida")
+        if source.get("access") not in {"free", "included", "paid"}:
+            raise ValueError(f"Fonte broadcast #{index + 1}: access non valido")
+        normalized.append(deepcopy(source))
+    return normalized
+
+
+def _fixture_date_markers(value: datetime) -> set[str]:
+    local = value.astimezone(ROME)
+    markers = {
+        local.strftime("%Y-%m-%d"),
+        local.strftime("%Y%m%d"),
+        local.strftime("%d-%m-%Y"),
+        local.strftime("%d-%m"),
+    }
+    for month in MONTH_NAMES[local.month]:
+        markers.add(_normalize(f"{local.day} {month} {local.year}"))
+        markers.add(_normalize(f"{local.day} {month}"))
+    return markers
+
+
+def page_confirms_fixture(html: str, event: dict[str, Any], broadcaster: str) -> bool:
+    """Require teams, exact date and viewing language in one nearby page fragment."""
+    text = _normalize(html_module.unescape(re.sub(r"<[^>]+>", " ", html)))
+    opponent = (
+        str(event.get("away_team") or "")
+        if _is_milan(str(event.get("home_team") or ""))
+        else str(event.get("home_team") or "")
+    )
+    opponent_key = _team_match_key(opponent)
+    opponent_tokens = [
+        token for token in opponent_key.split("-") if len(token) >= 4 and token not in {"club", "calcio"}
+    ]
+    if not opponent_tokens:
+        return False
+    anchor = max(opponent_tokens, key=len)
+    date_markers = _fixture_date_markers(_event_datetime(event))
+    broadcaster_marker = _normalize(broadcaster)
+    for match in re.finditer(re.escape(anchor), text):
+        window = text[max(0, match.start() - 900) : match.end() + 900]
+        if "milan" not in window or not any(marker in window for marker in date_markers):
+            continue
+        has_viewing_evidence = any(marker in window for marker in BROADCAST_EVIDENCE_MARKERS)
+        distinctive_broadcaster_tokens = [
+            token
+            for token in broadcaster_marker.split("-")
+            if len(token) >= 3 and token not in {"sport", "sports", "video", "tv", "play"}
+        ]
+        if has_viewing_evidence and (
+            broadcaster_marker in window
+            or any(token in window for token in distinctive_broadcaster_tokens)
+        ):
+            return True
+    return False
+
+
+def _broadcast_option(source: dict[str, Any], checked_at: str) -> dict[str, Any]:
+    return {
+        "country": str(source["country"]),
+        "country_code": str(source["country_code"]).upper(),
+        "broadcaster": str(source["broadcaster"]),
+        "access": str(source["access"]),
+        "platforms": str(source.get("platforms") or "streaming"),
+        "language": str(source.get("language") or ""),
+        "registration_required": bool(source.get("registration_required")),
+        "url": str(source["url"]),
+        "source_url": str(source["url"]),
+        "status": "confirmed",
+        "verified_at": checked_at,
+        "priority": int(source.get("priority") or 0),
+    }
+
+
+def apply_verified_broadcasts(
+    session: requests.Session,
+    events: list[dict[str, Any]],
+    previous: list[dict[str, Any]],
+    sources: list[dict[str, Any]],
+    checked_at: str,
+    now: datetime,
+) -> tuple[list[dict[str, Any]], list[str]]:
+    """Verify exact fixtures and preserve previously confirmed options on failures."""
+    result = deepcopy(events)
+    targets = [
+        event
+        for event in result
+        if _is_official_international_match(event)
+        and _event_datetime(event).astimezone(timezone.utc) > now.astimezone(timezone.utc)
+        and _normalize(str(event.get("status") or ""))
+        not in {"played", "final", "full-time", "ft", "completed", "status-final"}
+    ]
+    errors: list[str] = []
+    confirmations: dict[str, list[dict[str, Any]]] = {}
+    optional_session: requests.Session | None = None
+    requester: Any = session
+    if isinstance(session, requests.Session):
+        optional_session = requests.Session()
+        optional_session.headers.update(session.headers)
+        requester = optional_session
+    try:
+        for source in sources:
+            keywords = {_normalize(str(item)) for item in source.get("team_keywords") or []}
+            relevant = [
+                event
+                for event in targets
+                if str(source.get("country_code") or "").upper() == "IT"
+                or not keywords
+                or any(
+                    keyword in _team_match_key(str(event.get(key) or ""))
+                    for keyword in keywords
+                    for key in ("home_team", "away_team")
+                )
+            ]
+            if not relevant:
+                continue
+            try:
+                response = requester.get(str(source["url"]), timeout=10)
+                response.raise_for_status()
+            except requests.RequestException as exc:
+                errors.append(f"{source['broadcaster']}: {exc}")
+                continue
+            for event in relevant:
+                if page_confirms_fixture(response.text, event, str(source["broadcaster"])):
+                    confirmations.setdefault(_semantic_base(event), []).append(
+                        _broadcast_option(source, checked_at)
+                    )
+    finally:
+        if optional_session is not None:
+            optional_session.close()
+
+    access_order = {"free": 0, "included": 1, "paid": 2}
+    for event in result:
+        if not _is_official_international_match(event):
+            continue
+        old = next(
+            (item for item in previous if _same_long_range_fixture(item, event)), None
+        ) or next(
+            (item for item in previous if _same_fixture(item, event, unordered=True)), None
+        )
+        old_options = deepcopy((old or {}).get("broadcast_options") or [])
+        if _event_datetime(event).astimezone(timezone.utc) <= now.astimezone(timezone.utc):
+            if old_options:
+                event["broadcast_options"] = old_options
+                event["broadcast_international_tbc"] = bool(
+                    (old or {}).get("broadcast_international_tbc")
+                )
+            continue
+        merged: dict[tuple[str, str], dict[str, Any]] = {
+            (str(option.get("country_code") or ""), _normalize(str(option.get("broadcaster") or ""))): option
+            for option in old_options
+            if option.get("status") == "confirmed"
+        }
+        for option in confirmations.get(_semantic_base(event), []):
+            key = (str(option["country_code"]), _normalize(str(option["broadcaster"])))
+            previous_option = merged.get(key)
+            if previous_option:
+                comparable_old = {k: v for k, v in previous_option.items() if k != "verified_at"}
+                comparable_new = {k: v for k, v in option.items() if k != "verified_at"}
+                if comparable_old == comparable_new:
+                    option["verified_at"] = str(previous_option.get("verified_at") or checked_at)
+            merged[key] = option
+        options = list(merged.values())
+        italian = sorted(
+            (option for option in options if option.get("country_code") == "IT"),
+            key=lambda option: (access_order.get(str(option.get("access")), 9), -int(option.get("priority") or 0)),
+        )
+        foreign = sorted(
+            (
+                option for option in options
+                if option.get("country_code") != "IT" and option.get("access") == "free"
+            ),
+            key=lambda option: -int(option.get("priority") or 0),
+        )[:3]
+        event["broadcast_options"] = italian + foreign
+        event["broadcast_international_tbc"] = not bool(foreign)
+        event["broadcast_italy_tbc"] = not bool(italian)
+    return result, errors
 
 
 def _valid_first_team_fixture(home: str, away: str, *labels: str) -> bool:
@@ -1614,6 +1852,51 @@ def merge_manual_events(remote: list[dict[str, Any]], manual: list[dict[str, Any
     return sorted(merged, key=_event_datetime)
 
 
+def _country_flag(country_code: str) -> str:
+    code = country_code.upper()
+    if len(code) != 2 or not code.isalpha():
+        return "🌍"
+    return "".join(chr(127397 + ord(character)) for character in code)
+
+
+def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
+    options = data.get("broadcast_options") or []
+    italian = [option for option in options if option.get("country_code") == "IT"]
+    foreign = [option for option in options if option.get("country_code") != "IT"][:3]
+    lines = ["Dove vederla:"]
+    if not italian:
+        lines.append("🇮🇹 Italia — Da confermare")
+    for option in italian:
+        lines.append(f"🇮🇹 Italia — {option['broadcaster']}")
+        access = {
+            "free": "GRATIS",
+            "included": "Incluso nell'abbonamento",
+            "paid": "A pagamento",
+        }.get(str(option.get("access") or ""), "Da verificare")
+        attributes = [access, str(option.get("platforms") or "")]
+        if option.get("language"):
+            attributes.append(str(option["language"]))
+        if option.get("registration_required"):
+            attributes.append("registrazione richiesta")
+        lines.extend((" · ".join(item for item in attributes if item), str(option["url"])))
+    if foreign:
+        lines.append("GRATIS / IN CHIARO ALL'ESTERO:")
+        for option in foreign:
+            lines.append(
+                f"{_country_flag(str(option.get('country_code') or ''))} "
+                f"{option['country']} — {option['broadcaster']}"
+            )
+            attributes = ["Gratis", str(option.get("platforms") or "")]
+            if option.get("language"):
+                attributes.append(str(option["language"]))
+            if option.get("registration_required"):
+                attributes.append("registrazione richiesta")
+            lines.extend((" · ".join(item for item in attributes if item), str(option["url"])))
+    elif data.get("broadcast_international_tbc"):
+        lines.append("🌍 In chiaro all'estero — Da confermare")
+    return lines
+
+
 def build_ical(events: list[dict[str, Any]]) -> bytes:
     calendar = Calendar()
     calendar.add("prodid", "-//Milan Calendar//Dizzle0987//IT")
@@ -1693,7 +1976,9 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
             details.append(f"Stadio: {data['venue']}")
         if data.get("location"):
             details.append(f"Località: {data['location']}")
-        if is_match and data.get("broadcast_it"):
+        if is_match and _is_official_international_match(data) and "broadcast_options" in data:
+            details.extend(_broadcast_description_lines(data))
+        elif is_match and data.get("broadcast_it"):
             details.append(f"Dove vederla in Italia: {data['broadcast_it']}")
         if is_match and data.get("time_source"):
             details.append(f"Fonte orario: {data['time_source']}")
@@ -1798,7 +2083,8 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     changed_at = now.isoformat().replace("+00:00", "Z")
 
     reference_today = today or datetime.now(ROME).date()
-    fetched = fetch_remote_events(session or build_session(), reference_today)
+    active_session = session or build_session()
+    fetched = fetch_remote_events(active_session, reference_today)
     discovery_sources = {"AC Milan", "ESPN", "TheSportsDB"}
     discovered_events = [event for event in fetched.events if not event.get("_time_overlay")]
     if not discovery_sources.intersection(fetched.successful_sources) or not discovered_events:
@@ -1810,6 +2096,16 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
     remote = merge_remote_events(fetched.events)
     manual = load_manual_events(manual_path)
     combined = merge_manual_events(remote, manual)
+    broadcast_sources = load_broadcast_sources(data_dir / "broadcast_sources.json")
+    combined, broadcast_errors = apply_verified_broadcasts(
+        active_session,
+        combined,
+        previous,
+        broadcast_sources,
+        changed_at,
+        now,
+    )
+    fetched.errors.extend(f"Broadcast {error}" for error in broadcast_errors)
     participating_competitions = {
         _competition_family(str(event.get("competition") or ""))
         for event in combined
