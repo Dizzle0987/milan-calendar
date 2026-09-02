@@ -1287,3 +1287,8 @@ def test_subscription_page_has_iphone_fallback() -> None:
     assert "Mac — Calendario Apple" in html
     assert "PC Windows — Outlook" in html
     assert "Sottoscrivi dal Web" in html
+    assert 'id="live-dashboard"' in html
+    assert 'const dataUrl = "data/events.json"' in html
+    assert "Classifica Serie A" in html
+    assert 'timeZone: "Europe/Rome"' in html
+    assert "response.ok" in html
