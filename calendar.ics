@@ -547,14 +547,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Monza
 DTSTART;VALUE=DATE:20261202
 DTEND;VALUE=DATE:20261203
-DTSTAMP:20260902T003839Z
+DTSTAMP:20260902T165213Z
 UID:51a1b3b7b7144a45b62d6e6d@milan-calendar
-SEQUENCE:0
+SEQUENCE:1
 CATEGORIES:Coppa Italia,AC Milan
 DESCRIPTION:Competizione: Coppa Italia\nMilan: Casa\nOrario: da confermare
- \nTurno: 8th Finals\nDove vederla in Italia: Mediaset (canali in chiaro)\,
-  Mediaset Infinity e SportMediaset.it
-LAST-MODIFIED:20260902T003839Z
+ \nTurno: 8th Finals\nStadio: Stadio Giuseppe Meazza\nDove vederla in Itali
+ a: Mediaset (canali in chiaro)\, Mediaset Infinity e SportMediaset.it
+LAST-MODIFIED:20260902T165213Z
+LOCATION:Stadio Giuseppe Meazza
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
