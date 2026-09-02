@@ -1,5 +1,5 @@
 {
-  "event_count": 53,
+  "event_count": 54,
   "events": [
     {
       "all_day": false,
@@ -709,6 +709,30 @@
     },
     {
       "all_day": true,
+      "away_team": "Monza",
+      "broadcast_it": "Mediaset (canali in chiaro), Mediaset Infinity e SportMediaset.it",
+      "broadcast_source_url": "https://mediasetinfinity.mediaset.it/calcio-e-sport/coppaitaliacalcio_SE000000001529",
+      "competition": "Coppa Italia",
+      "home_away": "Casa",
+      "home_team": "Milan",
+      "last_modified": "2026-09-02T00:38:39Z",
+      "location": "",
+      "neutral": false,
+      "round": "8th Finals",
+      "sequence": 0,
+      "source": "AC Milan",
+      "source_id": "1i6kbshbydvo56p01mwfvfor8",
+      "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
+      "start": "2026-12-02",
+      "status": "Fixture",
+      "time_source": "",
+      "time_source_url": "",
+      "title": "Milan - Monza",
+      "uid": "51a1b3b7b7144a45b62d6e6d@milan-calendar",
+      "venue": ""
+    },
+    {
+      "all_day": true,
       "away_team": "Parma",
       "broadcast_it": "DAZN",
       "broadcast_source_url": "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
@@ -1389,7 +1413,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-01T11:49:01Z",
+  "last_changed": "2026-09-02T00:38:39Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
