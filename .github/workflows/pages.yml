@@ -6,7 +6,7 @@ on:
     paths:
       - index.html
       - calendar.ics
-      - .nojekyll
+      - data/events.json
       - .github/workflows/pages.yml
   workflow_run:
     workflows: ["Update calendar"]
@@ -20,31 +20,28 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
-    runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Prepare static site
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - name: Prepare site
         run: |
-          mkdir -p _site
-          cp index.html calendar.ics .nojekyll _site/
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
+          mkdir -p _site/data
+          cp index.html calendar.ics _site/
+          cp data/events.json _site/data/events.json
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
-
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
