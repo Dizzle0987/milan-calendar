@@ -1292,3 +1292,11 @@ def test_subscription_page_has_iphone_fallback() -> None:
     assert "Classifica Serie A" in html
     assert 'timeZone: "Europe/Rome"' in html
     assert "response.ok" in html
+
+
+def test_pages_deployment_includes_live_event_data() -> None:
+    workflow = (
+        Path(__file__).parents[1] / ".github" / "workflows" / "pages.yml"
+    ).read_text(encoding="utf-8")
+    assert "mkdir -p _site/data" in workflow
+    assert "cp data/events.json _site/data/events.json" in workflow
