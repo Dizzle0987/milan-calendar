@@ -297,15 +297,16 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:⚽ Sassuolo - Milan
-DTSTART;VALUE=DATE:20261011
-DTEND;VALUE=DATE:20261012
-DTSTAMP:20260831T072643Z
+DTSTART;TZID=Europe/Rome:20261011T180000
+DTEND;TZID=Europe/Rome:20261011T200000
+DTSTAMP:20260903T152529Z
 UID:efe8aeb093e233c7fe578a0b@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
- \nTurno: 6\nStadio: MAPEI Stadium\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 11/10/
+ 2026 18:00\nTurno: 6\nStadio: MAPEI Stadium\nDove vederla in Italia: DAZN\
+ nFonte orario: AC Milan
+LAST-MODIFIED:20260903T152529Z
 LOCATION:MAPEI Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -339,15 +340,16 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:⚽ Milan - Atalanta
-DTSTART;VALUE=DATE:20261018
-DTEND;VALUE=DATE:20261019
-DTSTAMP:20260831T072643Z
+DTSTART;TZID=Europe/Rome:20261018T180000
+DTEND;TZID=Europe/Rome:20261018T200000
+DTSTAMP:20260903T152529Z
 UID:f4cca29e5c6dd6bae4edb995@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
- no: 7\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 18/10/2026 
+ 18:00\nTurno: 7\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nFo
+ nte orario: AC Milan
+LAST-MODIFIED:20260903T152529Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -381,15 +383,16 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:⚽ Udinese - Milan
-DTSTART;VALUE=DATE:20261025
-DTEND;VALUE=DATE:20261026
-DTSTAMP:20260831T072643Z
+DTSTART;TZID=Europe/Rome:20261025T204500
+DTEND;TZID=Europe/Rome:20261025T224500
+DTSTAMP:20260903T152529Z
 UID:ed011e560d0939fa19ee726a@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
- \nTurno: 8\nStadio: Bluenergy Stadium\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 25/10/
+ 2026 20:45\nTurno: 8\nStadio: Bluenergy Stadium\nDove vederla in Italia: D
+ AZN\nFonte orario: AC Milan
+LAST-MODIFIED:20260903T152529Z
 LOCATION:Bluenergy Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -401,15 +404,16 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:⚽ Milan - Bologna
-DTSTART;VALUE=DATE:20261028
-DTEND;VALUE=DATE:20261029
-DTSTAMP:20260831T072643Z
+DTSTART;TZID=Europe/Rome:20261028T183000
+DTEND;TZID=Europe/Rome:20261028T203000
+DTSTAMP:20260903T152529Z
 UID:14204818a1863bef3d12592f@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
- no: 9\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 28/10/2026 
+ 18:30\nTurno: 9\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nFo
+ nte orario: AC Milan
+LAST-MODIFIED:20260903T152529Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -421,15 +425,16 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:⚽ Milan - Inter
-DTSTART;VALUE=DATE:20261101
-DTEND;VALUE=DATE:20261102
-DTSTAMP:20260831T072643Z
+DTSTART;TZID=Europe/Rome:20261031T204500
+DTEND;TZID=Europe/Rome:20261031T224500
+DTSTAMP:20260903T152529Z
 UID:8131b669c6acbfebbf8a5c63@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
- no: 10\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 31/10/2026 
+ 20:45\nTurno: 10\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nF
+ onte orario: AC Milan
+LAST-MODIFIED:20260903T152529Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -463,15 +468,16 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:⚽ Genoa - Milan
-DTSTART;VALUE=DATE:20261108
-DTEND;VALUE=DATE:20261109
-DTSTAMP:20260831T072643Z
+DTSTART;TZID=Europe/Rome:20261108T150000
+DTEND;TZID=Europe/Rome:20261108T170000
+DTSTAMP:20260903T152529Z
 UID:4bcf433e05672498eda803a5@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
- \nTurno: 11\nStadio: Stadio Ferraris\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 08/11/
+ 2026 15:00\nTurno: 11\nStadio: Stadio Ferraris\nDove vederla in Italia: DA
+ ZN\nFonte orario: AC Milan
+LAST-MODIFIED:20260903T152529Z
 LOCATION:Stadio Ferraris
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -483,15 +489,16 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:⚽ Milan - Frosinone
-DTSTART;VALUE=DATE:20261122
-DTEND;VALUE=DATE:20261123
-DTSTAMP:20260831T072643Z
+DTSTART;TZID=Europe/Rome:20261122T150000
+DTEND;TZID=Europe/Rome:20261122T170000
+DTSTAMP:20260903T152529Z
 UID:e0c247e803a33255e6ebefa8@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
-DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
- no: 12\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 22/11/2026 
+ 15:00\nTurno: 12\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nF
+ onte orario: AC Milan
+LAST-MODIFIED:20260903T152529Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
