@@ -1494,6 +1494,7 @@
     "Sky Sport: nessun orario esplicito per il Milan",
     "Mediaset: 404 Client Error: Not Found for url: https://mediasetinfinity.mediaset.it/sport",
     "Prime Video: nessun orario esplicito per il Milan",
+    "Broadcast Prime Video: 503 Server Error: Service Temporarily Unavailable for url: https://www.primevideo.com/sports",
     "Broadcast Mediaset Infinity: 404 Client Error: Not Found for url: https://mediasetinfinity.mediaset.it/sport",
     "Broadcast DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
     "Broadcast SIC: 403 Client Error: HTTP Forbidden for url: https://sic.pt/direto",
