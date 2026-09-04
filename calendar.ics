@@ -256,15 +256,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Benfica
 DTSTART;TZID=Europe/Rome:20260916T210000
 DTEND;TZID=Europe/Rome:20260916T230000
-DTSTAMP:20260901T114901Z
+DTSTAMP:20260904T152224Z
 UID:29b36264474890d3320b242f@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  16/09/2026 21:00\nTurno: 1\nStadio: San Siro Stadium\nDove vederla:\n🇮
- 🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da confermare
- \nFonte orario: AC Milan
-LAST-MODIFIED:20260901T114901Z
+ 🇹 Italia — Sky Sport / NOW\nA pagamento · TV + streaming · italiano
+ \nhttps://www.nowtv.it/sport/calcio/milan\n🌍 In chiaro all'estero — D
+ a confermare\nFonte orario: NOW
+LAST-MODIFIED:20260904T152224Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -299,14 +300,14 @@ BEGIN:VEVENT
 SUMMARY:⚽ Sassuolo - Milan
 DTSTART;TZID=Europe/Rome:20261011T180000
 DTEND;TZID=Europe/Rome:20261011T200000
-DTSTAMP:20260903T152529Z
+DTSTAMP:20260904T152224Z
 UID:efe8aeb093e233c7fe578a0b@milan-calendar
-SEQUENCE:8
+SEQUENCE:9
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 11/10/
  2026 18:00\nTurno: 6\nStadio: MAPEI Stadium\nDove vederla in Italia: DAZN\
- nFonte orario: AC Milan
-LAST-MODIFIED:20260903T152529Z
+ ; Sky Sport e NOW\nFonte orario: NOW
+LAST-MODIFIED:20260904T152224Z
 LOCATION:MAPEI Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -342,14 +343,14 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Atalanta
 DTSTART;TZID=Europe/Rome:20261018T180000
 DTEND;TZID=Europe/Rome:20261018T200000
-DTSTAMP:20260903T152529Z
+DTSTAMP:20260904T152224Z
 UID:f4cca29e5c6dd6bae4edb995@milan-calendar
-SEQUENCE:8
+SEQUENCE:9
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 18/10/2026 
- 18:00\nTurno: 7\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nFo
- nte orario: AC Milan
-LAST-MODIFIED:20260903T152529Z
+ 18:00\nTurno: 7\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\; S
+ ky Sport e NOW\nFonte orario: NOW
+LAST-MODIFIED:20260904T152224Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
