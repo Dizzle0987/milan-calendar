@@ -185,18 +185,14 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Venezia
 DTSTART;TZID=Europe/Rome:20260828T204500
 DTEND;TZID=Europe/Rome:20260828T224500
-DTSTAMP:20260905T214100Z
+DTSTAMP:20260905T232444Z
 UID:c842b581e5d1cee0db8d5794@milan-calendar
-SEQUENCE:20
+SEQUENCE:21
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 28/08/2026 
  20:45\nTurno: 2\nStadio: Stadio San Siro\nLocalità: Milano\nDove vederla 
- in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provvisoria 
- — giornata in corso:\n  2. Inter — 9 pt\n  3. Como — 7 pt\n▶ 4. Mi
- lan — 6 pt — 2 PG — DR +3\n  5. Juventus — 6 pt\n  6. Lazio — 6 
- pt\nClassifica aggiornata: 05/09/2026 23:41\nFonte classifica: Lega Serie 
- A
-LAST-MODIFIED:20260905T214100Z
+ in Italia: DAZN\nFonte orario: AC Milan
+LAST-MODIFIED:20260905T232444Z
 LOCATION:Stadio San Siro\, Milano
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -235,14 +231,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Lazio - Milan
 DTSTART;TZID=Europe/Rome:20260912T180000
 DTEND;TZID=Europe/Rome:20260912T200000
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260905T232444Z
 UID:9bd99a4e5de2da2051ebcc15@milan-calendar
-SEQUENCE:9
+SEQUENCE:10
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 12/09/
  2026 18:00\nTurno: 4\nStadio: Stadio Olimpico\nDove vederla in Italia: DAZ
- N\nFonte orario: AC Milan
-LAST-MODIFIED:20260831T072643Z
+ N\nFonte orario: AC Milan\nClassifica Serie A provvisoria — giornata in 
+ corso:\n  2. Inter — 9 pt\n  3. Como — 7 pt\n▶ 4. Milan — 6 pt —
+  2 PG — DR +3\n  5. Juventus — 6 pt\n  6. Lazio — 6 pt\nClassifica a
+ ggiornata: 05/09/2026 23:41\nFonte classifica: Lega Serie A
+LAST-MODIFIED:20260905T232444Z
 LOCATION:Stadio Olimpico
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
