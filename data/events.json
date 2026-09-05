@@ -202,18 +202,18 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-09-05T20:28:05Z",
+      "last_modified": "2026-09-05T21:41:00Z",
       "location": "Milano",
       "neutral": false,
       "round": "2",
-      "sequence": 19,
+      "sequence": 20,
       "serie_a_standing": {
         "context": [
           {
             "played": 3,
             "points": 9,
             "position": 2,
-            "team": "Atalanta"
+            "team": "Inter"
           },
           {
             "played": 3,
@@ -250,7 +250,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-09-05T20:28:05Z",
+        "updated_at": "2026-09-05T21:41:00Z",
         "wins": 2
       },
       "source": "AC Milan",
@@ -272,18 +272,18 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Juventus",
-      "last_modified": "2026-09-05T20:28:05Z",
+      "last_modified": "2026-09-05T21:41:00Z",
       "location": "Italy",
       "neutral": false,
       "round": "3",
-      "sequence": 21,
+      "sequence": 22,
       "serie_a_standing": {
         "context": [
           {
             "played": 3,
             "points": 9,
             "position": 2,
-            "team": "Atalanta"
+            "team": "Inter"
           },
           {
             "played": 3,
@@ -320,7 +320,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-09-05T20:28:05Z",
+        "updated_at": "2026-09-05T21:41:00Z",
         "wins": 2
       },
       "source": "AC Milan",
@@ -1504,7 +1504,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-05T20:28:05Z",
+  "last_changed": "2026-09-05T21:41:00Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -1512,7 +1512,7 @@
         "played": 3,
         "points": 9,
         "position": 2,
-        "team": "Atalanta"
+        "team": "Inter"
       },
       {
         "played": 3,
@@ -1549,7 +1549,7 @@
     "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-09-05T20:28:05Z",
+    "updated_at": "2026-09-05T21:41:00Z",
     "wins": 2
   },
   "source_errors": [
