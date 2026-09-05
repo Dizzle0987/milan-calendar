@@ -391,7 +391,7 @@
         {
           "broadcaster": "Sport TV",
           "competition": "UEFA Europa League",
-          "confidence": 85,
+          "confidence": 75,
           "country": "Portogallo",
           "country_code": "PT",
           "date": "2026-09-16",
@@ -400,7 +400,7 @@
               "guide": "FootAz",
               "source_type": "guide",
               "source_url": "https://www.footaz.pt/jogo/ac-milan-vs-benfica/",
-              "verified_at": "2026-09-05T14:04:15Z"
+              "verified_at": "2026-09-05T14:12:25Z"
             }
           ],
           "free_or_pay": "paid",
@@ -413,7 +413,7 @@
           "source_type": "guide",
           "source_url": "https://www.footaz.pt/jogo/ac-milan-vs-benfica/",
           "url": "https://www.footaz.pt/jogo/ac-milan-vs-benfica/",
-          "verified_at": "2026-09-05T14:04:15Z"
+          "verified_at": "2026-09-05T14:12:25Z"
         }
       ],
       "broadcast_international_tbc": true,
@@ -446,7 +446,7 @@
       "competition": "UEFA Europa League",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-09-05T14:04:15Z",
+      "last_modified": "2026-09-05T14:12:25Z",
       "location": "",
       "neutral": false,
       "opponent_country": "Portogallo",
@@ -454,7 +454,7 @@
       "opponent_country_source": "TheSportsDB team lookup",
       "opponent_country_source_url": "https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=Benfica",
       "round": "1",
-      "sequence": 3,
+      "sequence": 4,
       "source": "AC Milan",
       "source_id": "donqu6bltepo7k7bsmdffhfys",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -1504,7 +1504,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-05T14:04:15Z",
+  "last_changed": "2026-09-05T14:12:25Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [

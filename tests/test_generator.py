@@ -1423,7 +1423,7 @@ def test_foreign_paid_alternative_is_never_published_as_free() -> None:
             False,
             90,
         ),
-        ([{"source_type": "guide", "source_url": "guide-a"}], True, 85),
+        ([{"source_type": "guide", "source_url": "guide-a"}], True, 75),
         ([{"source_type": "guide", "source_url": "guide-a"}], False, 70),
     ],
 )
@@ -1486,7 +1486,7 @@ def test_paid_foreign_candidate_is_kept_for_debug_but_not_published() -> None:
     )
 
     assert not errors
-    assert updated[0]["broadcast_candidates"][0]["confidence"] == 85
+    assert updated[0]["broadcast_candidates"][0]["confidence"] == 75
     assert updated[0]["broadcast_candidates"][0]["free_or_pay"] == "paid"
     assert updated[0]["broadcast_options"] == []
     assert updated[0]["broadcast_international_tbc"] is True

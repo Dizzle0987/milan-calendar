@@ -145,6 +145,7 @@ TEAM_COUNTRY_LOOKUP_URL = (
     "https://www.thesportsdb.com/api/v1/json/123/searchteams.php"
 )
 BROADCAST_CONFIDENCE_THRESHOLD = 85
+INTERNATIONAL_FREE_MARKETS = {"PT", "DE", "AT", "CH"}
 MONTH_NAMES = {
     1: ("gennaio", "january", "januar", "janvier", "enero", "janeiro"),
     2: ("febbraio", "february", "februar", "fevrier", "febrero", "fevereiro"),
@@ -665,7 +666,9 @@ def score_broadcast_evidence(
     if len(guide_sources) >= 2:
         return 90
     if guide_sources and rights_confirmed:
-        return 85
+        # Generic territorial rights add context, but do not confirm that this
+        # particular fixture was selected by the broadcaster.
+        return 75
     if guide_sources:
         return 70
     return 0
@@ -724,9 +727,7 @@ def apply_verified_broadcasts(
             if opponent_country.get("source_url"):
                 target["opponent_country_source_url"] = opponent_country["source_url"]
 
-        allowed_countries = {"IT"}
-        if opponent_country:
-            allowed_countries.add(opponent_country["country_code"])
+        allowed_countries = {"IT", *INTERNATIONAL_FREE_MARKETS}
         broadcaster_sources = [
             source
             for source in sources

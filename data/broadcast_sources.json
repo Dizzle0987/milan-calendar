@@ -30,6 +30,14 @@
       "lookahead_days": 21, "priority": 105
     },
     {
+      "country": "Germania", "country_code": "DE", "broadcaster": "RTL / NITRO",
+      "access": "free", "platforms": "TV", "language": "tedesco",
+      "url": "https://www.rtl.de/sport/fussball/europa-league/",
+      "competition_families": ["europa-league", "conference-league"],
+      "rights_from_season": 2024, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 90
+    },
+    {
       "country": "Austria", "country_code": "AT", "broadcaster": "ServusTV / ServusTV On",
       "access": "free", "platforms": "TV + streaming", "language": "tedesco",
       "url": "https://www.servustv.com/de/epg", "public_url": "https://www.servustv.com/de/sport/",
