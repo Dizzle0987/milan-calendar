@@ -14,6 +14,7 @@ from milan_calendar.generator import (
     _broadcast_description_lines,
     _canonical_event,
     _is_official_international_match,
+    _guide_broadcasters,
     _programme_confirms_fixture,
     apply_verified_broadcasts,
     build_ical,
@@ -35,6 +36,7 @@ from milan_calendar.generator import (
     parse_tv8_epg,
     parse_official_html,
     page_confirms_fixture,
+    score_broadcast_evidence,
     update_calendar,
 )
 
@@ -1333,11 +1335,41 @@ def test_broadcast_verification_changes_only_international_broadcast_fields() ->
         datetime(2026, 9, 1, tzinfo=timezone.utc),
     )
 
-    assert not errors
+    assert errors  # il lookup Paese è separato e il fake non espone JSON strutturato
     assert "broadcast_options" in updated[0]
     assert updated[1] == domestic
     for key, value in international.items():
         assert updated[0][key] == value
+
+
+def test_only_next_international_fixture_is_reverified() -> None:
+    next_match = {
+        "event_kind": "match", "home_team": "Milan", "away_team": "Benfica",
+        "competition": "UEFA Europa League", "start": "2026-09-16T21:00:00+02:00",
+        "status": "Fixture",
+    }
+    later_match = {
+        "event_kind": "match", "home_team": "Salzburg", "away_team": "Milan",
+        "competition": "UEFA Europa League", "start": "2026-10-01T21:00:00+02:00",
+        "status": "Fixture",
+    }
+    old_later = dict(
+        later_match,
+        broadcast_options=[],
+        broadcast_italy_tbc=True,
+        broadcast_international_tbc=True,
+    )
+
+    class Session:
+        def get(self, url: str, timeout: int) -> None:
+            raise requests.Timeout("offline")
+
+    updated, _ = apply_verified_broadcasts(
+        Session(), [next_match, later_match], [next_match, old_later], [],
+        "2026-09-05T10:00:00Z", datetime(2026, 9, 5, tzinfo=timezone.utc),
+    )
+
+    assert updated[1] == old_later
 
 
 def test_structured_broadcast_description_orders_italy_and_foreign_links() -> None:
@@ -1363,7 +1395,7 @@ def test_structured_broadcast_description_orders_italy_and_foreign_links() -> No
     assert "https://www.servustv.com/sport/" in text
 
 
-def test_foreign_paid_alternative_is_labelled_and_not_presented_as_free() -> None:
+def test_foreign_paid_alternative_is_never_published_as_free() -> None:
     data = {
         "broadcast_options": [{
             "country": "Portogallo", "country_code": "PT", "broadcaster": "Sport TV",
@@ -1374,9 +1406,127 @@ def test_foreign_paid_alternative_is_labelled_and_not_presented_as_free() -> Non
     }
     text = "\n".join(_broadcast_description_lines(data))
 
-    assert "ALTERNATIVE UFFICIALI ALL'ESTERO" in text
-    assert "A pagamento" in text
+    assert "Sport TV" not in text
     assert "GRATIS" not in text
+
+
+@pytest.mark.parametrize(
+    ("evidence", "rights", "expected"),
+    [
+        ([{"source_type": "official_match", "source_url": "official"}], False, 100),
+        ([{"source_type": "official_epg", "source_url": "epg"}], False, 95),
+        (
+            [
+                {"source_type": "guide", "source_url": "guide-a"},
+                {"source_type": "guide", "source_url": "guide-b"},
+            ],
+            False,
+            90,
+        ),
+        ([{"source_type": "guide", "source_url": "guide-a"}], True, 85),
+        ([{"source_type": "guide", "source_url": "guide-a"}], False, 70),
+    ],
+)
+def test_broadcast_confidence_model(
+    evidence: list[dict[str, str]], rights: bool, expected: int
+) -> None:
+    assert score_broadcast_evidence(evidence, rights) == expected
+
+
+def test_unconfirmed_guide_window_does_not_name_a_broadcaster() -> None:
+    event = {
+        "event_kind": "match", "home_team": "Milan", "away_team": "Benfica",
+        "competition": "UEFA Europa League", "start": "2026-09-16T21:00:00+02:00",
+    }
+    html = "Milan - Benfica 16 settembre 2026, canal a confirmar, Sport TV"
+    broadcasters = [{"broadcaster": "Sport TV", "country_code": "PT"}]
+    assert _guide_broadcasters(html, event, broadcasters, "Europe/Lisbon") == []
+
+
+def test_paid_foreign_candidate_is_kept_for_debug_but_not_published() -> None:
+    event = {
+        "event_kind": "match", "home_team": "Milan", "away_team": "Benfica",
+        "title": "Milan - Benfica", "competition": "UEFA Europa League",
+        "start": "2026-09-16T21:00:00+02:00", "status": "Fixture",
+    }
+    sport = {
+        "country": "Portogallo", "country_code": "PT", "country_aliases": ["Portugal"],
+        "broadcaster": "Sport TV", "access": "paid", "platforms": "TV + streaming",
+        "language": "portoghese", "url": "https://sport.test/", "rights_confirmed": True,
+        "competition_families": ["europa-league"], "lookahead_days": 30,
+    }
+    guide = {
+        "country": "Portogallo", "country_code": "PT", "country_aliases": ["Portugal"],
+        "broadcaster": "Guida", "access": "free", "url": "https://guide.test/",
+        "source_type": "guide", "competition_families": ["europa-league"],
+        "lookahead_days": 30,
+    }
+
+    class Response:
+        def __init__(self, text: str = "", payload: dict | None = None) -> None:
+            self.text, self.payload = text, payload
+
+        def raise_for_status(self) -> None:
+            return None
+
+        def json(self) -> dict:
+            return self.payload or {}
+
+    class Session:
+        def get(self, url: str, timeout: int) -> Response:
+            if "searchteams.php" in url:
+                return Response(payload={"teams": [{"strTeam": "Benfica", "strCountry": "Portugal"}]})
+            if "guide.test" in url:
+                return Response("Milan - Benfica 16 settembre 2026 in diretta su Sport TV")
+            return Response("Programmazione generale Sport TV")
+
+    updated, errors = apply_verified_broadcasts(
+        Session(), [event], [], [sport, guide], "2026-09-05T10:00:00Z",
+        datetime(2026, 9, 5, tzinfo=timezone.utc),
+    )
+
+    assert not errors
+    assert updated[0]["broadcast_candidates"][0]["confidence"] == 85
+    assert updated[0]["broadcast_candidates"][0]["free_or_pay"] == "paid"
+    assert updated[0]["broadcast_options"] == []
+    assert updated[0]["broadcast_international_tbc"] is True
+    repeated, _ = apply_verified_broadcasts(
+        Session(), [event], updated, [sport, guide], "2026-09-05T16:00:00Z",
+        datetime(2026, 9, 5, tzinfo=timezone.utc),
+    )
+    assert repeated == updated
+
+
+@pytest.mark.parametrize("failure", [requests.Timeout("timeout"), requests.HTTPError("403")])
+def test_broadcast_source_failure_preserves_last_valid_option(failure: Exception) -> None:
+    event = {
+        "event_kind": "match", "home_team": "Milan", "away_team": "Benfica",
+        "competition": "UEFA Europa League", "start": "2026-09-16T21:00:00+02:00",
+        "status": "Fixture",
+    }
+    prior_option = {
+        "country": "Italia", "country_code": "IT", "broadcaster": "Sky Sport Calcio / Sky Go",
+        "access": "paid", "url": "https://sky.test/", "status": "confirmed",
+    }
+
+    class Session:
+        def get(self, url: str, timeout: int) -> None:
+            raise failure
+
+    first, errors = apply_verified_broadcasts(
+        Session(), [event], [dict(event, broadcast_options=[prior_option])],
+        [{"country": "Italia", "country_code": "IT", "broadcaster": "Sky", "access": "paid", "url": "https://sky.test/"}],
+        "2026-09-05T10:00:00Z", datetime(2026, 9, 5, tzinfo=timezone.utc),
+    )
+    second, _ = apply_verified_broadcasts(
+        Session(), first, first,
+        [{"country": "Italia", "country_code": "IT", "broadcaster": "Sky", "access": "paid", "url": "https://sky.test/"}],
+        "2026-09-05T10:00:00Z", datetime(2026, 9, 5, tzinfo=timezone.utc),
+    )
+
+    assert errors
+    assert first[0]["broadcast_options"] == [prior_option]
+    assert second == first
 
 
 def test_subscription_page_has_iphone_fallback() -> None:

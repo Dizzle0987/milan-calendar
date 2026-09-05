@@ -141,6 +141,10 @@ BROADCAST_EVIDENCE_MARKERS = {
 }
 BROADCAST_GUIDE_HORIZON_DAYS = 21
 TV8_PROGRAMMING_API = "https://www.tv8.it/api/programmingCarousel"
+TEAM_COUNTRY_LOOKUP_URL = (
+    "https://www.thesportsdb.com/api/v1/json/123/searchteams.php"
+)
+BROADCAST_CONFIDENCE_THRESHOLD = 85
 MONTH_NAMES = {
     1: ("gennaio", "january", "januar", "janvier", "enero", "janeiro"),
     2: ("febbraio", "february", "februar", "fevrier", "febrero", "fevereiro"),
@@ -292,13 +296,11 @@ def _fixture_date_markers(
     return markers
 
 
-def page_confirms_fixture(
+def _fixture_windows(
     html: str,
     event: dict[str, Any],
-    broadcaster: str,
     timezone_name: str = "Europe/Rome",
-) -> bool:
-    """Require teams, exact date and viewing language in one nearby page fragment."""
+) -> list[str]:
     text = _normalize(html_module.unescape(re.sub(r"<[^>]+>", " ", html)))
     opponent = (
         str(event.get("away_team") or "")
@@ -310,14 +312,26 @@ def page_confirms_fixture(
         token for token in opponent_key.split("-") if len(token) >= 4 and token not in {"club", "calcio"}
     ]
     if not opponent_tokens:
-        return False
+        return []
     anchor = max(opponent_tokens, key=len)
     date_markers = _fixture_date_markers(_event_datetime(event), timezone_name)
-    broadcaster_marker = _normalize(broadcaster)
+    windows: list[str] = []
     for match in re.finditer(re.escape(anchor), text):
         window = text[max(0, match.start() - 900) : match.end() + 900]
-        if "milan" not in window or not any(marker in window for marker in date_markers):
-            continue
+        if "milan" in window and any(marker in window for marker in date_markers):
+            windows.append(window)
+    return windows
+
+
+def page_confirms_fixture(
+    html: str,
+    event: dict[str, Any],
+    broadcaster: str,
+    timezone_name: str = "Europe/Rome",
+) -> bool:
+    """Require teams, exact date and viewing language in one nearby page fragment."""
+    broadcaster_marker = _normalize(broadcaster)
+    for window in _fixture_windows(html, event, timezone_name):
         has_viewing_evidence = any(marker in window for marker in BROADCAST_EVIDENCE_MARKERS)
         distinctive_broadcaster_tokens = [
             token
@@ -423,10 +437,10 @@ def _fixture_source_url(source: dict[str, Any], event: dict[str, Any]) -> str:
     family = _competition_family(str(event.get("competition") or ""))
     templates = source.get("url_templates") or {}
     template = str(templates.get(family) or source.get("url_template") or source["url"])
-    values = {
-        "home": _normalize(str(event.get("home_team") or "")),
-        "away": _normalize(str(event.get("away_team") or "")),
-    }
+    slugs = source.get("team_slugs") or {}
+    home = _team_match_key(str(event.get("home_team") or ""))
+    away = _team_match_key(str(event.get("away_team") or ""))
+    values = {"home": str(slugs.get(home) or home), "away": str(slugs.get(away) or away)}
     return template.format(**values)
 
 
@@ -515,6 +529,148 @@ def _fetch_epg_rows(
     raise ValueError(f"tipo palinsesto non supportato: {source_type}")
 
 
+def next_international_match(
+    events: list[dict[str, Any]], now: datetime
+) -> dict[str, Any] | None:
+    """Return only the next future official international Milan fixture."""
+    future = [
+        event
+        for event in events
+        if _is_official_international_match(event)
+        and _event_datetime(event).astimezone(timezone.utc) > now.astimezone(timezone.utc)
+        and _normalize(str(event.get("status") or ""))
+        not in {"played", "final", "full-time", "ft", "completed", "status-final"}
+    ]
+    return min(future, key=_event_datetime) if future else None
+
+
+def _opponent_name(event: dict[str, Any]) -> str:
+    return (
+        str(event.get("away_team") or "")
+        if _is_milan(str(event.get("home_team") or ""))
+        else str(event.get("home_team") or "")
+    )
+
+
+def _country_from_registry(
+    opponent: str, sources: list[dict[str, Any]]
+) -> dict[str, str] | None:
+    opponent_key = _team_match_key(opponent)
+    for source in sources:
+        if str(source.get("country_code") or "").upper() == "IT":
+            continue
+        if any(
+            _normalize(str(keyword)) in opponent_key
+            for keyword in source.get("team_keywords") or []
+        ):
+            return {
+                "country": str(source["country"]),
+                "country_code": str(source["country_code"]).upper(),
+                "source": "broadcast source registry",
+            }
+    return None
+
+
+def identify_opponent_country(
+    requester: Any,
+    event: dict[str, Any],
+    sources: list[dict[str, Any]],
+) -> tuple[dict[str, str] | None, str | None]:
+    """Resolve the opponent country through structured team data, with registry fallback."""
+    opponent = _opponent_name(event)
+    url = f"{TEAM_COUNTRY_LOOKUP_URL}?{urlencode({'t': opponent})}"
+    try:
+        response = requester.get(url, timeout=10)
+        response.raise_for_status()
+        teams = response.json().get("teams") or []
+        opponent_key = _team_match_key(opponent)
+        ordered = sorted(
+            teams,
+            key=lambda team: _team_match_key(str(team.get("strTeam") or ""))
+            != opponent_key,
+        )
+        for team in ordered:
+            country_name = str(team.get("strCountry") or "").strip()
+            if not country_name:
+                continue
+            country_key = _normalize(country_name)
+            for source in sources:
+                aliases = {
+                    _normalize(str(source.get("country") or "")),
+                    *(
+                        _normalize(str(alias))
+                        for alias in source.get("country_aliases") or []
+                    ),
+                }
+                if country_key in aliases:
+                    return {
+                        "country": str(source["country"]),
+                        "country_code": str(source["country_code"]).upper(),
+                        "source": "TheSportsDB team lookup",
+                        "source_url": url,
+                    }, None
+    except (
+        requests.RequestException,
+        ValueError,
+        json.JSONDecodeError,
+        AttributeError,
+        TypeError,
+    ) as exc:
+        fallback = _country_from_registry(opponent, sources)
+        return fallback, f"Paese avversaria ({opponent}): {exc}"
+    fallback = _country_from_registry(opponent, sources)
+    return fallback, None if fallback else f"Paese avversaria non identificato: {opponent}"
+
+
+def _guide_broadcasters(
+    html: str,
+    event: dict[str, Any],
+    broadcaster_sources: list[dict[str, Any]],
+    timezone_name: str,
+) -> list[dict[str, Any]]:
+    """Discover known broadcasters named next to the exact fixture in a TV guide."""
+    windows = _fixture_windows(html, event, timezone_name)
+    windows = [window for window in windows if "canal-a-confirmar" not in window]
+    if not windows:
+        return []
+    found: list[dict[str, Any]] = []
+    for broadcaster in broadcaster_sources:
+        marker = _normalize(str(broadcaster.get("broadcaster") or ""))
+        terms = {
+            marker,
+            *(
+                _normalize(str(term))
+                for term in broadcaster.get("match_terms") or []
+            ),
+        }
+        if any(term and term in window for term in terms for window in windows):
+            found.append(broadcaster)
+    return found
+
+
+def score_broadcast_evidence(
+    evidence: list[dict[str, Any]], rights_confirmed: bool = False
+) -> int:
+    """Score independent evidence without turning generic rights into match proof."""
+    types = {str(item.get("source_type") or "") for item in evidence}
+    if "official_match" in types:
+        return 100
+    if "official_epg" in types:
+        return 95
+    guide_sources = {
+        str(item.get("source_url") or "")
+        for item in evidence
+        if item.get("source_type") == "guide"
+    }
+    if len(guide_sources) >= 2:
+        return 90
+    if guide_sources and rights_confirmed:
+        return 85
+    if guide_sources:
+        return 70
+    return 0
+
+
 def apply_verified_broadcasts(
     session: requests.Session,
     events: list[dict[str, Any]],
@@ -523,18 +679,32 @@ def apply_verified_broadcasts(
     checked_at: str,
     now: datetime,
 ) -> tuple[list[dict[str, Any]], list[str]]:
-    """Verify exact fixtures and preserve previously confirmed options on failures."""
+    """Verify broadcasters for the next international fixture only."""
     result = deepcopy(events)
-    targets = [
-        event
-        for event in result
-        if _is_official_international_match(event)
-        and _event_datetime(event).astimezone(timezone.utc) > now.astimezone(timezone.utc)
-        and _normalize(str(event.get("status") or ""))
-        not in {"played", "final", "full-time", "ft", "completed", "status-final"}
-    ]
+    target = next_international_match(result, now)
+    if target is None:
+        return result, []
+
+    # This first rollout is deliberately scoped to one fixture. Fresh remote data
+    # does not contain our enrichment fields, so retain them for every other event
+    # instead of making unrelated calendar entries look changed.
+    for event in result:
+        if event is target:
+            continue
+        previous_event = next(
+            (item for item in previous if _same_long_range_fixture(item, event)), None
+        ) or next(
+            (item for item in previous if _same_fixture(item, event, unordered=True)),
+            None,
+        )
+        if not previous_event:
+            continue
+        for key, value in previous_event.items():
+            if key.startswith("broadcast_") or key.startswith("opponent_country"):
+                event[key] = deepcopy(value)
+
     errors: list[str] = []
-    confirmations: dict[str, list[dict[str, Any]]] = {}
+    evidence_by_broadcaster: dict[tuple[str, str], dict[str, Any]] = {}
     optional_session: requests.Session | None = None
     requester: Any = session
     if isinstance(session, requests.Session):
@@ -542,143 +712,276 @@ def apply_verified_broadcasts(
         optional_session.headers.update(session.headers)
         requester = optional_session
     try:
+        opponent_country, country_error = identify_opponent_country(
+            requester, target, sources
+        )
+        if country_error:
+            errors.append(country_error)
+        if opponent_country:
+            target["opponent_country"] = opponent_country["country"]
+            target["opponent_country_code"] = opponent_country["country_code"]
+            target["opponent_country_source"] = opponent_country["source"]
+            if opponent_country.get("source_url"):
+                target["opponent_country_source_url"] = opponent_country["source_url"]
+
+        allowed_countries = {"IT"}
+        if opponent_country:
+            allowed_countries.add(opponent_country["country_code"])
+        broadcaster_sources = [
+            source
+            for source in sources
+            if str(source.get("source_type") or "page") != "guide"
+            and str(source.get("country_code") or "").upper() in allowed_countries
+        ]
+
+        def add_evidence(
+            broadcaster: dict[str, Any], item: dict[str, Any]
+        ) -> None:
+            key = (
+                str(broadcaster["country_code"]).upper(),
+                _normalize(str(broadcaster["broadcaster"])),
+            )
+            bucket = evidence_by_broadcaster.setdefault(
+                key, {"source": deepcopy(broadcaster), "evidence": []}
+            )
+            if not any(
+                existing.get("source_url") == item.get("source_url")
+                and existing.get("source_type") == item.get("source_type")
+                for existing in bucket["evidence"]
+            ):
+                bucket["evidence"].append(item)
+
         for source in sources:
-            keywords = {_normalize(str(item)) for item in source.get("team_keywords") or []}
+            country_code = str(source.get("country_code") or "").upper()
+            if country_code not in allowed_countries:
+                continue
             competition_families = {
                 _normalize(str(item)) for item in source.get("competition_families") or []
             }
             horizon = int(source.get("lookahead_days") or BROADCAST_GUIDE_HORIZON_DAYS)
-            relevant = [
-                event
-                for event in targets
-                if _event_datetime(event).astimezone(ROME).date()
-                <= now.astimezone(ROME).date() + timedelta(days=horizon)
-                and int(source.get("rights_from_season") or 0)
-                <= season_start(_event_datetime(event).astimezone(ROME).date())
-                and int(source.get("rights_through_season") or 9999)
-                >= season_start(_event_datetime(event).astimezone(ROME).date())
-                and (
-                    not competition_families
-                    or _competition_family(str(event.get("competition") or ""))
-                    in competition_families
+            event_date = _event_datetime(target).astimezone(ROME).date()
+            event_season = season_start(event_date)
+            if (
+                event_date > now.astimezone(ROME).date() + timedelta(days=horizon)
+                or int(source.get("rights_from_season") or 0) > event_season
+                or int(source.get("rights_through_season") or 9999) < event_season
+                or (
+                    competition_families
+                    and _competition_family(str(target.get("competition") or ""))
+                    not in competition_families
                 )
-                and (
-                    str(source.get("country_code") or "").upper() == "IT"
-                    or not keywords
-                    or any(
-                        keyword in _team_match_key(str(event.get(key) or ""))
-                        for keyword in keywords
-                        for key in ("home_team", "away_team")
-                    )
-                )
-            ]
-            if not relevant:
+            ):
                 continue
             source_type = str(source.get("source_type") or "page")
             if source_type in {"servus_epg", "tv8_api"}:
                 try:
-                    programmes, guide_url = _fetch_epg_rows(requester, source, relevant)
+                    programmes, guide_url = _fetch_epg_rows(
+                        requester, source, [target]
+                    )
                 except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
                     errors.append(f"{source['broadcaster']}: {exc}")
                     continue
-                for event in relevant:
-                    starts = [
-                        start
-                        for programme in programmes
-                        if (start := _programme_confirms_fixture(programme, event))
-                    ]
-                    if starts:
-                        confirmations.setdefault(_semantic_base(event), []).append(
-                            _broadcast_option(
-                                source,
-                                checked_at,
-                                source_url=guide_url,
-                                programme_start=min(starts),
-                            )
-                        )
+                starts = [
+                    start
+                    for programme in programmes
+                    if (start := _programme_confirms_fixture(programme, target))
+                ]
+                if starts:
+                    add_evidence(
+                        source,
+                        {
+                            "source_type": "official_epg",
+                            "source_url": guide_url,
+                            "verified_at": checked_at,
+                            "programme_start": min(starts).isoformat(),
+                        },
+                    )
                 continue
 
-            for event in relevant:
-                url = _fixture_source_url(source, event)
-                try:
-                    response = requester.get(url, timeout=10)
-                    response.raise_for_status()
-                except requests.RequestException as exc:
-                    errors.append(f"{source['broadcaster']} ({event.get('title')}): {exc}")
-                    continue
-                if page_confirms_fixture(
+            url = _fixture_source_url(source, target)
+            try:
+                response = requester.get(url, timeout=10)
+                response.raise_for_status()
+            except requests.RequestException as exc:
+                errors.append(f"{source['broadcaster']} ({target.get('title')}): {exc}")
+                continue
+
+            timezone_name = str(source.get("timezone") or "Europe/Rome")
+            if source_type == "guide":
+                for broadcaster in _guide_broadcasters(
                     response.text,
-                    event,
-                    str(source["broadcaster"]),
-                    str(source.get("timezone") or "Europe/Rome"),
+                    target,
+                    [item for item in broadcaster_sources if item["country_code"] == country_code],
+                    timezone_name,
                 ):
-                    confirmations.setdefault(_semantic_base(event), []).append(
-                        _broadcast_option(
-                            _source_with_page_channels(source, response.text),
-                            checked_at,
-                            source_url=url,
-                        )
+                    add_evidence(
+                        broadcaster,
+                        {
+                            "source_type": "guide",
+                            "source_url": url,
+                            "verified_at": checked_at,
+                            "guide": str(source["broadcaster"]),
+                        },
                     )
+                continue
+
+            if page_confirms_fixture(
+                response.text,
+                target,
+                str(source["broadcaster"]),
+                timezone_name,
+            ):
+                refined = _source_with_page_channels(source, response.text)
+                add_evidence(
+                    refined,
+                    {
+                        "source_type": "official_match",
+                        "source_url": url,
+                        "verified_at": checked_at,
+                    },
+                )
     finally:
         if optional_session is not None:
             optional_session.close()
 
-    access_order = {"free": 0, "included": 1, "paid": 2}
-    for event in result:
-        if not _is_official_international_match(event):
-            continue
-        old = next(
-            (item for item in previous if _same_long_range_fixture(item, event)), None
-        ) or next(
-            (item for item in previous if _same_fixture(item, event, unordered=True)), None
+    previous_target = next(
+        (item for item in previous if _same_long_range_fixture(item, target)), None
+    ) or next(
+        (item for item in previous if _same_fixture(item, target, unordered=True)), None
+    )
+    candidates: list[dict[str, Any]] = []
+    for bucket in evidence_by_broadcaster.values():
+        source = bucket["source"]
+        evidence = bucket["evidence"]
+        confidence = score_broadcast_evidence(
+            evidence, bool(source.get("rights_confirmed"))
         )
-        old_options = deepcopy((old or {}).get("broadcast_options") or [])
-        if _event_datetime(event).astimezone(timezone.utc) <= now.astimezone(timezone.utc):
-            if old_options:
-                event["broadcast_options"] = old_options
-                event["broadcast_international_tbc"] = bool(
-                    (old or {}).get("broadcast_international_tbc")
-                )
-            continue
-        merged: dict[tuple[str, str], dict[str, Any]] = {
-            (str(option.get("country_code") or ""), _normalize(str(option.get("broadcaster") or ""))): option
-            for option in old_options
-            if option.get("status") == "confirmed"
-        }
-        for option in confirmations.get(_semantic_base(event), []):
-            replacements = set(option.pop("_replaces_broadcasters", []))
-            if replacements:
-                merged = {
-                    key: value
-                    for key, value in merged.items()
-                    if not (
-                        key[0] == str(option["country_code"])
-                        and _normalize(str(value.get("broadcaster") or "")) in replacements
-                    )
-                }
-            key = (str(option["country_code"]), _normalize(str(option["broadcaster"])))
-            previous_option = merged.get(key)
-            if previous_option:
-                comparable_old = {k: v for k, v in previous_option.items() if k != "verified_at"}
-                comparable_new = {k: v for k, v in option.items() if k != "verified_at"}
-                if comparable_old == comparable_new:
-                    option["verified_at"] = str(previous_option.get("verified_at") or checked_at)
-            merged[key] = option
-        options = list(merged.values())
-        italian = sorted(
-            (option for option in options if option.get("country_code") == "IT"),
-            key=lambda option: (access_order.get(str(option.get("access")), 9), -int(option.get("priority") or 0)),
+        best = max(
+            evidence,
+            key=lambda item: {
+                "official_match": 3, "official_epg": 2, "guide": 1
+            }.get(str(item.get("source_type")), 0),
         )
-        foreign = sorted(
-            (option for option in options if option.get("country_code") != "IT"),
-            key=lambda option: (
-                access_order.get(str(option.get("access")), 9),
-                -int(option.get("priority") or 0),
+        candidate = {
+            "match": str(
+                target.get("title")
+                or f"{target.get('home_team', '')} - {target.get('away_team', '')}"
             ),
-        )[:3]
-        event["broadcast_options"] = italian + foreign
-        event["broadcast_international_tbc"] = not bool(foreign)
-        event["broadcast_italy_tbc"] = not bool(italian)
+            "competition": str(target.get("competition") or ""),
+            "date": _event_datetime(target).astimezone(ROME).date().isoformat(),
+            "country": str(source["country"]),
+            "country_code": str(source["country_code"]).upper(),
+            "broadcaster": str(source["broadcaster"]),
+            "source_type": str(best["source_type"]),
+            "source_url": str(best["source_url"]),
+            "evidence": evidence,
+            "verified_at": checked_at,
+            "confidence": confidence,
+            "free_or_pay": str(source["access"]),
+            "language": str(source.get("language") or ""),
+            "platforms": str(source.get("platforms") or "streaming"),
+            "requires_registration": bool(source.get("registration_required")),
+            "registration": (
+                "required" if source.get("registration_required") else "not_required"
+            ),
+            "url": str(source.get("public_url") or best["source_url"]),
+            "priority": int(source.get("priority") or 0),
+        }
+        if best.get("programme_start"):
+            start = datetime.fromisoformat(str(best["programme_start"]))
+            candidate["broadcast_start"] = start.astimezone(ROME).isoformat()
+            candidate["broadcast_start_rome"] = start.astimezone(ROME).strftime("%H:%M")
+        candidates.append(candidate)
+
+    def without_verification_time(value: Any) -> Any:
+        if isinstance(value, dict):
+            return {
+                key: without_verification_time(item)
+                for key, item in value.items()
+                if key != "verified_at"
+            }
+        if isinstance(value, list):
+            return [without_verification_time(item) for item in value]
+        return value
+
+    if previous_target:
+        previous_candidates = previous_target.get("broadcast_candidates") or []
+        stable_candidates: list[dict[str, Any]] = []
+        for candidate in candidates:
+            old_candidate = next(
+                (
+                    item
+                    for item in previous_candidates
+                    if item.get("country_code") == candidate.get("country_code")
+                    and item.get("broadcaster") == candidate.get("broadcaster")
+                    and without_verification_time(item)
+                    == without_verification_time(candidate)
+                ),
+                None,
+            )
+            stable_candidates.append(deepcopy(old_candidate or candidate))
+        candidates = stable_candidates
+
+    if not candidates and previous_target:
+        candidates = deepcopy(previous_target.get("broadcast_candidates") or [])
+    target["broadcast_candidates"] = candidates
+
+    access_order = {"free": 0, "included": 1, "paid": 2}
+    eligible = [
+        candidate
+        for candidate in candidates
+        if int(candidate.get("confidence") or 0) >= BROADCAST_CONFIDENCE_THRESHOLD
+    ]
+    italian_candidates = sorted(
+        (item for item in eligible if item["country_code"] == "IT"),
+        key=lambda item: (
+            access_order.get(str(item["free_or_pay"]), 9),
+            -int(item["confidence"]),
+            -int(item["priority"]),
+        ),
+    )
+    foreign_free_candidates = sorted(
+        (
+            item for item in eligible
+            if item["country_code"] != "IT" and item["free_or_pay"] == "free"
+        ),
+        key=lambda item: (-int(item["confidence"]), -int(item["priority"])),
+    )[:3]
+
+    def candidate_option(candidate: dict[str, Any]) -> dict[str, Any]:
+        option = {
+            "country": candidate["country"],
+            "country_code": candidate["country_code"],
+            "broadcaster": candidate["broadcaster"],
+            "access": candidate["free_or_pay"],
+            "platforms": candidate["platforms"],
+            "language": candidate["language"],
+            "registration_required": candidate["requires_registration"],
+            "url": candidate["url"],
+            "source_url": candidate["source_url"],
+            "source_type": candidate["source_type"],
+            "confidence": candidate["confidence"],
+            "status": "confirmed",
+            "broadcast_type": "diretta",
+            "verified_at": candidate["verified_at"],
+            "priority": candidate["priority"],
+        }
+        for key in ("broadcast_start", "broadcast_start_rome"):
+            if candidate.get(key):
+                option[key] = candidate[key]
+        return option
+
+    selected_options = [
+        candidate_option(item)
+        for item in italian_candidates + foreign_free_candidates
+    ]
+    if not selected_options and previous_target:
+        selected_options = deepcopy(previous_target.get("broadcast_options") or [])
+    target["broadcast_options"] = selected_options
+    target["broadcast_italy_tbc"] = not any(
+        option.get("country_code") == "IT" for option in selected_options
+    )
+    target["broadcast_international_tbc"] = not bool(foreign_free_candidates)
     return result, errors
 
 
@@ -2103,7 +2406,11 @@ def _country_flag(country_code: str) -> str:
 def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
     options = data.get("broadcast_options") or []
     italian = [option for option in options if option.get("country_code") == "IT"]
-    foreign = [option for option in options if option.get("country_code") != "IT"][:3]
+    foreign = [
+        option
+        for option in options
+        if option.get("country_code") != "IT" and option.get("access") == "free"
+    ][:3]
     lines = ["Dove vederla:"]
     if not italian:
         lines.append("🇮🇹 Italia — Da confermare")
@@ -2125,7 +2432,7 @@ def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
             )
         lines.extend((" · ".join(item for item in attributes if item), str(option["url"])))
     if foreign:
-        lines.append("ALTERNATIVE UFFICIALI ALL'ESTERO:")
+        lines.append("GRATIS / IN CHIARO ALL'ESTERO:")
         for option in foreign:
             lines.append(
                 f"{_country_flag(str(option.get('country_code') or ''))} "

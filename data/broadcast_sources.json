@@ -57,19 +57,46 @@
     },
     {
       "country": "Portogallo", "country_code": "PT", "broadcaster": "Sport TV",
+      "country_aliases": ["Portugal"],
       "access": "paid", "platforms": "TV + streaming", "language": "portoghese",
       "url": "https://www.sporttv.pt/?programacao=1", "competition_families": ["europa-league", "conference-league"],
+      "rights_confirmed": true,
+      "rights_source_url": "https://www.uefa.com/uefaeuropaleague/news/028d-1af1354fca61-efb642e380e6-1000/",
       "team_keywords": ["benfica", "torreense"],
       "rights_from_season": 2024, "rights_through_season": 2026,
       "lookahead_days": 21, "priority": 85
     },
     {
       "country": "Portogallo", "country_code": "PT", "broadcaster": "DAZN Portugal",
+      "country_aliases": ["Portugal"],
       "access": "paid", "platforms": "streaming", "language": "portoghese",
       "url": "https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l", "competition_families": ["europa-league", "conference-league"],
+      "rights_confirmed": true,
+      "rights_source_url": "https://www.uefa.com/uefaeuropaleague/news/028d-1af1354fca61-efb642e380e6-1000/",
       "team_keywords": ["benfica", "torreense"],
       "rights_from_season": 2024, "rights_through_season": 2026,
       "lookahead_days": 21, "priority": 80
+    },
+    {
+      "country": "Portogallo", "country_code": "PT", "broadcaster": "FootAz",
+      "country_aliases": ["Portugal"],
+      "access": "free", "platforms": "guida TV", "language": "portoghese",
+      "url": "https://www.footaz.pt/", "url_template": "https://www.footaz.pt/jogo/{home}-vs-{away}/",
+      "team_slugs": {"milan": "ac-milan"},
+      "source_type": "guide", "reliability": 70,
+      "competition_families": ["europa-league", "conference-league"],
+      "team_keywords": ["benfica", "torreense"],
+      "lookahead_days": 21, "priority": 70
+    },
+    {
+      "country": "Portogallo", "country_code": "PT", "broadcaster": "Futebol na TV",
+      "country_aliases": ["Portugal"],
+      "access": "free", "platforms": "guida TV", "language": "portoghese",
+      "url": "https://www.futebolnatv.pt/equipe/ac-milan",
+      "source_type": "guide", "reliability": 70,
+      "competition_families": ["europa-league", "conference-league"],
+      "team_keywords": ["benfica", "torreense"],
+      "lookahead_days": 21, "priority": 65
     },
     {
       "country": "Regno Unito", "country_code": "GB", "broadcaster": "HBO Max",

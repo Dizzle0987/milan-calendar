@@ -361,6 +361,61 @@
     {
       "all_day": false,
       "away_team": "Benfica",
+      "broadcast_candidates": [
+        {
+          "broadcaster": "Sky Sport Calcio / Sky Go",
+          "competition": "UEFA Europa League",
+          "confidence": 100,
+          "country": "Italia",
+          "country_code": "IT",
+          "date": "2026-09-16",
+          "evidence": [
+            {
+              "source_type": "official_match",
+              "source_url": "https://programmi.sky.it/sport/coppe-europee/uefa-europa-league/dove-vedere-milan-benfica",
+              "verified_at": "2026-09-05T14:04:15Z"
+            }
+          ],
+          "free_or_pay": "paid",
+          "language": "italiano",
+          "match": "Milan - Benfica",
+          "platforms": "TV + streaming",
+          "priority": 100,
+          "registration": "not_required",
+          "requires_registration": false,
+          "source_type": "official_match",
+          "source_url": "https://programmi.sky.it/sport/coppe-europee/uefa-europa-league/dove-vedere-milan-benfica",
+          "url": "https://programmi.sky.it/sport/coppe-europee/uefa-europa-league/dove-vedere-milan-benfica",
+          "verified_at": "2026-09-05T14:04:15Z"
+        },
+        {
+          "broadcaster": "Sport TV",
+          "competition": "UEFA Europa League",
+          "confidence": 85,
+          "country": "Portogallo",
+          "country_code": "PT",
+          "date": "2026-09-16",
+          "evidence": [
+            {
+              "guide": "FootAz",
+              "source_type": "guide",
+              "source_url": "https://www.footaz.pt/jogo/ac-milan-vs-benfica/",
+              "verified_at": "2026-09-05T14:04:15Z"
+            }
+          ],
+          "free_or_pay": "paid",
+          "language": "portoghese",
+          "match": "Milan - Benfica",
+          "platforms": "TV + streaming",
+          "priority": 85,
+          "registration": "not_required",
+          "requires_registration": false,
+          "source_type": "guide",
+          "source_url": "https://www.footaz.pt/jogo/ac-milan-vs-benfica/",
+          "url": "https://www.footaz.pt/jogo/ac-milan-vs-benfica/",
+          "verified_at": "2026-09-05T14:04:15Z"
+        }
+      ],
       "broadcast_international_tbc": true,
       "broadcast_it": "Sky Sport e NOW",
       "broadcast_italy_tbc": false,
@@ -369,16 +424,18 @@
           "access": "paid",
           "broadcast_type": "diretta",
           "broadcaster": "Sky Sport Calcio / Sky Go",
+          "confidence": 100,
           "country": "Italia",
           "country_code": "IT",
           "language": "italiano",
           "platforms": "TV + streaming",
           "priority": 100,
           "registration_required": false,
+          "source_type": "official_match",
           "source_url": "https://programmi.sky.it/sport/coppe-europee/uefa-europa-league/dove-vedere-milan-benfica",
           "status": "confirmed",
           "url": "https://programmi.sky.it/sport/coppe-europee/uefa-europa-league/dove-vedere-milan-benfica",
-          "verified_at": "2026-09-05T13:38:14Z"
+          "verified_at": "2026-09-05T14:04:15Z"
         }
       ],
       "broadcast_source_url": "https://www.nowtv.it/sport/calcio/milan",
@@ -389,11 +446,15 @@
       "competition": "UEFA Europa League",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-09-05T13:39:30Z",
+      "last_modified": "2026-09-05T14:04:15Z",
       "location": "",
       "neutral": false,
+      "opponent_country": "Portogallo",
+      "opponent_country_code": "PT",
+      "opponent_country_source": "TheSportsDB team lookup",
+      "opponent_country_source_url": "https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=Benfica",
       "round": "1",
-      "sequence": 4,
+      "sequence": 3,
       "source": "AC Milan",
       "source_id": "donqu6bltepo7k7bsmdffhfys",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -1443,7 +1504,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-05T13:39:30Z",
+  "last_changed": "2026-09-05T14:04:15Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
