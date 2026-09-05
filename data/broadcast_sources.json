@@ -1,195 +1,139 @@
 {
   "sources": [
     {
-      "country": "Italia",
-      "country_code": "IT",
-      "broadcaster": "TV8",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "italiano",
-      "url": "https://www.tv8.it/sport",
-      "priority": 100
+      "country": "Italia", "country_code": "IT", "broadcaster": "Sky Sport / Sky Go",
+      "access": "paid", "platforms": "TV + streaming", "language": "italiano",
+      "url": "https://programmi.sky.it/sport/coppe-europee",
+      "url_templates": {
+        "champions-league": "https://programmi.sky.it/sport/coppe-europee/uefa-champions-league/dove-vedere-{home}-{away}",
+        "europa-league": "https://programmi.sky.it/sport/coppe-europee/uefa-europa-league/dove-vedere-{home}-{away}",
+        "conference-league": "https://programmi.sky.it/sport/coppe-europee/uefa-conference-league/dove-vedere-{home}-{away}"
+      },
+      "source_type": "fixture_page",
+      "replaces_broadcasters": ["Sky Sport / NOW", "Sky Sport e NOW"],
+      "competition_families": ["champions-league", "europa-league", "conference-league", "supercoppa-uefa"],
+      "rights_from_season": 2024, "rights_through_season": 2030,
+      "lookahead_days": 240, "priority": 100
     },
     {
-      "country": "Italia",
-      "country_code": "IT",
-      "broadcaster": "Sky Sport / NOW",
-      "access": "paid",
-      "platforms": "TV + streaming",
-      "language": "italiano",
-      "url": "https://www.nowtv.it/sport/calcio/milan",
-      "priority": 80
+      "country": "Italia", "country_code": "IT", "broadcaster": "TV8",
+      "access": "free", "platforms": "TV + streaming", "language": "italiano",
+      "url": "https://www.tv8.it/programmazione",
+      "public_url": "https://www.tv8.it/programmazione",
+      "endpoint": "https://www.tv8.it/api/programmingCarousel", "source_type": "tv8_api",
+      "lookahead_days": 21, "priority": 110
     },
     {
-      "country": "Italia",
-      "country_code": "IT",
-      "broadcaster": "Prime Video",
-      "access": "included",
-      "platforms": "streaming",
-      "language": "italiano",
-      "url": "https://www.primevideo.com/sports",
-      "priority": 90
+      "country": "Italia", "country_code": "IT", "broadcaster": "Prime Video",
+      "access": "included", "platforms": "streaming", "language": "italiano",
+      "url": "https://www.primevideo.com/sports", "competition_families": ["champions-league"],
+      "lookahead_days": 21, "priority": 105
     },
     {
-      "country": "Italia",
-      "country_code": "IT",
-      "broadcaster": "Rai / RaiPlay",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "italiano",
-      "url": "https://www.raiplay.it/dirette/raisport",
-      "priority": 95
+      "country": "Austria", "country_code": "AT", "broadcaster": "ServusTV / ServusTV On",
+      "access": "free", "platforms": "TV + streaming", "language": "tedesco",
+      "url": "https://www.servustv.com/de/epg", "public_url": "https://www.servustv.com/de/sport/",
+      "endpoint": "https://www.servustv.com/de/epg", "source_type": "servus_epg",
+      "competition_families": ["europa-league", "conference-league"],
+      "team_keywords": ["salzburg", "sturm-graz"],
+      "rights_from_season": 2024, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 100
     },
     {
-      "country": "Italia",
-      "country_code": "IT",
-      "broadcaster": "Mediaset Infinity",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "italiano",
-      "url": "https://mediasetinfinity.mediaset.it/sport",
-      "priority": 90
+      "country": "Austria", "country_code": "AT", "broadcaster": "Sky Austria",
+      "access": "paid", "platforms": "TV + streaming", "language": "tedesco",
+      "url": "https://www.sky.at/tvguide-7599", "competition_families": ["europa-league", "conference-league"],
+      "team_keywords": ["salzburg", "sturm-graz"],
+      "rights_from_season": 2024, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 80
     },
     {
-      "country": "Italia",
-      "country_code": "IT",
-      "broadcaster": "DAZN",
-      "access": "paid",
-      "platforms": "streaming",
-      "language": "italiano",
-      "url": "https://www.dazn.com/it-IT/schedule",
-      "priority": 70
+      "country": "Austria", "country_code": "AT", "broadcaster": "CANAL+ Austria",
+      "access": "paid", "platforms": "TV + streaming", "language": "tedesco",
+      "url": "https://www.canalplus.at/sport/fussball/uefa-europa-league/", "competition_families": ["europa-league", "conference-league"],
+      "team_keywords": ["salzburg", "sturm-graz"],
+      "rights_from_season": 2024, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 75
     },
     {
-      "country": "Austria",
-      "country_code": "AT",
-      "broadcaster": "ServusTV",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "tedesco",
-      "url": "https://www.servustv.com/sport/",
-      "priority": 95,
-      "team_keywords": ["salzburg"]
+      "country": "Portogallo", "country_code": "PT", "broadcaster": "Sport TV",
+      "access": "paid", "platforms": "TV + streaming", "language": "portoghese",
+      "url": "https://www.sporttv.pt/?programacao=1", "competition_families": ["europa-league", "conference-league"],
+      "team_keywords": ["benfica", "torreense"],
+      "rights_from_season": 2024, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 85
     },
     {
-      "country": "Austria",
-      "country_code": "AT",
-      "broadcaster": "ORF",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "tedesco",
-      "url": "https://sport.orf.at/",
-      "priority": 90,
-      "team_keywords": ["salzburg"]
+      "country": "Portogallo", "country_code": "PT", "broadcaster": "DAZN Portugal",
+      "access": "paid", "platforms": "streaming", "language": "portoghese",
+      "url": "https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l", "competition_families": ["europa-league", "conference-league"],
+      "team_keywords": ["benfica", "torreense"],
+      "rights_from_season": 2024, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 80
     },
     {
-      "country": "Portogallo",
-      "country_code": "PT",
-      "broadcaster": "RTP Play",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "portoghese",
-      "url": "https://www.rtp.pt/play/",
-      "priority": 90,
-      "team_keywords": ["benfica"]
+      "country": "Regno Unito", "country_code": "GB", "broadcaster": "HBO Max",
+      "access": "paid", "platforms": "streaming", "language": "inglese",
+      "url": "https://www.hbomax.com/gb/en/sports", "competition_families": ["europa-league", "conference-league"],
+      "team_keywords": ["bournemouth", "sunderland", "crystal-palace"],
+      "rights_from_season": 2026, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 80
     },
     {
-      "country": "Portogallo",
-      "country_code": "PT",
-      "broadcaster": "SIC",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "portoghese",
-      "url": "https://sic.pt/direto",
-      "priority": 85,
-      "team_keywords": ["benfica"]
+      "country": "Ungheria", "country_code": "HU", "broadcaster": "M4 Sport",
+      "access": "free", "platforms": "TV + streaming", "language": "ungherese",
+      "url": "https://m4sport.hu/musorujsag/", "competition_families": ["europa-league"],
+      "team_keywords": ["ferencvaros", "ferencvarosi"],
+      "rights_from_season": 2024, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 100
     },
     {
-      "country": "Ungheria",
-      "country_code": "HU",
-      "broadcaster": "M4 Sport",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "ungherese",
-      "url": "https://m4sport.hu/",
-      "priority": 90,
-      "team_keywords": ["ferencvaros", "ferencvarosi"]
+      "country": "Grecia", "country_code": "GR", "broadcaster": "ANT1",
+      "access": "free", "platforms": "TV + streaming", "language": "greco",
+      "url": "https://www.antenna.gr/tvguide", "competition_families": ["europa-league", "conference-league"],
+      "team_keywords": ["olympiacos", "ofi-crete"],
+      "rights_from_season": 2024, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 95
     },
     {
-      "country": "Grecia",
-      "country_code": "GR",
-      "broadcaster": "ERT",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "greco",
-      "url": "https://www.ertflix.gr/",
-      "priority": 90,
-      "team_keywords": ["olympiacos"]
+      "country": "Grecia", "country_code": "GR", "broadcaster": "Cosmote TV",
+      "access": "paid", "platforms": "TV + streaming", "language": "greco",
+      "url": "https://www.cosmotetv.gr/portal/program", "competition_families": ["europa-league", "conference-league"],
+      "team_keywords": ["olympiacos", "ofi-crete"],
+      "rights_from_season": 2024, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 80
     },
     {
-      "country": "Grecia",
-      "country_code": "GR",
-      "broadcaster": "ANT1",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "greco",
-      "url": "https://www.antenna.gr/live",
-      "priority": 85,
-      "team_keywords": ["olympiacos"]
+      "country": "Bulgaria", "country_code": "BG", "broadcaster": "bTV",
+      "access": "free", "platforms": "TV + streaming", "language": "bulgaro",
+      "url": "https://www.btv.bg/programata/", "competition_families": ["europa-league", "conference-league"],
+      "team_keywords": ["levski"],
+      "rights_from_season": 2024, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 95
     },
     {
-      "country": "Bulgaria",
-      "country_code": "BG",
-      "broadcaster": "bTV",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "bulgaro",
-      "url": "https://btvsport.bg/",
-      "priority": 85,
-      "team_keywords": ["levski"]
+      "country": "Bulgaria", "country_code": "BG", "broadcaster": "A1 Bulgaria",
+      "access": "paid", "platforms": "TV + streaming", "language": "bulgaro",
+      "url": "https://www.a1.bg/sporten-tv-buletin", "competition_families": ["europa-league", "conference-league"],
+      "team_keywords": ["levski"],
+      "rights_from_season": 2024, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 75
     },
     {
-      "country": "Regno Unito",
-      "country_code": "GB",
-      "broadcaster": "ITV",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "inglese",
-      "url": "https://www.itv.com/football",
-      "priority": 90,
-      "team_keywords": ["bournemouth", "sunderland"]
+      "country": "Armenia", "country_code": "AM", "broadcaster": "Fast Media",
+      "access": "paid", "platforms": "TV + streaming", "language": "armeno",
+      "timezone": "Asia/Yerevan",
+      "url": "https://www.fastmedia.am/ottPlatform", "competition_families": ["europa-league", "conference-league"],
+      "team_keywords": ["ararat-armenia"],
+      "rights_from_season": 2024, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 80
     },
     {
-      "country": "Regno Unito",
-      "country_code": "GB",
-      "broadcaster": "BBC",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "inglese",
-      "url": "https://www.bbc.com/sport/football",
-      "priority": 85,
-      "team_keywords": ["bournemouth", "sunderland"]
-    },
-    {
-      "country": "Armenia",
-      "country_code": "AM",
-      "broadcaster": "Armenian Public TV",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "armeno",
-      "url": "https://www.1tv.am/en/",
-      "priority": 85,
-      "team_keywords": ["ararat"]
-    },
-    {
-      "country": "Svizzera",
-      "country_code": "CH",
-      "broadcaster": "SRF",
-      "access": "free",
-      "platforms": "TV + streaming",
-      "language": "tedesco",
-      "url": "https://www.srf.ch/sport",
-      "priority": 80
+      "country": "Svizzera", "country_code": "CH", "broadcaster": "SRG / SRF",
+      "access": "free", "platforms": "TV + streaming", "language": "tedesco",
+      "url": "https://www.srf.ch/play/tv/programm", "competition_families": ["europa-league", "conference-league"],
+      "rights_from_season": 2024, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 85
     }
   ]
 }

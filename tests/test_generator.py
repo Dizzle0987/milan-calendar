@@ -14,6 +14,7 @@ from milan_calendar.generator import (
     _broadcast_description_lines,
     _canonical_event,
     _is_official_international_match,
+    _programme_confirms_fixture,
     apply_verified_broadcasts,
     build_ical,
     load_manual_events,
@@ -29,7 +30,9 @@ from milan_calendar.generator import (
     parse_uefa_draw_html,
     parse_lega_calendar_article,
     parse_schedule_html,
+    parse_servus_epg,
     parse_thesportsdb_json,
+    parse_tv8_epg,
     parse_official_html,
     page_confirms_fixture,
     update_calendar,
@@ -1164,6 +1167,49 @@ def test_broadcast_page_requires_exact_fixture_date_and_viewing_evidence() -> No
     )
 
 
+def test_servus_epg_requires_both_teams_and_live_sized_interval() -> None:
+    payload = (
+        r'{\"title\":\"UEFA Europa League: Milan - Benfica\",'
+        r'\"start_time\":\"2026-09-16T20:30:00+02:00\",'
+        r'\"end_time\":\"2026-09-16T23:15:00+02:00\"}'
+    )
+    rows = parse_servus_epg(payload)
+    event = {
+        "event_kind": "match", "home_team": "Milan", "away_team": "Benfica",
+        "competition": "UEFA Europa League", "start": "2026-09-16T21:00:00+02:00",
+    }
+
+    assert len(rows) == 1
+    assert _programme_confirms_fixture(rows[0], event).strftime("%H:%M") == "20:30"
+    assert _programme_confirms_fixture(
+        dict(rows[0], title="UEFA Europa League highlights"), event
+    ) is None
+    assert _programme_confirms_fixture(
+        dict(rows[0], end="2026-09-16T21:20:00+02:00"), event
+    ) is None
+
+
+def test_tv8_structured_epg_keeps_programme_start_separate_from_kickoff() -> None:
+    rows = parse_tv8_epg(
+        {
+            "programs": [{
+                "title": {"text": "UEFA Europa League: Milan - Benfica"},
+                "description": {"text": "Diretta"},
+                "badge": {"label": {"text": "20:30 - 23:20"}},
+            }]
+        },
+        date(2026, 9, 16),
+    )
+    event = {
+        "event_kind": "match", "home_team": "Milan", "away_team": "Benfica",
+        "competition": "UEFA Europa League", "start": "2026-09-16T21:00:00+02:00",
+    }
+
+    start = _programme_confirms_fixture(rows[0], event)
+    assert start is not None and start.strftime("%H:%M") == "20:30"
+    assert event["start"] == "2026-09-16T21:00:00+02:00"
+
+
 def test_confirmed_broadcast_survives_source_failure() -> None:
     event = {
         "event_kind": "match",
@@ -1209,6 +1255,45 @@ def test_confirmed_broadcast_survives_source_failure() -> None:
     assert errors
     assert updated[0]["broadcast_options"] == [option]
     assert updated[0]["broadcast_italy_tbc"] is False
+
+
+def test_exact_sky_page_replaces_old_generic_sky_option() -> None:
+    event = {
+        "event_kind": "match", "home_team": "Milan", "away_team": "Benfica",
+        "title": "Milan - Benfica", "competition": "UEFA Europa League",
+        "round": "1", "start": "2026-09-16T21:00:00+02:00", "status": "Fixture",
+    }
+    previous = [dict(event, broadcast_options=[{
+        "country": "Italia", "country_code": "IT", "broadcaster": "Sky Sport / NOW",
+        "access": "paid", "status": "confirmed", "priority": 80,
+        "url": "https://www.nowtv.it/sport/calcio/milan",
+    }])]
+
+    class Response:
+        text = "Milan - Benfica, 16 settembre 2026: diretta su Sky Sport Calcio e Sky Go."
+
+        def raise_for_status(self) -> None:
+            return None
+
+    class Session:
+        def get(self, url: str, timeout: int) -> Response:
+            return Response()
+
+    updated, _ = apply_verified_broadcasts(
+        Session(), [event], previous, [{
+            "country": "Italia", "country_code": "IT", "broadcaster": "Sky Sport / Sky Go",
+            "access": "paid", "platforms": "TV + streaming", "language": "italiano",
+            "url": "https://programmi.sky.it/sport/coppe-europee",
+            "url_template": "https://example.test/dove-vedere-{home}-{away}",
+            "lookahead_days": 30, "priority": 100,
+            "replaces_broadcasters": ["Sky Sport / NOW", "Sky Sport e NOW"],
+        }],
+        "2026-09-05T10:00:00Z", datetime(2026, 9, 5, tzinfo=timezone.utc),
+    )
+
+    assert [item["broadcaster"] for item in updated[0]["broadcast_options"]] == [
+        "Sky Sport Calcio / Sky Go"
+    ]
 
 
 def test_broadcast_verification_changes_only_international_broadcast_fields() -> None:
@@ -1276,6 +1361,22 @@ def test_structured_broadcast_description_orders_italy_and_foreign_links() -> No
     assert "Incluso nell'abbonamento · streaming · italiano" in text
     assert "🇦🇹 Austria — ServusTV" in text
     assert "https://www.servustv.com/sport/" in text
+
+
+def test_foreign_paid_alternative_is_labelled_and_not_presented_as_free() -> None:
+    data = {
+        "broadcast_options": [{
+            "country": "Portogallo", "country_code": "PT", "broadcaster": "Sport TV",
+            "access": "paid", "platforms": "TV + streaming", "language": "portoghese",
+            "registration_required": False, "url": "https://www.sporttv.pt/agenda/",
+        }],
+        "broadcast_international_tbc": False,
+    }
+    text = "\n".join(_broadcast_description_lines(data))
+
+    assert "ALTERNATIVE UFFICIALI ALL'ESTERO" in text
+    assert "A pagamento" in text
+    assert "GRATIS" not in text
 
 
 def test_subscription_page_has_iphone_fallback() -> None:

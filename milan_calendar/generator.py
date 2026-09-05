@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterable
-from urllib.parse import quote, urljoin
+from urllib.parse import quote, urlencode, urljoin
 from zoneinfo import ZoneInfo
 
 import requests
@@ -139,6 +139,8 @@ BROADCAST_EVIDENCE_MARKERS = {
     "channel", "watch", "guarda", "vederla", "palinsesto", "programma",
     "programmazione", "broadcast", "ubertragung", "transmissao", "ao-vivo",
 }
+BROADCAST_GUIDE_HORIZON_DAYS = 21
+TV8_PROGRAMMING_API = "https://www.tv8.it/api/programmingCarousel"
 MONTH_NAMES = {
     1: ("gennaio", "january", "januar", "janvier", "enero", "janeiro"),
     2: ("febbraio", "february", "februar", "fevrier", "febrero", "fevereiro"),
@@ -269,13 +271,20 @@ def load_broadcast_sources(path: Path) -> list[dict[str, Any]]:
     return normalized
 
 
-def _fixture_date_markers(value: datetime) -> set[str]:
-    local = value.astimezone(ROME)
+def _fixture_date_markers(
+    value: datetime, timezone_name: str = "Europe/Rome"
+) -> set[str]:
+    try:
+        local = value.astimezone(ZoneInfo(timezone_name))
+    except (KeyError, ValueError):
+        local = value.astimezone(ROME)
     markers = {
         local.strftime("%Y-%m-%d"),
         local.strftime("%Y%m%d"),
         local.strftime("%d-%m-%Y"),
         local.strftime("%d-%m"),
+        local.strftime("%d.%m.%Y"),
+        local.strftime("%d/%m/%Y"),
     }
     for month in MONTH_NAMES[local.month]:
         markers.add(_normalize(f"{local.day} {month} {local.year}"))
@@ -283,7 +292,12 @@ def _fixture_date_markers(value: datetime) -> set[str]:
     return markers
 
 
-def page_confirms_fixture(html: str, event: dict[str, Any], broadcaster: str) -> bool:
+def page_confirms_fixture(
+    html: str,
+    event: dict[str, Any],
+    broadcaster: str,
+    timezone_name: str = "Europe/Rome",
+) -> bool:
     """Require teams, exact date and viewing language in one nearby page fragment."""
     text = _normalize(html_module.unescape(re.sub(r"<[^>]+>", " ", html)))
     opponent = (
@@ -298,7 +312,7 @@ def page_confirms_fixture(html: str, event: dict[str, Any], broadcaster: str) ->
     if not opponent_tokens:
         return False
     anchor = max(opponent_tokens, key=len)
-    date_markers = _fixture_date_markers(_event_datetime(event))
+    date_markers = _fixture_date_markers(_event_datetime(event), timezone_name)
     broadcaster_marker = _normalize(broadcaster)
     for match in re.finditer(re.escape(anchor), text):
         window = text[max(0, match.start() - 900) : match.end() + 900]
@@ -318,8 +332,136 @@ def page_confirms_fixture(html: str, event: dict[str, Any], broadcaster: str) ->
     return False
 
 
-def _broadcast_option(source: dict[str, Any], checked_at: str) -> dict[str, Any]:
-    return {
+def parse_servus_epg(html: str) -> list[dict[str, Any]]:
+    """Extract the official server-rendered ServusTV EPG cards."""
+    pattern = re.compile(
+        r'\\"title\\":\\"(?P<title>(?:[^\\]|\\.)*?)\\"(?:(?!\},\{).)*?'
+        r'\\"start_time\\":\\"(?P<start>[^\\"]+)\\"(?:(?!\},\{).)*?'
+        r'\\"end_time\\":\\"(?P<end>[^\\"]+)\\"',
+        re.DOTALL,
+    )
+    rows: list[dict[str, Any]] = []
+    for match in pattern.finditer(html):
+        try:
+            title = json.loads('"' + match["title"] + '"')
+        except json.JSONDecodeError:
+            title = html_module.unescape(match["title"].replace('\\"', '"'))
+        rows.append(
+            {"title": title, "start": match["start"], "end": match["end"]}
+        )
+    return rows
+
+
+def parse_tv8_epg(payload: dict[str, Any], event_date: date) -> list[dict[str, Any]]:
+    """Normalise TV8's structured schedule into dated programme intervals."""
+    rows: list[dict[str, Any]] = []
+    range_pattern = re.compile(r"^(\d{2}):(\d{2})\s*-\s*(\d{2}):(\d{2})$")
+    for programme in payload.get("programs") or []:
+        badge = str(
+            ((programme.get("badge") or {}).get("label") or {}).get("text") or ""
+        )
+        match = range_pattern.match(badge)
+        if not match:
+            continue
+        start_hour, start_minute, end_hour, end_minute = map(int, match.groups())
+        start = datetime.combine(event_date, time(start_hour, start_minute), ROME)
+        end = datetime.combine(event_date, time(end_hour, end_minute), ROME)
+        if end <= start:
+            end += timedelta(days=1)
+        title = str(((programme.get("title") or {}).get("text")) or "")
+        description = str(((programme.get("description") or {}).get("text")) or "")
+        rows.append(
+            {
+                "title": " ".join((title, description)).strip(),
+                "start": start.isoformat(),
+                "end": end.isoformat(),
+            }
+        )
+    return rows
+
+
+def _programme_confirms_fixture(
+    programme: dict[str, Any], event: dict[str, Any]
+) -> datetime | None:
+    """Accept only a live-sized EPG block containing both clubs around kick-off."""
+    title = _normalize(str(programme.get("title") or ""))
+    if "milan" not in title:
+        return None
+    opponent = (
+        str(event.get("away_team") or "")
+        if _is_milan(str(event.get("home_team") or ""))
+        else str(event.get("home_team") or "")
+    )
+    opponent_tokens = {
+        token
+        for token in _team_match_key(opponent).split("-")
+        if len(token) >= 4 and token not in {"club", "calcio"}
+    }
+    if not opponent_tokens or not any(token in title for token in opponent_tokens):
+        return None
+    try:
+        programme_start = datetime.fromisoformat(
+            str(programme["start"]).replace("Z", "+00:00")
+        ).astimezone(ROME)
+        programme_end = datetime.fromisoformat(
+            str(programme["end"]).replace("Z", "+00:00")
+        ).astimezone(ROME)
+    except (KeyError, TypeError, ValueError):
+        return None
+    kick_off = _event_datetime(event).astimezone(ROME)
+    if programme_start.date() != kick_off.date():
+        return None
+    if not kick_off - timedelta(hours=2) <= programme_start <= kick_off + timedelta(minutes=10):
+        return None
+    # Requiring a long block rejects news, previews and highlights near kick-off.
+    if programme_end < kick_off + timedelta(minutes=75):
+        return None
+    return programme_start
+
+
+def _fixture_source_url(source: dict[str, Any], event: dict[str, Any]) -> str:
+    family = _competition_family(str(event.get("competition") or ""))
+    templates = source.get("url_templates") or {}
+    template = str(templates.get(family) or source.get("url_template") or source["url"])
+    values = {
+        "home": _normalize(str(event.get("home_team") or "")),
+        "away": _normalize(str(event.get("away_team") or "")),
+    }
+    return template.format(**values)
+
+
+def _source_with_page_channels(source: dict[str, Any], html: str) -> dict[str, Any]:
+    """Refine a confirmed source with channels explicitly named on its page."""
+    if str(source.get("country_code") or "").upper() != "IT":
+        return source
+    visible = html_module.unescape(re.sub(r"<[^>]+>", " ", html))
+    channels = list(
+        dict.fromkeys(
+            match.group(0)
+            for match in re.finditer(
+                r"Sky Sport(?: Uno| Calcio| Arena| Football| 4K| \d{3})",
+                visible,
+                re.IGNORECASE,
+            )
+        )
+    )
+    if "sky go" in visible.lower():
+        channels.append("Sky Go")
+    if not channels:
+        return source
+    refined = deepcopy(source)
+    refined["broadcaster"] = " / ".join(channels)
+    return refined
+
+
+def _broadcast_option(
+    source: dict[str, Any],
+    checked_at: str,
+    *,
+    source_url: str | None = None,
+    programme_start: datetime | None = None,
+) -> dict[str, Any]:
+    option = {
         "country": str(source["country"]),
         "country_code": str(source["country_code"]).upper(),
         "broadcaster": str(source["broadcaster"]),
@@ -327,12 +469,50 @@ def _broadcast_option(source: dict[str, Any], checked_at: str) -> dict[str, Any]
         "platforms": str(source.get("platforms") or "streaming"),
         "language": str(source.get("language") or ""),
         "registration_required": bool(source.get("registration_required")),
-        "url": str(source["url"]),
-        "source_url": str(source["url"]),
+        "url": str(source.get("public_url") or source_url or source["url"]),
+        "source_url": str(source_url or source["url"]),
         "status": "confirmed",
+        "broadcast_type": "diretta",
         "verified_at": checked_at,
         "priority": int(source.get("priority") or 0),
     }
+    if source.get("replaces_broadcasters"):
+        option["_replaces_broadcasters"] = [
+            _normalize(str(value)) for value in source["replaces_broadcasters"]
+        ]
+    if programme_start is not None:
+        option["broadcast_start"] = programme_start.astimezone(ROME).isoformat()
+        option["broadcast_start_rome"] = programme_start.astimezone(ROME).strftime("%H:%M")
+    return option
+
+
+def _fetch_epg_rows(
+    requester: Any,
+    source: dict[str, Any],
+    relevant: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], str]:
+    source_type = str(source.get("source_type") or "page")
+    url = str(source.get("endpoint") or source["url"])
+    if source_type == "servus_epg":
+        response = requester.get(url, timeout=10)
+        response.raise_for_status()
+        return parse_servus_epg(response.text), url
+    if source_type == "tv8_api":
+        rows: list[dict[str, Any]] = []
+        for event_date in sorted({_event_datetime(event).astimezone(ROME).date() for event in relevant}):
+            local_start = datetime.combine(event_date, time.min, ROME)
+            local_end = datetime.combine(event_date, time.max, ROME)
+            query = urlencode(
+                {
+                    "from": local_start.astimezone(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
+                    "to": local_end.astimezone(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
+                }
+            )
+            response = requester.get(f"{url}?{query}", timeout=10)
+            response.raise_for_status()
+            rows.extend(parse_tv8_epg(response.json(), event_date))
+        return rows, str(source.get("public_url") or source["url"])
+    raise ValueError(f"tipo palinsesto non supportato: {source_type}")
 
 
 def apply_verified_broadcasts(
@@ -364,29 +544,80 @@ def apply_verified_broadcasts(
     try:
         for source in sources:
             keywords = {_normalize(str(item)) for item in source.get("team_keywords") or []}
+            competition_families = {
+                _normalize(str(item)) for item in source.get("competition_families") or []
+            }
+            horizon = int(source.get("lookahead_days") or BROADCAST_GUIDE_HORIZON_DAYS)
             relevant = [
                 event
                 for event in targets
-                if str(source.get("country_code") or "").upper() == "IT"
-                or not keywords
-                or any(
-                    keyword in _team_match_key(str(event.get(key) or ""))
-                    for keyword in keywords
-                    for key in ("home_team", "away_team")
+                if _event_datetime(event).astimezone(ROME).date()
+                <= now.astimezone(ROME).date() + timedelta(days=horizon)
+                and int(source.get("rights_from_season") or 0)
+                <= season_start(_event_datetime(event).astimezone(ROME).date())
+                and int(source.get("rights_through_season") or 9999)
+                >= season_start(_event_datetime(event).astimezone(ROME).date())
+                and (
+                    not competition_families
+                    or _competition_family(str(event.get("competition") or ""))
+                    in competition_families
+                )
+                and (
+                    str(source.get("country_code") or "").upper() == "IT"
+                    or not keywords
+                    or any(
+                        keyword in _team_match_key(str(event.get(key) or ""))
+                        for keyword in keywords
+                        for key in ("home_team", "away_team")
+                    )
                 )
             ]
             if not relevant:
                 continue
-            try:
-                response = requester.get(str(source["url"]), timeout=10)
-                response.raise_for_status()
-            except requests.RequestException as exc:
-                errors.append(f"{source['broadcaster']}: {exc}")
+            source_type = str(source.get("source_type") or "page")
+            if source_type in {"servus_epg", "tv8_api"}:
+                try:
+                    programmes, guide_url = _fetch_epg_rows(requester, source, relevant)
+                except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
+                    errors.append(f"{source['broadcaster']}: {exc}")
+                    continue
+                for event in relevant:
+                    starts = [
+                        start
+                        for programme in programmes
+                        if (start := _programme_confirms_fixture(programme, event))
+                    ]
+                    if starts:
+                        confirmations.setdefault(_semantic_base(event), []).append(
+                            _broadcast_option(
+                                source,
+                                checked_at,
+                                source_url=guide_url,
+                                programme_start=min(starts),
+                            )
+                        )
                 continue
+
             for event in relevant:
-                if page_confirms_fixture(response.text, event, str(source["broadcaster"])):
+                url = _fixture_source_url(source, event)
+                try:
+                    response = requester.get(url, timeout=10)
+                    response.raise_for_status()
+                except requests.RequestException as exc:
+                    errors.append(f"{source['broadcaster']} ({event.get('title')}): {exc}")
+                    continue
+                if page_confirms_fixture(
+                    response.text,
+                    event,
+                    str(source["broadcaster"]),
+                    str(source.get("timezone") or "Europe/Rome"),
+                ):
                     confirmations.setdefault(_semantic_base(event), []).append(
-                        _broadcast_option(source, checked_at)
+                        _broadcast_option(
+                            _source_with_page_channels(source, response.text),
+                            checked_at,
+                            source_url=url,
+                        )
                     )
     finally:
         if optional_session is not None:
@@ -415,6 +646,16 @@ def apply_verified_broadcasts(
             if option.get("status") == "confirmed"
         }
         for option in confirmations.get(_semantic_base(event), []):
+            replacements = set(option.pop("_replaces_broadcasters", []))
+            if replacements:
+                merged = {
+                    key: value
+                    for key, value in merged.items()
+                    if not (
+                        key[0] == str(option["country_code"])
+                        and _normalize(str(value.get("broadcaster") or "")) in replacements
+                    )
+                }
             key = (str(option["country_code"]), _normalize(str(option["broadcaster"])))
             previous_option = merged.get(key)
             if previous_option:
@@ -429,11 +670,11 @@ def apply_verified_broadcasts(
             key=lambda option: (access_order.get(str(option.get("access")), 9), -int(option.get("priority") or 0)),
         )
         foreign = sorted(
-            (
-                option for option in options
-                if option.get("country_code") != "IT" and option.get("access") == "free"
+            (option for option in options if option.get("country_code") != "IT"),
+            key=lambda option: (
+                access_order.get(str(option.get("access")), 9),
+                -int(option.get("priority") or 0),
             ),
-            key=lambda option: -int(option.get("priority") or 0),
         )[:3]
         event["broadcast_options"] = italian + foreign
         event["broadcast_international_tbc"] = not bool(foreign)
@@ -1878,19 +2119,32 @@ def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
             attributes.append(str(option["language"]))
         if option.get("registration_required"):
             attributes.append("registrazione richiesta")
+        if option.get("broadcast_start_rome"):
+            attributes.append(
+                f"diretta dalle {option['broadcast_start_rome']} (ora di Roma)"
+            )
         lines.extend((" · ".join(item for item in attributes if item), str(option["url"])))
     if foreign:
-        lines.append("GRATIS / IN CHIARO ALL'ESTERO:")
+        lines.append("ALTERNATIVE UFFICIALI ALL'ESTERO:")
         for option in foreign:
             lines.append(
                 f"{_country_flag(str(option.get('country_code') or ''))} "
                 f"{option['country']} — {option['broadcaster']}"
             )
-            attributes = ["Gratis", str(option.get("platforms") or "")]
+            access = {
+                "free": "GRATIS",
+                "included": "Incluso nell'abbonamento",
+                "paid": "A pagamento",
+            }.get(str(option.get("access") or ""), "Da verificare")
+            attributes = [access, str(option.get("platforms") or "")]
             if option.get("language"):
                 attributes.append(str(option["language"]))
             if option.get("registration_required"):
                 attributes.append("registrazione richiesta")
+            if option.get("broadcast_start_rome"):
+                attributes.append(
+                    f"diretta dalle {option['broadcast_start_rome']} (ora di Roma)"
+                )
             lines.extend((" · ".join(item for item in attributes if item), str(option["url"])))
     elif data.get("broadcast_international_tbc"):
         lines.append("🌍 In chiaro all'estero — Da confermare")

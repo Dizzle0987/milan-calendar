@@ -367,17 +367,18 @@
       "broadcast_options": [
         {
           "access": "paid",
-          "broadcaster": "Sky Sport / NOW",
+          "broadcast_type": "diretta",
+          "broadcaster": "Sky Sport Calcio / Sky Go",
           "country": "Italia",
           "country_code": "IT",
           "language": "italiano",
           "platforms": "TV + streaming",
-          "priority": 80,
+          "priority": 100,
           "registration_required": false,
-          "source_url": "https://www.nowtv.it/sport/calcio/milan",
+          "source_url": "https://programmi.sky.it/sport/coppe-europee/uefa-europa-league/dove-vedere-milan-benfica",
           "status": "confirmed",
-          "url": "https://www.nowtv.it/sport/calcio/milan",
-          "verified_at": "2026-09-04T15:22:24Z"
+          "url": "https://programmi.sky.it/sport/coppe-europee/uefa-europa-league/dove-vedere-milan-benfica",
+          "verified_at": "2026-09-05T13:38:14Z"
         }
       ],
       "broadcast_source_url": "https://www.nowtv.it/sport/calcio/milan",
@@ -388,11 +389,11 @@
       "competition": "UEFA Europa League",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-09-04T15:22:24Z",
+      "last_modified": "2026-09-05T13:39:30Z",
       "location": "",
       "neutral": false,
       "round": "1",
-      "sequence": 2,
+      "sequence": 4,
       "source": "AC Milan",
       "source_id": "donqu6bltepo7k7bsmdffhfys",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -1442,7 +1443,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-04T19:31:13Z",
+  "last_changed": "2026-09-05T13:39:30Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -1493,15 +1494,10 @@
   "source_errors": [
     "AC Milan: nessun orario esplicito per il Milan",
     "Gazzetta dello Sport: 404 Client Error: Not Found for url: https://www.gazzetta.it/Calcio/Serie-A/Milan/",
-    "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
+    "DAZN: nessun orario esplicito per il Milan",
     "Sky Sport: nessun orario esplicito per il Milan",
     "Mediaset: 404 Client Error: Not Found for url: https://mediasetinfinity.mediaset.it/sport",
-    "Prime Video: nessun orario esplicito per il Milan",
-    "Broadcast Mediaset Infinity: 404 Client Error: Not Found for url: https://mediasetinfinity.mediaset.it/sport",
-    "Broadcast DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
-    "Broadcast SIC: 403 Client Error: HTTP Forbidden for url: https://sic.pt/direto",
-    "Broadcast ANT1: 403 Client Error: Forbidden for url: https://www.antenna.gr/live",
-    "Broadcast ITV: HTTPSConnectionPool(host='www.itv.com', port=443): Read timed out. (read timeout=10)"
+    "Prime Video: nessun orario esplicito per il Milan"
   ],
   "sources_used": [
     "AC Milan",

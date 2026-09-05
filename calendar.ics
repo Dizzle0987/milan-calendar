@@ -256,16 +256,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Benfica
 DTSTART;TZID=Europe/Rome:20260916T210000
 DTEND;TZID=Europe/Rome:20260916T230000
-DTSTAMP:20260904T152224Z
+DTSTAMP:20260905T133930Z
 UID:29b36264474890d3320b242f@milan-calendar
-SEQUENCE:2
+SEQUENCE:4
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  16/09/2026 21:00\nTurno: 1\nStadio: San Siro Stadium\nDove vederla:\n🇮
- 🇹 Italia — Sky Sport / NOW\nA pagamento · TV + streaming · italiano
- \nhttps://www.nowtv.it/sport/calcio/milan\n🌍 In chiaro all'estero — D
- a confermare\nFonte orario: NOW
-LAST-MODIFIED:20260904T152224Z
+ 🇹 Italia — Sky Sport Calcio / Sky Go\nA pagamento · TV + streaming 
+ · italiano\nhttps://programmi.sky.it/sport/coppe-europee/uefa-europa-leag
+ ue/dove-vedere-milan-benfica\n🌍 In chiaro all'estero — Da confermare\
+ nFonte orario: NOW
+LAST-MODIFIED:20260905T133930Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
