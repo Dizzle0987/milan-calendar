@@ -1558,7 +1558,7 @@
     "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
     "Sky Sport: nessun orario esplicito per il Milan",
     "Mediaset: 404 Client Error: Not Found for url: https://mediasetinfinity.mediaset.it/sport",
-    "Prime Video: HTTPSConnectionPool(host='www.primevideo.com', port=443): Max retries exceeded with url: /sports (Caused by ResponseError('too many 503 error responses'))",
+    "Prime Video: nessun orario esplicito per il Milan",
     "Broadcast DAZN Portugal (None): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l"
   ],
   "sources_used": [
