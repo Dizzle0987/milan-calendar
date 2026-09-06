@@ -206,18 +206,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ Juventus - Milan
 DTSTART;TZID=Europe/Rome:20260906T204500
 DTEND;TZID=Europe/Rome:20260906T224500
-DTSTAMP:20260905T214100Z
+DTSTAMP:20260906T193034Z
 UID:f6a0e961c790cc99304f973a@milan-calendar
-SEQUENCE:22
+SEQUENCE:23
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 06/09/
  2026 20:45\nTurno: 3\nStadio: Allianz Stadium\nLocalità: Italy\nDove vede
  rla in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provvisori
  a — giornata in corso:\n  2. Inter — 9 pt\n  3. Como — 7 pt\n▶ 4. 
- Milan — 6 pt — 2 PG — DR +3\n  5. Juventus — 6 pt\n  6. Lazio — 
- 6 pt\nClassifica aggiornata: 05/09/2026 23:41\nFonte classifica: Lega Seri
+ Milan — 7 pt — 3 PG — DR +3\n  5. Juventus — 7 pt\n  6. Lazio — 
+ 6 pt\nClassifica aggiornata: 06/09/2026 21:30\nFonte classifica: Lega Seri
  e A
-LAST-MODIFIED:20260905T214100Z
+LAST-MODIFIED:20260906T193034Z
 LOCATION:Allianz Stadium\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -231,17 +231,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Lazio - Milan
 DTSTART;TZID=Europe/Rome:20260912T180000
 DTEND;TZID=Europe/Rome:20260912T200000
-DTSTAMP:20260905T232444Z
+DTSTAMP:20260906T193034Z
 UID:9bd99a4e5de2da2051ebcc15@milan-calendar
-SEQUENCE:10
+SEQUENCE:11
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 12/09/
  2026 18:00\nTurno: 4\nStadio: Stadio Olimpico\nDove vederla in Italia: DAZ
  N\nFonte orario: AC Milan\nClassifica Serie A provvisoria — giornata in 
- corso:\n  2. Inter — 9 pt\n  3. Como — 7 pt\n▶ 4. Milan — 6 pt —
-  2 PG — DR +3\n  5. Juventus — 6 pt\n  6. Lazio — 6 pt\nClassifica a
- ggiornata: 05/09/2026 23:41\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20260905T232444Z
+ corso:\n  2. Inter — 9 pt\n  3. Como — 7 pt\n▶ 4. Milan — 7 pt —
+  3 PG — DR +3\n  5. Juventus — 7 pt\n  6. Lazio — 6 pt\nClassifica a
+ ggiornata: 06/09/2026 21:30\nFonte classifica: Lega Serie A
+LAST-MODIFIED:20260906T193034Z
 LOCATION:Stadio Olimpico
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
