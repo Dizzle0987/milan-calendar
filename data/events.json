@@ -296,11 +296,11 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Lazio",
-      "last_modified": "2026-09-06T21:41:20Z",
-      "location": "",
+      "last_modified": "2026-09-06T23:17:20Z",
+      "location": "Italy",
       "neutral": false,
       "round": "4",
-      "sequence": 13,
+      "sequence": 14,
       "serie_a_standing": {
         "context": [
           {
@@ -1504,7 +1504,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-06T21:41:20Z",
+  "last_changed": "2026-09-06T23:17:20Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
