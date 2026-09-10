@@ -804,11 +804,11 @@
       "competition": "Coppa Italia",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-09-02T16:52:13Z",
+      "last_modified": "2026-09-10T16:30:26Z",
       "location": "",
       "neutral": false,
       "round": "8th Finals",
-      "sequence": 1,
+      "sequence": 2,
       "source": "AC Milan",
       "source_id": "1i6kbshbydvo56p01mwfvfor8",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -818,7 +818,7 @@
       "time_source_url": "",
       "title": "Milan - Monza",
       "uid": "51a1b3b7b7144a45b62d6e6d@milan-calendar",
-      "venue": "Stadio Giuseppe Meazza"
+      "venue": "Stadio San Siro"
     },
     {
       "all_day": true,
@@ -1502,7 +1502,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-07T21:35:01Z",
+  "last_changed": "2026-09-10T16:30:26Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
