@@ -206,18 +206,14 @@ BEGIN:VEVENT
 SUMMARY:⚽ Juventus - Milan
 DTSTART;TZID=Europe/Rome:20260906T204500
 DTEND;TZID=Europe/Rome:20260906T224500
-DTSTAMP:20260911T210222Z
+DTSTAMP:20260911T232248Z
 UID:f6a0e961c790cc99304f973a@milan-calendar
-SEQUENCE:28
+SEQUENCE:29
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 06/09/
  2026 20:45\nTurno: 3\nStadio: Allianz Stadium\nLocalità: Torino\nDove ved
- erla in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provvisor
- ia — giornata in corso:\n  3. Lazio — 9 pt\n  4. Como — 7 pt\n▶ 5.
-  Milan — 7 pt — 3 PG — DR +3\n  6. Juventus — 7 pt\n  7. Frosinone
-  — 6 pt\nClassifica aggiornata: 11/09/2026 23:02\nFonte classifica: Lega
-  Serie A
-LAST-MODIFIED:20260911T210222Z
+ erla in Italia: DAZN\nFonte orario: AC Milan
+LAST-MODIFIED:20260911T232248Z
 LOCATION:Allianz Stadium\, Torino
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -280,14 +276,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Lecce
 DTSTART;TZID=Europe/Rome:20260920T204500
 DTEND;TZID=Europe/Rome:20260920T224500
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260911T232248Z
 UID:72ccbea5301e86dea083451c@milan-calendar
-SEQUENCE:8
+SEQUENCE:9
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 20/09/2026 
  20:45\nTurno: 5\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nFo
- nte orario: AC Milan
-LAST-MODIFIED:20260831T072643Z
+ nte orario: AC Milan\nClassifica Serie A provvisoria — giornata in corso
+ :\n  3. Lazio — 9 pt\n  4. Como — 7 pt\n▶ 5. Milan — 7 pt — 3 PG
+  — DR +3\n  6. Juventus — 7 pt\n  7. Frosinone — 6 pt\nClassifica ag
+ giornata: 11/09/2026 23:02\nFonte classifica: Lega Serie A
+LAST-MODIFIED:20260911T232248Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
