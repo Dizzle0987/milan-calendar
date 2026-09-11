@@ -365,15 +365,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ AFC Bournemouth - Milan
 DTSTART;TZID=Europe/Rome:20261022T210000
 DTEND;TZID=Europe/Rome:20261022T230000
-DTSTAMP:20260901T114901Z
+DTSTAMP:20260911T163537Z
 UID:dc46921426bc343efc88581d@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 22/10/2026 21:00\nTurno: 3\nStadio: Vitality Stadium\nDove vederla:\n
  🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da confer
- mare\nFonte orario: AC Milan
-LAST-MODIFIED:20260901T114901Z
+ mare\nFonte orario: NOW
+LAST-MODIFIED:20260911T163537Z
 LOCATION:Vitality Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -429,14 +429,14 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Inter
 DTSTART;TZID=Europe/Rome:20261031T204500
 DTEND;TZID=Europe/Rome:20261031T224500
-DTSTAMP:20260903T152529Z
+DTSTAMP:20260911T163537Z
 UID:8131b669c6acbfebbf8a5c63@milan-calendar
-SEQUENCE:8
+SEQUENCE:9
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 31/10/2026 
  20:45\nTurno: 10\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nF
- onte orario: AC Milan
-LAST-MODIFIED:20260903T152529Z
+ onte orario: NOW
+LAST-MODIFIED:20260911T163537Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -450,15 +450,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Ferencváros
 DTSTART;TZID=Europe/Rome:20261105T184500
 DTEND;TZID=Europe/Rome:20261105T204500
-DTSTAMP:20260903T123726Z
+DTSTAMP:20260911T163537Z
 UID:7104e20380283c03c6625881@milan-calendar
-SEQUENCE:2
+SEQUENCE:3
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  05/11/2026 18:45\nTurno: 4\nStadio: San Siro Stadium\nDove vederla:\n🇮
  🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da confermare
- \nFonte orario: AC Milan
-LAST-MODIFIED:20260903T123726Z
+ \nFonte orario: NOW
+LAST-MODIFIED:20260911T163537Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -514,15 +514,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Olympiacos - Milan
 DTSTART;TZID=Europe/Rome:20261126T184500
 DTEND;TZID=Europe/Rome:20261126T204500
-DTSTAMP:20260901T114901Z
+DTSTAMP:20260911T163537Z
 UID:716d30d10cd2a53f2b53c687@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 26/11/2026 18:45\nTurno: 5\nStadio: Stadio Georgios Karaiskákis\nDov
  e vederla:\n🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero 
- — Da confermare\nFonte orario: AC Milan
-LAST-MODIFIED:20260901T114901Z
+ — Da confermare\nFonte orario: NOW
+LAST-MODIFIED:20260911T163537Z
 LOCATION:Stadio Georgios Karaiskákis
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -597,15 +597,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Sunderland FC
 DTSTART;TZID=Europe/Rome:20261210T210000
 DTEND;TZID=Europe/Rome:20261210T230000
-DTSTAMP:20260901T114901Z
+DTSTAMP:20260911T163537Z
 UID:97982c44b5b8526e3dfb5444@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  10/12/2026 21:00\nTurno: 6\nStadio: San Siro Stadium\nDove vederla:\n🇮
  🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da confermare
- \nFonte orario: AC Milan
-LAST-MODIFIED:20260901T114901Z
+ \nFonte orario: NOW
+LAST-MODIFIED:20260911T163537Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
