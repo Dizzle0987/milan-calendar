@@ -250,11 +250,11 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Lazio",
-      "last_modified": "2026-09-12T17:44:16Z",
-      "location": "Italy",
+      "last_modified": "2026-09-12T19:41:34Z",
+      "location": "Roma",
       "neutral": false,
       "round": "4",
-      "sequence": 19,
+      "sequence": 20,
       "serie_a_standing": {
         "context": [
           {
@@ -305,7 +305,7 @@
       "source_id": "74inwq2qcihry6rgk4sa5sr9w",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-09-12T18:00:00+02:00",
-      "status": "Playing",
+      "status": "Played",
       "time_source": "AC Milan",
       "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "title": "Lazio - Milan",
@@ -1524,7 +1524,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-12T17:44:16Z",
+  "last_changed": "2026-09-12T19:41:34Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
