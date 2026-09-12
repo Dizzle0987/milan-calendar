@@ -400,15 +400,15 @@
       "competition": "UEFA Europa League",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-09-05T14:12:25Z",
-      "location": "",
+      "last_modified": "2026-09-12T23:27:37Z",
+      "location": "Milan, Italy",
       "neutral": false,
       "opponent_country": "Portogallo",
       "opponent_country_code": "PT",
       "opponent_country_source": "TheSportsDB team lookup",
       "opponent_country_source_url": "https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=Benfica",
       "round": "1",
-      "sequence": 4,
+      "sequence": 5,
       "source": "AC Milan",
       "source_id": "donqu6bltepo7k7bsmdffhfys",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -1524,7 +1524,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-12T20:38:45Z",
+  "last_changed": "2026-09-12T23:27:37Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
