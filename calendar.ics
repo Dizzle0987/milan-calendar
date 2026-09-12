@@ -227,18 +227,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ Lazio - Milan
 DTSTART;TZID=Europe/Rome:20260912T180000
 DTEND;TZID=Europe/Rome:20260912T200000
-DTSTAMP:20260912T194134Z
+DTSTAMP:20260912T203845Z
 UID:9bd99a4e5de2da2051ebcc15@milan-calendar
-SEQUENCE:20
+SEQUENCE:21
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 12/09/
  2026 18:00\nTurno: 4\nStadio: Stadio Olimpico\nLocalità: Roma\nDove veder
  la in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provvisoria
-  — giornata in corso:\n  2. Roma — 9 pt\n  3. Inter — 9 pt\n▶ 4. M
- ilan — 8 pt — 4 PG — DR +3\n  5. Como — 7 pt\n  6. Frosinone — 7
-  pt\nClassifica aggiornata: 12/09/2026 19:44\nFonte classifica: Lega Serie
-  A
-LAST-MODIFIED:20260912T194134Z
+  — giornata in corso:\n  3. Inter — 9 pt\n  4. Cagliari — 9 pt\n▶ 
+ 5. Milan — 8 pt — 4 PG — DR +3\n  6. Como — 7 pt\n  7. Frosinone 
+ — 7 pt\nClassifica aggiornata: 12/09/2026 22:38\nFonte classifica: Lega 
+ Serie A
+LAST-MODIFIED:20260912T203845Z
 LOCATION:Stadio Olimpico\, Roma
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -276,17 +276,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Lecce
 DTSTART;TZID=Europe/Rome:20260920T204500
 DTEND;TZID=Europe/Rome:20260920T224500
-DTSTAMP:20260912T174416Z
+DTSTAMP:20260912T203845Z
 UID:72ccbea5301e86dea083451c@milan-calendar
-SEQUENCE:11
+SEQUENCE:12
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 20/09/2026 
  20:45\nTurno: 5\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nFo
  nte orario: AC Milan\nClassifica Serie A provvisoria — giornata in corso
- :\n  2. Roma — 9 pt\n  3. Inter — 9 pt\n▶ 4. Milan — 8 pt — 4 PG
-  — DR +3\n  5. Como — 7 pt\n  6. Frosinone — 7 pt\nClassifica aggior
- nata: 12/09/2026 19:44\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20260912T174416Z
+ :\n  3. Inter — 9 pt\n  4. Cagliari — 9 pt\n▶ 5. Milan — 8 pt — 
+ 4 PG — DR +3\n  6. Como — 7 pt\n  7. Frosinone — 7 pt\nClassifica ag
+ giornata: 12/09/2026 22:38\nFonte classifica: Lega Serie A
+LAST-MODIFIED:20260912T203845Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
