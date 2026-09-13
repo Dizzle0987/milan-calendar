@@ -1551,3 +1551,8 @@ def test_pages_deployment_includes_live_event_data() -> None:
     ).read_text(encoding="utf-8")
     assert "mkdir -p _site/data" in workflow
     assert "cp data/events.json _site/data/events.json" in workflow
+    assert "actions/configure-pages@v6" in workflow
+    assert "actions/upload-pages-artifact@v5" in workflow
+    assert "actions/deploy-pages@v5" in workflow
+    artifact_name = "github-pages-${{ github.run_id }}-${{ github.run_attempt }}"
+    assert workflow.count(artifact_name) == 2
