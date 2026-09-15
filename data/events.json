@@ -344,16 +344,21 @@
         {
           "broadcaster": "Sport TV",
           "competition": "UEFA Europa League",
-          "confidence": 75,
+          "confidence": 100,
           "country": "Portogallo",
           "country_code": "PT",
           "date": "2026-09-16",
           "evidence": [
             {
+              "source_type": "official_match",
+              "source_url": "https://www.sporttv.pt/?programacao=1",
+              "verified_at": "2026-09-15T21:27:50Z"
+            },
+            {
               "guide": "FootAz",
               "source_type": "guide",
               "source_url": "https://www.footaz.pt/jogo/ac-milan-vs-benfica/",
-              "verified_at": "2026-09-15T11:52:52Z"
+              "verified_at": "2026-09-15T21:27:50Z"
             }
           ],
           "free_or_pay": "paid",
@@ -363,10 +368,10 @@
           "priority": 85,
           "registration": "not_required",
           "requires_registration": false,
-          "source_type": "guide",
-          "source_url": "https://www.footaz.pt/jogo/ac-milan-vs-benfica/",
-          "url": "https://www.footaz.pt/jogo/ac-milan-vs-benfica/",
-          "verified_at": "2026-09-15T11:52:52Z"
+          "source_type": "official_match",
+          "source_url": "https://www.sporttv.pt/?programacao=1",
+          "url": "https://www.sporttv.pt/?programacao=1",
+          "verified_at": "2026-09-15T21:27:50Z"
         }
       ],
       "broadcast_international_tbc": true,
@@ -399,7 +404,7 @@
       "competition": "UEFA Europa League",
       "home_away": "Casa",
       "home_team": "Milan",
-      "last_modified": "2026-09-15T11:52:52Z",
+      "last_modified": "2026-09-15T21:27:50Z",
       "location": "Milan, Italy",
       "neutral": false,
       "opponent_country": "Portogallo",
@@ -407,7 +412,7 @@
       "opponent_country_source": "TheSportsDB team lookup",
       "opponent_country_source_url": "https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=Benfica",
       "round": "1",
-      "sequence": 7,
+      "sequence": 8,
       "source": "AC Milan",
       "source_id": "donqu6bltepo7k7bsmdffhfys",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -1522,7 +1527,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-15T11:52:52Z",
+  "last_changed": "2026-09-15T21:27:50Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
