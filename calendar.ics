@@ -252,20 +252,20 @@ BEGIN:VEVENT
 SUMMARY:⚽ Milan - Benfica
 DTSTART;TZID=Europe/Rome:20260916T210000
 DTEND;TZID=Europe/Rome:20260916T230000
-DTSTAMP:20260916T093157Z
+DTSTAMP:20260916T212341Z
 UID:29b36264474890d3320b242f@milan-calendar
-SEQUENCE:11
+SEQUENCE:12
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
- 16/09/2026 21:00\nTurno: 1\nStadio: San Siro Stadium\nLocalità: Milan\, I
- taly\nDove vederla:\n🇮🇹 Italia — Sky Sport Calcio / Sky Go\nA paga
- mento · TV + streaming · italiano\nhttps://programmi.sky.it/sport/coppe-
- europee/uefa-europa-league/dove-vedere-milan-benfica\nGRATIS / IN CHIARO A
- LL'ESTERO:\n🇦🇿 Azerbaijan — CBC Sport\nGRATIS · TV in chiaro + st
- reaming · azero · diretta dalle 21:00 (ora di Roma)\nGuarda sul sito uff
- iciale: https://cbcsport.az/live/\nFonte orario: NOW
-LAST-MODIFIED:20260916T093157Z
-LOCATION:San Siro Stadium\, Milan\, Italy
+ 16/09/2026 21:00\nTurno: 1\nStadio: San Siro Stadium\nLocalità: Milano\nD
+ ove vederla:\n🇮🇹 Italia — Sky Sport Calcio / Sky Go\nA pagamento 
+ · TV + streaming · italiano\nhttps://programmi.sky.it/sport/coppe-europe
+ e/uefa-europa-league/dove-vedere-milan-benfica\nGRATIS / IN CHIARO ALL'EST
+ ERO:\n🇦🇿 Azerbaijan — CBC Sport\nGRATIS · TV in chiaro + streamin
+ g · azero · diretta dalle 21:00 (ora di Roma)\nGuarda sul sito ufficiale
+ : https://cbcsport.az/live/\nFonte orario: NOW
+LAST-MODIFIED:20260916T212341Z
+LOCATION:San Siro Stadium\, Milano
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
@@ -323,15 +323,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Salzburg - Milan
 DTSTART;TZID=Europe/Rome:20261015T184500
 DTEND;TZID=Europe/Rome:20261015T204500
-DTSTAMP:20260901T114901Z
+DTSTAMP:20260916T212341Z
 UID:3dada53d30468e73c19eae6d@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 15/10/2026 18:45\nTurno: 2\nStadio: Red Bull Arena\nDove vederla:\n
- 🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da confer
- mare\nFonte orario: AC Milan
-LAST-MODIFIED:20260901T114901Z
+ 🇮🇹 Italia — Sky Sport Calcio / Sky Go\nA pagamento · TV + streami
+ ng · italiano\nhttps://programmi.sky.it/sport/coppe-europee/uefa-europa-l
+ eague/dove-vedere-salzburg-milan\n🌍 In chiaro all'estero — Da conferm
+ are\nFonte orario: AC Milan
+LAST-MODIFIED:20260916T212341Z
 LOCATION:Red Bull Arena
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
