@@ -1425,12 +1425,165 @@ def test_foreign_paid_alternative_is_never_published_as_free() -> None:
         ),
         ([{"source_type": "guide", "source_url": "guide-a"}], True, 75),
         ([{"source_type": "guide", "source_url": "guide-a"}], False, 70),
+        ([], True, 60),
     ],
 )
 def test_broadcast_confidence_model(
     evidence: list[dict[str, str]], rights: bool, expected: int
 ) -> None:
     assert score_broadcast_evidence(evidence, rights) == expected
+
+
+def test_milan_benfica_keeps_sky_and_confirms_cbc_from_two_match_sources() -> None:
+    event = {
+        "event_kind": "match", "home_team": "AC Milan", "away_team": "SL Benfica",
+        "title": "AC Milan - SL Benfica", "competition": "UEFA Europa League",
+        "start": "2026-09-16T21:00:00+02:00", "status": "Fixture",
+    }
+    sources = [
+        {
+            "country": "Italia", "country_code": "IT", "broadcaster": "Sky Sport / NOW",
+            "access": "paid", "url": "https://sky.test/milan-benfica",
+            "platforms": "TV + streaming", "priority": 100,
+        },
+        {
+            "country": "Azerbaijan", "country_code": "AZ", "broadcaster": "CBC Sport",
+            "access": "free", "url": "https://cbcsport.az/tv_program_schedule",
+            "platforms": "TV in chiaro + streaming", "timezone": "Asia/Baku",
+            "rights_confirmed": True, "rights_source_url": "https://uefa.test/rights",
+            "broadcast_free": True, "web_stream_free": "unknown",
+            "watch_url": "https://cbcsport.az/live/", "watch_url_type": "live_page",
+            "broadcaster_home_url": "https://cbcsport.az/",
+            "official_domains": ["cbcsport.az"], "priority": 110,
+        },
+        {
+            "country": "Azerbaijan", "country_code": "AZ", "broadcaster": "Spor Ekranı",
+            "access": "free", "url": "https://guide-one.test/",
+            "source_type": "guide", "timezone": "Europe/Istanbul",
+            "require_kickoff_time": True,
+        },
+        {
+            "country": "Azerbaijan", "country_code": "AZ", "broadcaster": "Sportkritik",
+            "access": "free", "url": "https://guide-two.test/search",
+            "url_template": "https://guide-two.test/search?search={home}%20{away}",
+            "source_type": "wordpress_search", "timezone": "Asia/Baku",
+            "require_kickoff_time": True,
+        },
+    ]
+
+    class Response:
+        def __init__(self, text: str = "", payload: object = None) -> None:
+            self.text, self.payload = text, payload
+
+        def raise_for_status(self) -> None:
+            return None
+
+        def json(self) -> object:
+            return self.payload
+
+    class Session:
+        def get(self, url: str, timeout: int) -> Response:
+            if "searchteams.php" in url:
+                return Response(payload={"teams": [{"strTeam": "SL Benfica", "strCountry": "Portugal"}]})
+            if "sky.test" in url:
+                return Response("AC Milan - SL Benfica, 16 settembre 2026 ore 21:00: diretta Sky Sport / NOW")
+            if "cbcsport.az/tv_program" in url:
+                return Response("CBC Sport detiene i diritti UEFA Europa League")
+            if "guide-one.test" in url:
+                return Response("16 Eylül 2026 22:00 AC Milan - Benfica canlı CBC Sport")
+            if "guide-two.test/search" in url:
+                return Response(payload=[{"url": "https://guide-two.test/tv-program"}])
+            if "guide-two.test/tv-program" in url:
+                return Response("16 sentyabr 23:00 Milan – Benfika CBC Sport canlı")
+            raise AssertionError(url)
+
+    updated, errors = apply_verified_broadcasts(
+        Session(), [event], [], sources, "2026-09-16T08:00:00Z",
+        datetime(2026, 9, 16, 8, tzinfo=timezone.utc),
+    )
+
+    assert errors == ["Paese avversaria non identificato: SL Benfica"]
+    options = updated[0]["broadcast_options"]
+    assert [item["broadcaster"] for item in options] == ["Sky Sport / NOW", "CBC Sport"]
+    assert not updated[0]["free_italian_broadcasts"]
+    cbc = next(item for item in updated[0]["broadcast_candidates"] if item["broadcaster"] == "CBC Sport")
+    assert cbc["status"] == "CONFIRMED_FREE"
+    assert cbc["confidence"] == 90
+    assert cbc["rights_confirmed"] is True
+    assert cbc["match_confirmed"] is True
+    assert cbc["source_schedule"] in {
+        "https://guide-one.test/", "https://guide-two.test/tv-program"
+    }
+    assert cbc["watch_url"] == "https://cbcsport.az/live/"
+    assert cbc["watch_url_type"] == "live_page"
+
+
+@pytest.mark.parametrize(
+    ("watch_url", "domains", "expected"),
+    [
+        ("https://cbcsport.az/live/", ["cbcsport.az"], "https://cbcsport.az/live/"),
+        ("", ["cbcsport.az"], None),
+        ("https://stream.example/live", ["cbcsport.az"], None),
+    ],
+)
+def test_confirmed_broadcast_only_keeps_verified_official_watch_url(
+    watch_url: str, domains: list[str], expected: str | None
+) -> None:
+    event = {
+        "event_kind": "match", "home_team": "Milan", "away_team": "Benfica",
+        "competition": "UEFA Europa League", "start": "2026-09-16T21:00:00+02:00",
+        "status": "Fixture",
+    }
+    source = {
+        "country": "Azerbaijan", "country_code": "AZ", "broadcaster": "CBC Sport",
+        "access": "free", "url": "https://cbcsport.az/schedule",
+        "watch_url": watch_url, "official_domains": domains,
+        "broadcast_free": True, "web_stream_free": False,
+    }
+
+    class Response:
+        text = "Milan - Benfica 16 settembre 2026 ore 21:00: diretta CBC Sport"
+        def raise_for_status(self) -> None: return None
+        def json(self) -> dict: return {"teams": []}
+
+    updated, _ = apply_verified_broadcasts(
+        type("Session", (), {"get": lambda self, url, timeout: Response()})(),
+        [event], [], [source], "2026-09-15T08:00:00Z",
+        datetime(2026, 9, 15, 8, tzinfo=timezone.utc),
+    )
+    candidate = updated[0]["broadcast_candidates"][0]
+    assert candidate["watch_url"] == expected
+    assert candidate["broadcast_free"] is True
+    assert candidate["web_stream_free"] is False
+
+
+def test_rights_only_free_broadcaster_stays_possible() -> None:
+    event = {
+        "event_kind": "match", "home_team": "Milan", "away_team": "Benfica",
+        "competition": "UEFA Europa League", "start": "2026-09-16T21:00:00+02:00",
+        "status": "Fixture",
+    }
+    source = {
+        "country": "Azerbaijan", "country_code": "AZ", "broadcaster": "CBC Sport",
+        "access": "free", "url": "https://cbcsport.az/schedule",
+        "rights_confirmed": True, "rights_source_url": "https://uefa.test/rights",
+    }
+
+    class Response:
+        text = "CBC Sport: UEFA Europa League"
+        def raise_for_status(self) -> None: return None
+        def json(self) -> dict: return {"teams": []}
+
+    updated, _ = apply_verified_broadcasts(
+        type("Session", (), {"get": lambda self, url, timeout: Response()})(),
+        [event], [], [source], "2026-09-10T08:00:00Z",
+        datetime(2026, 9, 10, 8, tzinfo=timezone.utc),
+    )
+    candidate = updated[0]["broadcast_candidates"][0]
+    assert candidate["status"] == "POSSIBLE_FREE"
+    assert candidate["confidence"] == 60
+    assert candidate["match_confirmed"] is False
+    assert updated[0]["broadcast_options"] == []
 
 
 def test_unconfirmed_guide_window_does_not_name_a_broadcaster() -> None:

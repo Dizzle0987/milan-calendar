@@ -38,6 +38,44 @@
       "lookahead_days": 21, "priority": 90
     },
     {
+      "country": "Azerbaijan", "country_code": "AZ", "broadcaster": "CBC Sport",
+      "country_aliases": ["Azerbaijan", "Azerbaigian"],
+      "access": "free", "platforms": "TV in chiaro + streaming", "language": "azero",
+      "timezone": "Asia/Baku", "market_tier": 1,
+      "url": "https://cbcsport.az/tv_program_schedule",
+      "source_type": "fixture_page", "require_kickoff_time": true,
+      "rights_confirmed": true,
+      "rights_source_url": "https://www.uefa.com/uefaeuropaleague/news/028d-1ae6d62165d6-69b17b354deb-1000--where-to-watch-the-europa-league-final-tv-broadcast-partners-live-streams/",
+      "broadcast_free": true, "web_stream_free": "unknown",
+      "watch_url": "https://cbcsport.az/live/", "watch_url_type": "live_page",
+      "broadcaster_home_url": "https://cbcsport.az/",
+      "official_domains": ["cbcsport.az", "cbcsport.tv"],
+      "match_terms": ["CBC Sport", "CBC Sport TV"],
+      "competition_families": ["champions-league", "europa-league", "conference-league"],
+      "rights_from_season": 2026, "rights_through_season": 2026,
+      "lookahead_days": 21, "priority": 110
+    },
+    {
+      "country": "Azerbaijan", "country_code": "AZ", "broadcaster": "Spor Ekranı",
+      "access": "free", "platforms": "guida TV", "language": "turco",
+      "timezone": "Europe/Istanbul", "market_tier": 1,
+      "url": "https://www.sporekrani.com/", "source_type": "guide",
+      "require_kickoff_time": true,
+      "competition_families": ["champions-league", "europa-league", "conference-league"],
+      "lookahead_days": 21, "priority": 75
+    },
+    {
+      "country": "Azerbaijan", "country_code": "AZ", "broadcaster": "Sportkritik",
+      "access": "free", "platforms": "guida TV", "language": "azero",
+      "timezone": "Asia/Baku", "market_tier": 1,
+      "url": "https://sportkritik.az/wp-json/wp/v2/search",
+      "url_template": "https://sportkritik.az/wp-json/wp/v2/search?search={home}%20{away}",
+      "team_slugs": {"milan": "Milan", "benfica": "Benfika"},
+      "source_type": "wordpress_search", "require_kickoff_time": true,
+      "competition_families": ["champions-league", "europa-league", "conference-league"],
+      "lookahead_days": 21, "priority": 70
+    },
+    {
       "country": "Austria", "country_code": "AT", "broadcaster": "ServusTV / ServusTV On",
       "access": "free", "platforms": "TV + streaming", "language": "tedesco",
       "url": "https://www.servustv.com/de/epg", "public_url": "https://www.servustv.com/de/sport/",

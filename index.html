@@ -87,6 +87,8 @@
       .kickoff { margin: 45px 0 0; color: #ececec; font-size: 1.05rem; }
       .kickoff strong { color: #fff; }
       .watch-info { margin: 10px 0 0; color: #9e9e9e; font-size: .9rem; }
+      .watch-info a { color: #ff4b5c; font-weight: 700; text-decoration: none; }
+      .watch-info a:hover { text-decoration: underline; }
       .upcoming { display: grid; gap: 1px; margin-top: 16px; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--line); }
       .upcoming-row { display: grid; grid-template-columns: 106px 1fr auto; gap: 18px; align-items: center; padding: 18px 20px; background: #0e0e0e; }
       .upcoming-date { color: #ff5965; font-size: .8rem; font-weight: 850; text-transform: uppercase; }
@@ -286,6 +288,37 @@
         return event.broadcast_it && event.broadcast_it !== "Da definire" ? event.broadcast_it : "TV da confermare";
       }
 
+      function broadcastElement(event) {
+        const element = make("p", "watch-info");
+        const confirmed = event.broadcast_options || [];
+        const italian = confirmed.filter(option => option.country_code === "IT" && option.status === "confirmed");
+        const foreign = confirmed.filter(option => option.country_code !== "IT" && option.access === "free" && option.status === "confirmed");
+        const possible = (event.foreign_possible_broadcasts || []).slice(0, 3);
+        const rows = [];
+        if (italian.length) rows.push(...italian.map(option => ({ label: `🇮🇹 ${option.broadcaster}`, option })));
+        else rows.push({ label: `🇮🇹 ${broadcastText(event)}` });
+        if (foreign.length) rows.push(...foreign.map(option => ({ label: `🌍 ${option.broadcaster} — ${option.country} ✓`, option })));
+        else if (possible.length) rows.push(...possible.map(option => ({ label: `🌍 Possibile: ${option.broadcaster} — ${option.country}` })));
+        else rows.push({ label: "🌍 In chiaro all'estero — Da confermare" });
+
+        element.append(document.createTextNode("Dove vederla: "));
+        rows.forEach((row, index) => {
+          if (index) element.append(document.createElement("br"));
+          element.append(document.createTextNode(row.label));
+          const url = row.option && (row.option.watch_url || row.option.broadcaster_home_url);
+          if (url) {
+            element.append(document.createTextNode(" · "));
+            const link = document.createElement("a");
+            link.href = url;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.textContent = row.option.watch_url ? "Guarda" : "Sito ufficiale";
+            element.append(link);
+          }
+        });
+        return element;
+      }
+
       function renderMatchCenter(payload) {
         const dashboard = document.getElementById("live-dashboard");
         const status = document.getElementById("data-status");
@@ -309,7 +342,7 @@
         const kickoff = make("p", "kickoff");
         kickoff.append(make("strong", "", kickoffText(next)));
         if (next.venue) kickoff.append(document.createTextNode(` · ${next.venue}`));
-        card.append(meta, fixture, kickoff, make("p", "watch-info", `Dove vederla: ${broadcastText(next)}`));
+        card.append(meta, fixture, kickoff, broadcastElement(next));
         matchColumn.append(card);
 
         if (future.length > 1) {
