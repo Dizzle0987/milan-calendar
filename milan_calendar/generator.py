@@ -99,32 +99,7 @@ ESPN_COMPETITIONS = {
     "global.club_challenge": "UEFA-CONMEBOL Club Challenge",
     "club.friendly": "Amichevole",
 }
-BROADCASTERS_IT = {
-    "serie-a": (
-        "DAZN",
-        "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
-    ),
-    "coppa-italia": (
-        "Mediaset (canali in chiaro), Mediaset Infinity e SportMediaset.it",
-        "https://mediasetinfinity.mediaset.it/calcio-e-sport/coppaitaliacalcio_SE000000001529",
-    ),
-    "supercoppa-italiana": (
-        "Mediaset (canali in chiaro), Mediaset Infinity e SportMediaset.it",
-        "https://mediasetinfinity.mediaset.it/calcio-e-sport/supercoppaditaliacalcio_SE000000001643",
-    ),
-    "champions-league": (
-        "Sky Sport/NOW; possibile esclusiva Prime Video da verificare",
-        "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
-    ),
-    "europa-league": (
-        "Sky Sport e NOW",
-        "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
-    ),
-    "conference-league": (
-        "Sky Sport e NOW",
-        "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
-    ),
-}
+BROADCAST_CONFIG_PATH = Path(__file__).parents[1] / "data" / "broadcast_sources.json"
 INTERNATIONAL_COMPETITION_FAMILIES = {
     "champions-league",
     "europa-league",
@@ -145,15 +120,7 @@ TEAM_COUNTRY_LOOKUP_URL = (
     "https://www.thesportsdb.com/api/v1/json/123/searchteams.php"
 )
 BROADCAST_CONFIDENCE_THRESHOLD = 80
-BROADCAST_MARKET_TIERS = {
-    1: {"AT", "CH", "DE", "BE", "AZ", "TR", "AL", "RS"},
-    2: {"XK", "HR", "BA", "MD", "MT", "KZ", "GE", "CY"},
-}
 BROADCAST_GUIDE_SOURCE_TYPES = {"guide", "wordpress_search"}
-TEAM_BROADCAST_ALIASES = {
-    "milan": {"milan", "ac-milan", "a-c-milan", "acm"},
-    "benfica": {"benfica", "sl-benfica", "s-l-benfica", "benfika"},
-}
 MONTH_NAMES = {
     1: ("gennaio", "january", "januar", "janvier", "enero", "janeiro"),
     2: ("febbraio", "february", "februar", "fevrier", "febrero", "fevereiro"),
@@ -281,9 +248,17 @@ def load_broadcast_sources(path: Path) -> list[dict[str, Any]]:
     for index, source in enumerate(sources):
         if not isinstance(source, dict) or required - source.keys():
             raise ValueError(f"Fonte broadcast #{index + 1} non valida")
-        if source.get("access") not in {"free", "included", "paid"}:
+        if source.get("access") not in {"free", "included", "paid", "unknown"}:
             raise ValueError(f"Fonte broadcast #{index + 1}: access non valido")
-        normalized.append(deepcopy(source))
+        item = deepcopy(source)
+        tiers = payload.get("market_tiers") or {}
+        country_code = str(item.get("country_code") or "").upper()
+        if not item.get("market_tier"):
+            for tier, countries in tiers.items():
+                if country_code in {str(code).upper() for code in countries or []}:
+                    item["market_tier"] = int(tier)
+                    break
+        normalized.append(item)
     return normalized
 
 
@@ -323,12 +298,17 @@ def _fixture_time_markers(
     }
 
 
-def _team_broadcast_aliases(team: str) -> set[str]:
+def _team_broadcast_aliases(
+    team: str, configured_aliases: dict[str, Any] | None = None
+) -> set[str]:
     key = _team_match_key(team)
     aliases = {key}
-    for canonical, values in TEAM_BROADCAST_ALIASES.items():
-        if key == canonical or key in values:
-            aliases.update(values)
+    for canonical, values in (configured_aliases or {}).items():
+        normalized_values = {_team_match_key(str(value)) for value in values or []}
+        canonical_key = _team_match_key(str(canonical))
+        if key == canonical_key or key in normalized_values:
+            aliases.update(normalized_values)
+            aliases.add(canonical_key)
     return aliases
 
 
@@ -336,28 +316,40 @@ def _fixture_windows(
     html: str,
     event: dict[str, Any],
     timezone_name: str = "Europe/Rome",
+    team_aliases: dict[str, Any] | None = None,
 ) -> list[str]:
     text = _normalize(html_module.unescape(re.sub(r"<[^>]+>", " ", html)))
-    opponent = (
-        str(event.get("away_team") or "")
-        if _is_milan(str(event.get("home_team") or ""))
-        else str(event.get("home_team") or "")
-    )
-    opponent_tokens = [
+    ignored = {"club", "calcio", "football", "futbol", "sporting", "team"}
+    home_tokens = {
         token
-        for alias in _team_broadcast_aliases(opponent)
+        for alias in _team_broadcast_aliases(
+            str(event.get("home_team") or ""), team_aliases
+        )
         for token in alias.split("-")
-        if len(token) >= 4 and token not in {"club", "calcio"}
-    ]
-    if not opponent_tokens:
+        if len(token) >= 3 and token not in ignored
+    }
+    away_tokens = {
+        token
+        for alias in _team_broadcast_aliases(
+            str(event.get("away_team") or ""), team_aliases
+        )
+        for token in alias.split("-")
+        if len(token) >= 3 and token not in ignored
+    }
+    if not home_tokens or not away_tokens:
         return []
     date_markers = _fixture_date_markers(_event_datetime(event), timezone_name)
     windows: list[str] = []
-    for anchor in sorted(set(opponent_tokens), key=len, reverse=True):
+    anchors, counterparts = (
+        (away_tokens, home_tokens)
+        if max(map(len, away_tokens)) >= max(map(len, home_tokens))
+        else (home_tokens, away_tokens)
+    )
+    for anchor in sorted(anchors, key=len, reverse=True):
         for match in re.finditer(re.escape(anchor), text):
             window = text[max(0, match.start() - 900) : match.end() + 900]
             if (
-                "milan" in window
+                any(token in window for token in counterparts)
                 and any(marker in window for marker in date_markers)
                 and window not in windows
             ):
@@ -371,11 +363,12 @@ def page_confirms_fixture(
     broadcaster: str,
     timezone_name: str = "Europe/Rome",
     require_kickoff_time: bool = False,
+    team_aliases: dict[str, Any] | None = None,
 ) -> bool:
     """Require teams, exact date and viewing language in one nearby page fragment."""
     broadcaster_marker = _normalize(broadcaster)
     time_markers = _fixture_time_markers(_event_datetime(event), timezone_name)
-    for window in _fixture_windows(html, event, timezone_name):
+    for window in _fixture_windows(html, event, timezone_name, team_aliases):
         if require_kickoff_time and not any(marker in window for marker in time_markers):
             continue
         has_viewing_evidence = any(marker in window for marker in BROADCAST_EVIDENCE_MARKERS)
@@ -515,21 +508,22 @@ def _verified_official_url(source: dict[str, Any], field: str) -> str | None:
 
 def _source_with_page_channels(source: dict[str, Any], html: str) -> dict[str, Any]:
     """Refine a confirmed source with channels explicitly named on its page."""
-    if str(source.get("country_code") or "").upper() != "IT":
+    channel_pattern = str(source.get("channel_pattern") or "")
+    if not channel_pattern:
         return source
     visible = html_module.unescape(re.sub(r"<[^>]+>", " ", html))
     channels = list(
         dict.fromkeys(
             match.group(0)
-            for match in re.finditer(
-                r"Sky Sport(?: Uno| Calcio| Arena| Football| 4K| \d{3})",
-                visible,
-                re.IGNORECASE,
-            )
+            for match in re.finditer(channel_pattern, visible, re.IGNORECASE)
         )
     )
-    if "sky go" in visible.lower():
-        channels.append("Sky Go")
+    normalized_visible = visible.lower()
+    for additional in source.get("additional_channels") or []:
+        marker = str(additional.get("marker") or "").lower()
+        label = str(additional.get("label") or "").strip()
+        if marker and label and marker in normalized_visible:
+            channels.append(label)
     if not channels:
         return source
     refined = deepcopy(source)
@@ -697,9 +691,10 @@ def _guide_broadcasters(
     broadcaster_sources: list[dict[str, Any]],
     timezone_name: str,
     require_kickoff_time: bool = False,
+    team_aliases: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """Discover known broadcasters named next to the exact fixture in a TV guide."""
-    windows = _fixture_windows(html, event, timezone_name)
+    windows = _fixture_windows(html, event, timezone_name, team_aliases)
     windows = [window for window in windows if "canal-a-confirmar" not in window]
     if require_kickoff_time:
         time_markers = _fixture_time_markers(_event_datetime(event), timezone_name)
@@ -753,6 +748,87 @@ def _fetch_guide_documents(
     return documents
 
 
+def _walk_json_objects(value: Any) -> Iterable[dict[str, Any]]:
+    if isinstance(value, dict):
+        yield value
+        for child in value.values():
+            yield from _walk_json_objects(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from _walk_json_objects(child)
+
+
+def parse_structured_broadcast_guide(
+    html: str,
+    event: dict[str, Any],
+    team_aliases: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Discover match-specific broadcasters from schema.org JSON-LD."""
+    expected_start = _event_datetime(event).astimezone(timezone.utc)
+    home_aliases = _team_broadcast_aliases(
+        str(event.get("home_team") or ""), team_aliases
+    )
+    away_aliases = _team_broadcast_aliases(
+        str(event.get("away_team") or ""), team_aliases
+    )
+    discovered: list[dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+    scripts = re.findall(
+        r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+        html,
+        re.DOTALL | re.IGNORECASE,
+    )
+    for raw in scripts:
+        try:
+            payload = json.loads(html_module.unescape(raw))
+        except (json.JSONDecodeError, TypeError):
+            continue
+        for item in _walk_json_objects(payload):
+            if item.get("@type") != "BroadcastEvent":
+                continue
+            fixture = item.get("broadcastOfEvent") or {}
+            if not isinstance(fixture, dict):
+                continue
+            home = _team_match_key(str((fixture.get("homeTeam") or {}).get("name") or ""))
+            away = _team_match_key(str((fixture.get("awayTeam") or {}).get("name") or ""))
+            if home not in home_aliases or away not in away_aliases:
+                continue
+            try:
+                listed_start = datetime.fromisoformat(
+                    str(fixture.get("startDate") or item.get("startDate") or "")
+                    .replace("Z", "+00:00")
+                ).astimezone(timezone.utc)
+            except ValueError:
+                continue
+            if abs((listed_start - expected_start).total_seconds()) > 15 * 60:
+                continue
+            services = item.get("publishedOn") or []
+            if isinstance(services, dict):
+                services = [services]
+            for service in services:
+                if not isinstance(service, dict):
+                    continue
+                name = str(service.get("name") or "").strip()
+                source_url = str(service.get("sameAs") or "").strip()
+                if not name:
+                    continue
+                key = (_normalize(name), source_url)
+                if key in seen:
+                    continue
+                seen.add(key)
+                area = service.get("areaServed") or {}
+                country = str(area.get("name") or "") if isinstance(area, dict) else ""
+                discovered.append(
+                    {
+                        "broadcaster": name,
+                        "source_url": source_url,
+                        "country": country,
+                        "programme_start": listed_start.isoformat(),
+                    }
+                )
+    return discovered
+
+
 def score_broadcast_evidence(
     evidence: list[dict[str, Any]], rights_confirmed: bool = False
 ) -> int:
@@ -789,10 +865,80 @@ def classify_broadcast_candidate(
 ) -> str:
     """Keep territorial rights separate from proof of the individual fixture."""
     if match_confirmed and confidence >= BROADCAST_CONFIDENCE_THRESHOLD:
-        return "CONFIRMED_FREE" if access == "free" else "CONFIRMED_PAY"
+        if access == "free":
+            return "CONFIRMED_FREE"
+        if access in {"paid", "included"}:
+            return "CONFIRMED_PAY"
     if access == "free" and rights_confirmed:
         return "POSSIBLE_FREE"
     return "UNKNOWN"
+
+
+def _broadcast_season(event: dict[str, Any]) -> tuple[int, str]:
+    explicit = str(event.get("season") or "").strip()
+    range_match = re.search(r"(20\d{2})\s*[/\-]\s*(?:20)?(\d{2})", explicit)
+    if range_match:
+        start = int(range_match.group(1))
+        return start, f"{start}/{range_match.group(2)}"
+    year_match = re.fullmatch(r"20\d{2}", explicit)
+    if year_match:
+        start = int(explicit)
+        return start, explicit
+    start = season_start(_event_datetime(event).astimezone(ROME).date())
+    return start, f"{start}/{str(start + 1)[-2:]}"
+
+
+def _source_temporal_scope(
+    source: dict[str, Any], event: dict[str, Any]
+) -> tuple[bool, bool]:
+    """Return (source active, generic rights are season/date bounded)."""
+    event_start = _event_datetime(event).astimezone(timezone.utc)
+    event_season, _ = _broadcast_season(event)
+    from_season = source.get("rights_from_season")
+    through_season = source.get("rights_through_season")
+    valid_from = source.get("rights_valid_from")
+    valid_to = source.get("rights_valid_to")
+    has_temporal_bounds = any(
+        value not in (None, "")
+        for value in (from_season, through_season, valid_from, valid_to)
+    )
+    if from_season not in (None, "") and event_season < int(from_season):
+        return False, has_temporal_bounds
+    if through_season not in (None, "") and event_season > int(through_season):
+        return False, has_temporal_bounds
+    for raw, is_start in ((valid_from, True), (valid_to, False)):
+        if raw in (None, ""):
+            continue
+        try:
+            boundary = datetime.fromisoformat(str(raw).replace("Z", "+00:00"))
+            if boundary.tzinfo is None:
+                boundary = boundary.replace(tzinfo=timezone.utc)
+            boundary = boundary.astimezone(timezone.utc)
+        except ValueError:
+            return True, False
+        if is_start and event_start < boundary:
+            return False, has_temporal_bounds
+        if not is_start and event_start > boundary:
+            return False, has_temporal_bounds
+    return True, has_temporal_bounds
+
+
+def _broadcast_cache_keys(
+    event: dict[str, Any], country_code: str
+) -> tuple[str, str]:
+    _, season_key = _broadcast_season(event)
+    competition = _competition_family(str(event.get("competition") or ""))
+    date_key = _event_datetime(event).astimezone(ROME).date().isoformat()
+    teams = "|".join(
+        (
+            _team_match_key(str(event.get("home_team") or "")),
+            _team_match_key(str(event.get("away_team") or "")),
+        )
+    )
+    return (
+        f"{competition}|{season_key}|{country_code.upper()}",
+        f"{competition}|{season_key}|{date_key}|{teams}",
+    )
 
 
 def apply_verified_broadcasts(
@@ -895,12 +1041,7 @@ def apply_verified_broadcasts(
         ordered_sources = sorted(
             sources,
             key=lambda item: (
-                int(item.get("market_tier") or (
-                    1 if str(item.get("country_code") or "").upper()
-                    in BROADCAST_MARKET_TIERS[1] else 2 if
-                    str(item.get("country_code") or "").upper()
-                    in BROADCAST_MARKET_TIERS[2] else 3
-                )),
+                int(item.get("market_tier") or 3),
                 -int(item.get("priority") or 0),
             ),
         )
@@ -913,11 +1054,12 @@ def apply_verified_broadcasts(
             }
             horizon = int(source.get("lookahead_days") or BROADCAST_GUIDE_HORIZON_DAYS)
             event_date = _event_datetime(target).astimezone(ROME).date()
-            event_season = season_start(event_date)
+            source_active, rights_temporally_valid = _source_temporal_scope(
+                source, target
+            )
             if (
                 event_date > now.astimezone(ROME).date() + timedelta(days=horizon)
-                or int(source.get("rights_from_season") or 0) > event_season
-                or int(source.get("rights_through_season") or 9999) < event_season
+                or not source_active
                 or (
                     competition_families
                     and _competition_family(str(target.get("competition") or ""))
@@ -927,7 +1069,11 @@ def apply_verified_broadcasts(
                 continue
             source_type = str(source.get("source_type") or "page")
             source_key = (country_code, _normalize(str(source["broadcaster"])))
-            if source.get("rights_confirmed") and source_type not in BROADCAST_GUIDE_SOURCE_TYPES:
+            if (
+                source.get("rights_confirmed")
+                and rights_temporally_valid
+                and source_type not in BROADCAST_GUIDE_SOURCE_TYPES
+            ):
                 evidence_by_broadcaster.setdefault(
                     source_key, {"source": deepcopy(source), "evidence": []}
                 )
@@ -965,15 +1111,58 @@ def apply_verified_broadcasts(
                     continue
                 timezone_name = str(source.get("timezone") or "Europe/Rome")
                 for html, document_url in documents:
+                    if source.get("discover_broadcasters"):
+                        for discovered in parse_structured_broadcast_guide(
+                            html, target, source.get("team_aliases") or {}
+                        ):
+                            discovered_name = _normalize(discovered["broadcaster"])
+                            known = next(
+                                (
+                                    item for item in broadcaster_sources
+                                    if discovered_name
+                                    in {
+                                        _normalize(str(item.get("broadcaster") or "")),
+                                        *(
+                                            _normalize(str(term))
+                                            for term in item.get("match_terms") or []
+                                        ),
+                                    }
+                                ),
+                                None,
+                            )
+                            broadcaster = known or {
+                                "country": discovered.get("country") or "Da determinare",
+                                "country_code": "ZZ",
+                                "broadcaster": discovered["broadcaster"],
+                                "access": "unknown",
+                                "platforms": "TV/streaming da verificare",
+                                "url": discovered.get("source_url") or document_url,
+                                "priority": 0,
+                                "market_tier": 3,
+                                "discovered_dynamically": True,
+                            }
+                            add_evidence(
+                                broadcaster,
+                                {
+                                    "source_type": "guide",
+                                    "source_url": document_url,
+                                    "broadcaster_page": discovered.get("source_url"),
+                                    "verified_at": checked_at,
+                                    "guide": str(source["broadcaster"]),
+                                    "programme_start": discovered.get("programme_start"),
+                                },
+                            )
                     for broadcaster in _guide_broadcasters(
                         html,
                         target,
                         [
                             item for item in broadcaster_sources
-                            if str(item.get("country_code") or "").upper() == country_code
+                            if source.get("country_scope") == "*"
+                            or str(item.get("country_code") or "").upper() == country_code
                         ],
                         timezone_name,
                         bool(source.get("require_kickoff_time")),
+                        source.get("team_aliases") or {},
                     ):
                         add_evidence(
                             broadcaster,
@@ -1002,6 +1191,7 @@ def apply_verified_broadcasts(
                 str(source["broadcaster"]),
                 timezone_name,
                 bool(source.get("require_kickoff_time")),
+                source.get("team_aliases") or {},
             ):
                 refined = _source_with_page_channels(source, response.text)
                 add_evidence(
@@ -1025,7 +1215,10 @@ def apply_verified_broadcasts(
     for bucket in evidence_by_broadcaster.values():
         source = bucket["source"]
         evidence = bucket["evidence"]
-        rights_confirmed = bool(source.get("rights_confirmed"))
+        _, rights_temporally_valid = _source_temporal_scope(source, target)
+        rights_confirmed = bool(
+            source.get("rights_confirmed") and rights_temporally_valid
+        )
         match_confirmed = bool(evidence)
         confidence = score_broadcast_evidence(evidence, rights_confirmed)
         best = (
@@ -1049,6 +1242,19 @@ def apply_verified_broadcasts(
             source, "broadcaster_home_url"
         )
         source_schedule = str(best.get("source_url") or "") or None
+        season_start_year, season_key = _broadcast_season(target)
+        rights_cycle = str(source.get("rights_cycle") or "") or None
+        if rights_cycle is None and source.get("rights_from_season") not in (None, ""):
+            first = int(source["rights_from_season"])
+            last = int(source.get("rights_through_season") or first)
+            rights_cycle = (
+                f"{first}/{str(first + 1)[-2:]}"
+                if first == last
+                else f"{first}/{str(first + 1)[-2:]}-{last}/{str(last + 1)[-2:]}"
+            )
+        rights_cache_key, fixture_cache_key = _broadcast_cache_keys(
+            target, str(source["country_code"])
+        )
         candidate = {
             "match": str(
                 target.get("title")
@@ -1056,6 +1262,13 @@ def apply_verified_broadcasts(
             ),
             "competition": str(target.get("competition") or ""),
             "date": _event_datetime(target).astimezone(ROME).date().isoformat(),
+            "season": season_key,
+            "season_start": season_start_year,
+            "rights_cycle": rights_cycle,
+            "rights_valid_from": source.get("rights_valid_from"),
+            "rights_valid_to": source.get("rights_valid_to"),
+            "rights_cache_key": rights_cache_key,
+            "fixture_cache_key": fixture_cache_key,
             "country": str(source["country"]),
             "country_code": str(source["country_code"]).upper(),
             "broadcaster": str(source["broadcaster"]),
@@ -1099,6 +1312,8 @@ def apply_verified_broadcasts(
             ),
             "priority": int(source.get("priority") or 0),
             "market_tier": int(source.get("market_tier") or 3),
+            "italian_primary": bool(source.get("italian_primary")),
+            "discovered_dynamically": bool(source.get("discovered_dynamically")),
         }
         if best.get("programme_start"):
             start = datetime.fromisoformat(str(best["programme_start"]))
@@ -1157,8 +1372,18 @@ def apply_verified_broadcasts(
                     candidates.remove(current)
                 candidates.append(deepcopy(old_candidate))
 
-    if not candidates and previous_target:
-        candidates = deepcopy(previous_target.get("broadcast_candidates") or [])
+    _, target_fixture_cache_key = _broadcast_cache_keys(target, "")
+
+    def same_fixture_cache(item: dict[str, Any]) -> bool:
+        cached = str(item.get("fixture_cache_key") or "")
+        return not cached or cached == target_fixture_cache_key
+
+    if not candidates and previous_target and errors:
+        candidates = [
+            deepcopy(item)
+            for item in previous_target.get("broadcast_candidates") or []
+            if same_fixture_cache(item)
+        ]
     target["broadcast_candidates"] = candidates
 
     access_order = {"free": 0, "included": 1, "paid": 2}
@@ -1171,7 +1396,7 @@ def apply_verified_broadcasts(
     italian_candidates = sorted(
         (item for item in eligible if item["country_code"] == "IT"),
         key=lambda item: (
-            0 if "sky" in _normalize(str(item["broadcaster"])) else 1,
+            0 if item.get("italian_primary") else 1,
             -int(item["confidence"]),
             -int(item["priority"]),
             access_order.get(str(item["free_or_pay"]), 9),
@@ -1212,6 +1437,10 @@ def apply_verified_broadcasts(
             "broadcast_type": "diretta",
             "verified_at": candidate["verified_at"],
             "priority": candidate["priority"],
+            "season": candidate.get("season"),
+            "rights_cycle": candidate.get("rights_cycle"),
+            "rights_cache_key": candidate.get("rights_cache_key"),
+            "fixture_cache_key": candidate.get("fixture_cache_key"),
         }
         for key in ("broadcast_start", "broadcast_start_rome"):
             if candidate.get(key):
@@ -1222,8 +1451,12 @@ def apply_verified_broadcasts(
         candidate_option(item)
         for item in italian_candidates + foreign_free_candidates
     ]
-    if not selected_options and previous_target:
-        selected_options = deepcopy(previous_target.get("broadcast_options") or [])
+    if not selected_options and previous_target and errors:
+        selected_options = [
+            deepcopy(item)
+            for item in previous_target.get("broadcast_options") or []
+            if same_fixture_cache(item)
+        ]
     target["broadcast_options"] = selected_options
     target["primary_italian_broadcast"] = (
         candidate_option(italian_candidates[0]) if italian_candidates else None
@@ -2194,25 +2427,34 @@ def _uid_for(event: dict[str, Any]) -> str:
     return f"{digest}@milan-calendar"
 
 
+def _configured_broadcast_default(event: dict[str, Any]) -> dict[str, Any] | None:
+    payload = load_json(BROADCAST_CONFIG_PATH, {"italian_defaults": []})
+    family = _competition_family(str(event.get("competition") or ""))
+    matching = []
+    for item in payload.get("italian_defaults") or []:
+        if _normalize(str(item.get("competition_family") or "")) != family:
+            continue
+        active, _ = _source_temporal_scope(item, event)
+        if active:
+            matching.append(item)
+    return max(matching, key=lambda item: int(item.get("priority") or 0), default=None)
+
+
 def _add_italian_broadcaster(event: dict[str, Any]) -> None:
     if str(event.get("event_kind") or "match") != "match":
         return
     if event.get("broadcast_it"):
         return
-    broadcaster, source_url = BROADCASTERS_IT.get(
-        _competition_family(str(event.get("competition") or "")),
-        ("Da definire", ""),
-    )
-    event["broadcast_it"] = broadcaster
-    event.setdefault("broadcast_source_url", source_url)
+    configured = _configured_broadcast_default(event)
+    event["broadcast_it"] = str((configured or {}).get("broadcaster") or "Da definire")
+    event.setdefault("broadcast_source_url", str((configured or {}).get("source_url") or ""))
 
 
 def _merge_broadcaster_overlay(event: dict[str, Any], overlay: dict[str, Any]) -> None:
-    rights = BROADCASTERS_IT.get(
-        _competition_family(str(event.get("competition") or ""))
-    )
-    if rights and not event.get("broadcast_it"):
-        event["broadcast_it"], event["broadcast_source_url"] = rights
+    configured = _configured_broadcast_default(event)
+    if configured and not event.get("broadcast_it"):
+        event["broadcast_it"] = str(configured["broadcaster"])
+        event["broadcast_source_url"] = str(configured.get("source_url") or "")
 
     candidate = str(overlay.get("broadcast_it") or "").strip()
     existing = str(event.get("broadcast_it") or "").strip()

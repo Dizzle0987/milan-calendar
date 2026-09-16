@@ -11,6 +11,7 @@ from icalendar import Calendar
 from milan_calendar.generator import (
     FetchResult,
     UpdateError,
+    _add_italian_broadcaster,
     _broadcast_description_lines,
     _canonical_event,
     _is_official_international_match,
@@ -1288,6 +1289,8 @@ def test_exact_sky_page_replaces_old_generic_sky_option() -> None:
             "url": "https://programmi.sky.it/sport/coppe-europee",
             "url_template": "https://example.test/dove-vedere-{home}-{away}",
             "lookahead_days": 30, "priority": 100,
+            "channel_pattern": r"Sky Sport(?: Calcio| Uno| Arena| Football| 4K| \d{3})",
+            "additional_channels": [{"marker": "sky go", "label": "Sky Go"}],
             "replaces_broadcasters": ["Sky Sport / NOW", "Sky Sport e NOW"],
         }],
         "2026-09-05T10:00:00Z", datetime(2026, 9, 5, tzinfo=timezone.utc),
@@ -1450,8 +1453,9 @@ def test_milan_benfica_keeps_sky_and_confirms_cbc_from_two_match_sources() -> No
             "country": "Azerbaijan", "country_code": "AZ", "broadcaster": "CBC Sport",
             "access": "free", "url": "https://cbcsport.az/tv_program_schedule",
             "platforms": "TV in chiaro + streaming", "timezone": "Asia/Baku",
-            "rights_confirmed": True, "rights_source_url": "https://uefa.test/rights",
-            "broadcast_free": True, "web_stream_free": "unknown",
+                "rights_confirmed": True, "rights_source_url": "https://uefa.test/rights",
+                "rights_from_season": 2026, "rights_through_season": 2026,
+                "broadcast_free": True, "web_stream_free": "unknown",
             "watch_url": "https://cbcsport.az/live/", "watch_url_type": "live_page",
             "broadcaster_home_url": "https://cbcsport.az/",
             "official_domains": ["cbcsport.az"], "priority": 110,
@@ -1468,6 +1472,7 @@ def test_milan_benfica_keeps_sky_and_confirms_cbc_from_two_match_sources() -> No
             "url_template": "https://guide-two.test/search?search={home}%20{away}",
             "source_type": "wordpress_search", "timezone": "Asia/Baku",
             "require_kickoff_time": True,
+            "team_aliases": {"benfica": ["SL Benfica", "Benfika"]},
         },
     ]
 
@@ -1567,6 +1572,7 @@ def test_rights_only_free_broadcaster_stays_possible() -> None:
         "country": "Azerbaijan", "country_code": "AZ", "broadcaster": "CBC Sport",
         "access": "free", "url": "https://cbcsport.az/schedule",
         "rights_confirmed": True, "rights_source_url": "https://uefa.test/rights",
+        "rights_from_season": 2026, "rights_through_season": 2026,
     }
 
     class Response:
@@ -1584,6 +1590,163 @@ def test_rights_only_free_broadcaster_stays_possible() -> None:
     assert candidate["confidence"] == 60
     assert candidate["match_confirmed"] is False
     assert updated[0]["broadcast_options"] == []
+
+
+def test_broadcaster_and_access_change_between_rights_cycles() -> None:
+    def fixture(year: int) -> dict:
+        return {
+            "event_kind": "match", "home_team": "Milan", "away_team": "Rovers",
+            "competition": "FIFA Competition X", "status": "Fixture",
+            "season": f"{year}/{str(year + 1)[-2:]}",
+            "start": f"{year}-10-01T21:00:00+02:00",
+        }
+
+    sources = [
+        {
+            "country": "Italia", "country_code": "IT", "broadcaster": "Broadcaster A",
+            "access": "free", "url": "https://a.test/schedule",
+            "rights_confirmed": True, "rights_from_season": 2026,
+            "rights_through_season": 2026, "rights_cycle": "2026/27",
+            "italian_primary": True, "lookahead_days": 30,
+        },
+        {
+            "country": "Italia", "country_code": "IT", "broadcaster": "Broadcaster B",
+            "access": "paid", "url": "https://b.test/schedule",
+            "rights_confirmed": True, "rights_from_season": 2027,
+            "rights_through_season": 2027, "rights_cycle": "2027/28",
+            "italian_primary": True, "lookahead_days": 30,
+        },
+    ]
+
+    class Response:
+        def __init__(self, text: str = "") -> None: self.text = text
+        def raise_for_status(self) -> None: return None
+        def json(self) -> dict: return {"teams": []}
+
+    class Session:
+        def get(self, url: str, timeout: int) -> Response:
+            if "searchteams" in url: return Response()
+            broadcaster = "Broadcaster A" if "a.test" in url else "Broadcaster B"
+            year = 2026 if "a.test" in url else 2027
+            return Response(
+                f"Milan - Rovers, 1 ottobre {year} ore 21:00: diretta {broadcaster}"
+            )
+
+    season_a, _ = apply_verified_broadcasts(
+        Session(), [fixture(2026)], [], sources, "2026-09-20T08:00:00Z",
+        datetime(2026, 9, 20, 8, tzinfo=timezone.utc),
+    )
+    season_b, _ = apply_verified_broadcasts(
+        Session(), [fixture(2027)], season_a, sources, "2027-09-20T08:00:00Z",
+        datetime(2027, 9, 20, 8, tzinfo=timezone.utc),
+    )
+
+    assert [item["broadcaster"] for item in season_a[0]["broadcast_options"]] == [
+        "Broadcaster A"
+    ]
+    assert season_a[0]["broadcast_options"][0]["access"] == "free"
+    assert season_a[0]["broadcast_candidates"][0]["season"] == "2026/27"
+    assert [item["broadcaster"] for item in season_b[0]["broadcast_options"]] == [
+        "Broadcaster B"
+    ]
+    assert season_b[0]["broadcast_options"][0]["access"] == "paid"
+    assert season_b[0]["broadcast_candidates"][0]["season"] == "2027/28"
+    assert all(
+        item["broadcaster"] != "Broadcaster A"
+        for item in season_b[0]["broadcast_candidates"]
+    )
+
+
+def test_structured_guide_discovers_unregistered_broadcaster_without_confirming_access() -> None:
+    event = {
+        "event_kind": "match", "home_team": "Milan", "away_team": "Future FC",
+        "competition": "FIFA Global Cup", "status": "Fixture",
+        "start": "2028-08-10T20:00:00+02:00",
+    }
+    source = {
+        "country": "Globale", "country_code": "ZZ", "broadcaster": "Global Guide",
+        "access": "free", "url": "https://guide.test/", "source_type": "guide",
+        "country_scope": "*", "discover_broadcasters": True, "lookahead_days": 30,
+    }
+    html = """
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org", "@type": "BroadcastEvent",
+        "isLiveBroadcast": true,
+        "publishedOn": {"@type": "BroadcastService", "name": "New Channel Z",
+                        "sameAs": "https://guide.test/channel/new-z"},
+        "broadcastOfEvent": {
+          "@type": "SportsEvent", "name": "Milan - Future FC",
+          "startDate": "2028-08-10T20:00:00+02:00",
+          "homeTeam": {"@type": "SportsTeam", "name": "Milan"},
+          "awayTeam": {"@type": "SportsTeam", "name": "Future FC"}
+        }
+      }
+      </script>
+    """
+
+    class Response:
+        def __init__(self, text: str = "") -> None: self.text = text
+        def raise_for_status(self) -> None: return None
+        def json(self) -> dict: return {"teams": []}
+
+    class Session:
+        def get(self, url: str, timeout: int) -> Response:
+            return Response("" if "searchteams" in url else html)
+
+    updated, _ = apply_verified_broadcasts(
+        Session(), [event], [], [source], "2028-08-01T08:00:00Z",
+        datetime(2028, 8, 1, 8, tzinfo=timezone.utc),
+    )
+
+    candidate = updated[0]["broadcast_candidates"][0]
+    assert candidate["broadcaster"] == "New Channel Z"
+    assert candidate["discovered_dynamically"] is True
+    assert candidate["match_confirmed"] is True
+    assert candidate["free_or_pay"] == "unknown"
+    assert candidate["status"] == "UNKNOWN"
+    assert updated[0]["broadcast_options"] == []
+
+
+def test_unbounded_generic_rights_are_not_reused_as_confirmation() -> None:
+    event = {
+        "event_kind": "match", "home_team": "Milan", "away_team": "Future FC",
+        "competition": "FIFA Global Cup", "status": "Fixture",
+        "start": "2028-08-10T20:00:00+02:00",
+    }
+    source = {
+        "country": "Futureland", "country_code": "ZZ", "broadcaster": "Old Channel",
+        "access": "free", "url": "https://old.test/rights",
+        "rights_confirmed": True, "lookahead_days": 30,
+    }
+
+    class Response:
+        text = "Old Channel detiene genericamente i diritti"
+        def raise_for_status(self) -> None: return None
+        def json(self) -> dict: return {"teams": []}
+
+    updated, _ = apply_verified_broadcasts(
+        type("Session", (), {"get": lambda self, url, timeout: Response()})(),
+        [event], [], [source], "2028-08-01T08:00:00Z",
+        datetime(2028, 8, 1, 8, tzinfo=timezone.utc),
+    )
+
+    assert updated[0]["broadcast_candidates"] == []
+    assert updated[0]["broadcast_options"] == []
+
+
+def test_seasonal_italian_default_expires_instead_of_becoming_permanent() -> None:
+    current = {
+        "event_kind": "match", "home_team": "Milan", "away_team": "Rovers",
+        "competition": "Serie A", "start": "2026-10-01T20:45:00+02:00",
+    }
+    future = dict(current, start="2027-10-01T20:45:00+02:00")
+
+    _add_italian_broadcaster(current)
+    _add_italian_broadcaster(future)
+
+    assert current["broadcast_it"] == "DAZN"
+    assert future["broadcast_it"] == "Da definire"
 
 
 def test_unconfirmed_guide_window_does_not_name_a_broadcaster() -> None:
@@ -1606,6 +1769,7 @@ def test_paid_foreign_candidate_is_kept_for_debug_but_not_published() -> None:
         "country": "Portogallo", "country_code": "PT", "country_aliases": ["Portugal"],
         "broadcaster": "Sport TV", "access": "paid", "platforms": "TV + streaming",
         "language": "portoghese", "url": "https://sport.test/", "rights_confirmed": True,
+        "rights_from_season": 2026, "rights_through_season": 2026,
         "competition_families": ["europa-league"], "lookahead_days": 30,
     }
     guide = {

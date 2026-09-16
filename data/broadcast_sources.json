@@ -1,4 +1,49 @@
 {
+  "market_tiers": {
+    "1": ["AT", "CH", "DE", "BE", "AZ", "TR", "AL", "RS"],
+    "2": ["XK", "HR", "BA", "MD", "MT", "KZ", "GE", "CY"]
+  },
+  "italian_defaults": [
+    {
+      "competition_family": "serie-a", "broadcaster": "DAZN",
+      "source_url": "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
+      "rights_from_season": 2026, "rights_through_season": 2026,
+      "rights_cycle": "2026/27", "priority": 100
+    },
+    {
+      "competition_family": "coppa-italia",
+      "broadcaster": "Mediaset (canali in chiaro), Mediaset Infinity e SportMediaset.it",
+      "source_url": "https://mediasetinfinity.mediaset.it/calcio-e-sport/coppaitaliacalcio_SE000000001529",
+      "rights_from_season": 2026, "rights_through_season": 2026,
+      "rights_cycle": "2026/27", "priority": 100
+    },
+    {
+      "competition_family": "supercoppa-italiana",
+      "broadcaster": "Mediaset (canali in chiaro), Mediaset Infinity e SportMediaset.it",
+      "source_url": "https://mediasetinfinity.mediaset.it/calcio-e-sport/supercoppaditaliacalcio_SE000000001643",
+      "rights_from_season": 2026, "rights_through_season": 2026,
+      "rights_cycle": "2026/27", "priority": 100
+    },
+    {
+      "competition_family": "champions-league",
+      "broadcaster": "Sky Sport/NOW; possibile esclusiva Prime Video da verificare",
+      "source_url": "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
+      "rights_from_season": 2026, "rights_through_season": 2026,
+      "rights_cycle": "2026/27", "priority": 100
+    },
+    {
+      "competition_family": "europa-league", "broadcaster": "Sky Sport e NOW",
+      "source_url": "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
+      "rights_from_season": 2026, "rights_through_season": 2026,
+      "rights_cycle": "2026/27", "priority": 100
+    },
+    {
+      "competition_family": "conference-league", "broadcaster": "Sky Sport e NOW",
+      "source_url": "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
+      "rights_from_season": 2026, "rights_through_season": 2026,
+      "rights_cycle": "2026/27", "priority": 100
+    }
+  ],
   "sources": [
     {
       "country": "Italia", "country_code": "IT", "broadcaster": "Sky Sport / Sky Go",
@@ -10,9 +55,13 @@
         "conference-league": "https://programmi.sky.it/sport/coppe-europee/uefa-conference-league/dove-vedere-{home}-{away}"
       },
       "source_type": "fixture_page",
+      "italian_primary": true,
+      "channel_pattern": "Sky Sport(?: Uno| Calcio| Arena| Football| 4K| \\d{3})",
+      "additional_channels": [{"marker": "sky go", "label": "Sky Go"}],
       "replaces_broadcasters": ["Sky Sport / NOW", "Sky Sport e NOW"],
       "competition_families": ["champions-league", "europa-league", "conference-league", "supercoppa-uefa"],
       "rights_from_season": 2024, "rights_through_season": 2030,
+      "rights_cycle": "2024/25-2030/31",
       "lookahead_days": 240, "priority": 100
     },
     {
@@ -53,6 +102,7 @@
       "match_terms": ["CBC Sport", "CBC Sport TV"],
       "competition_families": ["champions-league", "europa-league", "conference-league"],
       "rights_from_season": 2026, "rights_through_season": 2026,
+      "rights_cycle": "2026/27",
       "lookahead_days": 21, "priority": 110
     },
     {
@@ -60,7 +110,8 @@
       "access": "free", "platforms": "guida TV", "language": "turco",
       "timezone": "Europe/Istanbul", "market_tier": 1,
       "url": "https://www.sporekrani.com/", "source_type": "guide",
-      "require_kickoff_time": true,
+      "require_kickoff_time": true, "country_scope": "*",
+      "discover_broadcasters": true,
       "competition_families": ["champions-league", "europa-league", "conference-league"],
       "lookahead_days": 21, "priority": 75
     },
@@ -71,6 +122,10 @@
       "url": "https://sportkritik.az/wp-json/wp/v2/search",
       "url_template": "https://sportkritik.az/wp-json/wp/v2/search?search={home}%20{away}",
       "team_slugs": {"milan": "Milan", "benfica": "Benfika"},
+      "team_aliases": {
+        "milan": ["AC Milan", "A.C. Milan", "ACM"],
+        "benfica": ["SL Benfica", "S.L. Benfica", "Benfika"]
+      },
       "source_type": "wordpress_search", "require_kickoff_time": true,
       "competition_families": ["champions-league", "europa-league", "conference-league"],
       "lookahead_days": 21, "priority": 70
