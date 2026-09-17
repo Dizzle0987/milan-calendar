@@ -139,23 +139,23 @@ TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Torino - Milan
+SUMMARY:⚽ Torino - AC Milan
 DTSTART;TZID=Europe/Rome:20260823T204500
 DTEND;TZID=Europe/Rome:20260823T224500
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:c4a8dca2f7da4ac306231f60@milan-calendar
-SEQUENCE:12
+SEQUENCE:13
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 23/08/
  2026 20:45\nTurno: 1\nStadio: Stadio Olimpico Grande Torino\nLocalità: To
  rino\nDove vederla in Italia: DAZN\nFonte orario: AC Milan
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Olimpico Grande Torino\, Torino
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Torino - Milan
+DESCRIPTION:Tra 150 minuti: Torino - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -182,54 +182,54 @@ TRIGGER:-PT30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Venezia
+SUMMARY:⚽ AC Milan - Venezia
 DTSTART;TZID=Europe/Rome:20260828T204500
 DTEND;TZID=Europe/Rome:20260828T224500
-DTSTAMP:20260905T232444Z
+DTSTAMP:20260917T045927Z
 UID:c842b581e5d1cee0db8d5794@milan-calendar
-SEQUENCE:21
+SEQUENCE:22
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 28/08/2026 
  20:45\nTurno: 2\nStadio: Stadio San Siro\nLocalità: Milano\nDove vederla 
  in Italia: DAZN\nFonte orario: AC Milan
-LAST-MODIFIED:20260905T232444Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro\, Milano
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Venezia
+DESCRIPTION:Tra 150 minuti: AC Milan - Venezia
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Juventus - Milan
+SUMMARY:⚽ Juventus - AC Milan
 DTSTART;TZID=Europe/Rome:20260906T204500
 DTEND;TZID=Europe/Rome:20260906T224500
-DTSTAMP:20260911T232248Z
+DTSTAMP:20260917T045927Z
 UID:f6a0e961c790cc99304f973a@milan-calendar
-SEQUENCE:29
+SEQUENCE:30
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 06/09/
  2026 20:45\nTurno: 3\nStadio: Allianz Stadium\nLocalità: Torino\nDove ved
  erla in Italia: DAZN\nFonte orario: AC Milan
-LAST-MODIFIED:20260911T232248Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Allianz Stadium\, Torino
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Juventus - Milan
+DESCRIPTION:Tra 150 minuti: Juventus - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Lazio - Milan
+SUMMARY:⚽ Lazio - AC Milan
 DTSTART;TZID=Europe/Rome:20260912T180000
 DTEND;TZID=Europe/Rome:20260912T200000
-DTSTAMP:20260914T194947Z
+DTSTAMP:20260917T045927Z
 UID:9bd99a4e5de2da2051ebcc15@milan-calendar
-SEQUENCE:24
+SEQUENCE:25
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 12/09/
  2026 18:00\nTurno: 4\nStadio: Stadio Olimpico\nLocalità: Roma\nDove veder
@@ -238,23 +238,23 @@ DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 12/09/
  ▶ 6. Milan — 8 pt — 4 PG — DR +3\n  7. Frosinone — 7 pt\n  8. Ju
  ventus — 7 pt\nClassifica aggiornata: 14/09/2026 21:49\nFonte classifica
  : Lega Serie A
-LAST-MODIFIED:20260914T194947Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Olimpico\, Roma
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Lazio - Milan
+DESCRIPTION:Tra 150 minuti: Lazio - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Benfica
+SUMMARY:⚽ AC Milan - Benfica
 DTSTART;TZID=Europe/Rome:20260916T210000
 DTEND;TZID=Europe/Rome:20260916T230000
-DTSTAMP:20260916T212341Z
+DTSTAMP:20260917T045927Z
 UID:29b36264474890d3320b242f@milan-calendar
-SEQUENCE:12
+SEQUENCE:13
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  16/09/2026 21:00\nTurno: 1\nStadio: San Siro Stadium\nLocalità: Milano\nD
@@ -264,68 +264,69 @@ DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma):
  ERO:\n🇦🇿 Azerbaijan — CBC Sport\nGRATIS · TV in chiaro + streamin
  g · azero · diretta dalle 21:00 (ora di Roma)\nGuarda sul sito ufficiale
  : https://cbcsport.az/live/\nFonte orario: NOW
-LAST-MODIFIED:20260916T212341Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:San Siro Stadium\, Milano
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Benfica
+DESCRIPTION:Tra 150 minuti: AC Milan - Benfica
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Lecce
+SUMMARY:⚽ AC Milan - Lecce
 DTSTART;TZID=Europe/Rome:20260920T204500
 DTEND;TZID=Europe/Rome:20260920T224500
-DTSTAMP:20260914T194947Z
+DTSTAMP:20260917T045927Z
 UID:72ccbea5301e86dea083451c@milan-calendar
-SEQUENCE:15
+SEQUENCE:16
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 20/09/2026 
- 20:45\nTurno: 5\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nFo
- nte orario: AC Milan\nClassifica Serie A aggiornata — giornata completat
- a:\n  4. Lazio — 10 pt\n  5. Cagliari — 9 pt\n▶ 6. Milan — 8 pt 
- — 4 PG — DR +3\n  7. Frosinone — 7 pt\n  8. Juventus — 7 pt\nClass
- ifica aggiornata: 14/09/2026 21:49\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20260914T194947Z
-LOCATION:Stadio San Siro
+ 20:45\nTurno: 5\nStadio: Stadio San Siro\nLocalità: Italy\nDove vederla i
+ n Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A aggiornata — 
+ giornata completata:\n  4. Lazio — 10 pt\n  5. Cagliari — 9 pt\n▶ 6.
+  Milan — 8 pt — 4 PG — DR +3\n  7. Frosinone — 7 pt\n  8. Juventus
+  — 7 pt\nClassifica aggiornata: 14/09/2026 21:49\nFonte classifica: Lega
+  Serie A
+LAST-MODIFIED:20260917T045927Z
+LOCATION:Stadio San Siro\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Lecce
+DESCRIPTION:Tra 150 minuti: AC Milan - Lecce
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Sassuolo - Milan
+SUMMARY:⚽ Sassuolo - AC Milan
 DTSTART;TZID=Europe/Rome:20261011T180000
 DTEND;TZID=Europe/Rome:20261011T200000
-DTSTAMP:20260904T152224Z
+DTSTAMP:20260917T045927Z
 UID:efe8aeb093e233c7fe578a0b@milan-calendar
-SEQUENCE:9
+SEQUENCE:10
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 11/10/
  2026 18:00\nTurno: 6\nStadio: MAPEI Stadium\nDove vederla in Italia: DAZN\
  ; Sky Sport e NOW\nFonte orario: NOW
-LAST-MODIFIED:20260904T152224Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:MAPEI Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Sassuolo - Milan
+DESCRIPTION:Tra 150 minuti: Sassuolo - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Salzburg - Milan
+SUMMARY:⚽ Salzburg - AC Milan
 DTSTART;TZID=Europe/Rome:20261015T184500
 DTEND;TZID=Europe/Rome:20261015T204500
-DTSTAMP:20260916T212341Z
+DTSTAMP:20260917T045927Z
 UID:3dada53d30468e73c19eae6d@milan-calendar
-SEQUENCE:2
+SEQUENCE:3
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 15/10/2026 18:45\nTurno: 2\nStadio: Red Bull Arena\nDove vederla:\n
@@ -333,812 +334,812 @@ DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ng · italiano\nhttps://programmi.sky.it/sport/coppe-europee/uefa-europa-l
  eague/dove-vedere-salzburg-milan\n🌍 In chiaro all'estero — Da conferm
  are\nFonte orario: AC Milan
-LAST-MODIFIED:20260916T212341Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Red Bull Arena
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Salzburg - Milan
+DESCRIPTION:Tra 150 minuti: Salzburg - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Atalanta
+SUMMARY:⚽ AC Milan - Atalanta
 DTSTART;TZID=Europe/Rome:20261018T180000
 DTEND;TZID=Europe/Rome:20261018T200000
-DTSTAMP:20260904T152224Z
+DTSTAMP:20260917T045927Z
 UID:f4cca29e5c6dd6bae4edb995@milan-calendar
-SEQUENCE:9
+SEQUENCE:10
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 18/10/2026 
  18:00\nTurno: 7\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\; S
  ky Sport e NOW\nFonte orario: NOW
-LAST-MODIFIED:20260904T152224Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Atalanta
+DESCRIPTION:Tra 150 minuti: AC Milan - Atalanta
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ AFC Bournemouth - Milan
+SUMMARY:⚽ AFC Bournemouth - AC Milan
 DTSTART;TZID=Europe/Rome:20261022T210000
 DTEND;TZID=Europe/Rome:20261022T230000
-DTSTAMP:20260911T163537Z
+DTSTAMP:20260917T045927Z
 UID:dc46921426bc343efc88581d@milan-calendar
-SEQUENCE:2
+SEQUENCE:3
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 22/10/2026 21:00\nTurno: 3\nStadio: Vitality Stadium\nDove vederla:\n
  🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da confer
  mare\nFonte orario: NOW
-LAST-MODIFIED:20260911T163537Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Vitality Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: AFC Bournemouth - Milan
+DESCRIPTION:Tra 150 minuti: AFC Bournemouth - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Udinese - Milan
+SUMMARY:⚽ Udinese - AC Milan
 DTSTART;TZID=Europe/Rome:20261025T204500
 DTEND;TZID=Europe/Rome:20261025T224500
-DTSTAMP:20260903T152529Z
+DTSTAMP:20260917T045927Z
 UID:ed011e560d0939fa19ee726a@milan-calendar
-SEQUENCE:8
+SEQUENCE:9
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 25/10/
  2026 20:45\nTurno: 8\nStadio: Bluenergy Stadium\nDove vederla in Italia: D
  AZN\nFonte orario: AC Milan
-LAST-MODIFIED:20260903T152529Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Bluenergy Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Udinese - Milan
+DESCRIPTION:Tra 150 minuti: Udinese - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Bologna
+SUMMARY:⚽ AC Milan - Bologna
 DTSTART;TZID=Europe/Rome:20261028T183000
 DTEND;TZID=Europe/Rome:20261028T203000
-DTSTAMP:20260903T152529Z
+DTSTAMP:20260917T045927Z
 UID:14204818a1863bef3d12592f@milan-calendar
-SEQUENCE:8
+SEQUENCE:9
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 28/10/2026 
  18:30\nTurno: 9\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nFo
  nte orario: AC Milan
-LAST-MODIFIED:20260903T152529Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Bologna
+DESCRIPTION:Tra 150 minuti: AC Milan - Bologna
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Inter
+SUMMARY:⚽ AC Milan - Inter
 DTSTART;TZID=Europe/Rome:20261031T204500
 DTEND;TZID=Europe/Rome:20261031T224500
-DTSTAMP:20260911T163537Z
+DTSTAMP:20260917T045927Z
 UID:8131b669c6acbfebbf8a5c63@milan-calendar
-SEQUENCE:9
+SEQUENCE:10
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 31/10/2026 
  20:45\nTurno: 10\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nF
  onte orario: NOW
-LAST-MODIFIED:20260911T163537Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Inter
+DESCRIPTION:Tra 150 minuti: AC Milan - Inter
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Ferencváros
+SUMMARY:⚽ AC Milan - Ferencváros
 DTSTART;TZID=Europe/Rome:20261105T184500
 DTEND;TZID=Europe/Rome:20261105T204500
-DTSTAMP:20260911T163537Z
+DTSTAMP:20260917T045927Z
 UID:7104e20380283c03c6625881@milan-calendar
-SEQUENCE:3
+SEQUENCE:4
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  05/11/2026 18:45\nTurno: 4\nStadio: San Siro Stadium\nDove vederla:\n🇮
  🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da confermare
  \nFonte orario: NOW
-LAST-MODIFIED:20260911T163537Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Ferencváros
+DESCRIPTION:Tra 150 minuti: AC Milan - Ferencváros
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Genoa - Milan
+SUMMARY:⚽ Genoa - AC Milan
 DTSTART;TZID=Europe/Rome:20261108T150000
 DTEND;TZID=Europe/Rome:20261108T170000
-DTSTAMP:20260903T152529Z
+DTSTAMP:20260917T045927Z
 UID:4bcf433e05672498eda803a5@milan-calendar
-SEQUENCE:8
+SEQUENCE:9
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 08/11/
  2026 15:00\nTurno: 11\nStadio: Stadio Ferraris\nDove vederla in Italia: DA
  ZN\nFonte orario: AC Milan
-LAST-MODIFIED:20260903T152529Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Ferraris
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Genoa - Milan
+DESCRIPTION:Tra 150 minuti: Genoa - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Frosinone
+SUMMARY:⚽ AC Milan - Frosinone
 DTSTART;TZID=Europe/Rome:20261122T150000
 DTEND;TZID=Europe/Rome:20261122T170000
-DTSTAMP:20260903T152529Z
+DTSTAMP:20260917T045927Z
 UID:e0c247e803a33255e6ebefa8@milan-calendar
-SEQUENCE:8
+SEQUENCE:9
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 22/11/2026 
  15:00\nTurno: 12\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nF
  onte orario: AC Milan
-LAST-MODIFIED:20260903T152529Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Frosinone
+DESCRIPTION:Tra 150 minuti: AC Milan - Frosinone
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Olympiacos - Milan
+SUMMARY:⚽ Olympiacos - AC Milan
 DTSTART;TZID=Europe/Rome:20261126T184500
 DTEND;TZID=Europe/Rome:20261126T204500
-DTSTAMP:20260911T163537Z
+DTSTAMP:20260917T045927Z
 UID:716d30d10cd2a53f2b53c687@milan-calendar
-SEQUENCE:2
+SEQUENCE:3
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 26/11/2026 18:45\nTurno: 5\nStadio: Stadio Georgios Karaiskákis\nDov
  e vederla:\n🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero 
  — Da confermare\nFonte orario: NOW
-LAST-MODIFIED:20260911T163537Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Georgios Karaiskákis
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Olympiacos - Milan
+DESCRIPTION:Tra 150 minuti: Olympiacos - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Cagliari - Milan
+SUMMARY:⚽ Cagliari - AC Milan
 DTSTART;VALUE=DATE:20261129
 DTEND;VALUE=DATE:20261130
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:dbfe00a983f6937f6ba0d38d@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 13\nStadio: Unipol Domus\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Unipol Domus
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Cagliari - Milan
+DESCRIPTION:Tra 150 minuti: Cagliari - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Monza
+SUMMARY:⚽ AC Milan - Monza
 DTSTART;VALUE=DATE:20261202
 DTEND;VALUE=DATE:20261203
-DTSTAMP:20260910T163026Z
+DTSTAMP:20260917T045927Z
 UID:51a1b3b7b7144a45b62d6e6d@milan-calendar
-SEQUENCE:2
+SEQUENCE:3
 CATEGORIES:Coppa Italia,AC Milan
 DESCRIPTION:Competizione: Coppa Italia\nMilan: Casa\nOrario: da confermare
  \nTurno: 8th Finals\nStadio: Stadio San Siro\nDove vederla in Italia: Medi
  aset (canali in chiaro)\, Mediaset Infinity e SportMediaset.it
-LAST-MODIFIED:20260910T163026Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Monza
+DESCRIPTION:Tra 150 minuti: AC Milan - Monza
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Parma
+SUMMARY:⚽ AC Milan - Parma
 DTSTART;VALUE=DATE:20261206
 DTEND;VALUE=DATE:20261207
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:cbf473fd1fec79742484d004@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 14\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Parma
+DESCRIPTION:Tra 150 minuti: AC Milan - Parma
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Sunderland FC
+SUMMARY:⚽ AC Milan - Sunderland FC
 DTSTART;TZID=Europe/Rome:20261210T210000
 DTEND;TZID=Europe/Rome:20261210T230000
-DTSTAMP:20260911T163537Z
+DTSTAMP:20260917T045927Z
 UID:97982c44b5b8526e3dfb5444@milan-calendar
-SEQUENCE:2
+SEQUENCE:3
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  10/12/2026 21:00\nTurno: 6\nStadio: San Siro Stadium\nDove vederla:\n🇮
  🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da confermare
  \nFonte orario: NOW
-LAST-MODIFIED:20260911T163537Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Sunderland FC
+DESCRIPTION:Tra 150 minuti: AC Milan - Sunderland FC
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Napoli - Milan
+SUMMARY:⚽ Napoli - AC Milan
 DTSTART;VALUE=DATE:20261213
 DTEND;VALUE=DATE:20261214
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:002c1aed5d53467e55fbd053@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 15\nStadio: Stadio Maradona\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Maradona
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Napoli - Milan
+DESCRIPTION:Tra 150 minuti: Napoli - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Como
+SUMMARY:⚽ AC Milan - Como
 DTSTART;VALUE=DATE:20261220
 DTEND;VALUE=DATE:20261221
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:abbc5591ee1fa9281de25865@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 16\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Como
+DESCRIPTION:Tra 150 minuti: AC Milan - Como
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Monza - Milan
+SUMMARY:⚽ Monza - AC Milan
 DTSTART;VALUE=DATE:20270103
 DTEND;VALUE=DATE:20270104
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:7fbe5f237ff0027359e82bec@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 17\nStadio: U-Power Stadium\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:U-Power Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Monza - Milan
+DESCRIPTION:Tra 150 minuti: Monza - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Fiorentina
+SUMMARY:⚽ AC Milan - Fiorentina
 DTSTART;VALUE=DATE:20270106
 DTEND;VALUE=DATE:20270107
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:7605afb902d86c5a1bbd49f7@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 18\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Fiorentina
+DESCRIPTION:Tra 150 minuti: AC Milan - Fiorentina
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Roma - Milan
+SUMMARY:⚽ Roma - AC Milan
 DTSTART;VALUE=DATE:20270110
 DTEND;VALUE=DATE:20270111
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:e3bd372f1347ed9ba3c39045@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 19\nStadio: Stadio Olimpico\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Olimpico
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Roma - Milan
+DESCRIPTION:Tra 150 minuti: Roma - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Torino
+SUMMARY:⚽ AC Milan - Torino
 DTSTART;VALUE=DATE:20270117
 DTEND;VALUE=DATE:20270118
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:53ab99ccd879619beefb1915@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 20\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Torino
+DESCRIPTION:Tra 150 minuti: AC Milan - Torino
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Levski Sofia - Milan
+SUMMARY:⚽ Levski Sofia - AC Milan
 DTSTART;TZID=Europe/Rome:20270121T210000
 DTEND;TZID=Europe/Rome:20270121T230000
-DTSTAMP:20260901T114901Z
+DTSTAMP:20260917T045927Z
 UID:2964675f38e6781980702aaf@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 21/01/2027 21:00\nTurno: 7\nStadio: Stadion Georgi Asparuhov\nDove ve
  derla:\n🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero — D
  a confermare\nFonte orario: AC Milan
-LAST-MODIFIED:20260901T114901Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadion Georgi Asparuhov
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Levski Sofia - Milan
+DESCRIPTION:Tra 150 minuti: Levski Sofia - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Frosinone - Milan
+SUMMARY:⚽ Frosinone - AC Milan
 DTSTART;VALUE=DATE:20270124
 DTEND;VALUE=DATE:20270125
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:799e525a74ac3b9c8ff6a400@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 21\nStadio: Stadio Stirpe\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Stirpe
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Frosinone - Milan
+DESCRIPTION:Tra 150 minuti: Frosinone - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Ararat-Armenia
+SUMMARY:⚽ AC Milan - Ararat-Armenia
 DTSTART;TZID=Europe/Rome:20270128T210000
 DTEND;TZID=Europe/Rome:20270128T230000
-DTSTAMP:20260901T114901Z
+DTSTAMP:20260917T045927Z
 UID:f664666d4c72ea33eb3abbcf@milan-calendar
-SEQUENCE:1
+SEQUENCE:2
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  28/01/2027 21:00\nTurno: 8\nStadio: San Siro Stadium\nDove vederla:\n🇮
  🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da confermare
  \nFonte orario: AC Milan
-LAST-MODIFIED:20260901T114901Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Ararat-Armenia
+DESCRIPTION:Tra 150 minuti: AC Milan - Ararat-Armenia
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Juventus
+SUMMARY:⚽ AC Milan - Juventus
 DTSTART;VALUE=DATE:20270131
 DTEND;VALUE=DATE:20270201
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:7901b36118e346044724f817@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 22\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Juventus
+DESCRIPTION:Tra 150 minuti: AC Milan - Juventus
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Bologna - Milan
+SUMMARY:⚽ Bologna - AC Milan
 DTSTART;VALUE=DATE:20270207
 DTEND;VALUE=DATE:20270208
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:078423a9e403304bd012c980@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 23\nStadio: Stadio Dall'Ara\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Dall'Ara
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Bologna - Milan
+DESCRIPTION:Tra 150 minuti: Bologna - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Inter - Milan
+SUMMARY:⚽ Inter - AC Milan
 DTSTART;VALUE=DATE:20270214
 DTEND;VALUE=DATE:20270215
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:ec72bb4d3a2195363bd8dac5@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 24\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Inter - Milan
+DESCRIPTION:Tra 150 minuti: Inter - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Genoa
+SUMMARY:⚽ AC Milan - Genoa
 DTSTART;VALUE=DATE:20270221
 DTEND;VALUE=DATE:20270222
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:affce368e5e16fe9cad76b67@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 25\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Genoa
+DESCRIPTION:Tra 150 minuti: AC Milan - Genoa
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Como - Milan
+SUMMARY:⚽ Como - AC Milan
 DTSTART;VALUE=DATE:20270228
 DTEND;VALUE=DATE:20270301
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:2460ccfbf6f8b6e6dfa8e02c@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 26\nStadio: Stadio Sinigaglia\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Sinigaglia
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Como - Milan
+DESCRIPTION:Tra 150 minuti: Como - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Cagliari
+SUMMARY:⚽ AC Milan - Cagliari
 DTSTART;VALUE=DATE:20270307
 DTEND;VALUE=DATE:20270308
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:5bccac0865eda578a3694c96@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 27\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Cagliari
+DESCRIPTION:Tra 150 minuti: AC Milan - Cagliari
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Sassuolo
+SUMMARY:⚽ AC Milan - Sassuolo
 DTSTART;VALUE=DATE:20270314
 DTEND;VALUE=DATE:20270315
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:729b58c1acba42008b12e293@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 28\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Sassuolo
+DESCRIPTION:Tra 150 minuti: AC Milan - Sassuolo
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Atalanta - Milan
+SUMMARY:⚽ Atalanta - AC Milan
 DTSTART;VALUE=DATE:20270321
 DTEND;VALUE=DATE:20270322
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:47745a86a738242f9f79287a@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 29\nStadio: New Balance Arena\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:New Balance Arena
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Atalanta - Milan
+DESCRIPTION:Tra 150 minuti: Atalanta - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Monza
+SUMMARY:⚽ AC Milan - Monza
 DTSTART;VALUE=DATE:20270404
 DTEND;VALUE=DATE:20270405
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:6e93cc177ecd88e5a3f47842@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 30\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Monza
+DESCRIPTION:Tra 150 minuti: AC Milan - Monza
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Fiorentina - Milan
+SUMMARY:⚽ Fiorentina - AC Milan
 DTSTART;VALUE=DATE:20270411
 DTEND;VALUE=DATE:20270412
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:7dc1f2e91dad27a407b1183c@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 31\nStadio: Stadio Franchi\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Franchi
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Fiorentina - Milan
+DESCRIPTION:Tra 150 minuti: Fiorentina - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Napoli
+SUMMARY:⚽ AC Milan - Napoli
 DTSTART;VALUE=DATE:20270418
 DTEND;VALUE=DATE:20270419
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:b0b78c78ecdf7b76c14688a1@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 32\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Napoli
+DESCRIPTION:Tra 150 minuti: AC Milan - Napoli
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Lecce - Milan
+SUMMARY:⚽ Lecce - AC Milan
 DTSTART;VALUE=DATE:20270425
 DTEND;VALUE=DATE:20270426
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:2ca518619efdf946e1d6159f@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 33\nStadio: Stadio Via del Mare\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Via del Mare
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Lecce - Milan
+DESCRIPTION:Tra 150 minuti: Lecce - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Lazio
+SUMMARY:⚽ AC Milan - Lazio
 DTSTART;VALUE=DATE:20270502
 DTEND;VALUE=DATE:20270503
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:751ea659a0aec85f094d69ba@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 34\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Lazio
+DESCRIPTION:Tra 150 minuti: AC Milan - Lazio
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Parma - Milan
+SUMMARY:⚽ Parma - AC Milan
 DTSTART;VALUE=DATE:20270509
 DTEND;VALUE=DATE:20270510
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:1c3db48a8653c5ab1ef24294@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 35\nStadio: Stadio Tardini\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Tardini
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Parma - Milan
+DESCRIPTION:Tra 150 minuti: Parma - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Roma
+SUMMARY:⚽ AC Milan - Roma
 DTSTART;VALUE=DATE:20270516
 DTEND;VALUE=DATE:20270517
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:6cada07d7a55db21550f2dd1@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 36\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Roma
+DESCRIPTION:Tra 150 minuti: AC Milan - Roma
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Venezia - Milan
+SUMMARY:⚽ Venezia - AC Milan
 DTSTART;VALUE=DATE:20270523
 DTEND;VALUE=DATE:20270524
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:38b49ac97ab9b5a36cc0e8f0@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario: da confermare
  \nTurno: 37\nStadio: Stadio Penzo\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Penzo
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Venezia - Milan
+DESCRIPTION:Tra 150 minuti: Venezia - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:⚽ Milan - Udinese
+SUMMARY:⚽ AC Milan - Udinese
 DTSTART;VALUE=DATE:20270530
 DTEND;VALUE=DATE:20270531
-DTSTAMP:20260831T072643Z
+DTSTAMP:20260917T045927Z
 UID:0eede0800f2c0314cd7442e1@milan-calendar
-SEQUENCE:7
+SEQUENCE:8
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario: da confermare\nTur
  no: 38\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN
-LAST-MODIFIED:20260831T072643Z
+LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Milan - Udinese
+DESCRIPTION:Tra 150 minuti: AC Milan - Udinese
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
