@@ -250,24 +250,24 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Lazio",
-      "last_modified": "2026-09-19T13:03:01Z",
+      "last_modified": "2026-09-19T15:56:28Z",
       "location": "Roma",
       "neutral": false,
       "round": "4",
-      "sequence": 27,
+      "sequence": 28,
       "serie_a_standing": {
         "context": [
           {
             "played": 4,
             "points": 10,
             "position": 4,
-            "team": "Lazio"
+            "team": "Como"
           },
           {
-            "played": 5,
+            "played": 4,
             "points": 10,
             "position": 5,
-            "team": "Cagliari"
+            "team": "Lazio"
           },
           {
             "played": 4,
@@ -298,7 +298,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-09-19T13:03:01Z",
+        "updated_at": "2026-09-19T15:56:28Z",
         "wins": 2
       },
       "source": "AC Milan",
@@ -673,24 +673,24 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-09-19T13:03:01Z",
+      "last_modified": "2026-09-19T15:56:28Z",
       "location": "Italy",
       "neutral": false,
       "round": "5",
-      "sequence": 18,
+      "sequence": 19,
       "serie_a_standing": {
         "context": [
           {
             "played": 4,
             "points": 10,
             "position": 4,
-            "team": "Lazio"
+            "team": "Como"
           },
           {
-            "played": 5,
+            "played": 4,
             "points": 10,
             "position": 5,
-            "team": "Cagliari"
+            "team": "Lazio"
           },
           {
             "played": 4,
@@ -721,7 +721,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-09-19T13:03:01Z",
+        "updated_at": "2026-09-19T15:56:28Z",
         "wins": 2
       },
       "source": "AC Milan",
@@ -1888,7 +1888,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-19T13:03:01Z",
+  "last_changed": "2026-09-19T15:56:28Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -1896,13 +1896,13 @@
         "played": 4,
         "points": 10,
         "position": 4,
-        "team": "Lazio"
+        "team": "Como"
       },
       {
-        "played": 5,
+        "played": 4,
         "points": 10,
         "position": 5,
-        "team": "Cagliari"
+        "team": "Lazio"
       },
       {
         "played": 4,
@@ -1933,7 +1933,7 @@
     "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-09-19T13:03:01Z",
+    "updated_at": "2026-09-19T15:56:28Z",
     "wins": 2
   },
   "source_errors": [
