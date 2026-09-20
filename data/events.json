@@ -627,24 +627,24 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-09-20T13:33:10Z",
+      "last_modified": "2026-09-20T16:14:30Z",
       "location": "Italy",
       "neutral": false,
       "round": "5",
-      "sequence": 22,
+      "sequence": 23,
       "serie_a_standing": {
         "context": [
           {
             "played": 5,
             "points": 10,
             "position": 5,
-            "team": "Como"
+            "team": "Frosinone"
           },
           {
             "played": 5,
             "points": 10,
             "position": 6,
-            "team": "Frosinone"
+            "team": "Como"
           },
           {
             "played": 4,
@@ -653,8 +653,8 @@
             "team": "Milan"
           },
           {
-            "played": 4,
-            "points": 7,
+            "played": 5,
+            "points": 8,
             "position": 8,
             "team": "Juventus"
           },
@@ -675,7 +675,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-09-20T13:33:10Z",
+        "updated_at": "2026-09-20T16:14:30Z",
         "wins": 2
       },
       "source": "AC Milan",
@@ -701,24 +701,24 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Sassuolo",
-      "last_modified": "2026-09-20T13:33:10Z",
+      "last_modified": "2026-09-20T16:14:30Z",
       "location": "",
       "neutral": false,
       "round": "6",
-      "sequence": 13,
+      "sequence": 14,
       "serie_a_standing": {
         "context": [
           {
             "played": 5,
             "points": 10,
             "position": 5,
-            "team": "Como"
+            "team": "Frosinone"
           },
           {
             "played": 5,
             "points": 10,
             "position": 6,
-            "team": "Frosinone"
+            "team": "Como"
           },
           {
             "played": 4,
@@ -727,8 +727,8 @@
             "team": "Milan"
           },
           {
-            "played": 4,
-            "points": 7,
+            "played": 5,
+            "points": 8,
             "position": 8,
             "team": "Juventus"
           },
@@ -749,7 +749,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-09-20T13:33:10Z",
+        "updated_at": "2026-09-20T16:14:30Z",
         "wins": 2
       },
       "source": "AC Milan",
@@ -1888,7 +1888,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-20T13:33:10Z",
+  "last_changed": "2026-09-20T16:14:30Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -1896,13 +1896,13 @@
         "played": 5,
         "points": 10,
         "position": 5,
-        "team": "Como"
+        "team": "Frosinone"
       },
       {
         "played": 5,
         "points": 10,
         "position": 6,
-        "team": "Frosinone"
+        "team": "Como"
       },
       {
         "played": 4,
@@ -1911,8 +1911,8 @@
         "team": "Milan"
       },
       {
-        "played": 4,
-        "points": 7,
+        "played": 5,
+        "points": 8,
         "position": 8,
         "team": "Juventus"
       },
@@ -1933,7 +1933,7 @@
     "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-09-20T13:33:10Z",
+    "updated_at": "2026-09-20T16:14:30Z",
     "wins": 2
   },
   "source_errors": [
