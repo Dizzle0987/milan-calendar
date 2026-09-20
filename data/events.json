@@ -627,62 +627,61 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-09-20T18:11:01Z",
-      "location": "Italy",
+      "last_modified": "2026-09-20T20:54:32Z",
+      "location": "Milano",
       "neutral": false,
       "round": "5",
-      "sequence": 25,
+      "sequence": 26,
       "serie_a_standing": {
         "context": [
           {
             "played": 5,
+            "points": 13,
+            "position": 3,
+            "team": "Lazio"
+          },
+          {
+            "played": 5,
+            "points": 12,
+            "position": 4,
+            "team": "Cagliari"
+          },
+          {
+            "played": 5,
+            "points": 11,
+            "position": 5,
+            "team": "Milan"
+          },
+          {
+            "played": 5,
             "points": 10,
             "position": 6,
-            "team": "Juventus"
+            "team": "Frosinone"
           },
           {
             "played": 5,
             "points": 10,
             "position": 7,
-            "team": "Como"
-          },
-          {
-            "played": 4,
-            "points": 8,
-            "position": 8,
-            "team": "Milan"
-          },
-          {
-            "played": 5,
-            "points": 7,
-            "position": 9,
-            "team": "Napoli"
-          },
-          {
-            "played": 5,
-            "points": 7,
-            "position": 10,
-            "team": "Sassuolo"
+            "team": "Juventus"
           }
         ],
         "draws": 2,
-        "goal_difference": 3,
+        "goal_difference": 6,
         "losses": 0,
-        "pending_recoveries": [],
-        "played": 4,
-        "points": 8,
-        "position": 8,
-        "provisional": true,
+        "played": 5,
+        "points": 11,
+        "position": 5,
+        "provisional": false,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-09-20T18:11:01Z",
-        "wins": 2
+        "updated_at": "2026-09-20T20:54:32Z",
+        "wins": 3
       },
       "source": "AC Milan",
       "source_id": "77l9geiwaiztbwyn4jqalw07o",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-09-20T20:45:00+02:00",
-      "status": "Fixture",
+      "status": "Played",
       "time_source": "AC Milan",
       "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "title": "AC Milan - Lecce",
@@ -701,56 +700,55 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Sassuolo",
-      "last_modified": "2026-09-20T18:11:01Z",
+      "last_modified": "2026-09-20T20:54:32Z",
       "location": "",
       "neutral": false,
       "round": "6",
-      "sequence": 16,
+      "sequence": 17,
       "serie_a_standing": {
         "context": [
           {
             "played": 5,
+            "points": 13,
+            "position": 3,
+            "team": "Lazio"
+          },
+          {
+            "played": 5,
+            "points": 12,
+            "position": 4,
+            "team": "Cagliari"
+          },
+          {
+            "played": 5,
+            "points": 11,
+            "position": 5,
+            "team": "Milan"
+          },
+          {
+            "played": 5,
             "points": 10,
             "position": 6,
-            "team": "Juventus"
+            "team": "Frosinone"
           },
           {
             "played": 5,
             "points": 10,
             "position": 7,
-            "team": "Como"
-          },
-          {
-            "played": 4,
-            "points": 8,
-            "position": 8,
-            "team": "Milan"
-          },
-          {
-            "played": 5,
-            "points": 7,
-            "position": 9,
-            "team": "Napoli"
-          },
-          {
-            "played": 5,
-            "points": 7,
-            "position": 10,
-            "team": "Sassuolo"
+            "team": "Juventus"
           }
         ],
         "draws": 2,
-        "goal_difference": 3,
+        "goal_difference": 6,
         "losses": 0,
-        "pending_recoveries": [],
-        "played": 4,
-        "points": 8,
-        "position": 8,
-        "provisional": true,
+        "played": 5,
+        "points": 11,
+        "position": 5,
+        "provisional": false,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-09-20T18:11:01Z",
-        "wins": 2
+        "updated_at": "2026-09-20T20:54:32Z",
+        "wins": 3
       },
       "source": "AC Milan",
       "source_id": "7bvu4b4e5lezk0he7a4l3getw",
@@ -1888,56 +1886,54 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-20T18:11:01Z",
+  "last_changed": "2026-09-20T20:54:32Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
       {
         "played": 5,
+        "points": 13,
+        "position": 3,
+        "team": "Lazio"
+      },
+      {
+        "played": 5,
+        "points": 12,
+        "position": 4,
+        "team": "Cagliari"
+      },
+      {
+        "played": 5,
+        "points": 11,
+        "position": 5,
+        "team": "Milan"
+      },
+      {
+        "played": 5,
         "points": 10,
         "position": 6,
-        "team": "Juventus"
+        "team": "Frosinone"
       },
       {
         "played": 5,
         "points": 10,
         "position": 7,
-        "team": "Como"
-      },
-      {
-        "played": 4,
-        "points": 8,
-        "position": 8,
-        "team": "Milan"
-      },
-      {
-        "played": 5,
-        "points": 7,
-        "position": 9,
-        "team": "Napoli"
-      },
-      {
-        "played": 5,
-        "points": 7,
-        "position": 10,
-        "team": "Sassuolo"
+        "team": "Juventus"
       }
     ],
     "draws": 2,
-    "goal_difference": 3,
+    "goal_difference": 6,
     "losses": 0,
-    "pending_recoveries": [],
-    "played": 4,
-    "points": 8,
-    "position": 8,
-    "provisional": true,
+    "played": 5,
+    "points": 11,
+    "position": 5,
+    "provisional": false,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-09-20T18:11:01Z",
-    "wins": 2
+    "updated_at": "2026-09-20T20:54:32Z",
+    "wins": 3
   },
   "source_errors": [
-    "ESPN recuperi Serie A: 400 Client Error: Bad Request for url: https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20260801-20270630&limit=1000",
     "AC Milan: nessun orario esplicito per il Milan",
     "Gazzetta dello Sport: 404 Client Error: Not Found for url: https://www.gazzetta.it/Calcio/Serie-A/Milan/",
     "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
