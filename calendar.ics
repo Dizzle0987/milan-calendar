@@ -274,18 +274,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Lecce
 DTSTART;TZID=Europe/Rome:20260920T204500
 DTEND;TZID=Europe/Rome:20260920T224500
-DTSTAMP:20260919T203429Z
+DTSTAMP:20260920T113359Z
 UID:72ccbea5301e86dea083451c@milan-calendar
-SEQUENCE:20
+SEQUENCE:21
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 20/09/2026 
  20:45\nTurno: 5\nStadio: Stadio San Siro\nLocalità: Italy\nDove vederla i
  n Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provvisoria —
-  giornata in corso:\n  4. Cagliari — 12 pt\n  5. Como — 10 pt\n▶ 6. 
- Milan — 8 pt — 4 PG — DR +3\n  7. Frosinone — 7 pt\n  8. Juventus 
- — 7 pt\nClassifica aggiornata: 19/09/2026 22:34\nFonte classifica: Lega 
- Serie A
-LAST-MODIFIED:20260919T203429Z
+  giornata in corso:\n  5. Como — 10 pt\n  6. Napoli — 9 pt\n▶ 7. Mil
+ an — 8 pt — 4 PG — DR +3\n  8. Frosinone — 7 pt\n  9. Juventus —
+  7 pt\nClassifica aggiornata: 20/09/2026 13:33\nFonte classifica: Lega Ser
+ ie A
+LAST-MODIFIED:20260920T113359Z
 LOCATION:Stadio San Siro\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -299,18 +299,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ Sassuolo - AC Milan
 DTSTART;TZID=Europe/Rome:20261011T180000
 DTEND;TZID=Europe/Rome:20261011T200000
-DTSTAMP:20260919T222913Z
+DTSTAMP:20260920T113359Z
 UID:efe8aeb093e233c7fe578a0b@milan-calendar
-SEQUENCE:11
+SEQUENCE:12
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 11/10/
  2026 18:00\nTurno: 6\nStadio: MAPEI Stadium\nDove vederla in Italia: DAZN\
  ; Sky Sport e NOW\nFonte orario: NOW\nClassifica Serie A provvisoria — g
- iornata in corso:\n  4. Cagliari — 12 pt\n  5. Como — 10 pt\n▶ 6. Mi
- lan — 8 pt — 4 PG — DR +3\n  7. Frosinone — 7 pt\n  8. Juventus 
- — 7 pt\nClassifica aggiornata: 19/09/2026 22:34\nFonte classifica: Lega 
- Serie A
-LAST-MODIFIED:20260919T222913Z
+ iornata in corso:\n  5. Como — 10 pt\n  6. Napoli — 9 pt\n▶ 7. Milan
+  — 8 pt — 4 PG — DR +3\n  8. Frosinone — 7 pt\n  9. Juventus — 7
+  pt\nClassifica aggiornata: 20/09/2026 13:33\nFonte classifica: Lega Serie
+  A
+LAST-MODIFIED:20260920T113359Z
 LOCATION:MAPEI Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
