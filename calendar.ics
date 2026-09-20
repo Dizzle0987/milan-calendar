@@ -299,19 +299,19 @@ BEGIN:VEVENT
 SUMMARY:⚽ Sassuolo - AC Milan
 DTSTART;TZID=Europe/Rome:20261011T180000
 DTEND;TZID=Europe/Rome:20261011T200000
-DTSTAMP:20260920T205432Z
+DTSTAMP:20260920T231221Z
 UID:efe8aeb093e233c7fe578a0b@milan-calendar
-SEQUENCE:17
+SEQUENCE:18
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 11/10/
- 2026 18:00\nTurno: 6\nStadio: MAPEI Stadium\nDove vederla in Italia: DAZN\
- ; Sky Sport e NOW\nFonte orario: NOW\nClassifica Serie A aggiornata — gi
- ornata completata:\n  3. Lazio — 13 pt\n  4. Cagliari — 12 pt\n▶ 5. 
- Milan — 11 pt — 5 PG — DR +6\n  6. Frosinone — 10 pt\n  7. Juventu
- s — 10 pt\nClassifica aggiornata: 20/09/2026 22:54\nFonte classifica: Le
- ga Serie A
-LAST-MODIFIED:20260920T205432Z
-LOCATION:MAPEI Stadium
+ 2026 18:00\nTurno: 6\nStadio: MAPEI Stadium\nLocalità: Italy\nDove vederl
+ a in Italia: DAZN\; Sky Sport e NOW\nFonte orario: NOW\nClassifica Serie A
+  aggiornata — giornata completata:\n  3. Lazio — 13 pt\n  4. Cagliari 
+ — 12 pt\n▶ 5. Milan — 11 pt — 5 PG — DR +6\n  6. Frosinone — 1
+ 0 pt\n  7. Juventus — 10 pt\nClassifica aggiornata: 20/09/2026 22:54\nFo
+ nte classifica: Lega Serie A
+LAST-MODIFIED:20260920T231221Z
+LOCATION:MAPEI Stadium\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM

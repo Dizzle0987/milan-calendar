@@ -700,11 +700,11 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Sassuolo",
-      "last_modified": "2026-09-20T20:54:32Z",
-      "location": "",
+      "last_modified": "2026-09-20T23:12:21Z",
+      "location": "Italy",
       "neutral": false,
       "round": "6",
-      "sequence": 17,
+      "sequence": 18,
       "serie_a_standing": {
         "context": [
           {
@@ -1886,7 +1886,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-20T20:54:32Z",
+  "last_changed": "2026-09-20T23:12:21Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
