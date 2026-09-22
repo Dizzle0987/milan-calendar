@@ -81,18 +81,18 @@
       "competition": "Club Friendly",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-08-15T15:26:52Z",
+      "last_modified": "2026-09-22T11:48:20Z",
       "location": "Perth",
       "neutral": false,
       "round": "",
-      "sequence": 2,
+      "sequence": 3,
       "source": "ESPN",
       "source_id": "401869428",
-      "source_url": "https://www.espn.com/soccer/match/_/gameId/401869428/internazionale-ac-milan",
+      "source_url": "https://www.espn.com/soccer/match?gameId=401869428/internazionale-ac-milan",
       "start": "2026-08-05T13:00:00+02:00",
       "status": "scheduled",
       "time_source": "ESPN",
-      "time_source_url": "https://www.espn.com/soccer/match/_/gameId/401869428/internazionale-ac-milan",
+      "time_source_url": "https://www.espn.com/soccer/match?gameId=401869428/internazionale-ac-milan",
       "title": "AC Milan - Internazionale",
       "uid": "e40c3704d9ff86d5bf45b12d@milan-calendar",
       "venue": "Optus Stadium"
@@ -1886,7 +1886,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-20T23:12:21Z",
+  "last_changed": "2026-09-22T11:48:20Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [

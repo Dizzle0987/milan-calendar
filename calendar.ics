@@ -75,18 +75,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Internazionale
 DTSTART;TZID=Europe/Rome:20260805T130000
 DTEND;TZID=Europe/Rome:20260805T150000
-DTSTAMP:20260815T152652Z
+DTSTAMP:20260922T114820Z
 UID:e40c3704d9ff86d5bf45b12d@milan-calendar
-SEQUENCE:2
+SEQUENCE:3
 CATEGORIES:Club Friendly,AC Milan
 DESCRIPTION:Competizione: Club Friendly\nMilan: Casa\nOrario (Roma): 05/08
  /2026 13:00\nStadio: Optus Stadium\nLocalità: Perth\nDove vederla in Ital
  ia: Da definire\nFonte orario: ESPN
-LAST-MODIFIED:20260815T152652Z
+LAST-MODIFIED:20260922T114820Z
 LOCATION:Optus Stadium\, Perth
 TRANSP:OPAQUE
-URL:https://www.espn.com/soccer/match/_/gameId/401869428/internazionale-ac
- -milan
+URL:https://www.espn.com/soccer/match?gameId=401869428/internazionale-ac-m
+ ilan
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Tra 150 minuti: AC Milan - Internazionale
