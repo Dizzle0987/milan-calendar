@@ -2107,7 +2107,6 @@
     "Prime Video: nessun orario esplicito per il Milan",
     "Broadcast CBC Sport (None): 403 Client Error: Forbidden for url: https://cbcsport.az/tv_program_schedule",
     "Broadcast TV8: 500 Server Error: Internal Server Error for url: https://www.tv8.it/api/programmingCarousel?from=2026-10-14T22%3A00%3A00.000Z&to=2026-10-15T21%3A59%3A59.999Z",
-    "Broadcast M4 Sport (None): HTTPSConnectionPool(host='m4sport.hu', port=443): Max retries exceeded with url: /musorujsag/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='m4sport.hu', port=443) at 0x7f5f1f069e80>, 'Connection to m4sport.hu timed out. (connect timeout=10)'))",
     "Broadcast bTV (None): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
     "Broadcast DAZN Portugal (None): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l",
     "Broadcast FootAz (None): 410 Client Error: Gone for url: https://www.footaz.pt/jogo/salzburg-vs-ac-milan/"
