@@ -2108,7 +2108,6 @@
     "Broadcast CBC Sport (None): 403 Client Error: Forbidden for url: https://cbcsport.az/tv_program_schedule",
     "Broadcast bTV (None): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
     "Broadcast DAZN Portugal (None): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l",
-    "Broadcast A1 Bulgaria (None): HTTPSConnectionPool(host='www.a1.bg', port=443): Max retries exceeded with url: /sporten-tv-buletin (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.a1.bg', port=443) at 0x7fab495a5250>, 'Connection to www.a1.bg timed out. (connect timeout=10)'))",
     "Broadcast FootAz (None): 410 Client Error: Gone for url: https://www.footaz.pt/jogo/salzburg-vs-ac-milan/"
   ],
   "sources_used": [
