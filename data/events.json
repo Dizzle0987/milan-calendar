@@ -1575,11 +1575,11 @@
       "competition": "UEFA Europa League",
       "home_away": "Trasferta",
       "home_team": "Levski Sofia",
-      "last_modified": "2026-09-17T04:59:27Z",
+      "last_modified": "2026-10-03T05:26:26Z",
       "location": "",
       "neutral": false,
       "round": "7",
-      "sequence": 2,
+      "sequence": 3,
       "source": "AC Milan",
       "source_id": "eps2yhphc7cddrof27i1p7rx0",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -1589,7 +1589,7 @@
       "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "title": "Levski Sofia - AC Milan",
       "uid": "2964675f38e6781980702aaf@milan-calendar",
-      "venue": "Stadion Georgi Asparuhov"
+      "venue": "Stadion Vasil Levski"
     },
     {
       "all_day": true,
@@ -2051,7 +2051,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-09-25T19:13:41Z",
+  "last_changed": "2026-10-03T05:26:26Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [

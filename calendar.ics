@@ -752,16 +752,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Levski Sofia - AC Milan
 DTSTART;TZID=Europe/Rome:20270121T210000
 DTEND;TZID=Europe/Rome:20270121T230000
-DTSTAMP:20260917T045927Z
+DTSTAMP:20261003T052626Z
 UID:2964675f38e6781980702aaf@milan-calendar
-SEQUENCE:2
+SEQUENCE:3
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
- ma): 21/01/2027 21:00\nTurno: 7\nStadio: Stadion Georgi Asparuhov\nDove ve
- derla:\n🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero — D
- a confermare\nFonte orario: AC Milan
-LAST-MODIFIED:20260917T045927Z
-LOCATION:Stadion Georgi Asparuhov
+ ma): 21/01/2027 21:00\nTurno: 7\nStadio: Stadion Vasil Levski\nDove vederl
+ a:\n🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da co
+ nfermare\nFonte orario: AC Milan
+LAST-MODIFIED:20261003T052626Z
+LOCATION:Stadion Vasil Levski
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
