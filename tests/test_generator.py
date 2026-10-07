@@ -1759,6 +1759,67 @@ def test_unconfirmed_guide_window_does_not_name_a_broadcaster() -> None:
     assert _guide_broadcasters(html, event, broadcasters, "Europe/Lisbon") == []
 
 
+def test_opponent_country_guide_discovers_paid_channel_without_confirming_it() -> None:
+    event = {
+        "event_kind": "match", "home_team": "Salzburg", "away_team": "AC Milan",
+        "title": "Salzburg - AC Milan", "competition": "UEFA Europa League",
+        "start": "2026-10-15T18:45:00+02:00", "status": "Fixture",
+    }
+    sky = {
+        "country": "Austria", "country_code": "AT", "broadcaster": "Sky Austria",
+        "access": "paid", "platforms": "TV + streaming", "language": "tedesco",
+        "url": "https://sky.test/tvguide",
+        "match_terms": ["Sky Austria", "Sky Sport Austria", "Sky X"],
+        "competition_families": ["europa-league"], "lookahead_days": 21,
+    }
+    guide = {
+        "country": "Austria", "country_code": "AT", "broadcaster": "Guida Austria",
+        "access": "free", "platforms": "guida TV", "language": "tedesco",
+        "timezone": "Europe/Vienna", "url": "https://guide.test/",
+        "url_template": "https://guide.test/spiel/{home}-vs-{away}/",
+        "team_slugs": {"milan": "ac-milan", "salzburg": "red-bull-salzburg"},
+        "team_aliases": {"milan": ["AC Milan", "AC Mailand"]},
+        "source_type": "guide", "require_kickoff_time": True,
+        "competition_families": ["europa-league"], "lookahead_days": 21,
+    }
+
+    class Response:
+        def __init__(self, text: str = "", payload: dict | None = None) -> None:
+            self.text, self.payload = text, payload
+
+        def raise_for_status(self) -> None:
+            return None
+
+        def json(self) -> dict:
+            return self.payload or {}
+
+    class Session:
+        def get(self, url: str, timeout: int) -> Response:
+            if "searchteams.php" in url:
+                return Response(payload={"teams": [{"strTeam": "Salzburg", "strCountry": "Austria"}]})
+            if "guide.test" in url:
+                assert url == "https://guide.test/spiel/red-bull-salzburg-vs-ac-milan/"
+                return Response(
+                    "RB Salzburg - AC Mailand, Donnerstag 15. Oktober 2026, "
+                    "18:45 live auf Sky Sport Austria"
+                )
+            return Response("Programmazione generale Sky Austria")
+
+    updated, errors = apply_verified_broadcasts(
+        Session(), [event], [], [sky, guide], "2026-10-07T08:00:00Z",
+        datetime(2026, 10, 7, 8, tzinfo=timezone.utc),
+    )
+
+    assert errors == []
+    candidate = updated[0]["broadcast_candidates"][0]
+    assert candidate["broadcaster"] == "Sky Austria"
+    assert candidate["confidence"] == 70
+    assert candidate["status"] == "UNKNOWN"
+    assert candidate["match_confirmed"] is True
+    assert candidate["source_schedule"] == "https://guide.test/spiel/red-bull-salzburg-vs-ac-milan/"
+    assert updated[0]["broadcast_options"] == []
+
+
 def test_paid_foreign_candidate_is_kept_for_debug_but_not_published() -> None:
     event = {
         "event_kind": "match", "home_team": "Milan", "away_team": "Benfica",

@@ -87,6 +87,25 @@
       "lookahead_days": 21, "priority": 90
     },
     {
+      "country": "Germania", "country_code": "DE", "broadcaster": "RTL+",
+      "access": "paid", "platforms": "streaming", "language": "tedesco",
+      "url": "https://plus.rtl.de/video-tv/sport",
+      "match_terms": ["RTL+", "RTL Plus"],
+      "competition_families": ["europa-league", "conference-league"],
+      "lookahead_days": 21, "priority": 85
+    },
+    {
+      "country": "Germania", "country_code": "DE", "broadcaster": "FootAz Germania",
+      "access": "free", "platforms": "guida TV", "language": "tedesco",
+      "timezone": "Europe/Berlin",
+      "url": "https://www.footaz.de/", "url_template": "https://www.footaz.de/spiel/{home}-vs-{away}/",
+      "team_slugs": {"milan": "ac-milan", "salzburg": "red-bull-salzburg", "rb-salzburg": "red-bull-salzburg"},
+      "team_aliases": {"milan": ["AC Milan", "AC Mailand"]},
+      "source_type": "guide", "require_kickoff_time": true, "reliability": 70,
+      "competition_families": ["champions-league", "europa-league", "conference-league"],
+      "lookahead_days": 21, "priority": 70
+    },
+    {
       "country": "Azerbaijan", "country_code": "AZ", "broadcaster": "CBC Sport",
       "country_aliases": ["Azerbaijan", "Azerbaigian"],
       "access": "free", "platforms": "TV in chiaro + streaming", "language": "azero",
@@ -144,6 +163,7 @@
       "country": "Austria", "country_code": "AT", "broadcaster": "Sky Austria",
       "access": "paid", "platforms": "TV + streaming", "language": "tedesco",
       "url": "https://www.sky.at/tvguide-7599", "competition_families": ["europa-league", "conference-league"],
+      "match_terms": ["Sky Austria", "Sky Sport Austria", "Sky X"],
       "team_keywords": ["salzburg", "sturm-graz"],
       "rights_from_season": 2024, "rights_through_season": 2026,
       "lookahead_days": 21, "priority": 80
@@ -155,6 +175,17 @@
       "team_keywords": ["salzburg", "sturm-graz"],
       "rights_from_season": 2024, "rights_through_season": 2026,
       "lookahead_days": 21, "priority": 75
+    },
+    {
+      "country": "Austria", "country_code": "AT", "broadcaster": "FootAz Austria",
+      "access": "free", "platforms": "guida TV", "language": "tedesco",
+      "timezone": "Europe/Vienna",
+      "url": "https://www.footaz.at/", "url_template": "https://www.footaz.at/spiel/{home}-vs-{away}/",
+      "team_slugs": {"milan": "ac-milan", "salzburg": "red-bull-salzburg", "rb-salzburg": "red-bull-salzburg"},
+      "team_aliases": {"milan": ["AC Milan", "AC Mailand"]},
+      "source_type": "guide", "require_kickoff_time": true, "reliability": 70,
+      "competition_families": ["champions-league", "europa-league", "conference-league"],
+      "lookahead_days": 21, "priority": 70
     },
     {
       "country": "Portogallo", "country_code": "PT", "broadcaster": "Sport TV",
@@ -262,6 +293,28 @@
       "url": "https://www.srf.ch/play/tv/programm", "competition_families": ["europa-league", "conference-league"],
       "rights_from_season": 2024, "rights_through_season": 2026,
       "lookahead_days": 21, "priority": 85
+    },
+    {
+      "country": "Svizzera", "country_code": "CH", "broadcaster": "Blue Sport",
+      "access": "paid", "platforms": "TV + streaming", "language": "tedesco",
+      "url": "https://www.blueplus.ch/sport",
+      "match_terms": ["Blue Sport"],
+      "competition_families": ["champions-league", "europa-league", "conference-league"],
+      "lookahead_days": 21, "priority": 80
+    },
+    {
+      "country": "Svizzera", "country_code": "CH", "broadcaster": "Fußball im TV Schweiz",
+      "access": "free", "platforms": "guida TV", "language": "tedesco",
+      "timezone": "Europe/Zurich",
+      "url": "https://www.fussball-im-tv.ch/",
+      "url_templates": {
+        "champions-league": "https://www.fussball-im-tv.ch/wettbewerbe/liga-campeones",
+        "europa-league": "https://www.fussball-im-tv.ch/wettbewerbe/europa-league"
+      },
+      "team_aliases": {"milan": ["AC Milan", "AC Mailand"]},
+      "source_type": "guide", "require_kickoff_time": true, "reliability": 70,
+      "competition_families": ["champions-league", "europa-league"],
+      "lookahead_days": 21, "priority": 70
     }
   ]
 }
