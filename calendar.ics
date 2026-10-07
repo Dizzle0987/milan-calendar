@@ -324,9 +324,9 @@ BEGIN:VEVENT
 SUMMARY:⚽ Salzburg - AC Milan
 DTSTART;TZID=Europe/Rome:20261015T184500
 DTEND;TZID=Europe/Rome:20261015T204500
-DTSTAMP:20261007T121700Z
+DTSTAMP:20261007T231025Z
 UID:3dada53d30468e73c19eae6d@milan-calendar
-SEQUENCE:5
+SEQUENCE:6
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 15/10/2026 18:45\nTurno: 2\nStadio: Red Bull Arena\nDove vederla:\n
@@ -335,7 +335,7 @@ DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  eague/dove-vedere-salzburg-milan\n🌍 In chiaro all'estero — Possibile 
  / da confermare:\n🇦🇿 Azerbaijan — CBC Sport\nFonte orario: AC Mila
  n
-LAST-MODIFIED:20261007T121700Z
+LAST-MODIFIED:20261007T231025Z
 LOCATION:Red Bull Arena
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
