@@ -1413,6 +1413,27 @@ def test_foreign_paid_alternative_is_never_published_as_free() -> None:
     assert "GRATIS" not in text
 
 
+def test_unconfirmed_free_candidate_is_not_named_in_calendar_notes() -> None:
+    data = {
+        "broadcast_options": [{
+            "country": "Italia", "country_code": "IT", "broadcaster": "Sky Sport",
+            "access": "paid", "platforms": "TV + streaming", "language": "italiano",
+            "registration_required": False, "url": "https://sky.test/",
+        }],
+        "foreign_possible_broadcasts": [{
+            "country": "Azerbaijan", "country_code": "AZ", "broadcaster": "CBC Sport",
+            "status": "POSSIBLE_FREE", "confidence": 60,
+        }],
+        "broadcast_international_tbc": True,
+    }
+
+    text = "\n".join(_broadcast_description_lines(data))
+
+    assert "CBC Sport" not in text
+    assert "Possibile / da confermare" not in text
+    assert "🌍 In chiaro all'estero — Da confermare" in text
+
+
 @pytest.mark.parametrize(
     ("evidence", "rights", "expected"),
     [
