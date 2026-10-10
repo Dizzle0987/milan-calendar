@@ -627,11 +627,11 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-10T15:13:28Z",
+      "last_modified": "2026-10-10T19:15:14Z",
       "location": "Milano",
       "neutral": false,
       "round": "5",
-      "sequence": 27,
+      "sequence": 28,
       "serie_a_standing": {
         "context": [
           {
@@ -653,7 +653,7 @@
             "team": "Milan"
           },
           {
-            "played": 5,
+            "played": 6,
             "points": 10,
             "position": 6,
             "team": "Frosinone"
@@ -675,7 +675,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-10T15:13:28Z",
+        "updated_at": "2026-10-10T19:15:14Z",
         "wins": 3
       },
       "source": "AC Milan",
@@ -701,11 +701,11 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Sassuolo",
-      "last_modified": "2026-10-10T15:13:28Z",
+      "last_modified": "2026-10-10T19:15:14Z",
       "location": "Italy",
       "neutral": false,
       "round": "6",
-      "sequence": 19,
+      "sequence": 20,
       "serie_a_standing": {
         "context": [
           {
@@ -727,7 +727,7 @@
             "team": "Milan"
           },
           {
-            "played": 5,
+            "played": 6,
             "points": 10,
             "position": 6,
             "team": "Frosinone"
@@ -749,7 +749,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-10T15:13:28Z",
+        "updated_at": "2026-10-10T19:15:14Z",
         "wins": 3
       },
       "source": "AC Milan",
@@ -2202,7 +2202,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-10T15:13:28Z",
+  "last_changed": "2026-10-10T19:15:14Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -2225,7 +2225,7 @@
         "team": "Milan"
       },
       {
-        "played": 5,
+        "played": 6,
         "points": 10,
         "position": 6,
         "team": "Frosinone"
@@ -2247,7 +2247,7 @@
     "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-10-10T15:13:28Z",
+    "updated_at": "2026-10-10T19:15:14Z",
     "wins": 3
   },
   "source_errors": [
