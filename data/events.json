@@ -655,28 +655,28 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Sassuolo",
-      "last_modified": "2026-10-11T15:33:26Z",
-      "location": "Italy",
+      "last_modified": "2026-10-11T19:31:03Z",
+      "location": "Reggio Emilia",
       "neutral": false,
       "round": "6",
-      "sequence": 23,
+      "sequence": 24,
       "serie_a_standing": {
         "context": [
           {
             "played": 6,
-            "points": 14,
+            "points": 15,
             "position": 3,
-            "team": "Roma"
-          },
-          {
-            "played": 5,
-            "points": 12,
-            "position": 4,
             "team": "Cagliari"
           },
           {
-            "played": 5,
-            "points": 11,
+            "played": 6,
+            "points": 14,
+            "position": 4,
+            "team": "Roma"
+          },
+          {
+            "played": 6,
+            "points": 12,
             "position": 5,
             "team": "Milan"
           },
@@ -693,24 +693,24 @@
             "team": "Napoli"
           }
         ],
-        "draws": 2,
+        "draws": 3,
         "goal_difference": 6,
         "losses": 0,
         "pending_recoveries": [],
-        "played": 5,
-        "points": 11,
+        "played": 6,
+        "points": 12,
         "position": 5,
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-11T15:33:26Z",
+        "updated_at": "2026-10-11T19:31:03Z",
         "wins": 3
       },
       "source": "AC Milan",
       "source_id": "7bvu4b4e5lezk0he7a4l3getw",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-10-11T18:00:00+02:00",
-      "status": "Fixture",
+      "status": "Played",
       "time_source": "NOW",
       "time_source_url": "https://www.nowtv.it/sport/calcio/milan",
       "title": "Sassuolo - AC Milan",
@@ -1189,28 +1189,28 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-11T15:33:26Z",
+      "last_modified": "2026-10-11T19:31:03Z",
       "location": "",
       "neutral": false,
       "round": "7",
-      "sequence": 13,
+      "sequence": 14,
       "serie_a_standing": {
         "context": [
           {
             "played": 6,
-            "points": 14,
+            "points": 15,
             "position": 3,
-            "team": "Roma"
-          },
-          {
-            "played": 5,
-            "points": 12,
-            "position": 4,
             "team": "Cagliari"
           },
           {
-            "played": 5,
-            "points": 11,
+            "played": 6,
+            "points": 14,
+            "position": 4,
+            "team": "Roma"
+          },
+          {
+            "played": 6,
+            "points": 12,
             "position": 5,
             "team": "Milan"
           },
@@ -1227,17 +1227,17 @@
             "team": "Napoli"
           }
         ],
-        "draws": 2,
+        "draws": 3,
         "goal_difference": 6,
         "losses": 0,
         "pending_recoveries": [],
-        "played": 5,
-        "points": 11,
+        "played": 6,
+        "points": 12,
         "position": 5,
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-11T15:33:26Z",
+        "updated_at": "2026-10-11T19:31:03Z",
         "wins": 3
       },
       "source": "AC Milan",
@@ -2202,25 +2202,25 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-11T15:33:26Z",
+  "last_changed": "2026-10-11T19:31:03Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
       {
         "played": 6,
-        "points": 14,
+        "points": 15,
         "position": 3,
-        "team": "Roma"
-      },
-      {
-        "played": 5,
-        "points": 12,
-        "position": 4,
         "team": "Cagliari"
       },
       {
-        "played": 5,
-        "points": 11,
+        "played": 6,
+        "points": 14,
+        "position": 4,
+        "team": "Roma"
+      },
+      {
+        "played": 6,
+        "points": 12,
         "position": 5,
         "team": "Milan"
       },
@@ -2237,17 +2237,17 @@
         "team": "Napoli"
       }
     ],
-    "draws": 2,
+    "draws": 3,
     "goal_difference": 6,
     "losses": 0,
     "pending_recoveries": [],
-    "played": 5,
-    "points": 11,
+    "played": 6,
+    "points": 12,
     "position": 5,
     "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-10-11T15:33:26Z",
+    "updated_at": "2026-10-11T19:31:03Z",
     "wins": 3
   },
   "source_errors": [
@@ -2260,6 +2260,7 @@
     "Prime Video: nessun orario esplicito per il Milan",
     "Broadcast CBC Sport (None): 403 Client Error: Forbidden for url: https://cbcsport.az/tv_program_schedule",
     "Broadcast RTL+ (None): 404 Client Error: Not Found for url: https://plus.rtl.de/video-tv/sport",
+    "Broadcast Sportkritik (None): HTTPSConnectionPool(host='sportkritik.az', port=443): Max retries exceeded with url: /wp-json/wp/v2/search?search=salzburg%20Milan (Caused by NewConnectionError(\"HTTPSConnection(host='sportkritik.az', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
     "Broadcast bTV (None): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
     "Broadcast DAZN Portugal (None): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l",
     "Broadcast FootAz (None): 410 Client Error: Gone for url: https://www.footaz.pt/jogo/salzburg-vs-ac-milan/"
