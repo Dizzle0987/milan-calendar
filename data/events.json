@@ -655,16 +655,16 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Sassuolo",
-      "last_modified": "2026-10-10T21:50:59Z",
+      "last_modified": "2026-10-11T13:03:41Z",
       "location": "Italy",
       "neutral": false,
       "round": "6",
-      "sequence": 21,
+      "sequence": 22,
       "serie_a_standing": {
         "context": [
           {
-            "played": 5,
-            "points": 13,
+            "played": 6,
+            "points": 14,
             "position": 3,
             "team": "Lazio"
           },
@@ -682,15 +682,15 @@
           },
           {
             "played": 6,
-            "points": 10,
+            "points": 11,
             "position": 6,
-            "team": "Napoli"
+            "team": "Como"
           },
           {
-            "played": 5,
+            "played": 6,
             "points": 10,
             "position": 7,
-            "team": "Juventus"
+            "team": "Napoli"
           }
         ],
         "draws": 2,
@@ -703,7 +703,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-10T21:50:59Z",
+        "updated_at": "2026-10-11T13:03:41Z",
         "wins": 3
       },
       "source": "AC Milan",
@@ -1189,16 +1189,16 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-10T22:42:41Z",
+      "last_modified": "2026-10-11T13:03:41Z",
       "location": "",
       "neutral": false,
       "round": "7",
-      "sequence": 11,
+      "sequence": 12,
       "serie_a_standing": {
         "context": [
           {
-            "played": 5,
-            "points": 13,
+            "played": 6,
+            "points": 14,
             "position": 3,
             "team": "Lazio"
           },
@@ -1216,15 +1216,15 @@
           },
           {
             "played": 6,
-            "points": 10,
+            "points": 11,
             "position": 6,
-            "team": "Napoli"
+            "team": "Como"
           },
           {
-            "played": 5,
+            "played": 6,
             "points": 10,
             "position": 7,
-            "team": "Juventus"
+            "team": "Napoli"
           }
         ],
         "draws": 2,
@@ -1237,7 +1237,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-10T21:50:59Z",
+        "updated_at": "2026-10-11T13:03:41Z",
         "wins": 3
       },
       "source": "AC Milan",
@@ -2202,13 +2202,13 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-10T22:42:41Z",
+  "last_changed": "2026-10-11T13:03:41Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
       {
-        "played": 5,
-        "points": 13,
+        "played": 6,
+        "points": 14,
         "position": 3,
         "team": "Lazio"
       },
@@ -2226,15 +2226,15 @@
       },
       {
         "played": 6,
-        "points": 10,
+        "points": 11,
         "position": 6,
-        "team": "Napoli"
+        "team": "Como"
       },
       {
-        "played": 5,
+        "played": 6,
         "points": 10,
         "position": 7,
-        "team": "Juventus"
+        "team": "Napoli"
       }
     ],
     "draws": 2,
@@ -2247,7 +2247,7 @@
     "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-10-10T21:50:59Z",
+    "updated_at": "2026-10-11T13:03:41Z",
     "wins": 3
   },
   "source_errors": [
