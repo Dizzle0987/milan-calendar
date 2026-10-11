@@ -341,6 +341,28 @@ TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:⚽ Red Bull Salzburg - AC Milan
+DTSTART;TZID=Europe/Rome:20261015T184500
+DTEND;TZID=Europe/Rome:20261015T204500
+DTSTAMP:20261011T230802Z
+UID:74901762e4b1c27153dbe5e0@milan-calendar
+SEQUENCE:0
+CATEGORIES:UEFA Europa League,AC Milan
+DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
+ ma): 15/10/2026 18:45\nTurno: 2\nStadio: Red Bull Arena Salzburg\nLocalit
+ à: Salzburg\, Austria\nDove vederla in Italia: Sky Sport e NOW\nFonte ora
+ rio: TheSportsDB
+LAST-MODIFIED:20261011T230802Z
+LOCATION:Red Bull Arena Salzburg\, Salzburg\, Austria
+TRANSP:OPAQUE
+URL:https://www.thesportsdb.com/event/2594905
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tra 150 minuti: Red Bull Salzburg - AC Milan
+TRIGGER:-PT2H30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Atalanta
 DTSTART;TZID=Europe/Rome:20261018T180000
 DTEND;TZID=Europe/Rome:20261018T200000
