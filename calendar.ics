@@ -295,18 +295,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ Sassuolo - AC Milan
 DTSTART;TZID=Europe/Rome:20261011T180000
 DTEND;TZID=Europe/Rome:20261011T200000
-DTSTAMP:20261011T220622Z
+DTSTAMP:20261012T222845Z
 UID:efe8aeb093e233c7fe578a0b@milan-calendar
-SEQUENCE:25
+SEQUENCE:26
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 11/10/
  2026 18:00\nTurno: 6\nStadio: MAPEI Stadium\nLocalità: Reggio Emilia\nDov
  e vederla in Italia: DAZN\; Sky Sport e NOW\nFonte orario: NOW\nClassifica
-  Serie A provvisoria — giornata in corso:\n  3. Roma — 14 pt\n  4. Cag
- liari — 13 pt\n▶ 5. Milan — 12 pt — 6 PG — DR +6\n  6. Juventus 
- — 11 pt\n  7. Como — 11 pt\nClassifica aggiornata: 12/10/2026 00:06\nF
- onte classifica: Lega Serie A
-LAST-MODIFIED:20261011T220622Z
+  Serie A aggiornata — giornata completata:\n  3. Roma — 14 pt\n  4. Ca
+ gliari — 13 pt\n▶ 5. Milan — 12 pt — 6 PG — DR +6\n  6. Juventus
+  — 11 pt\n  7. Como — 11 pt\nClassifica aggiornata: 13/10/2026 00:28\n
+ Fonte classifica: Lega Serie A
+LAST-MODIFIED:20261012T222845Z
 LOCATION:MAPEI Stadium\, Reggio Emilia
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -345,17 +345,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Atalanta
 DTSTART;TZID=Europe/Rome:20261018T180000
 DTEND;TZID=Europe/Rome:20261018T200000
-DTSTAMP:20261011T220622Z
+DTSTAMP:20261012T222845Z
 UID:f4cca29e5c6dd6bae4edb995@milan-calendar
-SEQUENCE:15
+SEQUENCE:16
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 18/10/2026 
  18:00\nTurno: 7\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\; S
- ky Sport e NOW\nFonte orario: NOW\nClassifica Serie A provvisoria — gior
- nata in corso:\n  3. Roma — 14 pt\n  4. Cagliari — 13 pt\n▶ 5. Milan
-  — 12 pt — 6 PG — DR +6\n  6. Juventus — 11 pt\n  7. Como — 11 p
- t\nClassifica aggiornata: 12/10/2026 00:06\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20261011T220622Z
+ ky Sport e NOW\nFonte orario: NOW\nClassifica Serie A aggiornata — giorn
+ ata completata:\n  3. Roma — 14 pt\n  4. Cagliari — 13 pt\n▶ 5. Mila
+ n — 12 pt — 6 PG — DR +6\n  6. Juventus — 11 pt\n  7. Como — 11 
+ pt\nClassifica aggiornata: 13/10/2026 00:28\nFonte classifica: Lega Serie 
+ A
+LAST-MODIFIED:20261012T222845Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all

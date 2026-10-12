@@ -655,11 +655,11 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Sassuolo",
-      "last_modified": "2026-10-11T22:06:22Z",
+      "last_modified": "2026-10-12T22:28:45Z",
       "location": "Reggio Emilia",
       "neutral": false,
       "round": "6",
-      "sequence": 25,
+      "sequence": 26,
       "serie_a_standing": {
         "context": [
           {
@@ -696,14 +696,13 @@
         "draws": 3,
         "goal_difference": 6,
         "losses": 0,
-        "pending_recoveries": [],
         "played": 6,
         "points": 12,
         "position": 5,
-        "provisional": true,
+        "provisional": false,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-11T22:06:22Z",
+        "updated_at": "2026-10-12T22:28:45Z",
         "wins": 3
       },
       "source": "AC Milan",
@@ -1189,11 +1188,11 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-11T22:06:22Z",
+      "last_modified": "2026-10-12T22:28:45Z",
       "location": "",
       "neutral": false,
       "round": "7",
-      "sequence": 15,
+      "sequence": 16,
       "serie_a_standing": {
         "context": [
           {
@@ -1230,14 +1229,13 @@
         "draws": 3,
         "goal_difference": 6,
         "losses": 0,
-        "pending_recoveries": [],
         "played": 6,
         "points": 12,
         "position": 5,
-        "provisional": true,
+        "provisional": false,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-11T22:06:22Z",
+        "updated_at": "2026-10-12T22:28:45Z",
         "wins": 3
       },
       "source": "AC Milan",
@@ -2202,7 +2200,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-12T12:30:13Z",
+  "last_changed": "2026-10-12T22:28:45Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -2240,18 +2238,16 @@
     "draws": 3,
     "goal_difference": 6,
     "losses": 0,
-    "pending_recoveries": [],
     "played": 6,
     "points": 12,
     "position": 5,
-    "provisional": true,
+    "provisional": false,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-10-11T22:06:22Z",
+    "updated_at": "2026-10-12T22:28:45Z",
     "wins": 3
   },
   "source_errors": [
-    "ESPN recuperi Serie A: 400 Client Error: Bad Request for url: https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20260801-20270630&limit=1000",
     "AC Milan: nessun orario esplicito per il Milan",
     "Gazzetta dello Sport: 404 Client Error: Not Found for url: https://www.gazzetta.it/Calcio/Serie-A/Milan/",
     "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
