@@ -438,6 +438,30 @@ def test_milan_and_ac_milan_aliases_do_not_create_duplicates() -> None:
     assert len(merged) == 1
 
 
+def test_salzburg_and_red_bull_salzburg_aliases_do_not_create_duplicates() -> None:
+    official = {
+        "home_team": "Salzburg",
+        "away_team": "AC Milan",
+        "competition": "UEFA Europa League",
+        "start": "2026-10-15T18:45:00+02:00",
+        "all_day": False,
+        "source": "AC Milan",
+        "source_url": "https://www.acmilan.com/schedule",
+    }
+    fallback = {
+        **official,
+        "home_team": "Red Bull Salzburg",
+        "source": "TheSportsDB",
+        "source_url": "https://www.thesportsdb.com/event/2594905",
+    }
+
+    merged = merge_remote_events([official, fallback])
+
+    assert len(merged) == 1
+    assert merged[0]["source"] == "AC Milan"
+    assert merged[0]["home_team"] == "Salzburg"
+
+
 def test_now_overlay_keeps_dazn_as_primary_serie_a_broadcaster() -> None:
     official = parse_official_html(
         official_html(
@@ -1431,7 +1455,10 @@ def test_unconfirmed_free_candidate_is_not_named_in_calendar_notes() -> None:
 
     assert "CBC Sport" not in text
     assert "Possibile / da confermare" not in text
-    assert "🌍 In chiaro all'estero — Da confermare" in text
+    assert (
+        "🌍 In chiaro all'estero — Nessuna emittente gratuita confermata al momento"
+        in text
+    )
 
 
 @pytest.mark.parametrize(

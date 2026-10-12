@@ -320,45 +320,24 @@ BEGIN:VEVENT
 SUMMARY:⚽ Salzburg - AC Milan
 DTSTART;TZID=Europe/Rome:20261015T184500
 DTEND;TZID=Europe/Rome:20261015T204500
-DTSTAMP:20261007T231025Z
+DTSTAMP:20261012T123013Z
 UID:3dada53d30468e73c19eae6d@milan-calendar
-SEQUENCE:6
+SEQUENCE:7
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
- ma): 15/10/2026 18:45\nTurno: 2\nStadio: Red Bull Arena\nDove vederla:\n
- 🇮🇹 Italia — Sky Sport Calcio / Sky Go\nA pagamento · TV + streami
- ng · italiano\nhttps://programmi.sky.it/sport/coppe-europee/uefa-europa-l
- eague/dove-vedere-salzburg-milan\n🌍 In chiaro all'estero — Da conferm
- are\nFonte orario: AC Milan
-LAST-MODIFIED:20261007T231025Z
-LOCATION:Red Bull Arena
+ ma): 15/10/2026 18:45\nTurno: 2\nStadio: Red Bull Arena\nLocalità: Salzbu
+ rg\, Austria\nDove vederla:\n🇮🇹 Italia — Sky Sport Calcio / Sky Go
+ \nA pagamento · TV + streaming · italiano\nhttps://programmi.sky.it/spor
+ t/coppe-europee/uefa-europa-league/dove-vedere-salzburg-milan\n🌍 In chi
+ aro all'estero — Nessuna emittente gratuita confermata al momento\nFonte
+  orario: AC Milan
+LAST-MODIFIED:20261012T123013Z
+LOCATION:Red Bull Arena\, Salzburg\, Austria
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Tra 150 minuti: Salzburg - AC Milan
-TRIGGER:-PT2H30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:⚽ Red Bull Salzburg - AC Milan
-DTSTART;TZID=Europe/Rome:20261015T184500
-DTEND;TZID=Europe/Rome:20261015T204500
-DTSTAMP:20261011T230802Z
-UID:74901762e4b1c27153dbe5e0@milan-calendar
-SEQUENCE:0
-CATEGORIES:UEFA Europa League,AC Milan
-DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
- ma): 15/10/2026 18:45\nTurno: 2\nStadio: Red Bull Arena Salzburg\nLocalit
- à: Salzburg\, Austria\nDove vederla in Italia: Sky Sport e NOW\nFonte ora
- rio: TheSportsDB
-LAST-MODIFIED:20261011T230802Z
-LOCATION:Red Bull Arena Salzburg\, Salzburg\, Austria
-TRANSP:OPAQUE
-URL:https://www.thesportsdb.com/event/2594905
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Tra 150 minuti: Red Bull Salzburg - AC Milan
 TRIGGER:-PT2H30M
 END:VALARM
 END:VEVENT
@@ -396,8 +375,8 @@ SEQUENCE:3
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 22/10/2026 21:00\nTurno: 3\nStadio: Vitality Stadium\nDove vederla:\n
- 🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da confer
- mare\nFonte orario: NOW
+ 🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Nessuna e
+ mittente gratuita confermata al momento\nFonte orario: NOW
 LAST-MODIFIED:20260917T045927Z
 LOCATION:Vitality Stadium
 TRANSP:OPAQUE
@@ -481,8 +460,8 @@ SEQUENCE:4
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  05/11/2026 18:45\nTurno: 4\nStadio: San Siro Stadium\nDove vederla:\n🇮
- 🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da confermare
- \nFonte orario: NOW
+ 🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Nessuna emitt
+ ente gratuita confermata al momento\nFonte orario: NOW
 LAST-MODIFIED:20260917T045927Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
@@ -546,7 +525,7 @@ CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 26/11/2026 18:45\nTurno: 5\nStadio: Stadio Georgios Karaiskákis\nDov
  e vederla:\n🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero 
- — Da confermare\nFonte orario: NOW
+ — Nessuna emittente gratuita confermata al momento\nFonte orario: NOW
 LAST-MODIFIED:20260917T045927Z
 LOCATION:Stadio Georgios Karaiskákis
 TRANSP:OPAQUE
@@ -609,8 +588,8 @@ SEQUENCE:3
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  10/12/2026 21:00\nTurno: 6\nStadio: San Siro Stadium\nDove vederla:\n🇮
- 🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da confermare
- \nFonte orario: NOW
+ 🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Nessuna emitt
+ ente gratuita confermata al momento\nFonte orario: NOW
 LAST-MODIFIED:20260917T045927Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
@@ -778,8 +757,8 @@ SEQUENCE:3
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 21/01/2027 21:00\nTurno: 7\nStadio: Stadion Vasil Levski\nDove vederl
- a:\n🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da co
- nfermare\nFonte orario: AC Milan
+ a:\n🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Nessu
+ na emittente gratuita confermata al momento\nFonte orario: AC Milan
 LAST-MODIFIED:20261003T052626Z
 LOCATION:Stadion Vasil Levski
 TRANSP:OPAQUE
@@ -820,8 +799,8 @@ SEQUENCE:2
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  28/01/2027 21:00\nTurno: 8\nStadio: San Siro Stadium\nDove vederla:\n🇮
- 🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Da confermare
- \nFonte orario: AC Milan
+ 🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Nessuna emitt
+ ente gratuita confermata al momento\nFonte orario: AC Milan
 LAST-MODIFIED:20260917T045927Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE

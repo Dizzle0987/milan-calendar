@@ -1,5 +1,5 @@
 {
-  "event_count": 55,
+  "event_count": 54,
   "events": [
     {
       "all_day": false,
@@ -1126,8 +1126,8 @@
       "free_italian_broadcasts": [],
       "home_away": "Trasferta",
       "home_team": "Salzburg",
-      "last_modified": "2026-10-07T23:10:25Z",
-      "location": "",
+      "last_modified": "2026-10-12T12:30:13Z",
+      "location": "Salzburg, Austria",
       "neutral": false,
       "opponent_country": "Austria",
       "opponent_country_code": "AT",
@@ -1165,7 +1165,7 @@
         "web_stream_free": "unknown"
       },
       "round": "2",
-      "sequence": 6,
+      "sequence": 7,
       "source": "AC Milan",
       "source_id": "dshef8yysdujmj6koja7wuluc",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -1176,30 +1176,6 @@
       "title": "Salzburg - AC Milan",
       "uid": "3dada53d30468e73c19eae6d@milan-calendar",
       "venue": "Red Bull Arena"
-    },
-    {
-      "all_day": false,
-      "away_team": "AC Milan",
-      "broadcast_it": "Sky Sport e NOW",
-      "broadcast_source_url": "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
-      "competition": "UEFA Europa League",
-      "home_away": "Trasferta",
-      "home_team": "Red Bull Salzburg",
-      "last_modified": "2026-10-11T23:08:02Z",
-      "location": "Salzburg, Austria",
-      "neutral": false,
-      "round": "2",
-      "sequence": 0,
-      "source": "TheSportsDB",
-      "source_id": "2594905",
-      "source_url": "https://www.thesportsdb.com/event/2594905",
-      "start": "2026-10-15T18:45:00+02:00",
-      "status": "NS",
-      "time_source": "TheSportsDB",
-      "time_source_url": "https://www.thesportsdb.com/event/2594905",
-      "title": "Red Bull Salzburg - AC Milan",
-      "uid": "74901762e4b1c27153dbe5e0@milan-calendar",
-      "venue": "Red Bull Arena Salzburg"
     },
     {
       "all_day": false,
@@ -2226,7 +2202,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-11T23:08:02Z",
+  "last_changed": "2026-10-12T12:30:13Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -2278,14 +2254,13 @@
     "ESPN recuperi Serie A: 400 Client Error: Bad Request for url: https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20260801-20270630&limit=1000",
     "AC Milan: nessun orario esplicito per il Milan",
     "Gazzetta dello Sport: 404 Client Error: Not Found for url: https://www.gazzetta.it/Calcio/Serie-A/Milan/",
-    "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
+    "DAZN: nessun orario esplicito per il Milan",
     "Sky Sport: nessun orario esplicito per il Milan",
     "Mediaset: 404 Client Error: Not Found for url: https://mediasetinfinity.mediaset.it/sport",
     "Prime Video: nessun orario esplicito per il Milan",
     "Broadcast CBC Sport (None): 403 Client Error: Forbidden for url: https://cbcsport.az/tv_program_schedule",
     "Broadcast RTL+ (None): 404 Client Error: Not Found for url: https://plus.rtl.de/video-tv/sport",
     "Broadcast bTV (None): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
-    "Broadcast DAZN Portugal (None): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l",
     "Broadcast FootAz (None): 410 Client Error: Gone for url: https://www.footaz.pt/jogo/salzburg-vs-ac-milan/"
   ],
   "sources_used": [

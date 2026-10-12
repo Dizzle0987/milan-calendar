@@ -34,6 +34,8 @@ TEAM_EQUIVALENTS = {
     "manchester-utd": "manchester-united",
     "man-utd": "manchester-united",
     "psg": "paris-saint-germain",
+    "rb-salzburg": "salzburg",
+    "red-bull-salzburg": "salzburg",
 }
 OFFICIAL_URL = "https://www.acmilan.com/en/season/{season}/schedule/all"
 ESPN_URL = (
@@ -2971,7 +2973,7 @@ def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
             elif option.get("url"):
                 lines.append(str(option["url"]))
     elif data.get("broadcast_international_tbc"):
-        lines.append("🌍 In chiaro all'estero — Da confermare")
+        lines.append("🌍 In chiaro all'estero — Nessuna emittente gratuita confermata al momento")
     return lines
 
 
