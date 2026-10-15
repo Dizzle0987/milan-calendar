@@ -108,7 +108,7 @@
     {
       "country": "Azerbaijan", "country_code": "AZ", "broadcaster": "CBC Sport",
       "country_aliases": ["Azerbaijan", "Azerbaigian"],
-      "access": "free", "platforms": "TV in chiaro + streaming", "language": "azero",
+      "access": "free", "platforms": "TV + streaming", "language": "azero",
       "timezone": "Asia/Baku", "market_tier": 1,
       "url": "https://cbcsport.az/tv_program_schedule",
       "source_type": "fixture_page", "require_kickoff_time": true,
@@ -156,6 +156,46 @@
       "source_type": "wordpress_search", "require_kickoff_time": true,
       "competition_families": ["champions-league", "europa-league", "conference-league"],
       "lookahead_days": 21, "priority": 70
+    },
+    {
+      "country": "Internazionale", "country_code": "ZZ",
+      "broadcaster": "Sport TV Guide",
+      "access": "unknown", "platforms": "guida TV", "language": "multilingue",
+      "timezone": "Europe/Rome", "market_tier": 1,
+      "url": "https://sport-tv-guide.live/",
+      "source_type": "guide", "guide_parser": "sport_tv_guide",
+      "query_url_template": "https://sport-tv-guide.live/squadra/calcio/{home_slug}",
+      "query_limit": 6,
+      "team_slugs": {
+        "milan": "ac-milan",
+        "salzburg": "salzburg"
+      },
+      "team_aliases": {
+        "milan": ["AC Milan", "A.C. Milan", "AC Mailand"],
+        "salzburg": ["RB Salzburg", "Red Bull Salzburg", "Salisburgo"]
+      },
+      "match_url_pattern": "/(?:[a-z]{2}/)?event/.+/[0-9]+/?$",
+      "permalink_domains": ["sport-tv-guide.live"],
+      "permalink_limit": 6,
+      "discover_match_permalinks": true,
+      "require_kickoff_time": true, "country_scope": "*",
+      "discover_broadcasters": true,
+      "competition_families": ["champions-league", "europa-league", "conference-league"],
+      "lookahead_days": 21, "priority": 74
+    },
+    {
+      "country": "Internazionale", "country_code": "ZZ",
+      "broadcaster": "MacEkran",
+      "access": "unknown", "platforms": "verifica accesso", "language": "turco",
+      "timezone": "Europe/Istanbul", "market_tier": 1,
+      "url": "https://macekran.com/",
+      "url_template": "https://macekran.com/mac/{home}-vs-{away}-{date}",
+      "team_aliases": {
+        "milan": ["AC Milan", "A.C. Milan", "AC Mailand"]
+      },
+      "source_type": "access_guide",
+      "competition_families": ["champions-league", "europa-league", "conference-league"],
+      "lookahead_days": 21, "priority": 73
     },
     {
       "country": "Austria", "country_code": "AT", "broadcaster": "ServusTV / ServusTV On",

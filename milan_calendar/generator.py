@@ -123,6 +123,7 @@ TEAM_COUNTRY_LOOKUP_URL = (
 )
 BROADCAST_CONFIDENCE_THRESHOLD = 80
 BROADCAST_GUIDE_SOURCE_TYPES = {"guide", "wordpress_search"}
+BROADCAST_ACCESS_SOURCE_TYPES = {"access_guide"}
 BROADCAST_QUERY_LIMIT = 6
 MONTH_NAMES = {
     1: ("gennaio", "january", "januar", "janvier", "enero", "janeiro"),
@@ -276,6 +277,7 @@ def _fixture_date_markers(
         local.strftime("%Y-%m-%d"),
         local.strftime("%Y%m%d"),
         local.strftime("%d-%m-%Y"),
+        local.strftime("%m-%d-%Y"),
         local.strftime("%d-%m"),
         local.strftime("%d.%m.%Y"),
         local.strftime("%d/%m/%Y"),
@@ -917,14 +919,18 @@ def _fetch_guide_documents(
                     return [(article.text, article_url)]
             continue
 
-        if not _guide_document_confirms_fixture(response.text, event, source):
-            continue
+        listing_confirms_fixture = _guide_document_confirms_fixture(
+            response.text, event, source
+        )
         permalink_limit = max(1, min(int(source.get("permalink_limit") or 3), 6))
-        for permalink in _match_permalink_candidates(
-            response.text, query_url, source
-        )[:permalink_limit]:
+        permalinks = _match_permalink_candidates(response.text, query_url, source)
+        if not listing_confirms_fixture and not source.get("discover_match_permalinks"):
+            continue
+        for permalink in permalinks[:permalink_limit]:
             if permalink == query_url:
-                return [(response.text, query_url)]
+                if listing_confirms_fixture:
+                    return [(response.text, query_url)]
+                continue
             try:
                 match_page = requester.get(permalink, timeout=10)
                 match_page.raise_for_status()
@@ -933,7 +939,8 @@ def _fetch_guide_documents(
             if _guide_document_confirms_fixture(match_page.text, event, source):
                 return [(match_page.text, permalink)]
         # The listing itself is still exact evidence, but an unverified link is not.
-        return [(response.text, query_url)]
+        if listing_confirms_fixture:
+            return [(response.text, query_url)]
     if not successful_query and last_query_error is not None:
         raise last_query_error
     return []
@@ -1018,6 +1025,262 @@ def parse_structured_broadcast_guide(
                     }
                 )
     return discovered
+
+
+def parse_sport_tv_guide(
+    html: str,
+    event: dict[str, Any],
+    source_schedule: str,
+    team_aliases: dict[str, Any] | None = None,
+    timezone_name: str = "Europe/Rome",
+) -> list[dict[str, Any]]:
+    """Parse broadcasters from one verified Sport TV Guide match page."""
+    parsed_schedule = urlparse(source_schedule)
+    if (
+        parsed_schedule.scheme != "https"
+        or not parsed_schedule.hostname
+        or not re.search(r"/(?:[a-z]{2}/)?event/.+/\d+/?$", parsed_schedule.path)
+    ):
+        return []
+
+    windows = _fixture_windows(html, event, timezone_name, team_aliases)
+    time_markers = _fixture_time_markers(_event_datetime(event), timezone_name)
+    if not any(
+        any(marker in window for marker in time_markers) for window in windows
+    ):
+        return []
+
+    active_name = ""
+    programme_start: datetime | None = None
+    channel_info = re.search(
+        r'<div[^>]+id=["\']channelInfo["\'][^>]*>(.*?)</div>\s*<h3',
+        html,
+        re.DOTALL | re.IGNORECASE,
+    )
+    if channel_info:
+        details = channel_info.group(1)
+        station_match = re.search(
+            r'<div[^>]+class=["\'][^"\']*\bstation\s+full\b[^"\']*["\'][^>]*>'
+            r"(.*?)</div>",
+            details,
+            re.DOTALL | re.IGNORECASE,
+        )
+        time_match = re.search(
+            r'<div[^>]+class=["\'][^"\']*\btime\s+full\b[^"\']*["\'][^>]*>'
+            r".*?(\d{1,2}:\d{2}).*?</div>",
+            details,
+            re.DOTALL | re.IGNORECASE,
+        )
+        date_match = re.search(
+            r'<div[^>]+class=["\'][^"\']*\bdate\s+full\b[^"\']*["\'][^>]*>'
+            r"(.*?)</div>",
+            details,
+            re.DOTALL | re.IGNORECASE,
+        )
+        if station_match:
+            station_text = html_module.unescape(
+                re.sub(r"<[^>]+>", " ", station_match.group(1))
+            )
+            active_name = _normalize(station_text.split("/")[0].strip())
+        if time_match and date_match:
+            date_text = html_module.unescape(
+                re.sub(r"<[^>]+>", " ", date_match.group(1))
+            )
+            date_value = re.search(
+                r"(\d{1,2}[-./]\d{1,2}[-./]\d{4})", date_text
+            )
+            if date_value:
+                for date_format in ("%m-%d-%Y", "%d-%m-%Y", "%d.%m.%Y", "%d/%m/%Y"):
+                    try:
+                        local_date = datetime.strptime(
+                            date_value.group(1), date_format
+                        ).date()
+                        local_time = datetime.strptime(
+                            time_match.group(1), "%H:%M"
+                        ).time()
+                        programme_start = datetime.combine(
+                            local_date, local_time, ZoneInfo(timezone_name)
+                        )
+                        break
+                    except ValueError:
+                        continue
+
+    station_pattern = re.compile(
+        r'<div\b(?P<attrs>[^>]*\bclass=["\'][^"\']*\bstationLive\b[^"\']*["\'][^>]*)>'
+        r"(?P<label>.*?)</div>",
+        re.DOTALL | re.IGNORECASE,
+    )
+    discovered: list[dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+    for station in station_pattern.finditer(html):
+        attrs = {
+            key.lower(): html_module.unescape(value)
+            for key, value in re.findall(
+                r'([\w-]+)=["\']([^"\']*)["\']', station.group("attrs")
+            )
+        }
+        label = html_module.unescape(
+            re.sub(r"<[^>]+>", " ", station.group("label"))
+        ).strip()
+        channel = re.match(r"\s*(.*?)\s*\[([A-Za-z]{2})\]", label)
+        if not channel:
+            channel = re.match(
+                r"\s*(.*?)\s*\[([A-Za-z]{2})\]", attrs.get("title", "")
+            )
+        if not channel:
+            continue
+        broadcaster = channel.group(1).strip()
+        country_code = channel.group(2).upper()
+        key = (_normalize(broadcaster), country_code)
+        if not broadcaster or key in seen:
+            continue
+        seen.add(key)
+        item: dict[str, Any] = {
+            "broadcaster": broadcaster,
+            "country": "",
+            "country_code": country_code,
+            "source_schedule": source_schedule,
+        }
+        class_names = attrs.get("class", "").split()
+        if programme_start is not None and (
+            "active" in class_names and key[0] == active_name
+        ):
+            item["programme_start"] = programme_start.isoformat()
+        discovered.append(item)
+    return discovered
+
+
+def parse_macekran_access_guide(
+    html: str,
+    event: dict[str, Any],
+    source_schedule: str,
+    team_aliases: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Parse explicit per-broadcaster access claims from a verified match page."""
+    parsed_schedule = urlparse(source_schedule)
+    if (
+        parsed_schedule.scheme != "https"
+        or not parsed_schedule.hostname
+        or not re.search(r"/mac/.+-\d{4}-\d{2}-\d{2}/?$", parsed_schedule.path)
+    ):
+        return []
+
+    expected_start = _event_datetime(event).astimezone(timezone.utc)
+    home_aliases = _team_broadcast_aliases(
+        str(event.get("home_team") or ""), team_aliases
+    )
+    away_aliases = _team_broadcast_aliases(
+        str(event.get("away_team") or ""), team_aliases
+    )
+    objects: list[dict[str, Any]] = []
+    for raw in re.findall(
+        r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+        html,
+        re.DOTALL | re.IGNORECASE,
+    ):
+        try:
+            objects.extend(_walk_json_objects(json.loads(html_module.unescape(raw))))
+        except (json.JSONDecodeError, TypeError):
+            continue
+
+    event_ids: set[str] = set()
+    for item in objects:
+        if item.get("@type") != "SportsEvent":
+            continue
+        home = _team_match_key(str((item.get("homeTeam") or {}).get("name") or ""))
+        away = _team_match_key(str((item.get("awayTeam") or {}).get("name") or ""))
+        if home not in home_aliases or away not in away_aliases:
+            continue
+        try:
+            listed_start = datetime.fromisoformat(
+                str(item.get("startDate") or "").replace("Z", "+00:00")
+            ).astimezone(timezone.utc)
+        except ValueError:
+            continue
+        if abs((listed_start - expected_start).total_seconds()) > 15 * 60:
+            continue
+        event_id = str(item.get("@id") or "")
+        if event_id:
+            event_ids.add(event_id)
+    if not event_ids:
+        return []
+
+    confirmed_broadcasters: set[str] = set()
+    for item in objects:
+        if item.get("@type") != "BroadcastEvent":
+            continue
+        broadcast_event = item.get("broadcastOfEvent") or {}
+        if not isinstance(broadcast_event, dict):
+            continue
+        if str(broadcast_event.get("@id") or "") not in event_ids:
+            continue
+        service = item.get("publishedOn") or {}
+        services = service if isinstance(service, list) else [service]
+        for broadcaster in services:
+            if isinstance(broadcaster, dict) and broadcaster.get("name"):
+                confirmed_broadcasters.add(
+                    _normalize(str(broadcaster["name"]))
+                )
+    if not confirmed_broadcasters:
+        return []
+
+    table = re.search(
+        r"<table[^>]*>.*?<th[^>]*>\s*Kanal\s*</th>.*?<tbody>(.*?)</tbody>",
+        html,
+        re.DOTALL | re.IGNORECASE,
+    )
+    if not table:
+        return []
+
+    result: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for row in re.findall(r"<tr[^>]*>(.*?)</tr>", table.group(1), re.DOTALL | re.I):
+        cells = re.findall(r"<td[^>]*>(.*?)</td>", row, re.DOTALL | re.I)
+        if len(cells) < 4:
+            continue
+        title = re.search(r'\btitle=["\']([^"\']+)["\']', cells[0], re.I)
+        if not title:
+            continue
+        broadcaster = html_module.unescape(title.group(1)).strip()
+        broadcaster_key = _normalize(broadcaster)
+        if broadcaster_key not in confirmed_broadcasters or broadcaster_key in seen:
+            continue
+
+        values = [
+            " ".join(
+                html_module.unescape(re.sub(r"<[^>]+>", " ", cell)).split()
+            )
+            for cell in cells[1:4]
+        ]
+        access_type, platforms, price = values
+        access_text = f"{access_type} {price}".casefold()
+        free_claim = "ücretsiz" in access_text or "ucretsiz" in access_text
+        paid_claim = bool(
+            re.search(r"(?:₺|€|\$|£|/\s*(?:ay|month)|\bsubscription\b)", access_text)
+        ) or "ücretli" in access_text
+        if free_claim == paid_claim:
+            continue
+
+        platform_key = _normalize(platforms)
+        has_web = "web" in platform_key
+        has_tv = any(
+            marker in platform_key
+            for marker in ("uydu", "satellite", "tv", "televizyon")
+        )
+        item: dict[str, Any] = {
+            "broadcaster": broadcaster,
+            "source_url": source_schedule,
+            "subscription_required": paid_claim,
+        }
+        if free_claim:
+            item["broadcast_free"] = has_tv
+            item["web_stream_free"] = True if has_web else "unknown"
+        else:
+            item["broadcast_free"] = False
+            item["web_stream_free"] = False if has_web else "unknown"
+        seen.add(broadcaster_key)
+        result.append(item)
+    return result
 
 
 def score_broadcast_evidence(
@@ -1166,6 +1429,9 @@ def apply_verified_broadcasts(
 
     errors: list[str] = []
     evidence_by_broadcaster: dict[tuple[str, str], dict[str, Any]] = {}
+    availability_by_broadcaster: dict[
+        tuple[str, str], list[dict[str, Any]]
+    ] = {}
     failed_broadcasters: set[tuple[str, str]] = set()
     optional_session: requests.Session | None = None
     requester: Any = session
@@ -1200,7 +1466,8 @@ def apply_verified_broadcasts(
                 str(source.get("country_code") or "").upper() == country
                 and (
                     source.get("access") == "free"
-                    or str(source.get("source_type") or "") in BROADCAST_GUIDE_SOURCE_TYPES
+                    or str(source.get("source_type") or "")
+                    in BROADCAST_GUIDE_SOURCE_TYPES | BROADCAST_ACCESS_SOURCE_TYPES
                 )
                 for source in sources
             )
@@ -1208,7 +1475,8 @@ def apply_verified_broadcasts(
         broadcaster_sources = [
             source
             for source in sources
-            if str(source.get("source_type") or "page") not in BROADCAST_GUIDE_SOURCE_TYPES
+            if str(source.get("source_type") or "page")
+            not in BROADCAST_GUIDE_SOURCE_TYPES | BROADCAST_ACCESS_SOURCE_TYPES
             and str(source.get("country_code") or "").upper() in allowed_countries
         ]
 
@@ -1263,7 +1531,8 @@ def apply_verified_broadcasts(
             if (
                 source.get("rights_confirmed")
                 and rights_temporally_valid
-                and source_type not in BROADCAST_GUIDE_SOURCE_TYPES
+                and source_type
+                not in BROADCAST_GUIDE_SOURCE_TYPES | BROADCAST_ACCESS_SOURCE_TYPES
             ):
                 evidence_by_broadcaster.setdefault(
                     source_key, {"source": deepcopy(source), "evidence": []}
@@ -1294,6 +1563,57 @@ def apply_verified_broadcasts(
                     )
                 continue
 
+            if source_type in BROADCAST_ACCESS_SOURCE_TYPES:
+                url = _fixture_source_url(source, target)
+                try:
+                    response = requester.get(url, timeout=10)
+                    response.raise_for_status()
+                except requests.RequestException as exc:
+                    errors.append(
+                        f"{source['broadcaster']} ({target.get('title')}): {exc}"
+                    )
+                    continue
+                for availability in parse_macekran_access_guide(
+                    response.text,
+                    target,
+                    url,
+                    source.get("team_aliases") or {},
+                ):
+                    discovered_name = _normalize(availability["broadcaster"])
+                    matching_keys: set[tuple[str, str]] = set()
+                    for broadcaster in broadcaster_sources:
+                        names = {
+                            _normalize(str(broadcaster.get("broadcaster") or "")),
+                            *(
+                                _normalize(str(term))
+                                for term in broadcaster.get("match_terms") or []
+                            ),
+                        }
+                        if discovered_name in names:
+                            matching_keys.add((
+                                str(broadcaster.get("country_code") or "").upper(),
+                                _normalize(str(broadcaster.get("broadcaster") or "")),
+                            ))
+                    for key, bucket in evidence_by_broadcaster.items():
+                        names = {
+                            _normalize(str(bucket["source"].get("broadcaster") or "")),
+                            *(
+                                _normalize(str(term))
+                                for term in bucket["source"].get("match_terms") or []
+                            ),
+                        }
+                        if discovered_name in names:
+                            matching_keys.add(key)
+                    if len(matching_keys) != 1:
+                        continue
+                    key = next(iter(matching_keys))
+                    availability_by_broadcaster.setdefault(key, []).append({
+                        **availability,
+                        "verified_at": checked_at,
+                        "guide": str(source["broadcaster"]),
+                    })
+                continue
+
             if source_type in BROADCAST_GUIDE_SOURCE_TYPES:
                 try:
                     documents = _fetch_guide_documents(requester, source, target)
@@ -1303,10 +1623,23 @@ def apply_verified_broadcasts(
                 timezone_name = str(source.get("timezone") or "Europe/Rome")
                 for html, document_url in documents:
                     if source.get("discover_broadcasters"):
-                        for discovered in parse_structured_broadcast_guide(
-                            html, target, source.get("team_aliases") or {}
-                        ):
+                        if source.get("guide_parser") == "sport_tv_guide":
+                            discovered_broadcasters = parse_sport_tv_guide(
+                                html,
+                                target,
+                                document_url,
+                                source.get("team_aliases") or {},
+                                timezone_name,
+                            )
+                        else:
+                            discovered_broadcasters = parse_structured_broadcast_guide(
+                                html, target, source.get("team_aliases") or {}
+                            )
+                        for discovered in discovered_broadcasters:
                             discovered_name = _normalize(discovered["broadcaster"])
+                            discovered_country_code = str(
+                                discovered.get("country_code") or ""
+                            ).upper()
                             known = next(
                                 (
                                     item for item in broadcaster_sources
@@ -1318,16 +1651,26 @@ def apply_verified_broadcasts(
                                             for term in item.get("match_terms") or []
                                         ),
                                     }
+                                    and (
+                                        not discovered_country_code
+                                        or discovered_country_code == "ZZ"
+                                        or str(item.get("country_code") or "").upper()
+                                        == discovered_country_code
+                                    )
                                 ),
                                 None,
                             )
                             broadcaster = known or {
-                                "country": discovered.get("country") or "Da determinare",
-                                "country_code": "ZZ",
+                                "country": (
+                                    discovered.get("country")
+                                    or discovered_country_code
+                                    or "Da determinare"
+                                ),
+                                "country_code": discovered_country_code or "ZZ",
                                 "broadcaster": discovered["broadcaster"],
                                 "access": "unknown",
                                 "platforms": "TV/streaming da verificare",
-                                "url": discovered.get("source_url") or document_url,
+                                "url": document_url,
                                 "priority": 0,
                                 "market_tier": 3,
                                 "discovered_dynamically": True,
@@ -1343,27 +1686,29 @@ def apply_verified_broadcasts(
                                     "programme_start": discovered.get("programme_start"),
                                 },
                             )
-                    for broadcaster in _guide_broadcasters(
-                        html,
-                        target,
-                        [
-                            item for item in broadcaster_sources
-                            if source.get("country_scope") == "*"
-                            or str(item.get("country_code") or "").upper() == country_code
-                        ],
-                        timezone_name,
-                        bool(source.get("require_kickoff_time")),
-                        source.get("team_aliases") or {},
-                    ):
-                        add_evidence(
-                            broadcaster,
-                            {
-                                "source_type": "guide",
-                                "source_url": document_url,
-                                "verified_at": checked_at,
-                                "guide": str(source["broadcaster"]),
-                            },
-                        )
+                    if source.get("guide_parser") != "sport_tv_guide":
+                        for broadcaster in _guide_broadcasters(
+                            html,
+                            target,
+                            [
+                                item for item in broadcaster_sources
+                                if source.get("country_scope") == "*"
+                                or str(item.get("country_code") or "").upper()
+                                == country_code
+                            ],
+                            timezone_name,
+                            bool(source.get("require_kickoff_time")),
+                            source.get("team_aliases") or {},
+                        ):
+                            add_evidence(
+                                broadcaster,
+                                {
+                                    "source_type": "guide",
+                                    "source_url": document_url,
+                                    "verified_at": checked_at,
+                                    "guide": str(source["broadcaster"]),
+                                },
+                            )
                 continue
 
             url = _fixture_source_url(source, target)
@@ -1403,9 +1748,22 @@ def apply_verified_broadcasts(
         (item for item in previous if _same_fixture(item, target, unordered=True)), None
     )
     candidates: list[dict[str, Any]] = []
-    for bucket in evidence_by_broadcaster.values():
+    for broadcaster_key, bucket in evidence_by_broadcaster.items():
         source = bucket["source"]
         evidence = bucket["evidence"]
+        availability_evidence = availability_by_broadcaster.get(
+            broadcaster_key, []
+        )
+
+        def resolved_availability(field: str, default: Any) -> Any:
+            values: list[Any] = []
+            for item in availability_evidence:
+                value = item.get(field)
+                if value in (None, "unknown") or value in values:
+                    continue
+                values.append(value)
+            return values[0] if len(values) == 1 else default
+
         _, rights_temporally_valid = _source_temporal_scope(source, target)
         rights_confirmed = bool(
             source.get("rights_confirmed") and rights_temporally_valid
@@ -1446,6 +1804,15 @@ def apply_verified_broadcasts(
         rights_cache_key, fixture_cache_key = _broadcast_cache_keys(
             target, str(source["country_code"])
         )
+        broadcast_free = resolved_availability(
+            "broadcast_free", bool(source.get("broadcast_free", access == "free"))
+        )
+        web_stream_free = resolved_availability(
+            "web_stream_free", source.get("web_stream_free", "unknown")
+        )
+        registration_required = resolved_availability(
+            "subscription_required", bool(source.get("registration_required"))
+        )
         candidate = {
             "match": str(
                 target.get("title")
@@ -1475,8 +1842,9 @@ def apply_verified_broadcasts(
             "status": status,
             "rights_confirmed": rights_confirmed,
             "match_confirmed": match_confirmed,
-            "broadcast_free": bool(source.get("broadcast_free", access == "free")),
-            "web_stream_free": source.get("web_stream_free", "unknown"),
+            "broadcast_free": broadcast_free,
+            "web_stream_free": web_stream_free,
+            "availability_evidence": availability_evidence,
             "reason": (
                 "exact fixture found in match-specific schedule"
                 if match_confirmed
@@ -1485,9 +1853,9 @@ def apply_verified_broadcasts(
             "free_or_pay": access,
             "language": str(source.get("language") or ""),
             "platforms": str(source.get("platforms") or "streaming"),
-            "requires_registration": bool(source.get("registration_required")),
+            "requires_registration": registration_required,
             "registration": (
-                "required" if source.get("registration_required") else "not_required"
+                "required" if registration_required else "not_required"
             ),
             "watch_url": watch_url,
             "watch_url_type": (
@@ -1506,6 +1874,7 @@ def apply_verified_broadcasts(
             "italian_primary": bool(source.get("italian_primary")),
             "discovered_dynamically": bool(source.get("discovered_dynamically")),
         }
+        candidate["availability_label"] = _broadcast_availability_text(candidate)
         if best.get("programme_start"):
             start = datetime.fromisoformat(str(best["programme_start"]))
             candidate["broadcast_start"] = start.astimezone(ROME).isoformat()
@@ -1621,6 +1990,8 @@ def apply_verified_broadcasts(
             "match_confirmed": candidate["match_confirmed"],
             "broadcast_free": candidate["broadcast_free"],
             "web_stream_free": candidate["web_stream_free"],
+            "availability_label": candidate["availability_label"],
+            "availability_evidence": candidate["availability_evidence"],
             "watch_url": candidate.get("watch_url"),
             "watch_url_type": candidate.get("watch_url_type"),
             "broadcaster_home_url": candidate.get("broadcaster_home_url"),
@@ -3099,6 +3470,55 @@ def _country_flag(country_code: str) -> str:
     return "".join(chr(127397 + ord(character)) for character in code)
 
 
+def _broadcast_availability_text(option: dict[str, Any]) -> str:
+    """Describe TV and web availability without inferring one from the other."""
+    has_structured_availability = (
+        "broadcast_free" in option or "web_stream_free" in option
+    )
+    if not has_structured_availability:
+        access = {
+            "free": "GRATIS",
+            "included": "Incluso nell'abbonamento",
+            "paid": "A pagamento",
+        }.get(
+            str(option.get("access") or option.get("free_or_pay") or ""),
+            "Da verificare",
+        )
+        return " · ".join(
+            item for item in (access, str(option.get("platforms") or "")) if item
+        )
+
+    broadcast_free = option.get("broadcast_free") is True
+    web_stream_free = option.get("web_stream_free")
+    labels: list[str] = []
+    if broadcast_free:
+        labels.append("TV in chiaro")
+    if web_stream_free is True:
+        labels.append("Streaming web gratuito")
+    elif web_stream_free is False:
+        labels.append("Streaming web a pagamento o non gratuito")
+    elif broadcast_free:
+        labels.append("Streaming web da verificare")
+
+    if labels:
+        return " · ".join(labels)
+    return {
+        "included": "Incluso nell'abbonamento",
+        "paid": "A pagamento",
+    }.get(
+        str(option.get("access") or option.get("free_or_pay") or ""),
+        "Gratuità da verificare",
+    )
+
+
+def _official_broadcast_link_label(option: dict[str, Any]) -> str:
+    return (
+        "Streaming ufficiale"
+        if option.get("web_stream_free") is True
+        else "Sito ufficiale"
+    )
+
+
 def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
     options = data.get("broadcast_options") or []
     italian = [option for option in options if option.get("country_code") == "IT"]
@@ -3112,12 +3532,10 @@ def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
         lines.append("🇮🇹 Italia — Da confermare")
     for option in italian:
         lines.append(f"🇮🇹 Italia — {option['broadcaster']}")
-        access = {
-            "free": "GRATIS",
-            "included": "Incluso nell'abbonamento",
-            "paid": "A pagamento",
-        }.get(str(option.get("access") or ""), "Da verificare")
-        attributes = [access, str(option.get("platforms") or "")]
+        attributes = [
+            str(option.get("availability_label") or "")
+            or _broadcast_availability_text(option)
+        ]
         if option.get("language"):
             attributes.append(str(option["language"]))
         if option.get("registration_required"):
@@ -3128,24 +3546,24 @@ def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
             )
         lines.append(" · ".join(item for item in attributes if item))
         if option.get("watch_url"):
-            lines.append(f"Guarda: {option['watch_url']}")
+            lines.append(
+                f"{_official_broadcast_link_label(option)}: {option['watch_url']}"
+            )
         elif option.get("broadcaster_home_url"):
             lines.append(f"Sito ufficiale: {option['broadcaster_home_url']}")
         elif option.get("url"):
             lines.append(str(option["url"]))
     if foreign:
-        lines.append("GRATIS / IN CHIARO ALL'ESTERO:")
+        lines.append("ALTERNATIVE GRATUITE ALL'ESTERO:")
         for option in foreign:
             lines.append(
                 f"{_country_flag(str(option.get('country_code') or ''))} "
                 f"{option['country']} — {option['broadcaster']}"
             )
-            access = {
-                "free": "GRATIS",
-                "included": "Incluso nell'abbonamento",
-                "paid": "A pagamento",
-            }.get(str(option.get("access") or ""), "Da verificare")
-            attributes = [access, str(option.get("platforms") or "")]
+            attributes = [
+                str(option.get("availability_label") or "")
+                or _broadcast_availability_text(option)
+            ]
             if option.get("language"):
                 attributes.append(str(option["language"]))
             if option.get("registration_required"):
@@ -3156,7 +3574,10 @@ def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
                 )
             lines.append(" · ".join(item for item in attributes if item))
             if option.get("watch_url"):
-                lines.append(f"Guarda sul sito ufficiale: {option['watch_url']}")
+                lines.append(
+                    f"{_official_broadcast_link_label(option)}: "
+                    f"{option['watch_url']}"
+                )
             elif option.get("broadcaster_home_url"):
                 lines.append(f"Sito ufficiale: {option['broadcaster_home_url']}")
             elif option.get("url"):

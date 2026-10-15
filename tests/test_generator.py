@@ -33,8 +33,10 @@ from milan_calendar.generator import (
     parse_lega_standings_json,
     parse_uefa_draw_html,
     parse_lega_calendar_article,
+    parse_macekran_access_guide,
     parse_schedule_html,
     parse_servus_epg,
+    parse_sport_tv_guide,
     parse_thesportsdb_json,
     parse_tv8_epg,
     parse_official_html,
@@ -1424,6 +1426,56 @@ def test_structured_broadcast_description_orders_italy_and_foreign_links() -> No
     assert "https://www.servustv.com/sport/" in text
 
 
+@pytest.mark.parametrize(
+    ("broadcast_free", "web_stream_free", "expected", "forbidden", "link_label"),
+    [
+        (
+            True, True,
+            "TV in chiaro · Streaming web gratuito", "Streaming web da verificare",
+            "Streaming ufficiale",
+        ),
+        (
+            True, "unknown",
+            "TV in chiaro · Streaming web da verificare", "Streaming web gratuito",
+            "Sito ufficiale",
+        ),
+        (
+            True, False,
+            "TV in chiaro · Streaming web a pagamento o non gratuito",
+            "Streaming web gratuito", "Sito ufficiale",
+        ),
+        (
+            False, True,
+            "Streaming web gratuito", "TV in chiaro", "Streaming ufficiale",
+        ),
+    ],
+)
+def test_broadcast_description_distinguishes_tv_and_web_gratuity(
+    broadcast_free: bool,
+    web_stream_free: bool | str,
+    expected: str,
+    forbidden: str,
+    link_label: str,
+) -> None:
+    data = {
+        "broadcast_options": [{
+            "country": "Azerbaijan", "country_code": "AZ",
+            "broadcaster": "CBC Sport", "access": "free",
+            "platforms": "TV in chiaro + streaming",
+            "broadcast_free": broadcast_free,
+            "web_stream_free": web_stream_free,
+            "watch_url": "https://cbcsport.az/live/",
+        }],
+        "broadcast_international_tbc": False,
+    }
+
+    text = "\n".join(_broadcast_description_lines(data))
+
+    assert expected in text
+    assert forbidden not in text
+    assert f"{link_label}: https://cbcsport.az/live/" in text
+
+
 def test_foreign_paid_alternative_is_never_published_as_free() -> None:
     data = {
         "broadcast_options": [{
@@ -1756,6 +1808,538 @@ def test_structured_guide_discovers_unregistered_broadcaster_without_confirming_
     assert candidate["free_or_pay"] == "unknown"
     assert candidate["status"] == "UNKNOWN"
     assert updated[0]["broadcast_options"] == []
+
+
+def test_sport_tv_guide_parses_match_broadcasters_without_inferring_access() -> None:
+    event = {
+        "event_kind": "match", "home_team": "Salzburg", "away_team": "AC Milan",
+        "competition": "UEFA Europa League", "status": "Fixture",
+        "start": "2026-10-15T18:45:00+02:00",
+    }
+    permalink = (
+        "https://sport-tv-guide.live/event/"
+        "diretta-calcio-europa-league-salzburg-ac-milan/1641854"
+    )
+    html = """
+      <title>Salzburg - AC Milan : Europa League</title>
+      <div id="channelInfo">
+        <div class="time full"><strong>18:45</strong></div>
+        <div class="date full">Giovedi, 10-15-2026</div>
+        <div class="station full">CBC Sport / Azerbaijan</div>
+      </div><h3>Dove vedere in tv o diretta streaming</h3>
+      <div class="liveOtherStations clearfix">
+        <div class="stationLive active col-wrap"
+             title="CBC Sport [AZ] - Live: Salzburg - Milan">CBC Sport [AZ]</div>
+        <div class="stationLive col-wrap"
+             title="RTL+ [DE] - Live: Salzburg - Milan">RTL+ [DE]</div>
+        <div class="stationLive col-wrap">Star+ [BR]</div>
+        <div class="stationLive col-wrap">CBC Sport [AZ]</div>
+      </div>
+    """
+
+    discovered = parse_sport_tv_guide(html, event, permalink)
+
+    assert [item["broadcaster"] for item in discovered] == [
+        "CBC Sport", "RTL+", "Star+"
+    ]
+    assert discovered[0] == {
+        "broadcaster": "CBC Sport",
+        "country": "",
+        "country_code": "AZ",
+        "source_schedule": permalink,
+        "programme_start": "2026-10-15T18:45:00+02:00",
+    }
+    assert all("access" not in item for item in discovered)
+    assert all(item["broadcaster"] != "CazéTV" for item in discovered)
+
+
+@pytest.mark.parametrize(
+    "date_text,time_text,source_schedule",
+    [
+        (
+            "10-14-2026", "18:45",
+            "https://sport-tv-guide.live/event/salzburg-ac-milan/1641854",
+        ),
+        (
+            "10-15-2026", "20:45",
+            "https://sport-tv-guide.live/event/salzburg-ac-milan/1641854",
+        ),
+        ("10-15-2026", "18:45", "https://sport-tv-guide.live/"),
+    ],
+)
+def test_sport_tv_guide_rejects_wrong_fixture_evidence_and_generic_urls(
+    date_text: str, time_text: str, source_schedule: str
+) -> None:
+    event = {
+        "home_team": "Salzburg", "away_team": "AC Milan",
+        "start": "2026-10-15T18:45:00+02:00",
+    }
+    html = f"""
+      Salzburg - AC Milan
+      <div id="channelInfo">
+        <div class="time full"><strong>{time_text}</strong></div>
+        <div class="date full">{date_text}</div>
+        <div class="station full">CBC Sport / Azerbaijan</div>
+      </div><h3>TV</h3>
+      <div class="stationLive active">CBC Sport [AZ]</div>
+    """
+
+    assert parse_sport_tv_guide(html, event, source_schedule) == []
+
+
+def test_sport_tv_guide_keeps_list_country_when_detail_country_disagrees() -> None:
+    event = {
+        "home_team": "Salzburg", "away_team": "AC Milan",
+        "start": "2026-10-15T18:45:00+02:00",
+    }
+    permalink = (
+        "https://sport-tv-guide.live/it/event/"
+        "diretta-calcio-europa-league-salzburg-ac-milan/1641854"
+    )
+    html = """
+      Salzburg - AC Milan
+      <div id="channelInfo">
+        <div class="time full"><strong>18:45</strong></div>
+        <div class="date full">Giovedi, 10-15-2026</div>
+        <div class="station full">Star+ / Messico</div>
+      </div><h3>TV</h3>
+      <div class="stationLive active">Star+ [BR]</div>
+    """
+
+    discovered = parse_sport_tv_guide(html, event, permalink)
+
+    assert discovered == [{
+        "broadcaster": "Star+",
+        "country": "",
+        "country_code": "BR",
+        "source_schedule": permalink,
+        "programme_start": "2026-10-15T18:45:00+02:00",
+    }]
+
+
+def _salzburg_milan_event() -> dict:
+    return {
+        "event_kind": "match",
+        "home_team": "Salzburg",
+        "away_team": "AC Milan",
+        "title": "Salzburg - AC Milan",
+        "competition": "UEFA Europa League",
+        "status": "Fixture",
+        "start": "2026-10-15T18:45:00+02:00",
+    }
+
+
+def _sport_tv_guide_match_html(
+    stations: list[tuple[str, str]], *, opponent: str = "AC Milan"
+) -> str:
+    rows = "".join(
+        f'<div class="stationLive">{name} [{country_code}]</div>'
+        for name, country_code in stations
+    )
+    return f"""
+      <title>Salzburg - {opponent} : Europa League</title>
+      <div id="channelInfo">
+        <div class="time full"><strong>18:45</strong></div>
+        <div class="date full">Giovedi, 10-15-2026</div>
+        <div class="station full">{stations[0][0]} / TV</div>
+      </div><h3>Dove vedere in tv o diretta streaming</h3>
+      <div class="liveOtherStations clearfix">{rows}</div>
+    """
+
+
+def _macekran_match_html(
+    rows: list[tuple[str, str, str, str]],
+    *,
+    home: str = "Salzburg",
+    away: str = "AC Milan",
+    start: str = "2026-10-15T16:45:00Z",
+) -> str:
+    event_id = "https://macekran.com/mac/test#event"
+    broadcasts = "".join(
+        f"""
+        <script type="application/ld+json">{{
+          "@context": "https://schema.org", "@type": "BroadcastEvent",
+          "broadcastOfEvent": {{"@id": "{event_id}"}},
+          "publishedOn": {{"@type": "BroadcastService", "name": "{name}"}}
+        }}</script>
+        """
+        for name, _, _, _ in rows
+    )
+    table_rows = "".join(
+        f"""
+        <tr>
+          <td><span title="{name}">{name}</span></td>
+          <td>{access_type}</td><td>{platforms}</td><td>{price}</td>
+        </tr>
+        """
+        for name, access_type, platforms, price in rows
+    )
+    return f"""
+      <script type="application/ld+json">{{
+        "@context": "https://schema.org", "@type": "SportsEvent",
+        "@id": "{event_id}", "name": "{home} - {away}",
+        "startDate": "{start}",
+        "homeTeam": {{"@type": "SportsTeam", "name": "{home}"}},
+        "awayTeam": {{"@type": "SportsTeam", "name": "{away}"}}
+      }}</script>
+      {broadcasts}
+      <table><thead><tr><th>Kanal</th><th>Tip</th><th>Platform</th><th>Fiyat</th></tr></thead>
+      <tbody>{table_rows}</tbody></table>
+    """
+
+
+def _macekran_source() -> dict:
+    return {
+        "country": "Internazionale", "country_code": "ZZ",
+        "broadcaster": "MacEkran", "access": "unknown",
+        "url": "https://macekran.com/",
+        "url_template": "https://macekran.com/mac/{home}-vs-{away}-{date}",
+        "source_type": "access_guide", "market_tier": 1,
+        "team_aliases": {"milan": ["AC Milan"]},
+        "lookahead_days": 21, "priority": 73,
+    }
+
+
+def _sport_tv_runtime_sources(
+    *, include_spor: bool = True, duplicate_sport_tv: bool = False
+) -> list[dict]:
+    sources = [
+        {
+            "country": "Azerbaijan", "country_code": "AZ",
+            "broadcaster": "CBC Sport", "access": "free",
+            "url": "https://cbcsport.az/tv_program_schedule",
+            "rights_confirmed": True,
+            "rights_source_url": "https://uefa.test/rights",
+            "rights_from_season": 2026, "rights_through_season": 2026,
+            "broadcast_free": True, "web_stream_free": "unknown",
+            "watch_url": "https://cbcsport.az/live/",
+            "official_domains": ["cbcsport.az"],
+            "match_terms": ["CBC Sport", "CBC Sport TV"],
+            "lookahead_days": 21, "priority": 110,
+        },
+    ]
+    if include_spor:
+        sources.append({
+            "country": "Azerbaijan", "country_code": "AZ",
+            "broadcaster": "Spor Ekranı", "access": "free",
+            "url": "https://sporekrani.test/match/salzburg-milan",
+            "source_type": "guide", "timezone": "Europe/Rome",
+            "require_kickoff_time": True, "country_scope": "*",
+            "lookahead_days": 21, "priority": 75,
+        })
+    sport_tv = {
+        "country": "Internazionale", "country_code": "ZZ",
+        "broadcaster": "Sport TV Guide", "access": "unknown",
+        "url": "https://sport-tv-guide.live/", "source_type": "guide",
+        "guide_parser": "sport_tv_guide", "timezone": "Europe/Rome",
+        "query_url_template": (
+            "https://sport-tv-guide.live/squadra/calcio/{home_slug}"
+        ),
+        "query_limit": 4,
+        "team_slugs": {"milan": "ac-milan", "salzburg": "salzburg"},
+        "team_aliases": {
+            "milan": ["AC Milan"], "salzburg": ["RB Salzburg"]
+        },
+        "match_url_pattern": r"/(?:[a-z]{2}/)?event/.+/[0-9]+/?$",
+        "permalink_domains": ["sport-tv-guide.live"],
+        "discover_match_permalinks": True, "permalink_limit": 4,
+        "require_kickoff_time": True, "country_scope": "*",
+        "discover_broadcasters": True, "lookahead_days": 21,
+        "priority": 74,
+    }
+    sources.append(sport_tv)
+    if duplicate_sport_tv:
+        sources.append(dict(sport_tv))
+    return sources
+
+
+def _run_sport_tv_runtime(
+    sources: list[dict],
+    *, stations: list[tuple[str, str]] | None = None,
+    match_opponent: str = "AC Milan",
+    return_search_result: bool = True,
+    macekran_html: str | None = None,
+    macekran_unreachable: bool = False,
+    errors_sink: list[str] | None = None,
+) -> dict:
+    permalink = (
+        "https://sport-tv-guide.live/event/"
+        "diretta-calcio-europa-league-salzburg-ac-milan/1641854"
+    )
+    listing = f'<a href="{permalink}">Salzburg - AC Milan</a>'
+    match_html = _sport_tv_guide_match_html(
+        stations or [("CBC Sport", "AZ")], opponent=match_opponent
+    )
+
+    class Response:
+        def __init__(self, text: str = "", payload: object = None) -> None:
+            self.text = text
+            self.payload = payload
+
+        def raise_for_status(self) -> None:
+            return None
+
+        def json(self) -> object:
+            return self.payload
+
+    class Session:
+        def get(self, url: str, timeout: int) -> Response:
+            if "searchteams.php" in url:
+                return Response(payload={
+                    "teams": [{"strTeam": "Salzburg", "strCountry": "Austria"}]
+                })
+            if url == permalink:
+                return Response(match_html)
+            if "sport-tv-guide.live/squadra/" in url:
+                return Response(listing if return_search_result else "Nessun evento")
+            if "macekran.com/mac/" in url:
+                if macekran_unreachable:
+                    raise requests.Timeout("MacEkran offline")
+                return Response(macekran_html or "Nessun dato")
+            if "sporekrani.test" in url:
+                return Response(
+                    "Salzburg - AC Milan, 15 ottobre 2026 ore 18:45: CBC Sport"
+                )
+            return Response("Diritti UEFA Europa League")
+
+    updated, errors = apply_verified_broadcasts(
+        Session(), [_salzburg_milan_event()], [], sources,
+        "2026-10-15T08:00:00Z",
+        datetime(2026, 10, 15, 8, tzinfo=timezone.utc),
+    )
+    if errors_sink is not None:
+        errors_sink.extend(errors)
+    return updated[0]
+
+
+def test_sport_tv_runtime_combines_two_independent_guides_for_cbc() -> None:
+    one_guide = _run_sport_tv_runtime(
+        _sport_tv_runtime_sources()[:-1], return_search_result=False
+    )
+    two_guides = _run_sport_tv_runtime(_sport_tv_runtime_sources())
+
+    one_cbc = next(
+        item for item in one_guide["broadcast_candidates"]
+        if item["broadcaster"] == "CBC Sport"
+    )
+    two_cbc = next(
+        item for item in two_guides["broadcast_candidates"]
+        if item["broadcaster"] == "CBC Sport"
+    )
+    assert one_cbc["confidence"] == 75
+    assert one_cbc["status"] == "POSSIBLE_FREE"
+    assert two_cbc["confidence"] == 90
+    assert two_cbc["status"] == "CONFIRMED_FREE"
+    assert two_cbc["free_or_pay"] == "free"
+    assert two_cbc["broadcast_free"] is True
+    assert two_cbc["web_stream_free"] == "unknown"
+    assert two_cbc["availability_label"] == (
+        "TV in chiaro · Streaming web da verificare"
+    )
+    assert any(
+        item["source_url"].endswith("/1641854")
+        for item in two_cbc["evidence"]
+    )
+
+
+def test_sport_tv_runtime_rejects_wrong_match_and_duplicate_guide_evidence() -> None:
+    wrong_match = _run_sport_tv_runtime(
+        _sport_tv_runtime_sources(), match_opponent="AS Roma"
+    )
+    duplicated = _run_sport_tv_runtime(
+        _sport_tv_runtime_sources(include_spor=False, duplicate_sport_tv=True)
+    )
+
+    wrong_cbc = next(
+        item for item in wrong_match["broadcast_candidates"]
+        if item["broadcaster"] == "CBC Sport"
+    )
+    duplicate_cbc = next(
+        item for item in duplicated["broadcast_candidates"]
+        if item["broadcaster"] == "CBC Sport"
+    )
+    assert wrong_cbc["confidence"] == 75
+    assert duplicate_cbc["confidence"] == 75
+    assert len(duplicate_cbc["evidence"]) == 1
+    assert duplicate_cbc["source_schedule"].endswith("/1641854")
+
+
+def test_sport_tv_runtime_keeps_new_broadcaster_unknown_without_watch_url() -> None:
+    event = _run_sport_tv_runtime(
+        _sport_tv_runtime_sources(), stations=[("New Channel", "FR")]
+    )
+
+    candidate = next(
+        item for item in event["broadcast_candidates"]
+        if item["broadcaster"] == "New Channel"
+    )
+    assert candidate["country_code"] == "FR"
+    assert candidate["status"] == "UNKNOWN"
+    assert candidate["free_or_pay"] == "unknown"
+    assert candidate["watch_url"] is None
+    assert candidate["source_schedule"].endswith("/1641854")
+
+
+def test_sport_tv_runtime_does_not_merge_same_name_across_countries() -> None:
+    sources = _sport_tv_runtime_sources(include_spor=False) + [
+        {
+            "country": "Bulgaria", "country_code": "BG",
+            "broadcaster": "Nova Sport", "access": "free",
+            "url": "https://nova-bg.test/", "lookahead_days": 21,
+        },
+        {
+            "country": "Grecia", "country_code": "GR",
+            "broadcaster": "Nova Sport", "access": "free",
+            "url": "https://nova-gr.test/", "lookahead_days": 21,
+        },
+    ]
+    event = _run_sport_tv_runtime(
+        sources, stations=[("Nova Sport", "BG"), ("Nova Sport", "GR")]
+    )
+
+    nova = [
+        item for item in event["broadcast_candidates"]
+        if item["broadcaster"] == "Nova Sport"
+    ]
+    assert {item["country_code"] for item in nova} == {"BG", "GR"}
+    assert all(len(item["evidence"]) == 1 for item in nova)
+
+
+def test_sport_tv_runtime_no_search_result_preserves_previous_confidence() -> None:
+    event = _run_sport_tv_runtime(
+        _sport_tv_runtime_sources(), return_search_result=False
+    )
+    cbc = next(
+        item for item in event["broadcast_candidates"]
+        if item["broadcaster"] == "CBC Sport"
+    )
+
+    assert cbc["confidence"] == 75
+    assert cbc["source_schedule"] == (
+        "https://sporekrani.test/match/salzburg-milan"
+    )
+
+
+def test_macekran_parses_explicit_web_free_and_subscription_per_broadcaster() -> None:
+    html = _macekran_match_html([
+        ("Tabii", "OTT", "Web · Mobil · Smart TV", "₺44/ay"),
+        ("CBC Sport", "Ücretsiz", "Uydu · Web", "Ücretsiz"),
+    ])
+    url = "https://macekran.com/mac/salzburg-vs-ac-milan-2026-10-15"
+
+    parsed = parse_macekran_access_guide(html, _salzburg_milan_event(), url)
+
+    assert parsed == [
+        {
+            "broadcaster": "Tabii", "source_url": url,
+            "subscription_required": True,
+            "broadcast_free": False, "web_stream_free": False,
+        },
+        {
+            "broadcaster": "CBC Sport", "source_url": url,
+            "subscription_required": False,
+            "broadcast_free": True, "web_stream_free": True,
+        },
+    ]
+
+
+def test_macekran_keeps_tv_only_free_separate_from_web() -> None:
+    html = _macekran_match_html([
+        ("Free TV", "Ücretsiz", "Uydu", "Ücretsiz"),
+    ])
+    url = "https://macekran.com/mac/salzburg-vs-ac-milan-2026-10-15"
+
+    parsed = parse_macekran_access_guide(html, _salzburg_milan_event(), url)
+
+    assert parsed[0]["broadcast_free"] is True
+    assert parsed[0]["web_stream_free"] == "unknown"
+    assert parsed[0]["subscription_required"] is False
+
+
+@pytest.mark.parametrize(
+    ("html", "url"),
+    [
+        (
+            _macekran_match_html(
+                [("CBC Sport", "Ücretsiz", "Uydu · Web", "Ücretsiz")],
+                away="AS Roma",
+            ),
+            "https://macekran.com/mac/salzburg-vs-roma-2026-10-15",
+        ),
+        (
+            _macekran_match_html([
+                ("Other Channel", "Ücretsiz", "Uydu · Web", "Ücretsiz"),
+            ]).replace(
+                '"name": "Other Channel"', '"name": "CBC Sport"', 1
+            ),
+            "https://macekran.com/mac/salzburg-vs-ac-milan-2026-10-15",
+        ),
+        (
+            _macekran_match_html([
+                ("CBC Sport", "Ücretsiz", "Uydu · Web", "₺44/ay"),
+            ]),
+            "https://macekran.com/mac/salzburg-vs-ac-milan-2026-10-15",
+        ),
+    ],
+)
+def test_macekran_rejects_wrong_fixture_broadcaster_or_conflicting_access(
+    html: str, url: str
+) -> None:
+    assert parse_macekran_access_guide(
+        html, _salzburg_milan_event(), url
+    ) == []
+
+
+def test_macekran_runtime_updates_only_availability_not_transmission_confidence() -> None:
+    html = _macekran_match_html([
+        ("CBC Sport", "Ücretsiz", "Uydu · Web", "Ücretsiz"),
+    ])
+    event = _run_sport_tv_runtime(
+        _sport_tv_runtime_sources() + [_macekran_source()],
+        macekran_html=html,
+    )
+    cbc = next(
+        item for item in event["broadcast_candidates"]
+        if item["broadcaster"] == "CBC Sport"
+    )
+
+    assert cbc["confidence"] == 90
+    assert cbc["status"] == "CONFIRMED_FREE"
+    assert cbc["broadcast_free"] is True
+    assert cbc["web_stream_free"] is True
+    assert cbc["requires_registration"] is False
+    assert cbc["availability_label"] == (
+        "TV in chiaro · Streaming web gratuito"
+    )
+    assert cbc["availability_evidence"][0]["source_url"].startswith(
+        "https://macekran.com/mac/"
+    )
+    assert len(cbc["evidence"]) == 2
+
+
+def test_macekran_different_broadcaster_or_unreachable_page_changes_nothing() -> None:
+    different = _run_sport_tv_runtime(
+        _sport_tv_runtime_sources() + [_macekran_source()],
+        macekran_html=_macekran_match_html([
+            ("Other Channel", "Ücretsiz", "Uydu · Web", "Ücretsiz"),
+        ]),
+    )
+    errors: list[str] = []
+    unreachable = _run_sport_tv_runtime(
+        _sport_tv_runtime_sources() + [_macekran_source()],
+        macekran_unreachable=True,
+        errors_sink=errors,
+    )
+
+    for event in (different, unreachable):
+        cbc = next(
+            item for item in event["broadcast_candidates"]
+            if item["broadcaster"] == "CBC Sport"
+        )
+        assert cbc["confidence"] == 90
+        assert cbc["web_stream_free"] == "unknown"
+        assert cbc["availability_evidence"] == []
+    assert any("MacEkran offline" in error for error in errors)
 
 
 def test_unbounded_generic_rights_are_not_reused_as_confirmation() -> None:
@@ -2160,6 +2744,9 @@ def test_subscription_page_has_iphone_fallback() -> None:
     assert "Classifica Serie A" in html
     assert 'timeZone: "Europe/Rome"' in html
     assert "response.ok" in html
+    assert "broadcastAvailabilityText" in html
+    assert "Streaming web da verificare" in html
+    assert 'row.option.web_stream_free === true ? "Streaming ufficiale" : "Sito ufficiale"' in html
 
 
 def test_pages_deployment_includes_live_event_data() -> None:

@@ -288,6 +288,22 @@
         return event.broadcast_it && event.broadcast_it !== "Da definire" ? event.broadcast_it : "TV da confermare";
       }
 
+      function broadcastAvailabilityText(option) {
+        if (option.availability_label) return option.availability_label;
+        const hasStructuredAvailability = Object.prototype.hasOwnProperty.call(option, "broadcast_free") || Object.prototype.hasOwnProperty.call(option, "web_stream_free");
+        if (!hasStructuredAvailability) {
+          const access = { free: "GRATIS", included: "Incluso nell'abbonamento", paid: "A pagamento" }[option.access] || "Da verificare";
+          return [access, option.platforms].filter(Boolean).join(" · ");
+        }
+        const labels = [];
+        if (option.broadcast_free === true) labels.push("TV in chiaro");
+        if (option.web_stream_free === true) labels.push("Streaming web gratuito");
+        else if (option.web_stream_free === false) labels.push("Streaming web a pagamento o non gratuito");
+        else if (option.broadcast_free === true) labels.push("Streaming web da verificare");
+        if (labels.length) return labels.join(" · ");
+        return { included: "Incluso nell'abbonamento", paid: "A pagamento" }[option.access] || "Gratuità da verificare";
+      }
+
       function broadcastElement(event) {
         const element = make("p", "watch-info");
         const confirmed = event.broadcast_options || [];
@@ -305,6 +321,9 @@
         rows.forEach((row, index) => {
           if (index) element.append(document.createElement("br"));
           element.append(document.createTextNode(row.label));
+          if (row.option) {
+            element.append(document.createTextNode(` · ${broadcastAvailabilityText(row.option)}`));
+          }
           const url = row.option && (row.option.watch_url || row.option.broadcaster_home_url);
           if (url) {
             element.append(document.createTextNode(" · "));
@@ -312,7 +331,7 @@
             link.href = url;
             link.target = "_blank";
             link.rel = "noopener noreferrer";
-            link.textContent = row.option.watch_url ? "Guarda" : "Sito ufficiale";
+            link.textContent = row.option.watch_url && row.option.web_stream_free === true ? "Streaming ufficiale" : "Sito ufficiale";
             element.append(link);
           }
         });
