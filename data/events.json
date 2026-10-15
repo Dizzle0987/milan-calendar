@@ -1143,20 +1143,20 @@
       "competition": "UEFA Europa League",
       "home_away": "Trasferta",
       "home_team": "Salzburg",
-      "last_modified": "2026-10-15T17:08:44Z",
-      "location": "Salzburg, Austria",
+      "last_modified": "2026-10-15T19:05:03Z",
+      "location": "Salzburg",
       "neutral": false,
       "opponent_country": "Austria",
       "opponent_country_code": "AT",
       "opponent_country_source": "TheSportsDB team lookup",
       "opponent_country_source_url": "https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t=Salzburg",
       "round": "2",
-      "sequence": 11,
+      "sequence": 12,
       "source": "AC Milan",
       "source_id": "dshef8yysdujmj6koja7wuluc",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-10-15T18:45:00+02:00",
-      "status": "Playing",
+      "status": "Played",
       "time_source": "AC Milan",
       "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "title": "Salzburg - AC Milan",
@@ -2620,7 +2620,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-15T17:08:44Z",
+  "last_changed": "2026-10-15T19:05:03Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
