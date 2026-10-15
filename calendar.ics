@@ -320,9 +320,9 @@ BEGIN:VEVENT
 SUMMARY:⚽ Salzburg - AC Milan
 DTSTART;TZID=Europe/Rome:20261015T184500
 DTEND;TZID=Europe/Rome:20261015T204500
-DTSTAMP:20261014T214716Z
+DTSTAMP:20261015T170844Z
 UID:3dada53d30468e73c19eae6d@milan-calendar
-SEQUENCE:10
+SEQUENCE:11
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 15/10/2026 18:45\nTurno: 2\nStadio: Red Bull Arena\nLocalità: Salzbu
@@ -331,7 +331,7 @@ DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  t/coppe-europee/uefa-europa-league/dove-vedere-salzburg-milan\n🌍 In chi
  aro all'estero — Nessuna emittente gratuita confermata al momento\nFonte
   orario: AC Milan
-LAST-MODIFIED:20261014T214716Z
+LAST-MODIFIED:20261015T170844Z
 LOCATION:Red Bull Arena\, Salzburg\, Austria
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -370,15 +370,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ AFC Bournemouth - AC Milan
 DTSTART;TZID=Europe/Rome:20261022T210000
 DTEND;TZID=Europe/Rome:20261022T230000
-DTSTAMP:20260917T045927Z
+DTSTAMP:20261015T170844Z
 UID:dc46921426bc343efc88581d@milan-calendar
-SEQUENCE:3
+SEQUENCE:4
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 22/10/2026 21:00\nTurno: 3\nStadio: Vitality Stadium\nDove vederla:\n
- 🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Nessuna e
- mittente gratuita confermata al momento\nFonte orario: NOW
-LAST-MODIFIED:20260917T045927Z
+ 🇮🇹 Italia — Sky Go\nA pagamento · TV + streaming · italiano\nhtt
+ ps://programmi.sky.it/sport/coppe-europee/uefa-europa-league/dove-vedere-b
+ ournemouth-milan\n🌍 In chiaro all'estero — Nessuna emittente gratuita
+  confermata al momento\nFonte orario: NOW
+LAST-MODIFIED:20261015T170844Z
 LOCATION:Vitality Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
