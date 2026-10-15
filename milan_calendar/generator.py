@@ -123,6 +123,7 @@ TEAM_COUNTRY_LOOKUP_URL = (
 )
 BROADCAST_CONFIDENCE_THRESHOLD = 80
 BROADCAST_GUIDE_SOURCE_TYPES = {"guide", "wordpress_search"}
+BROADCAST_QUERY_LIMIT = 6
 MONTH_NAMES = {
     1: ("gennaio", "january", "januar", "janvier", "enero", "janeiro"),
     2: ("febbraio", "february", "februar", "fevrier", "febrero", "fevereiro"),
@@ -490,6 +491,83 @@ def _fixture_source_url(source: dict[str, Any], event: dict[str, Any]) -> str:
     return template.format(**values)
 
 
+def _configured_team_search_names(
+    team: str, aliases: dict[str, Any] | None = None
+) -> list[str]:
+    """Return stable, de-duplicated source-specific names for one club."""
+    team_key = _team_match_key(team)
+    names = [team]
+    for canonical, configured in (aliases or {}).items():
+        group = [str(canonical), *(str(value) for value in configured or [])]
+        keys = {_team_match_key(value) for value in group}
+        if team_key in keys:
+            names.extend(group)
+    result: list[str] = []
+    seen: set[str] = set()
+    for name in names:
+        marker = _normalize(name)
+        if marker and marker not in seen:
+            seen.add(marker)
+            result.append(name)
+    return result
+
+
+def _configured_team_search_key(
+    team: str, aliases: dict[str, Any] | None = None
+) -> str:
+    """Map a localised alias back to its configured canonical search key."""
+    team_key = _team_match_key(team)
+    for canonical, configured in (aliases or {}).items():
+        values = [str(canonical), *(str(value) for value in configured or [])]
+        if team_key in {_team_match_key(value) for value in values}:
+            return _team_match_key(str(canonical))
+    return team_key
+
+
+def _fixture_query_urls(
+    source: dict[str, Any], event: dict[str, Any]
+) -> list[str]:
+    """Build bounded fixture queries in both team orders and localised aliases."""
+    template = str(source.get("query_url_template") or "")
+    if not template:
+        return [_fixture_source_url(source, event)]
+
+    aliases = source.get("team_aliases") or {}
+    home_names = _configured_team_search_names(
+        str(event.get("home_team") or ""), aliases
+    )
+    away_names = _configured_team_search_names(
+        str(event.get("away_team") or ""), aliases
+    )
+    pairs: list[tuple[str, str]] = []
+    for home in home_names:
+        for away in away_names:
+            pairs.extend(((home, away), (away, home)))
+
+    slugs = source.get("team_slugs") or {}
+    limit = max(1, min(int(source.get("query_limit") or BROADCAST_QUERY_LIMIT), 12))
+    event_date = _event_datetime(event).date().isoformat()
+    urls: list[str] = []
+    for home, away in pairs:
+        home_key = _configured_team_search_key(home, aliases)
+        away_key = _configured_team_search_key(away, aliases)
+        values = {
+            "home": str(slugs.get(home_key) or home_key),
+            "away": str(slugs.get(away_key) or away_key),
+            "home_slug": str(slugs.get(home_key) or home_key),
+            "away_slug": str(slugs.get(away_key) or away_key),
+            "home_query": quote(home.strip(), safe=""),
+            "away_query": quote(away.strip(), safe=""),
+            "date": event_date,
+        }
+        url = template.format(**values)
+        if url not in urls:
+            urls.append(url)
+        if len(urls) >= limit:
+            break
+    return urls
+
+
 def _verified_official_url(source: dict[str, Any], field: str) -> str | None:
     """Accept configured user links only when they use an allow-listed official host."""
     value = str(source.get(field) or "").strip()
@@ -721,33 +799,144 @@ def _guide_broadcasters(
     return found
 
 
+def _guide_document_confirms_fixture(
+    html: str,
+    event: dict[str, Any],
+    source: dict[str, Any],
+) -> bool:
+    """Verify that a guide document contains the exact dated fixture."""
+    timezone_name = str(source.get("timezone") or "Europe/Rome")
+    windows = _fixture_windows(
+        html, event, timezone_name, source.get("team_aliases") or {}
+    )
+    if not source.get("require_kickoff_time"):
+        return bool(windows)
+    time_markers = _fixture_time_markers(_event_datetime(event), timezone_name)
+    return any(
+        any(marker in window for marker in time_markers) for window in windows
+    )
+
+
+def _match_permalink_candidates(
+    html: str,
+    document_url: str,
+    source: dict[str, Any],
+) -> list[str]:
+    """Extract same-provider match permalinks without trusting them as evidence yet."""
+    pattern = str(source.get("match_url_pattern") or "")
+    if not pattern:
+        return []
+    configured_domains = {
+        str(domain).lower().lstrip(".")
+        for domain in source.get("permalink_domains") or []
+    }
+    document_host = (urlparse(document_url).hostname or "").lower()
+    if not configured_domains and document_host:
+        configured_domains.add(document_host)
+
+    raw_values = re.findall(r'(?:href|content)=["\']([^"\']+)["\']', html, re.I)
+    raw_values.extend(re.findall(r'https?://[^"\'<>\\\s]+', html))
+    result: list[str] = []
+    for raw in raw_values:
+        absolute = urljoin(document_url, html_module.unescape(raw))
+        parsed = urlparse(absolute)
+        host = (parsed.hostname or "").lower()
+        if parsed.scheme != "https" or not host:
+            continue
+        if configured_domains and not any(
+            host == domain or host.endswith(f".{domain}")
+            for domain in configured_domains
+        ):
+            continue
+        permalink = parsed._replace(fragment="", query="").geturl()
+        if not re.search(pattern, permalink) or permalink in result:
+            continue
+        result.append(permalink)
+    return result
+
+
 def _fetch_guide_documents(
     requester: Any,
     source: dict[str, Any],
     event: dict[str, Any],
 ) -> list[tuple[str, str]]:
-    """Fetch one guide page or the first useful pages from a WordPress search."""
-    url = _fixture_source_url(source, event)
-    response = requester.get(url, timeout=10)
-    response.raise_for_status()
-    if str(source.get("source_type")) != "wordpress_search":
-        return [(response.text, url)]
+    """Fetch a bounded set of variants, stopping this source on an exact match."""
+    source_type = str(source.get("source_type"))
+    query_urls = _fixture_query_urls(source, event)
+    uses_variants = bool(source.get("query_url_template"))
 
-    results = response.json()
-    if not isinstance(results, list):
-        raise ValueError("risposta ricerca WordPress non valida")
-    documents: list[tuple[str, str]] = []
-    for item in results[:5]:
-        article_url = str(item.get("url") or "") if isinstance(item, dict) else ""
-        if not article_url:
-            continue
+    # Preserve the established behaviour for all sources outside this first rollout.
+    if not uses_variants:
+        url = query_urls[0]
+        response = requester.get(url, timeout=10)
+        response.raise_for_status()
+        if source_type != "wordpress_search":
+            return [(response.text, url)]
+        results = response.json()
+        if not isinstance(results, list):
+            raise ValueError("risposta ricerca WordPress non valida")
+        documents: list[tuple[str, str]] = []
+        for item in results[:5]:
+            article_url = str(item.get("url") or "") if isinstance(item, dict) else ""
+            if not article_url:
+                continue
+            try:
+                article = requester.get(article_url, timeout=10)
+                article.raise_for_status()
+            except requests.RequestException:
+                continue
+            documents.append((article.text, article_url))
+        return documents
+
+    last_query_error: requests.RequestException | None = None
+    successful_query = False
+    for query_url in query_urls:
         try:
-            article = requester.get(article_url, timeout=10)
-            article.raise_for_status()
-        except requests.RequestException:
+            response = requester.get(query_url, timeout=10)
+            response.raise_for_status()
+        except requests.RequestException as exc:
+            last_query_error = exc
             continue
-        documents.append((article.text, article_url))
-    return documents
+        successful_query = True
+        if source_type == "wordpress_search":
+            results = response.json()
+            if not isinstance(results, list):
+                raise ValueError("risposta ricerca WordPress non valida")
+            for item in results[:5]:
+                article_url = (
+                    str(item.get("url") or "") if isinstance(item, dict) else ""
+                )
+                if not article_url:
+                    continue
+                try:
+                    article = requester.get(article_url, timeout=10)
+                    article.raise_for_status()
+                except requests.RequestException:
+                    continue
+                if _guide_document_confirms_fixture(article.text, event, source):
+                    return [(article.text, article_url)]
+            continue
+
+        if not _guide_document_confirms_fixture(response.text, event, source):
+            continue
+        permalink_limit = max(1, min(int(source.get("permalink_limit") or 3), 6))
+        for permalink in _match_permalink_candidates(
+            response.text, query_url, source
+        )[:permalink_limit]:
+            if permalink == query_url:
+                return [(response.text, query_url)]
+            try:
+                match_page = requester.get(permalink, timeout=10)
+                match_page.raise_for_status()
+            except requests.RequestException:
+                continue
+            if _guide_document_confirms_fixture(match_page.text, event, source):
+                return [(match_page.text, permalink)]
+        # The listing itself is still exact evidence, but an unverified link is not.
+        return [(response.text, query_url)]
+    if not successful_query and last_query_error is not None:
+        raise last_query_error
+    return []
 
 
 def _walk_json_objects(value: Any) -> Iterable[dict[str, Any]]:

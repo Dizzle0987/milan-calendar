@@ -129,6 +129,13 @@
       "access": "free", "platforms": "guida TV", "language": "turco",
       "timezone": "Europe/Istanbul", "market_tier": 1,
       "url": "https://www.sporekrani.com/", "source_type": "guide",
+      "query_url_template": "https://www.sporekrani.com/home/team/{home_slug}",
+      "query_limit": 6,
+      "team_aliases": {
+        "milan": ["AC Milan", "A.C. Milan", "AC Mailand"]
+      },
+      "match_url_pattern": "/home/match/",
+      "permalink_domains": ["sporekrani.com"],
       "require_kickoff_time": true, "country_scope": "*",
       "discover_broadcasters": true,
       "competition_families": ["champions-league", "europa-league", "conference-league"],
@@ -139,7 +146,8 @@
       "access": "free", "platforms": "guida TV", "language": "azero",
       "timezone": "Asia/Baku", "market_tier": 1,
       "url": "https://sportkritik.az/wp-json/wp/v2/search",
-      "url_template": "https://sportkritik.az/wp-json/wp/v2/search?search={home}%20{away}",
+      "query_url_template": "https://sportkritik.az/wp-json/wp/v2/search?search={home_query}%20{away_query}",
+      "query_limit": 6,
       "team_slugs": {"milan": "Milan", "benfica": "Benfika"},
       "team_aliases": {
         "milan": ["AC Milan", "A.C. Milan", "ACM"],

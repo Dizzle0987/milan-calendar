@@ -14,6 +14,8 @@ from milan_calendar.generator import (
     _add_italian_broadcaster,
     _broadcast_description_lines,
     _canonical_event,
+    _fetch_guide_documents,
+    _fixture_query_urls,
     _is_official_international_match,
     _guide_broadcasters,
     _programme_confirms_fixture,
@@ -1805,6 +1807,195 @@ def test_unconfirmed_guide_window_does_not_name_a_broadcaster() -> None:
     html = "Milan - Benfica 16 settembre 2026, canal a confirmar, Sport TV"
     broadcasters = [{"broadcaster": "Sport TV", "country_code": "PT"}]
     assert _guide_broadcasters(html, event, broadcasters, "Europe/Lisbon") == []
+
+
+def test_fixture_query_urls_are_bounded_localised_and_bidirectional() -> None:
+    event = {
+        "home_team": "AC Milan",
+        "away_team": "SL Benfica",
+        "start": "2026-09-16T21:00:00+02:00",
+    }
+    source = {
+        "url": "https://guide.test/",
+        "query_url_template": (
+            "https://guide.test/search?teams={home_query}%20{away_query}"
+        ),
+        "query_limit": 5,
+        "team_aliases": {
+            "milan": ["AC Milan", "AC Mailand"],
+            "benfica": ["SL Benfica", "Benfika"],
+        },
+    }
+
+    urls = _fixture_query_urls(source, event)
+
+    assert urls[:2] == [
+        "https://guide.test/search?teams=AC%20Milan%20SL%20Benfica",
+        "https://guide.test/search?teams=SL%20Benfica%20AC%20Milan",
+    ]
+    assert len(urls) == 5
+    assert len(set(urls)) == len(urls)
+    assert any("Benfika" in url for url in urls)
+
+
+def test_sporekrani_variants_keep_only_a_verified_match_permalink() -> None:
+    event = {
+        "home_team": "AC Milan",
+        "away_team": "SL Benfica",
+        "start": "2026-09-16T21:00:00+02:00",
+    }
+    source = {
+        "url": "https://guide.test/",
+        "source_type": "guide",
+        "timezone": "Europe/Istanbul",
+        "require_kickoff_time": True,
+        "query_url_template": "https://guide.test/team/{home_slug}",
+        "query_limit": 6,
+        "team_aliases": {
+            "milan": ["AC Milan", "AC Mailand"],
+            "benfica": ["SL Benfica", "Benfika"],
+        },
+        "match_url_pattern": "/match/",
+        "permalink_domains": ["guide.test"],
+    }
+    calls: list[str] = []
+
+    class Response:
+        def __init__(self, text: str) -> None:
+            self.text = text
+
+        def raise_for_status(self) -> None:
+            return None
+
+    class Session:
+        def get(self, url: str, timeout: int) -> Response:
+            calls.append(url)
+            if url == "https://guide.test/team/milan":
+                return Response(
+                    "AC Milan - SL Benfica, 16 Eylül 2026 21:00 canlı CBC Sport"
+                )
+            if url == "https://guide.test/team/benfica":
+                return Response(
+                    '<a href="/match/123/milan-benfica">partita</a> '
+                    "AC Milan - SL Benfica, 16 Eylül 2026 22:00 canlı CBC Sport"
+                )
+            if url == "https://guide.test/match/123/milan-benfica":
+                return Response(
+                    "AC Milan - SL Benfica, 16 Eylül 2026 22:00 canlı CBC Sport"
+                )
+            raise AssertionError(url)
+
+    documents = _fetch_guide_documents(Session(), source, event)
+
+    assert documents == [(
+        "AC Milan - SL Benfica, 16 Eylül 2026 22:00 canlı CBC Sport",
+        "https://guide.test/match/123/milan-benfica",
+    )]
+    assert calls == [
+        "https://guide.test/team/milan",
+        "https://guide.test/team/benfica",
+        "https://guide.test/match/123/milan-benfica",
+    ]
+
+
+def test_unverified_match_permalink_is_not_used_as_source_schedule() -> None:
+    event = {
+        "home_team": "AC Milan",
+        "away_team": "SL Benfica",
+        "start": "2026-09-16T21:00:00+02:00",
+    }
+    source = {
+        "url": "https://guide.test/",
+        "source_type": "guide",
+        "timezone": "Europe/Istanbul",
+        "require_kickoff_time": True,
+        "query_url_template": "https://guide.test/team/{home_slug}",
+        "query_limit": 2,
+        "team_aliases": {"milan": ["AC Milan"], "benfica": ["SL Benfica"]},
+        "match_url_pattern": "/match/",
+        "permalink_domains": ["guide.test"],
+    }
+    listing = (
+        '<a href="/match/999/wrong-fixture">partita</a> '
+        "AC Milan - SL Benfica, 16 Eylül 2026 22:00 canlı CBC Sport"
+    )
+
+    class Response:
+        def __init__(self, text: str) -> None:
+            self.text = text
+
+        def raise_for_status(self) -> None:
+            return None
+
+    class Session:
+        def get(self, url: str, timeout: int) -> Response:
+            if url == "https://guide.test/team/milan":
+                return Response(listing)
+            if url == "https://guide.test/match/999/wrong-fixture":
+                return Response(
+                    "AC Milan - Porto, 16 Eylül 2026 22:00 canlı CBC Sport"
+                )
+            raise AssertionError(url)
+
+    documents = _fetch_guide_documents(Session(), source, event)
+
+    assert documents == [(listing, "https://guide.test/team/milan")]
+    assert documents[0][1] != "https://guide.test/match/999/wrong-fixture"
+
+
+def test_sportkritik_search_stops_after_exact_reversed_variant() -> None:
+    event = {
+        "home_team": "AC Milan",
+        "away_team": "SL Benfica",
+        "start": "2026-09-16T21:00:00+02:00",
+    }
+    source = {
+        "url": "https://articles.test/search",
+        "source_type": "wordpress_search",
+        "timezone": "Asia/Baku",
+        "require_kickoff_time": True,
+        "query_url_template": (
+            "https://articles.test/search?search={home_query}%20{away_query}"
+        ),
+        "query_limit": 6,
+        "team_aliases": {
+            "milan": ["AC Milan", "ACM"],
+            "benfica": ["SL Benfica", "Benfika"],
+        },
+    }
+    calls: list[str] = []
+
+    class Response:
+        def __init__(self, text: str = "", payload: object = None) -> None:
+            self.text, self.payload = text, payload
+
+        def raise_for_status(self) -> None:
+            return None
+
+        def json(self) -> object:
+            return self.payload
+
+    class Session:
+        def get(self, url: str, timeout: int) -> Response:
+            calls.append(url)
+            if url.endswith("AC%20Milan%20SL%20Benfica"):
+                return Response(payload=[{"url": "https://articles.test/wrong"}])
+            if url == "https://articles.test/wrong":
+                return Response("AC Milan - Porto, 16 sentyabr 23:00 canlı")
+            if url.endswith("SL%20Benfica%20AC%20Milan"):
+                return Response(payload=[{"url": "https://articles.test/exact"}])
+            if url == "https://articles.test/exact":
+                return Response("Milan - SL Benfica, 16 sentyabr 23:00 canlı CBC Sport")
+            raise AssertionError(url)
+
+    documents = _fetch_guide_documents(Session(), source, event)
+
+    assert documents == [(
+        "Milan - SL Benfica, 16 sentyabr 23:00 canlı CBC Sport",
+        "https://articles.test/exact",
+    )]
+    assert calls[-1] == "https://articles.test/exact"
+    assert not any("Benfika" in call or "ACM" in call for call in calls)
 
 
 def test_opponent_country_guide_discovers_paid_channel_without_confirming_it() -> None:
