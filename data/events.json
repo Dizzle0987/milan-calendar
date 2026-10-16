@@ -1336,9 +1336,9 @@
           "availability_evidence": [],
           "availability_label": "Gratuità da verificare",
           "broadcast_free": false,
-          "broadcast_start": "2026-10-22T12:00:00+02:00",
-          "broadcast_start_rome": "12:00",
-          "broadcaster": "CBS Sports Network",
+          "broadcast_start": "2026-10-22T11:50:00+02:00",
+          "broadcast_start_rome": "11:50",
+          "broadcaster": "UniMas Eastern",
           "broadcaster_home_url": null,
           "competition": "UEFA Europa League",
           "confidence": 70,
@@ -1350,10 +1350,10 @@
             {
               "broadcaster_page": null,
               "guide": "Sport TV Guide",
-              "programme_start": "2026-10-22T12:00:00+02:00",
+              "programme_start": "2026-10-22T11:50:00+02:00",
               "source_type": "guide",
               "source_url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
-              "verified_at": "2026-10-16T04:41:10Z"
+              "verified_at": "2026-10-16T11:34:43Z"
             }
           ],
           "fixture_cache_key": "europa-league|2026/27|2026-10-22|bournemouth|milan",
@@ -1381,7 +1381,59 @@
           "source_url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
           "status": "UNKNOWN",
           "url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
-          "verified_at": "2026-10-16T04:41:10Z",
+          "verified_at": "2026-10-16T11:34:43Z",
+          "watch_url": null,
+          "watch_url_type": null,
+          "web_stream_free": "unknown"
+        },
+        {
+          "availability_evidence": [],
+          "availability_label": "Gratuità da verificare",
+          "broadcast_free": false,
+          "broadcaster": "CBS Sports Network",
+          "broadcaster_home_url": null,
+          "competition": "UEFA Europa League",
+          "confidence": 70,
+          "country": "US",
+          "country_code": "US",
+          "date": "2026-10-22",
+          "discovered_dynamically": true,
+          "evidence": [
+            {
+              "broadcaster_page": null,
+              "guide": "Sport TV Guide",
+              "programme_start": null,
+              "source_type": "guide",
+              "source_url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
+              "verified_at": "2026-10-16T11:34:43Z"
+            }
+          ],
+          "fixture_cache_key": "europa-league|2026/27|2026-10-22|bournemouth|milan",
+          "free_or_pay": "unknown",
+          "italian_primary": false,
+          "language": "",
+          "market_tier": 3,
+          "match": "AFC Bournemouth - AC Milan",
+          "match_confirmed": true,
+          "platforms": "TV/streaming da verificare",
+          "priority": 0,
+          "reason": "exact fixture found in match-specific schedule",
+          "registration": "not_required",
+          "requires_registration": false,
+          "rights_cache_key": "europa-league|2026/27|US",
+          "rights_confirmed": false,
+          "rights_cycle": null,
+          "rights_valid_from": null,
+          "rights_valid_to": null,
+          "season": "2026/27",
+          "season_start": 2026,
+          "source_rights": null,
+          "source_schedule": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
+          "source_type": "guide",
+          "source_url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
+          "status": "UNKNOWN",
+          "url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
+          "verified_at": "2026-10-16T11:34:43Z",
           "watch_url": null,
           "watch_url_type": null,
           "web_stream_free": "unknown"
@@ -1774,7 +1826,7 @@
       "free_italian_broadcasts": [],
       "home_away": "Trasferta",
       "home_team": "AFC Bournemouth",
-      "last_modified": "2026-10-16T04:41:10Z",
+      "last_modified": "2026-10-16T11:34:43Z",
       "location": "",
       "neutral": false,
       "opponent_country": "Regno Unito",
@@ -1814,7 +1866,7 @@
         "web_stream_free": "unknown"
       },
       "round": "3",
-      "sequence": 7,
+      "sequence": 8,
       "source": "AC Milan",
       "source_id": "e2mq4rd04751zo1nv362agys4",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -2746,7 +2798,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-16T04:41:10Z",
+  "last_changed": "2026-10-16T11:34:43Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -2794,17 +2846,15 @@
     "wins": 3
   },
   "source_errors": [
-    "TheSportsDB: 522 Server Error: <none> for url: https://www.thesportsdb.com/api/v1/json/123/eventsnext.php?id=133667",
+    "TheSportsDB: HTTPSConnectionPool(host='www.thesportsdb.com', port=443): Max retries exceeded with url: /api/v1/json/123/eventsnext.php?id=133667 (Caused by ResponseError('too many 503 error responses'))",
     "AC Milan: nessun orario esplicito per il Milan",
     "Gazzetta dello Sport: 404 Client Error: Not Found for url: https://www.gazzetta.it/Calcio/Serie-A/Milan/",
     "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
     "Sky Sport: nessun orario esplicito per il Milan",
     "Mediaset: 404 Client Error: Not Found for url: https://mediasetinfinity.mediaset.it/sport",
-    "Prime Video: nessun orario esplicito per il Milan",
-    "Broadcast Paese avversaria (AFC Bournemouth): HTTPSConnectionPool(host='www.thesportsdb.com', port=443): Read timed out. (read timeout=10)",
+    "Prime Video: HTTPSConnectionPool(host='www.primevideo.com', port=443): Max retries exceeded with url: /sports (Caused by ResponseError('too many 503 error responses'))",
     "Broadcast CBC Sport (None): 403 Client Error: Forbidden for url: https://cbcsport.az/tv_program_schedule",
     "Broadcast RTL+ (None): 404 Client Error: Not Found for url: https://plus.rtl.de/video-tv/sport",
-    "Broadcast MacEkran (None): 404 Client Error: Not Found for url: https://macekran.com/mac/bournemouth-vs-milan-2026-10-22",
     "Broadcast bTV (None): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
     "Broadcast DAZN Portugal (None): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l",
     "Broadcast HBO Max (None): 403 Client Error: Forbidden for url: https://www.hbomax.com/gb/en/sports"
