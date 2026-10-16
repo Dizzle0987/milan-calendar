@@ -190,9 +190,17 @@
       "timezone": "Europe/Istanbul", "market_tier": 1,
       "url": "https://macekran.com/",
       "url_template": "https://macekran.com/mac/{home}-vs-{away}-{date}",
+      "listing_url_templates": [
+        "https://macekran.com/program/{date}",
+        "https://macekran.com/takim/{milan_slug}"
+      ],
+      "team_slugs": {"milan": "ac-milan"},
       "team_aliases": {
         "milan": ["AC Milan", "A.C. Milan", "AC Mailand"]
       },
+      "match_url_pattern": "/mac/.+-[0-9]{4}-[0-9]{2}-[0-9]{2}/?$",
+      "permalink_domains": ["macekran.com"],
+      "permalink_limit": 6, "request_timeout": 10,
       "source_type": "access_guide",
       "competition_families": ["champions-league", "europa-league", "conference-league"],
       "lookahead_days": 21, "priority": 73

@@ -857,6 +857,137 @@ def _match_permalink_candidates(
     return result
 
 
+def _macekran_permalink_matches_fixture(
+    permalink: str,
+    event: dict[str, Any],
+    source: dict[str, Any],
+) -> bool:
+    """Cheaply filter MacEkran links before fetching and fully parsing them."""
+    parsed = urlparse(permalink)
+    match = re.search(
+        r"/mac/(?P<slug>.+)-(?P<date>\d{4}-\d{2}-\d{2})/?$",
+        parsed.path,
+    )
+    if not match:
+        return False
+    try:
+        local_zone = ZoneInfo(str(source.get("timezone") or "Europe/Istanbul"))
+    except (KeyError, ValueError):
+        local_zone = ZoneInfo("Europe/Istanbul")
+    expected_date = _event_datetime(event).astimezone(local_zone).date().isoformat()
+    if match.group("date") != expected_date:
+        return False
+
+    ignored = {"afc", "ac", "cf", "fc", "football", "club", "team"}
+
+    def tokens(team: str) -> set[str]:
+        return {
+            token
+            for alias in _team_broadcast_aliases(
+                team, source.get("team_aliases") or {}
+            )
+            for token in alias.split("-")
+            if len(token) >= 3 and token not in ignored
+        }
+
+    slug_tokens = set(_normalize(match.group("slug")).split("-"))
+    home_tokens = tokens(str(event.get("home_team") or ""))
+    away_tokens = tokens(str(event.get("away_team") or ""))
+    return bool(home_tokens & slug_tokens) and bool(away_tokens & slug_tokens)
+
+
+def _macekran_listing_urls(
+    source: dict[str, Any], event: dict[str, Any]
+) -> list[str]:
+    """Build the small, configured set of public MacEkran discovery pages."""
+    templates = source.get("listing_url_templates") or []
+    if not isinstance(templates, list):
+        return []
+    try:
+        local_zone = ZoneInfo(str(source.get("timezone") or "Europe/Istanbul"))
+    except (KeyError, ValueError):
+        local_zone = ZoneInfo("Europe/Istanbul")
+    event_date = _event_datetime(event).astimezone(local_zone).date().isoformat()
+    team_slugs = source.get("team_slugs") or {}
+    milan_slug = str(team_slugs.get("milan") or "ac-milan")
+    result: list[str] = []
+    for template in templates:
+        url = str(template).format(date=event_date, milan_slug=milan_slug)
+        if url and url not in result:
+            result.append(url)
+    return result
+
+
+def _fetch_macekran_availability(
+    requester: Any,
+    source: dict[str, Any],
+    event: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """Discover and verify one MacEkran match page with bounded HTTP requests."""
+    limit = max(1, min(int(source.get("permalink_limit") or 4), 6))
+    timeout = max(1, min(int(source.get("request_timeout") or 10), 20))
+    seen_permalinks: set[str] = set()
+    fetched_permalinks = 0
+    successful_listing = False
+    last_error: requests.RequestException | None = None
+
+    def try_permalink(permalink: str) -> list[dict[str, Any]]:
+        nonlocal fetched_permalinks, last_error
+        if permalink in seen_permalinks or fetched_permalinks >= limit:
+            return []
+        seen_permalinks.add(permalink)
+        fetched_permalinks += 1
+        try:
+            response = requester.get(permalink, timeout=timeout)
+            response.raise_for_status()
+        except requests.RequestException as exc:
+            last_error = exc
+            return []
+        return parse_macekran_access_guide(
+            response.text,
+            event,
+            permalink,
+            source.get("team_aliases") or {},
+        )
+
+    for listing_url in _macekran_listing_urls(source, event):
+        try:
+            response = requester.get(listing_url, timeout=timeout)
+            response.raise_for_status()
+        except requests.RequestException as exc:
+            last_error = exc
+            continue
+        successful_listing = True
+        for permalink in _match_permalink_candidates(
+            response.text, listing_url, source
+        ):
+            if not _macekran_permalink_matches_fixture(
+                permalink, event, source
+            ):
+                continue
+            availability = try_permalink(permalink)
+            if availability:
+                return availability
+            if fetched_permalinks >= limit:
+                break
+        if fetched_permalinks >= limit:
+            break
+
+    fallback = _fixture_source_url(source, event)
+    if (
+        fetched_permalinks < limit
+        and fallback not in seen_permalinks
+        and _macekran_permalink_matches_fixture(fallback, event, source)
+    ):
+        availability = try_permalink(fallback)
+        if availability:
+            return availability
+
+    if not successful_listing and last_error is not None:
+        raise last_error
+    return []
+
+
 def _fetch_guide_documents(
     requester: Any,
     source: dict[str, Any],
@@ -1564,21 +1695,16 @@ def apply_verified_broadcasts(
                 continue
 
             if source_type in BROADCAST_ACCESS_SOURCE_TYPES:
-                url = _fixture_source_url(source, target)
                 try:
-                    response = requester.get(url, timeout=10)
-                    response.raise_for_status()
+                    availabilities = _fetch_macekran_availability(
+                        requester, source, target
+                    )
                 except requests.RequestException as exc:
                     errors.append(
                         f"{source['broadcaster']} ({target.get('title')}): {exc}"
                     )
                     continue
-                for availability in parse_macekran_access_guide(
-                    response.text,
-                    target,
-                    url,
-                    source.get("team_aliases") or {},
-                ):
+                for availability in availabilities:
                     discovered_name = _normalize(availability["broadcaster"])
                     matching_keys: set[tuple[str, str]] = set()
                     for broadcaster in broadcaster_sources:

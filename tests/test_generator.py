@@ -15,6 +15,7 @@ from milan_calendar.generator import (
     _broadcast_description_lines,
     _canonical_event,
     _fetch_guide_documents,
+    _fetch_macekran_availability,
     _fixture_query_urls,
     _is_official_international_match,
     _guide_broadcasters,
@@ -1994,6 +1995,14 @@ def _macekran_source() -> dict:
         "broadcaster": "MacEkran", "access": "unknown",
         "url": "https://macekran.com/",
         "url_template": "https://macekran.com/mac/{home}-vs-{away}-{date}",
+        "listing_url_templates": [
+            "https://macekran.com/program/{date}",
+            "https://macekran.com/takim/{milan_slug}",
+        ],
+        "team_slugs": {"milan": "ac-milan"},
+        "match_url_pattern": r"/mac/.+-\d{4}-\d{2}-\d{2}/?$",
+        "permalink_domains": ["macekran.com"],
+        "permalink_limit": 6, "request_timeout": 10,
         "source_type": "access_guide", "market_tier": 1,
         "team_aliases": {"milan": ["AC Milan"]},
         "lookahead_days": 21, "priority": 73,
@@ -2070,6 +2079,12 @@ def _run_sport_tv_runtime(
     match_html = _sport_tv_guide_match_html(
         stations or [("CBC Sport", "AZ")], opponent=match_opponent
     )
+    macekran_permalink = (
+        "https://macekran.com/mac/salzburg-vs-ac-milan-2026-10-15"
+    )
+    macekran_listing = (
+        f'<a href="{macekran_permalink}">Salzburg - AC Milan</a>'
+    )
 
     class Response:
         def __init__(self, text: str = "", payload: object = None) -> None:
@@ -2092,6 +2107,10 @@ def _run_sport_tv_runtime(
                 return Response(match_html)
             if "sport-tv-guide.live/squadra/" in url:
                 return Response(listing if return_search_result else "Nessun evento")
+            if "macekran.com/program/" in url or "macekran.com/takim/" in url:
+                if macekran_unreachable:
+                    raise requests.Timeout("MacEkran offline")
+                return Response(macekran_listing)
             if "macekran.com/mac/" in url:
                 if macekran_unreachable:
                     raise requests.Timeout("MacEkran offline")
@@ -2340,6 +2359,245 @@ def test_macekran_different_broadcaster_or_unreachable_page_changes_nothing() ->
         assert cbc["web_stream_free"] == "unknown"
         assert cbc["availability_evidence"] == []
     assert any("MacEkran offline" in error for error in errors)
+
+
+def _bournemouth_milan_event() -> dict:
+    return {
+        "event_kind": "match",
+        "home_team": "AFC Bournemouth",
+        "away_team": "AC Milan",
+        "title": "AFC Bournemouth - AC Milan",
+        "competition": "UEFA Europa League",
+        "status": "Fixture",
+        "start": "2026-10-22T21:00:00+02:00",
+    }
+
+
+def _macekran_discovery_source(*, limit: int = 6) -> dict:
+    source = _macekran_source()
+    source["permalink_limit"] = limit
+    return source
+
+
+class _MacEkranFixtureResponse:
+    def __init__(self, text: str, status: int = 200) -> None:
+        self.text = text
+        self.status = status
+
+    def raise_for_status(self) -> None:
+        if self.status >= 400:
+            raise requests.HTTPError(f"HTTP {self.status}")
+
+
+class _MacEkranFixtureSession:
+    def __init__(
+        self,
+        pages: dict[str, str | tuple[int, str]],
+        *,
+        unreachable: bool = False,
+    ) -> None:
+        self.pages = pages
+        self.unreachable = unreachable
+        self.calls: list[tuple[str, int]] = []
+
+    def get(self, url: str, timeout: int) -> _MacEkranFixtureResponse:
+        self.calls.append((url, timeout))
+        if self.unreachable:
+            raise requests.Timeout("MacEkran offline")
+        configured = self.pages.get(url, (404, ""))
+        if isinstance(configured, tuple):
+            return _MacEkranFixtureResponse(configured[1], configured[0])
+        return _MacEkranFixtureResponse(configured)
+
+
+def _macekran_bournemouth_match_html(
+    rows: list[tuple[str, str, str, str]] | None = None,
+    *,
+    home: str = "Bournemouth",
+    away: str = "AC Milan",
+    start: str = "2026-10-22T19:00:00Z",
+) -> str:
+    return _macekran_match_html(
+        rows if rows is not None else [
+            ("Tabii", "OTT", "Web · Mobil · Smart TV", "₺44/ay")
+        ],
+        home=home,
+        away=away,
+        start=start,
+    )
+
+
+def test_macekran_discovers_daily_permalink_before_constructed_fallback() -> None:
+    event = _bournemouth_milan_event()
+    source = _macekran_discovery_source()
+    correct = "https://macekran.com/mac/bournemouth-vs-ac-milan-2026-10-22"
+    constructed_without_alias = (
+        "https://macekran.com/mac/bournemouth-vs-milan-2026-10-22"
+    )
+    daily = "https://macekran.com/program/2026-10-22"
+    session = _MacEkranFixtureSession({
+        daily: f'<a href="{correct}">Bournemouth - AC Milan</a>',
+        correct: _macekran_bournemouth_match_html(),
+    })
+
+    availability = _fetch_macekran_availability(session, source, event)
+
+    assert availability == [{
+        "broadcaster": "Tabii", "source_url": correct,
+        "subscription_required": True,
+        "broadcast_free": False, "web_stream_free": False,
+    }]
+    assert [url for url, _ in session.calls] == [daily, correct]
+    assert constructed_without_alias not in {url for url, _ in session.calls}
+
+
+def test_macekran_falls_back_to_team_page_and_deduplicates_permalink() -> None:
+    event = _bournemouth_milan_event()
+    source = _macekran_discovery_source()
+    correct = "https://macekran.com/mac/bournemouth-vs-ac-milan-2026-10-22"
+    daily = "https://macekran.com/program/2026-10-22"
+    team = "https://macekran.com/takim/ac-milan"
+    session = _MacEkranFixtureSession({
+        daily: "Nessun evento",
+        team: f'<a href="{correct}">Bournemouth - AC Milan</a>',
+        correct: _macekran_bournemouth_match_html(),
+    })
+
+    availability = _fetch_macekran_availability(session, source, event)
+
+    assert availability[0]["broadcaster"] == "Tabii"
+    assert [url for url, _ in session.calls] == [daily, team, correct]
+    assert sum(url == correct for url, _ in session.calls) == 1
+
+
+def test_macekran_absent_fixture_returns_no_availability() -> None:
+    session = _MacEkranFixtureSession({
+        "https://macekran.com/program/2026-10-22": "Nessun evento",
+        "https://macekran.com/takim/ac-milan": "Nessun evento",
+    })
+
+    availability = _fetch_macekran_availability(
+        session, _macekran_discovery_source(), _bournemouth_milan_event()
+    )
+
+    assert availability == []
+    assert len(session.calls) == 3  # two listings plus the final verified fallback
+
+
+def test_macekran_uses_verified_deterministic_permalink_only_as_final_fallback() -> None:
+    event = _bournemouth_milan_event()
+    source = _macekran_discovery_source()
+    fallback = "https://macekran.com/mac/bournemouth-vs-ac-milan-2026-10-22"
+    session = _MacEkranFixtureSession({
+        "https://macekran.com/program/2026-10-22": "Nessun evento",
+        "https://macekran.com/takim/ac-milan": "Nessun evento",
+        fallback: _macekran_bournemouth_match_html(),
+    })
+
+    availability = _fetch_macekran_availability(session, source, event)
+
+    assert availability[0]["broadcaster"] == "Tabii"
+    assert [url for url, _ in session.calls][-1] == fallback
+
+
+@pytest.mark.parametrize(
+    ("permalink", "match_html"),
+    [
+        (
+            "https://macekran.com/mac/bournemouth-vs-roma-2026-10-22",
+            _macekran_bournemouth_match_html(away="AS Roma"),
+        ),
+        (
+            "https://macekran.com/mac/bournemouth-vs-ac-milan-2026-10-21",
+            _macekran_bournemouth_match_html(),
+        ),
+        (
+            "https://macekran.com/mac/bournemouth-vs-ac-milan-2026-10-22",
+            _macekran_bournemouth_match_html(start="2026-10-22T17:00:00Z"),
+        ),
+    ],
+)
+def test_macekran_rejects_wrong_fixture_date_or_kickoff_during_discovery(
+    permalink: str, match_html: str
+) -> None:
+    daily = "https://macekran.com/program/2026-10-22"
+    team = "https://macekran.com/takim/ac-milan"
+    session = _MacEkranFixtureSession({
+        daily: f'<a href="{permalink}">Possibile partita</a>',
+        team: f'<a href="{permalink}">Possibile partita</a>',
+        permalink: match_html,
+    })
+
+    availability = _fetch_macekran_availability(
+        session, _macekran_discovery_source(), _bournemouth_milan_event()
+    )
+
+    assert availability == []
+    assert sum(url == permalink for url, _ in session.calls) <= 1
+
+
+def test_macekran_deduplicates_duplicate_links_and_limits_match_requests() -> None:
+    event = _bournemouth_milan_event()
+    source = _macekran_discovery_source(limit=4)
+    daily = "https://macekran.com/program/2026-10-22"
+    permalinks = [
+        f"https://macekran.com/mac/bournemouth-{index}-vs-ac-milan-2026-10-22"
+        for index in range(8)
+    ]
+    links = "".join(
+        f'<a href="{url}">Bournemouth - AC Milan</a>' for url in permalinks
+    )
+    pages: dict[str, str | tuple[int, str]] = {daily: links + links}
+    pages.update({
+        url: _macekran_bournemouth_match_html(home="AS Roma")
+        for url in permalinks
+    })
+    session = _MacEkranFixtureSession(pages)
+
+    availability = _fetch_macekran_availability(session, source, event)
+
+    assert availability == []
+    match_calls = [url for url, _ in session.calls if "/mac/" in url]
+    assert match_calls == permalinks[:4]
+    assert len(match_calls) == len(set(match_calls))
+    assert all(timeout == 10 for _, timeout in session.calls)
+
+
+def test_macekran_unreachable_discovery_raises_last_http_error() -> None:
+    session = _MacEkranFixtureSession({}, unreachable=True)
+
+    with pytest.raises(requests.Timeout, match="MacEkran offline"):
+        _fetch_macekran_availability(
+            session, _macekran_discovery_source(), _bournemouth_milan_event()
+        )
+
+
+@pytest.mark.parametrize(
+    "match_html",
+    [
+        _macekran_bournemouth_match_html(rows=[]).replace("<tbody></tbody>", ""),
+        _macekran_bournemouth_match_html([
+            ("Tabii", "Ücretsiz", "Web", "₺44/ay"),
+        ]),
+    ],
+)
+def test_macekran_ambiguous_or_missing_access_is_not_promoted(
+    match_html: str,
+) -> None:
+    event = _bournemouth_milan_event()
+    source = _macekran_discovery_source()
+    correct = "https://macekran.com/mac/bournemouth-vs-ac-milan-2026-10-22"
+    session = _MacEkranFixtureSession({
+        "https://macekran.com/program/2026-10-22": (
+            f'<a href="{correct}">Bournemouth - AC Milan</a>'
+        ),
+        "https://macekran.com/takim/ac-milan": (
+            f'<a href="{correct}">Bournemouth - AC Milan</a>'
+        ),
+        correct: match_html,
+    })
+
+    assert _fetch_macekran_availability(session, source, event) == []
 
 
 def test_unbounded_generic_rights_are_not_reused_as_confirmation() -> None:
