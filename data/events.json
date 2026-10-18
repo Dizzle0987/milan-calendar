@@ -1130,11 +1130,11 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-18T16:34:38Z",
+      "last_modified": "2026-10-18T18:03:17Z",
       "location": "Italy",
       "neutral": false,
       "round": "7",
-      "sequence": 20,
+      "sequence": 21,
       "serie_a_standing": {
         "context": [
           {
@@ -1185,7 +1185,7 @@
       "source_id": "7dqaeeptiswq1qp6sexkq8hsk",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-10-18T18:00:00+02:00",
-      "status": "Playing",
+      "status": "Played",
       "time_source": "NOW",
       "time_source_url": "https://www.nowtv.it/sport/calcio/milan",
       "title": "AC Milan - Atalanta",
@@ -1292,8 +1292,8 @@
           "availability_evidence": [],
           "availability_label": "Gratuità da verificare",
           "broadcast_free": false,
-          "broadcast_start": "2026-10-22T11:50:00+02:00",
-          "broadcast_start_rome": "11:50",
+          "broadcast_start": "2026-10-22T01:50:00+02:00",
+          "broadcast_start_rome": "01:50",
           "broadcaster": "UniMas Eastern",
           "broadcaster_home_url": null,
           "competition": "UEFA Europa League",
@@ -1306,10 +1306,10 @@
             {
               "broadcaster_page": null,
               "guide": "Sport TV Guide",
-              "programme_start": "2026-10-22T11:50:00+02:00",
+              "programme_start": "2026-10-22T01:50:00+02:00",
               "source_type": "guide",
               "source_url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
-              "verified_at": "2026-10-18T16:34:38Z"
+              "verified_at": "2026-10-18T18:03:17Z"
             }
           ],
           "fixture_cache_key": "europa-league|2026/27|2026-10-22|bournemouth|milan",
@@ -1337,7 +1337,7 @@
           "source_url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
           "status": "UNKNOWN",
           "url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
-          "verified_at": "2026-10-18T16:34:38Z",
+          "verified_at": "2026-10-18T18:03:17Z",
           "watch_url": null,
           "watch_url_type": null,
           "web_stream_free": "unknown"
@@ -1782,7 +1782,7 @@
       "free_italian_broadcasts": [],
       "home_away": "Trasferta",
       "home_team": "AFC Bournemouth",
-      "last_modified": "2026-10-18T16:34:38Z",
+      "last_modified": "2026-10-18T18:03:17Z",
       "location": "",
       "neutral": false,
       "opponent_country": "Regno Unito",
@@ -1822,7 +1822,7 @@
         "web_stream_free": "unknown"
       },
       "round": "3",
-      "sequence": 19,
+      "sequence": 20,
       "source": "AC Milan",
       "source_id": "e2mq4rd04751zo1nv362agys4",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -2800,7 +2800,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-18T16:34:38Z",
+  "last_changed": "2026-10-18T18:03:17Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
