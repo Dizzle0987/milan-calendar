@@ -340,18 +340,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Atalanta
 DTSTART;TZID=Europe/Rome:20261018T180000
 DTEND;TZID=Europe/Rome:20261018T200000
-DTSTAMP:20261018T130933Z
+DTSTAMP:20261018T155737Z
 UID:f4cca29e5c6dd6bae4edb995@milan-calendar
-SEQUENCE:18
+SEQUENCE:19
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 18/10/2026 
  18:00\nTurno: 7\nStadio: Stadio San Siro\nLocalità: Italy\nDove vederla i
  n Italia: DAZN\; Sky Sport e NOW\nFonte orario: NOW\nClassifica Serie A pr
- ovvisoria — giornata in corso:\n  4. Frosinone — 13 pt\n  5. Cagliari 
- — 13 pt\n▶ 6. Milan — 12 pt — 6 PG — DR +6\n  7. Como — 12 pt\
- n  8. Juventus — 11 pt\nClassifica aggiornata: 18/10/2026 15:09\nFonte c
- lassifica: Lega Serie A
-LAST-MODIFIED:20261018T130933Z
+ ovvisoria — giornata in corso:\n  5. Frosinone — 13 pt\n  6. Cagliari 
+ — 13 pt\n▶ 7. Milan — 12 pt — 6 PG — DR +6\n  8. Juventus — 11
+  pt\n  9. Napoli — 10 pt\nClassifica aggiornata: 18/10/2026 17:57\nFonte
+  classifica: Lega Serie A
+LAST-MODIFIED:20261018T155737Z
 LOCATION:Stadio San Siro\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -389,17 +389,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ Udinese - AC Milan
 DTSTART;TZID=Europe/Rome:20261025T204500
 DTEND;TZID=Europe/Rome:20261025T224500
-DTSTAMP:20261018T130933Z
+DTSTAMP:20261018T155737Z
 UID:ed011e560d0939fa19ee726a@milan-calendar
-SEQUENCE:11
+SEQUENCE:12
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 25/10/
  2026 20:45\nTurno: 8\nStadio: Bluenergy Stadium\nDove vederla in Italia: D
  AZN\nFonte orario: AC Milan\nClassifica Serie A provvisoria — giornata i
- n corso:\n  4. Frosinone — 13 pt\n  5. Cagliari — 13 pt\n▶ 6. Milan 
- — 12 pt — 6 PG — DR +6\n  7. Como — 12 pt\n  8. Juventus — 11 pt
- \nClassifica aggiornata: 18/10/2026 15:09\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20261018T130933Z
+ n corso:\n  5. Frosinone — 13 pt\n  6. Cagliari — 13 pt\n▶ 7. Milan 
+ — 12 pt — 6 PG — DR +6\n  8. Juventus — 11 pt\n  9. Napoli — 10 
+ pt\nClassifica aggiornata: 18/10/2026 17:57\nFonte classifica: Lega Serie 
+ A
+LAST-MODIFIED:20261018T155737Z
 LOCATION:Bluenergy Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
