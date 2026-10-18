@@ -1130,62 +1130,62 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-18T15:57:37Z",
+      "last_modified": "2026-10-18T16:34:38Z",
       "location": "Italy",
       "neutral": false,
       "round": "7",
-      "sequence": 19,
+      "sequence": 20,
       "serie_a_standing": {
         "context": [
           {
             "played": 7,
-            "points": 13,
-            "position": 5,
-            "team": "Frosinone"
+            "points": 17,
+            "position": 2,
+            "team": "Roma"
           },
           {
             "played": 6,
-            "points": 13,
-            "position": 6,
-            "team": "Cagliari"
-          },
-          {
-            "played": 6,
-            "points": 12,
-            "position": 7,
-            "team": "Milan"
-          },
-          {
-            "played": 6,
-            "points": 11,
-            "position": 8,
-            "team": "Juventus"
+            "points": 16,
+            "position": 3,
+            "team": "Lazio"
           },
           {
             "played": 7,
-            "points": 10,
-            "position": 9,
-            "team": "Napoli"
+            "points": 15,
+            "position": 4,
+            "team": "Milan"
+          },
+          {
+            "played": 7,
+            "points": 14,
+            "position": 5,
+            "team": "Como"
+          },
+          {
+            "played": 7,
+            "points": 13,
+            "position": 6,
+            "team": "Frosinone"
           }
         ],
         "draws": 3,
-        "goal_difference": 6,
+        "goal_difference": 7,
         "losses": 0,
         "pending_recoveries": [],
-        "played": 6,
-        "points": 12,
-        "position": 7,
+        "played": 7,
+        "points": 15,
+        "position": 4,
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-18T15:57:37Z",
-        "wins": 3
+        "updated_at": "2026-10-18T16:34:38Z",
+        "wins": 4
       },
       "source": "AC Milan",
       "source_id": "7dqaeeptiswq1qp6sexkq8hsk",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-10-18T18:00:00+02:00",
-      "status": "Fixture",
+      "status": "Playing",
       "time_source": "NOW",
       "time_source_url": "https://www.nowtv.it/sport/calcio/milan",
       "title": "AC Milan - Atalanta",
@@ -1292,8 +1292,8 @@
           "availability_evidence": [],
           "availability_label": "Gratuità da verificare",
           "broadcast_free": false,
-          "broadcast_start": "2026-10-22T01:50:00+02:00",
-          "broadcast_start_rome": "01:50",
+          "broadcast_start": "2026-10-22T11:50:00+02:00",
+          "broadcast_start_rome": "11:50",
           "broadcaster": "UniMas Eastern",
           "broadcaster_home_url": null,
           "competition": "UEFA Europa League",
@@ -1306,10 +1306,10 @@
             {
               "broadcaster_page": null,
               "guide": "Sport TV Guide",
-              "programme_start": "2026-10-22T01:50:00+02:00",
+              "programme_start": "2026-10-22T11:50:00+02:00",
               "source_type": "guide",
               "source_url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
-              "verified_at": "2026-10-18T13:09:33Z"
+              "verified_at": "2026-10-18T16:34:38Z"
             }
           ],
           "fixture_cache_key": "europa-league|2026/27|2026-10-22|bournemouth|milan",
@@ -1337,7 +1337,7 @@
           "source_url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
           "status": "UNKNOWN",
           "url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
-          "verified_at": "2026-10-18T13:09:33Z",
+          "verified_at": "2026-10-18T16:34:38Z",
           "watch_url": null,
           "watch_url_type": null,
           "web_stream_free": "unknown"
@@ -1782,7 +1782,7 @@
       "free_italian_broadcasts": [],
       "home_away": "Trasferta",
       "home_team": "AFC Bournemouth",
-      "last_modified": "2026-10-18T13:09:33Z",
+      "last_modified": "2026-10-18T16:34:38Z",
       "location": "",
       "neutral": false,
       "opponent_country": "Regno Unito",
@@ -1822,7 +1822,7 @@
         "web_stream_free": "unknown"
       },
       "round": "3",
-      "sequence": 18,
+      "sequence": 19,
       "source": "AC Milan",
       "source_id": "e2mq4rd04751zo1nv362agys4",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -1842,56 +1842,56 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Udinese",
-      "last_modified": "2026-10-18T15:57:37Z",
+      "last_modified": "2026-10-18T16:34:38Z",
       "location": "",
       "neutral": false,
       "round": "8",
-      "sequence": 12,
+      "sequence": 13,
       "serie_a_standing": {
         "context": [
           {
             "played": 7,
-            "points": 13,
-            "position": 5,
-            "team": "Frosinone"
+            "points": 17,
+            "position": 2,
+            "team": "Roma"
           },
           {
             "played": 6,
-            "points": 13,
-            "position": 6,
-            "team": "Cagliari"
-          },
-          {
-            "played": 6,
-            "points": 12,
-            "position": 7,
-            "team": "Milan"
-          },
-          {
-            "played": 6,
-            "points": 11,
-            "position": 8,
-            "team": "Juventus"
+            "points": 16,
+            "position": 3,
+            "team": "Lazio"
           },
           {
             "played": 7,
-            "points": 10,
-            "position": 9,
-            "team": "Napoli"
+            "points": 15,
+            "position": 4,
+            "team": "Milan"
+          },
+          {
+            "played": 7,
+            "points": 14,
+            "position": 5,
+            "team": "Como"
+          },
+          {
+            "played": 7,
+            "points": 13,
+            "position": 6,
+            "team": "Frosinone"
           }
         ],
         "draws": 3,
-        "goal_difference": 6,
+        "goal_difference": 7,
         "losses": 0,
         "pending_recoveries": [],
-        "played": 6,
-        "points": 12,
-        "position": 7,
+        "played": 7,
+        "points": 15,
+        "position": 4,
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-18T15:57:37Z",
-        "wins": 3
+        "updated_at": "2026-10-18T16:34:38Z",
+        "wins": 4
       },
       "source": "AC Milan",
       "source_id": "7idw4m4yhge2zekdmq1h7jjtg",
@@ -2800,53 +2800,53 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-18T15:57:37Z",
+  "last_changed": "2026-10-18T16:34:38Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
       {
         "played": 7,
-        "points": 13,
-        "position": 5,
-        "team": "Frosinone"
+        "points": 17,
+        "position": 2,
+        "team": "Roma"
       },
       {
         "played": 6,
-        "points": 13,
-        "position": 6,
-        "team": "Cagliari"
-      },
-      {
-        "played": 6,
-        "points": 12,
-        "position": 7,
-        "team": "Milan"
-      },
-      {
-        "played": 6,
-        "points": 11,
-        "position": 8,
-        "team": "Juventus"
+        "points": 16,
+        "position": 3,
+        "team": "Lazio"
       },
       {
         "played": 7,
-        "points": 10,
-        "position": 9,
-        "team": "Napoli"
+        "points": 15,
+        "position": 4,
+        "team": "Milan"
+      },
+      {
+        "played": 7,
+        "points": 14,
+        "position": 5,
+        "team": "Como"
+      },
+      {
+        "played": 7,
+        "points": 13,
+        "position": 6,
+        "team": "Frosinone"
       }
     ],
     "draws": 3,
-    "goal_difference": 6,
+    "goal_difference": 7,
     "losses": 0,
     "pending_recoveries": [],
-    "played": 6,
-    "points": 12,
-    "position": 7,
+    "played": 7,
+    "points": 15,
+    "position": 4,
     "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-10-18T15:57:37Z",
-    "wins": 3
+    "updated_at": "2026-10-18T16:34:38Z",
+    "wins": 4
   },
   "source_errors": [
     "ESPN recuperi Serie A: 400 Client Error: Bad Request for url: https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20260801-20270630&limit=1000",

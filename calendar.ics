@@ -340,18 +340,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Atalanta
 DTSTART;TZID=Europe/Rome:20261018T180000
 DTEND;TZID=Europe/Rome:20261018T200000
-DTSTAMP:20261018T155737Z
+DTSTAMP:20261018T163438Z
 UID:f4cca29e5c6dd6bae4edb995@milan-calendar
-SEQUENCE:19
+SEQUENCE:20
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 18/10/2026 
  18:00\nTurno: 7\nStadio: Stadio San Siro\nLocalità: Italy\nDove vederla i
  n Italia: DAZN\; Sky Sport e NOW\nFonte orario: NOW\nClassifica Serie A pr
- ovvisoria — giornata in corso:\n  5. Frosinone — 13 pt\n  6. Cagliari 
- — 13 pt\n▶ 7. Milan — 12 pt — 6 PG — DR +6\n  8. Juventus — 11
-  pt\n  9. Napoli — 10 pt\nClassifica aggiornata: 18/10/2026 17:57\nFonte
-  classifica: Lega Serie A
-LAST-MODIFIED:20261018T155737Z
+ ovvisoria — giornata in corso:\n  2. Roma — 17 pt\n  3. Lazio — 16 p
+ t\n▶ 4. Milan — 15 pt — 7 PG — DR +7\n  5. Como — 14 pt\n  6. Fr
+ osinone — 13 pt\nClassifica aggiornata: 18/10/2026 18:34\nFonte classifi
+ ca: Lega Serie A
+LAST-MODIFIED:20261018T163438Z
 LOCATION:Stadio San Siro\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -365,9 +365,9 @@ BEGIN:VEVENT
 SUMMARY:⚽ AFC Bournemouth - AC Milan
 DTSTART;TZID=Europe/Rome:20261022T210000
 DTEND;TZID=Europe/Rome:20261022T230000
-DTSTAMP:20261018T130933Z
+DTSTAMP:20261018T163438Z
 UID:dc46921426bc343efc88581d@milan-calendar
-SEQUENCE:18
+SEQUENCE:19
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 22/10/2026 21:00\nTurno: 3\nStadio: Vitality Stadium\nDove vederla:\n
@@ -375,7 +375,7 @@ DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  .it/sport/coppe-europee/uefa-europa-league/dove-vedere-bournemouth-milan\n
  🌍 In chiaro all'estero — Nessuna emittente gratuita confermata al mom
  ento\nFonte orario: NOW
-LAST-MODIFIED:20261018T130933Z
+LAST-MODIFIED:20261018T163438Z
 LOCATION:Vitality Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -389,18 +389,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Udinese - AC Milan
 DTSTART;TZID=Europe/Rome:20261025T204500
 DTEND;TZID=Europe/Rome:20261025T224500
-DTSTAMP:20261018T155737Z
+DTSTAMP:20261018T163438Z
 UID:ed011e560d0939fa19ee726a@milan-calendar
-SEQUENCE:12
+SEQUENCE:13
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 25/10/
  2026 20:45\nTurno: 8\nStadio: Bluenergy Stadium\nDove vederla in Italia: D
  AZN\nFonte orario: AC Milan\nClassifica Serie A provvisoria — giornata i
- n corso:\n  5. Frosinone — 13 pt\n  6. Cagliari — 13 pt\n▶ 7. Milan 
- — 12 pt — 6 PG — DR +6\n  8. Juventus — 11 pt\n  9. Napoli — 10 
- pt\nClassifica aggiornata: 18/10/2026 17:57\nFonte classifica: Lega Serie 
- A
-LAST-MODIFIED:20261018T155737Z
+ n corso:\n  2. Roma — 17 pt\n  3. Lazio — 16 pt\n▶ 4. Milan — 15 p
+ t — 7 PG — DR +7\n  5. Como — 14 pt\n  6. Frosinone — 13 pt\nClass
+ ifica aggiornata: 18/10/2026 18:34\nFonte classifica: Lega Serie A
+LAST-MODIFIED:20261018T163438Z
 LOCATION:Bluenergy Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
