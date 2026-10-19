@@ -340,18 +340,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Atalanta
 DTSTART;TZID=Europe/Rome:20261018T180000
 DTEND;TZID=Europe/Rome:20261018T200000
-DTSTAMP:20261018T203625Z
+DTSTAMP:20261019T203327Z
 UID:f4cca29e5c6dd6bae4edb995@milan-calendar
-SEQUENCE:22
+SEQUENCE:23
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 18/10/2026 
  18:00\nTurno: 7\nStadio: Stadio San Siro\nLocalità: Milano\nDove vederla 
- in Italia: DAZN\; Sky Sport e NOW\nFonte orario: NOW\nClassifica Serie A p
- rovvisoria — giornata in corso:\n  2. Lazio — 19 pt\n  3. Roma — 17 
- pt\n▶ 4. Milan — 15 pt — 7 PG — DR +7\n  5. Como — 14 pt\n  6. F
- rosinone — 13 pt\nClassifica aggiornata: 18/10/2026 22:36\nFonte classif
- ica: Lega Serie A
-LAST-MODIFIED:20261018T203625Z
+ in Italia: DAZN\; Sky Sport e NOW\nFonte orario: NOW\nClassifica Serie A a
+ ggiornata — giornata completata:\n  2. Lazio — 19 pt\n  3. Roma — 17
+  pt\n▶ 4. Milan — 15 pt — 7 PG — DR +7\n  5. Como — 14 pt\n  6. 
+ Frosinone — 13 pt\nClassifica aggiornata: 19/10/2026 22:33\nFonte classi
+ fica: Lega Serie A
+LAST-MODIFIED:20261019T203327Z
 LOCATION:Stadio San Siro\, Milano
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -389,17 +389,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Udinese - AC Milan
 DTSTART;TZID=Europe/Rome:20261025T204500
 DTEND;TZID=Europe/Rome:20261025T224500
-DTSTAMP:20261018T203625Z
+DTSTAMP:20261019T203327Z
 UID:ed011e560d0939fa19ee726a@milan-calendar
-SEQUENCE:14
+SEQUENCE:15
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 25/10/
  2026 20:45\nTurno: 8\nStadio: Bluenergy Stadium\nDove vederla in Italia: D
- AZN\nFonte orario: AC Milan\nClassifica Serie A provvisoria — giornata i
- n corso:\n  2. Lazio — 19 pt\n  3. Roma — 17 pt\n▶ 4. Milan — 15 p
- t — 7 PG — DR +7\n  5. Como — 14 pt\n  6. Frosinone — 13 pt\nClass
- ifica aggiornata: 18/10/2026 22:36\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20261018T203625Z
+ AZN\nFonte orario: AC Milan\nClassifica Serie A aggiornata — giornata co
+ mpletata:\n  2. Lazio — 19 pt\n  3. Roma — 17 pt\n▶ 4. Milan — 15 
+ pt — 7 PG — DR +7\n  5. Como — 14 pt\n  6. Frosinone — 13 pt\nClas
+ sifica aggiornata: 19/10/2026 22:33\nFonte classifica: Lega Serie A
+LAST-MODIFIED:20261019T203327Z
 LOCATION:Bluenergy Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
