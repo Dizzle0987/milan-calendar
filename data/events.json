@@ -1291,8 +1291,8 @@
           "availability_evidence": [],
           "availability_label": "Gratuità da verificare",
           "broadcast_free": false,
-          "broadcast_start": "2026-10-22T11:50:00+02:00",
-          "broadcast_start_rome": "11:50",
+          "broadcast_start": "2026-10-22T02:50:00+02:00",
+          "broadcast_start_rome": "02:50",
           "broadcaster": "TUDN",
           "broadcaster_home_url": null,
           "competition": "UEFA Europa League",
@@ -1305,10 +1305,10 @@
             {
               "broadcaster_page": null,
               "guide": "Sport TV Guide",
-              "programme_start": "2026-10-22T11:50:00+02:00",
+              "programme_start": "2026-10-22T02:50:00+02:00",
               "source_type": "guide",
               "source_url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
-              "verified_at": "2026-10-20T17:17:44Z"
+              "verified_at": "2026-10-20T19:10:36Z"
             }
           ],
           "fixture_cache_key": "europa-league|2026/27|2026-10-22|bournemouth|milan",
@@ -1336,7 +1336,7 @@
           "source_url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
           "status": "UNKNOWN",
           "url": "https://sport-tv-guide.live/en/event/live-football-europa-league-bournemouth-acmilan/1641679",
-          "verified_at": "2026-10-20T17:17:44Z",
+          "verified_at": "2026-10-20T19:10:36Z",
           "watch_url": null,
           "watch_url_type": null,
           "web_stream_free": "unknown"
@@ -1857,7 +1857,7 @@
       "free_italian_broadcasts": [],
       "home_away": "Trasferta",
       "home_team": "AFC Bournemouth",
-      "last_modified": "2026-10-20T17:17:44Z",
+      "last_modified": "2026-10-20T19:10:36Z",
       "location": "England",
       "neutral": false,
       "opponent_country": "Regno Unito",
@@ -1897,7 +1897,7 @@
         "web_stream_free": "unknown"
       },
       "round": "3",
-      "sequence": 30,
+      "sequence": 31,
       "source": "AC Milan",
       "source_id": "e2mq4rd04751zo1nv362agys4",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -2874,7 +2874,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-20T17:17:44Z",
+  "last_changed": "2026-10-20T19:10:36Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -2933,7 +2933,8 @@
     "Broadcast MacEkran (None): HTTPSConnectionPool(host='macekran.com', port=443): Read timed out. (read timeout=10)",
     "Broadcast bTV (None): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
     "Broadcast DAZN Portugal (None): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l",
-    "Broadcast HBO Max (None): 403 Client Error: Forbidden for url: https://www.hbomax.com/gb/en/sports"
+    "Broadcast HBO Max (None): 403 Client Error: Forbidden for url: https://www.hbomax.com/gb/en/sports",
+    "Broadcast Cosmote TV (None): 502 Server Error: Bad Gateway for url: https://www.magentatv.gr/portal/program"
   ],
   "sources_used": [
     "AC Milan",
