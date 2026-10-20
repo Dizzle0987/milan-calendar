@@ -3653,6 +3653,11 @@ def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
         for option in options
         if option.get("country_code") != "IT" and option.get("access") == "free"
     ][:3]
+    possible = [
+        option
+        for option in (data.get("foreign_possible_broadcasts") or [])
+        if option.get("status") == "POSSIBLE_FREE"
+    ][:3]
     lines = ["Dove vederla:"]
     if not italian:
         lines.append("🇮🇹 Italia — Da confermare")
@@ -3708,6 +3713,11 @@ def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
                 lines.append(f"Sito ufficiale: {option['broadcaster_home_url']}")
             elif option.get("url"):
                 lines.append(str(option["url"]))
+    elif possible:
+        for option in possible:
+            lines.append(
+                f"🌍 Possibile: {option['broadcaster']} — {option['country']}"
+            )
     elif data.get("broadcast_international_tbc"):
         lines.append("🌍 In chiaro all'estero — Nessuna emittente gratuita confermata al momento")
     return lines
