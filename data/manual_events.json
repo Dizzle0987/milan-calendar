@@ -1,4 +1,20 @@
 {
+  "international_tv_options": [
+    {
+      "home_team": "AFC Bournemouth",
+      "away_team": "AC Milan",
+      "competition": "UEFA Europa League",
+      "date": "2026-10-22",
+      "broadcaster": "Qazsport",
+      "country": "Kazakistan",
+      "country_code": "KZ",
+      "source_schedule": "https://qazsporttv.kz/kz/program/2026-10-22",
+      "watch_url": "https://qazsporttv.kz/kz/live",
+      "official_domains": ["qazsporttv.kz"],
+      "player_user_report": "Funzionante dall'Italia senza VPN; verifica riferita al player, non alla partita",
+      "availability_label": "TV confermata · Player web funzionante (verifica utente) · Gratuità web della partita da confermare"
+    }
+  ],
   "events": [
     {
       "id": "chelsea-milan-jakarta-2026",

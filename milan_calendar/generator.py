@@ -3334,6 +3334,37 @@ def load_manual_events(path: Path) -> list[dict[str, Any]]:
     return result
 
 
+def apply_manual_international_tv_options(
+    events: list[dict[str, Any]], payload: Any,
+) -> list[dict[str, Any]]:
+    """Attach fixture-scoped TV notes, never a free-web confirmation or discovery."""
+    result = deepcopy(events)
+    options = payload.get("international_tv_options", []) if isinstance(payload, dict) else []
+    for event in result:
+        if not _is_official_international_match(event):
+            continue
+        selected = []
+        for option in options:
+            if (option.get("date") != _event_datetime(event).astimezone(ROME).date().isoformat()
+                    or _competition_family(str(option.get("competition") or ""))
+                    != _competition_family(str(event.get("competition") or ""))
+                    or any(_team_match_key(str(option.get(key) or ""))
+                           != _team_match_key(str(event.get(key) or ""))
+                           for key in ("home_team", "away_team"))
+                    or option.get("country_code") in {None, "", "IT", "ZZ"}
+                    or not _verified_official_url(option, "watch_url")
+                    or not _verified_official_url(option, "source_schedule")):
+                continue
+            selected.append({
+                **deepcopy(option), "status": "UNKNOWN", "access": "unknown",
+                "match_confirmed": True, "web_match_confirmed": False,
+                "broadcast_free": "unknown", "web_stream_free": "unknown",
+            })
+        if selected:
+            event["foreign_tv_broadcasts"] = selected
+    return result
+
+
 def load_calendar_events(
     path: Path, participating_competitions: set[str]
 ) -> list[dict[str, Any]]:
@@ -3720,6 +3751,13 @@ def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
             )
     elif data.get("broadcast_international_tbc"):
         lines.append("🌍 In chiaro all'estero — Nessuna emittente gratuita confermata al momento")
+    if _is_official_international_match(data):
+        for option in data.get("foreign_tv_broadcasts") or []:
+            lines.extend([
+                f"🌍 TV confermata: {option['broadcaster']} — {option['country']}",
+                str(option["availability_label"]),
+                f"Sito ufficiale: {option['watch_url']}",
+            ])
     return lines
 
 
@@ -3932,6 +3970,9 @@ def update_calendar(root: Path, session: requests.Session | None = None, today: 
         now,
     )
     fetched.errors.extend(f"Broadcast {error}" for error in broadcast_errors)
+    combined = apply_manual_international_tv_options(
+        combined, load_json(manual_path, {})
+    )
     participating_competitions = {
         _competition_family(str(event.get("competition") or ""))
         for event in combined

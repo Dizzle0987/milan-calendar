@@ -316,6 +316,7 @@
         if (foreign.length) rows.push(...foreign.map(option => ({ label: `🌍 ${option.broadcaster} — ${option.country} ✓`, option })));
         else if (possible.length) rows.push(...possible.map(option => ({ label: `🌍 Possibile: ${option.broadcaster} — ${option.country}` })));
         else rows.push({ label: "🌍 In chiaro all'estero — Da confermare" });
+        rows.push(...(event.foreign_tv_broadcasts || []).map(option => ({ label: `🌍 TV confermata: ${option.broadcaster} — ${option.country}`, option })));
 
         element.append(document.createTextNode("Dove vederla: "));
         rows.forEach((row, index) => {

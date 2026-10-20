@@ -1830,10 +1830,34 @@
           "web_stream_free": "unknown"
         }
       ],
+      "foreign_tv_broadcasts": [
+        {
+          "access": "unknown",
+          "availability_label": "TV confermata · Player web funzionante (verifica utente) · Gratuità web della partita da confermare",
+          "away_team": "AC Milan",
+          "broadcast_free": "unknown",
+          "broadcaster": "Qazsport",
+          "competition": "UEFA Europa League",
+          "country": "Kazakistan",
+          "country_code": "KZ",
+          "date": "2026-10-22",
+          "home_team": "AFC Bournemouth",
+          "match_confirmed": true,
+          "official_domains": [
+            "qazsporttv.kz"
+          ],
+          "player_user_report": "Funzionante dall'Italia senza VPN; verifica riferita al player, non alla partita",
+          "source_schedule": "https://qazsporttv.kz/kz/program/2026-10-22",
+          "status": "UNKNOWN",
+          "watch_url": "https://qazsporttv.kz/kz/live",
+          "web_match_confirmed": false,
+          "web_stream_free": "unknown"
+        }
+      ],
       "free_italian_broadcasts": [],
       "home_away": "Trasferta",
       "home_team": "AFC Bournemouth",
-      "last_modified": "2026-10-20T11:48:53Z",
+      "last_modified": "2026-10-20T15:40:39Z",
       "location": "England",
       "neutral": false,
       "opponent_country": "Regno Unito",
@@ -1873,7 +1897,7 @@
         "web_stream_free": "unknown"
       },
       "round": "3",
-      "sequence": 28,
+      "sequence": 29,
       "source": "AC Milan",
       "source_id": "e2mq4rd04751zo1nv362agys4",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -2850,7 +2874,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-20T11:48:53Z",
+  "last_changed": "2026-10-20T15:40:39Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
