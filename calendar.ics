@@ -365,16 +365,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ AFC Bournemouth - AC Milan
 DTSTART;TZID=Europe/Rome:20261022T210000
 DTEND;TZID=Europe/Rome:20261022T230000
-DTSTAMP:20261022T171807Z
+DTSTAMP:20261022T191147Z
 UID:dc46921426bc343efc88581d@milan-calendar
-SEQUENCE:43
+SEQUENCE:44
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 22/10/2026 21:00\nTurno: 3\nStadio: Vitality Stadium\nLocalità: Engl
  and\nDove vederla:\nSky Sport e NOW — Italia — https://www.nowtv.it/sp
  ort/calcio/milan\nQazsport — Kazakistan — VPN — https://qazsporttv.k
  z/ru/live\nİctimai TV — Azerbaigian — VPN — https://itv.az/live
-LAST-MODIFIED:20261022T171807Z
+LAST-MODIFIED:20261022T191147Z
 LOCATION:Vitality Stadium\, England
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -454,15 +454,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Ferencváros
 DTSTART;TZID=Europe/Rome:20261105T184500
 DTEND;TZID=Europe/Rome:20261105T204500
-DTSTAMP:20260917T045927Z
+DTSTAMP:20261022T191147Z
 UID:7104e20380283c03c6625881@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  05/11/2026 18:45\nTurno: 4\nStadio: San Siro Stadium\nDove vederla:\n🇮
- 🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Nessuna emitt
- ente gratuita confermata al momento\nFonte orario: NOW
-LAST-MODIFIED:20260917T045927Z
+ 🇹 Italia — Da confermare\n🌍 Possibile: CBC Sport — Azerbaijan\nF
+ onte orario: NOW
+LAST-MODIFIED:20261022T191147Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
