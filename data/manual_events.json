@@ -9,10 +9,35 @@
       "country": "Kazakistan",
       "country_code": "KZ",
       "source_schedule": "https://qazsporttv.kz/kz/program/2026-10-22",
-      "watch_url": "https://qazsporttv.kz/kz/live",
+      "watch_url": "https://qazsporttv.kz/ru/live",
       "official_domains": ["qazsporttv.kz"],
-      "player_user_report": "Funzionante dall'Italia senza VPN; verifica riferita al player, non alla partita",
-      "availability_label": "TV confermata · Player web funzionante (verifica utente) · Gratuità web della partita da confermare"
+      "status": "POSSIBLE_FREE",
+      "confidence": 95,
+      "confidence_scope": "television_schedule",
+      "vpn_required": true,
+      "compact_notes": true,
+      "broadcast_start_rome": "20:50",
+      "player_user_report": "2026-10-21: calcio visibile con VPN kazaka; senza VPN pubblicità di 30 secondi in loop. Partita specifica non verificata.",
+      "availability_label": "TV confermata · Streaming web della partita da verificare"
+    },
+    {
+      "home_team": "AFC Bournemouth",
+      "away_team": "AC Milan",
+      "competition": "UEFA Europa League",
+      "date": "2026-10-22",
+      "broadcaster": "İctimai TV",
+      "country": "Azerbaigian",
+      "country_code": "AZ",
+      "source_schedule": "https://api.itv.az/api/schedules/4",
+      "source_guide": "https://www.livesoccertv.com/it/match/milan-vs-afc-bournemouth/3hsp3",
+      "watch_url": "https://itv.az/live",
+      "official_domains": ["itv.az"],
+      "status": "UNKNOWN",
+      "confidence": 95,
+      "confidence_scope": "television_schedule",
+      "vpn_required": true,
+      "compact_notes": true,
+      "availability_label": "TV confermata · Accesso gratuito al player e streaming della partita da verificare"
     }
   ],
   "events": [

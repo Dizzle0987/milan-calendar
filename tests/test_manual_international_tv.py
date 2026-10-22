@@ -33,18 +33,23 @@ def test_qazsport_manual_tv_option_is_not_a_free_stream_confirmation():
     event = fixture()
     before = deepcopy(event)
     result, = apply_manual_international_tv_options([event], configuration())
-    option, = result["foreign_tv_broadcasts"]
+    option, ictimai = result["foreign_tv_broadcasts"]
     assert option["broadcaster"] == "Qazsport"
     assert option["country_code"] == "KZ"
-    assert option["status"] == "UNKNOWN"
+    assert option["status"] == "POSSIBLE_FREE"
+    assert option["confidence"] == 95
+    assert option["confidence_scope"] == "television_schedule"
+    assert ictimai["status"] == "UNKNOWN"
+    assert ictimai["web_stream_free"] == "unknown"
+    assert ictimai["watch_url"] == "https://itv.az/live"
     assert option["access"] == "unknown"
     assert option["match_confirmed"] is True
     assert option["web_match_confirmed"] is False
     assert option["web_stream_free"] == "unknown"
     assert option["broadcast_free"] == "unknown"
-    assert option["watch_url"] == "https://qazsporttv.kz/kz/live"
+    assert option["watch_url"] == "https://qazsporttv.kz/ru/live"
     assert option["source_schedule"].endswith("/2026-10-22")
-    assert {k: v for k, v in result.items() if k != "foreign_tv_broadcasts"} == before
+    assert {k: v for k, v in result.items() if k not in {"foreign_tv_broadcasts", "broadcast_notes_compact"}} == before
     assert event == before
     assert apply_manual_international_tv_options([result], configuration()) == [result]
 
@@ -68,7 +73,8 @@ def test_manual_tv_option_requires_official_links():
     payload = configuration()
     payload["international_tv_options"][0]["watch_url"] = "https://untrusted.example/live"
     event = fixture()
-    assert apply_manual_international_tv_options([event], payload) == [event]
+    result, = apply_manual_international_tv_options([event], payload)
+    assert [o["broadcaster"] for o in result["foreign_tv_broadcasts"]] == ["İctimai TV"]
 
 
 def test_ics_presents_qazsport_separately_and_keeps_italian_priority():
@@ -76,10 +82,10 @@ def test_ics_presents_qazsport_separately_and_keeps_italian_priority():
     result, = apply_manual_international_tv_options([event], configuration())
     text = "\n".join(_broadcast_description_lines(result))
     assert text.index("Sky Sport e NOW") < text.index("Qazsport")
-    assert "TV confermata: Qazsport — Kazakistan" in text
-    assert "Player web funzionante (verifica utente)" in text
-    assert "Gratuità web della partita da confermare" in text
-    assert "Sito ufficiale: https://qazsporttv.kz/kz/live" in text
+    assert "Qazsport — Kazakistan — VPN — https://qazsporttv.kz/ru/live" in text
+    assert "İctimai TV — Azerbaigian — VPN — https://itv.az/live" in text
+    assert text.count("Qazsport") == 1
+    assert not any(word in text for word in ["verifica", "confermata", "confidence", "POSSIBLE_FREE", "UNKNOWN", "palinsesto"])
     assert "ALTERNATIVE GRATUITE ALL'ESTERO" not in text
     assert "Streaming web gratuito" not in text
     component, = Calendar.from_ical(build_ical([result])).walk("VEVENT")
@@ -99,7 +105,7 @@ def test_existing_calendar_only_gets_the_target_annotation():
     old, new = changed[0]
     assert "Bournemouth" in old["home_team"]
     assert old["start"].startswith("2026-10-22")
-    assert {k: v for k, v in new.items() if k != "foreign_tv_broadcasts"} == old
+    assert {k: v for k, v in new.items() if k not in {"foreign_tv_broadcasts", "broadcast_notes_compact"}} == {k: v for k, v in old.items() if k != "broadcast_notes_compact"}
     unchanged_old = [e for e in events if e != old]
     unchanged_new = [e for e in result if e != new]
     assert build_ical(unchanged_old) == build_ical(unchanged_new)
@@ -129,7 +135,7 @@ def test_normal_generation_keeps_qazsport_after_fresh_broadcast_resolution(tmp_p
     second = generator.update_calendar(tmp_path)
     assert first == second
     saved = json.loads((data / "events.json").read_text())["events"][0]
-    assert saved["foreign_tv_broadcasts"][0]["status"] == "UNKNOWN"
+    assert saved["foreign_tv_broadcasts"][0]["status"] == "POSSIBLE_FREE"
     assert saved["foreign_tv_broadcasts"][0]["web_stream_free"] == "unknown"
     assert saved["start"] == event["start"]
     assert saved["uid"] == event["uid"]
@@ -137,3 +143,36 @@ def test_normal_generation_keeps_qazsport_after_fresh_broadcast_resolution(tmp_p
     component, = Calendar.from_ical((tmp_path / "calendar.ics").read_bytes()).walk("VEVENT")
     assert "Qazsport" in str(component["description"])
     assert component.decoded("dtstart").isoformat() == event["start"]
+
+
+def test_compact_notes_deduplicate_and_hide_unverified_rights_and_paid_streams():
+    event = fixture()
+    event["broadcast_it"] = "Sky Sport e NOW"
+    event["broadcast_source_url"] = "https://www.nowtv.it/sport/calcio/milan"
+    event["foreign_possible_broadcasts"] = [{
+        "broadcaster": "CBC Sport", "country_code": "AZ", "country": "Azerbaigian",
+        "match_confirmed": False, "watch_url": "https://cbcsport.az/live/",
+    }]
+    result, = apply_manual_international_tv_options([event], configuration())
+    result["broadcast_options"].extend([
+        {**result["foreign_tv_broadcasts"][0], "access": "free"},
+        {"country_code": "MX", "country": "Messico", "broadcaster": "Premium",
+         "match_confirmed": True, "access": "paid", "watch_url": "https://premium.example/live"},
+        {"country_code": "BR", "country": "Brasile", "broadcaster": "Video",
+         "match_confirmed": True, "access": "free", "watch_url": "https://www.youtube.com/watch?v=example"},
+    ])
+    lines = _broadcast_description_lines(result)
+    assert lines[1] == "Sky Sport e NOW — Italia — https://www.nowtv.it/sport/calcio/milan"
+    assert "\n".join(lines).count("Qazsport") == 1
+    assert not any(name in "\n".join(lines) for name in ["CBC Sport", "Premium", "Video", "Claro"])
+    result["time_source"] = "NOW"
+    description = str(Calendar.from_ical(build_ical([result])).walk("VEVENT")[0]["description"])
+    assert "Fonte orario:" not in description
+
+
+def test_manual_note_cannot_promote_a_confirmed_free_stream():
+    payload = configuration()
+    payload["international_tv_options"][0].update(status="CONFIRMED_FREE", web_stream_free=True)
+    result, = apply_manual_international_tv_options([fixture()], payload)
+    assert result["foreign_tv_broadcasts"][0]["status"] == "UNKNOWN"
+    assert result["foreign_tv_broadcasts"][0]["web_stream_free"] == "unknown"

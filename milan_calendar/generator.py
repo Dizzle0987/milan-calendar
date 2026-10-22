@@ -3356,12 +3356,16 @@ def apply_manual_international_tv_options(
                     or not _verified_official_url(option, "source_schedule")):
                 continue
             selected.append({
-                **deepcopy(option), "status": "UNKNOWN", "access": "unknown",
+                **deepcopy(option),
+                "status": "POSSIBLE_FREE" if option.get("status") == "POSSIBLE_FREE" else "UNKNOWN",
+                "access": "unknown",
                 "match_confirmed": True, "web_match_confirmed": False,
                 "broadcast_free": "unknown", "web_stream_free": "unknown",
             })
         if selected:
             event["foreign_tv_broadcasts"] = selected
+            if any(option.get("compact_notes") is True for option in selected):
+                event["broadcast_notes_compact"] = True
     return result
 
 
@@ -3677,6 +3681,30 @@ def _official_broadcast_link_label(option: dict[str, Any]) -> str:
 
 
 def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
+    if data.get("broadcast_notes_compact") and _is_official_international_match(data):
+        # Fixture-scoped presentation only: never change candidates or scoring.
+        lines = ["Dove vederla:"]
+        italian = [o for o in data.get("broadcast_options") or [] if o.get("country_code") == "IT"]
+        if italian or data.get("broadcast_it"):
+            option = italian[0] if italian else {}
+            name = str(data.get("broadcast_it") or option.get("broadcaster") or "")
+            url = option.get("watch_url") or data.get("broadcast_source_url") or option.get("url")
+            lines.append(" — ".join(str(v) for v in (name, "Italia", url) if v))
+        seen = set()
+        foreign = list(data.get("foreign_tv_broadcasts") or []) + [
+            o for o in (data.get("broadcast_options") or []) + (data.get("foreign_possible_broadcasts") or [])
+            if o.get("country_code") != "IT" and o.get("match_confirmed") is True
+        ]
+        for option in foreign:
+            key = (option.get("country_code"), _normalize(str(option.get("broadcaster") or "")))
+            url = str(option.get("watch_url") or "")
+            if (key in seen or not url or option.get("access", option.get("free_or_pay")) in {"paid", "included"}
+                    or (urlparse(url).hostname or "").lower() in {"youtube.com", "www.youtube.com", "youtu.be"}):
+                continue
+            seen.add(key)
+            vpn = "VPN" if option.get("vpn_required", True) else ""
+            lines.append(" — ".join(str(v) for v in (option["broadcaster"], option["country"], vpn, url) if v))
+        return lines
     options = data.get("broadcast_options") or []
     italian = [option for option in options if option.get("country_code") == "IT"]
     foreign = [
@@ -3844,7 +3872,7 @@ def build_ical(events: list[dict[str, Any]]) -> bytes:
             details.extend(_broadcast_description_lines(data))
         elif is_match and data.get("broadcast_it"):
             details.append(f"Dove vederla in Italia: {data['broadcast_it']}")
-        if is_match and data.get("time_source"):
+        if is_match and data.get("time_source") and not data.get("broadcast_notes_compact"):
             details.append(f"Fonte orario: {data['time_source']}")
         if not is_match and data.get("notes"):
             details.append(str(data["notes"]))

@@ -1743,6 +1743,7 @@
       "broadcast_international_tbc": true,
       "broadcast_it": "Sky Sport e NOW",
       "broadcast_italy_tbc": false,
+      "broadcast_notes_compact": true,
       "broadcast_options": [
         {
           "access": "paid",
@@ -1833,11 +1834,15 @@
       "foreign_tv_broadcasts": [
         {
           "access": "unknown",
-          "availability_label": "TV confermata · Player web funzionante (verifica utente) · Gratuità web della partita da confermare",
+          "availability_label": "TV confermata · Streaming web della partita da verificare",
           "away_team": "AC Milan",
           "broadcast_free": "unknown",
+          "broadcast_start_rome": "20:50",
           "broadcaster": "Qazsport",
+          "compact_notes": true,
           "competition": "UEFA Europa League",
+          "confidence": 95,
+          "confidence_scope": "television_schedule",
           "country": "Kazakistan",
           "country_code": "KZ",
           "date": "2026-10-22",
@@ -1846,10 +1851,37 @@
           "official_domains": [
             "qazsporttv.kz"
           ],
-          "player_user_report": "Funzionante dall'Italia senza VPN; verifica riferita al player, non alla partita",
+          "player_user_report": "2026-10-21: calcio visibile con VPN kazaka; senza VPN pubblicità di 30 secondi in loop. Partita specifica non verificata.",
           "source_schedule": "https://qazsporttv.kz/kz/program/2026-10-22",
+          "status": "POSSIBLE_FREE",
+          "vpn_required": true,
+          "watch_url": "https://qazsporttv.kz/ru/live",
+          "web_match_confirmed": false,
+          "web_stream_free": "unknown"
+        },
+        {
+          "access": "unknown",
+          "availability_label": "TV confermata · Accesso gratuito al player e streaming della partita da verificare",
+          "away_team": "AC Milan",
+          "broadcast_free": "unknown",
+          "broadcaster": "İctimai TV",
+          "compact_notes": true,
+          "competition": "UEFA Europa League",
+          "confidence": 95,
+          "confidence_scope": "television_schedule",
+          "country": "Azerbaigian",
+          "country_code": "AZ",
+          "date": "2026-10-22",
+          "home_team": "AFC Bournemouth",
+          "match_confirmed": true,
+          "official_domains": [
+            "itv.az"
+          ],
+          "source_guide": "https://www.livesoccertv.com/it/match/milan-vs-afc-bournemouth/3hsp3",
+          "source_schedule": "https://api.itv.az/api/schedules/4",
           "status": "UNKNOWN",
-          "watch_url": "https://qazsporttv.kz/kz/live",
+          "vpn_required": true,
+          "watch_url": "https://itv.az/live",
           "web_match_confirmed": false,
           "web_stream_free": "unknown"
         }
@@ -1857,7 +1889,7 @@
       "free_italian_broadcasts": [],
       "home_away": "Trasferta",
       "home_team": "AFC Bournemouth",
-      "last_modified": "2026-10-22T05:00:26Z",
+      "last_modified": "2026-10-22T08:58:11Z",
       "location": "England",
       "neutral": false,
       "opponent_country": "Regno Unito",
@@ -1897,7 +1929,7 @@
         "web_stream_free": "unknown"
       },
       "round": "3",
-      "sequence": 40,
+      "sequence": 41,
       "source": "AC Milan",
       "source_id": "e2mq4rd04751zo1nv362agys4",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -2874,7 +2906,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-22T05:00:26Z",
+  "last_changed": "2026-10-22T08:58:11Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
