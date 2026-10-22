@@ -365,16 +365,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ AFC Bournemouth - AC Milan
 DTSTART;TZID=Europe/Rome:20261022T210000
 DTEND;TZID=Europe/Rome:20261022T230000
-DTSTAMP:20261022T120337Z
+DTSTAMP:20261022T171807Z
 UID:dc46921426bc343efc88581d@milan-calendar
-SEQUENCE:42
+SEQUENCE:43
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 22/10/2026 21:00\nTurno: 3\nStadio: Vitality Stadium\nLocalità: Engl
  and\nDove vederla:\nSky Sport e NOW — Italia — https://www.nowtv.it/sp
  ort/calcio/milan\nQazsport — Kazakistan — VPN — https://qazsporttv.k
  z/ru/live\nİctimai TV — Azerbaigian — VPN — https://itv.az/live
-LAST-MODIFIED:20261022T120337Z
+LAST-MODIFIED:20261022T171807Z
 LOCATION:Vitality Stadium\, England
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
