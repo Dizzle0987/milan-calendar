@@ -217,6 +217,13 @@
       "timezone": "Asia/Baku", "market_tier": 1,
       "url": "https://cbcsport.az/tv_program_schedule",
       "source_type": "fixture_page", "require_kickoff_time": true,
+      "fixture_validation": "cbc_programme",
+      "team_aliases": {
+        "milan": ["AC Milan", "A.C. Milan"],
+        "bournemouth": ["AFC Bournemouth", "Bornmut"],
+        "benfica": ["SL Benfica", "Benfika"],
+        "salzburg": ["RB Salzburg", "Zaltsburq"]
+      },
       "rights_confirmed": true,
       "rights_source_url": "https://www.uefa.com/uefaeuropaleague/news/028d-1ae6d62165d6-69b17b354deb-1000--where-to-watch-the-europa-league-final-tv-broadcast-partners-live-streams/",
       "broadcast_free": true, "web_stream_free": "unknown",

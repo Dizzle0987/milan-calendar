@@ -11,6 +11,7 @@ import unicodedata
 from copy import deepcopy
 from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta, timezone
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import quote, urlencode, urljoin, urlparse
@@ -372,8 +373,12 @@ def page_confirms_fixture(
     timezone_name: str = "Europe/Rome",
     require_kickoff_time: bool = False,
     team_aliases: dict[str, Any] | None = None,
+    *,
+    strict_programme: bool = False,
 ) -> bool:
     """Require teams, exact date and viewing language in one nearby page fragment."""
+    if strict_programme:
+        return _cbc_fixture_state(html, event, timezone_name, team_aliases or {}) == "confirmed"
     broadcaster_marker = _normalize(broadcaster)
     time_markers = _fixture_time_markers(_event_datetime(event), timezone_name)
     for window in _fixture_windows(html, event, timezone_name, team_aliases):
@@ -391,6 +396,149 @@ def page_confirms_fixture(
         ):
             return True
     return False
+
+
+class _CBCProgrammeBlocks(HTMLParser):
+    """Keep leaf programme records separate; never combine a whole timetable.
+
+    Semantic rows/articles or explicitly labelled programme items are accepted.
+    Unsupported markup fails closed until the real accessible source is known.
+    """
+    def __init__(self) -> None:
+        super().__init__()
+        self.stack: list[dict[str, Any]] = []
+        self.blocks: list[str] = []
+        self.ignored = 0
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attributes = dict(attrs)
+        if tag in {"script", "style", "noscript"}:
+            self.ignored += 1
+        if self.ignored:
+            return
+        classes = set(str(attributes.get("class") or "").split())
+        record = tag in {"tr", "article"} or bool(classes & {
+            "programme", "program-item", "programme-item", "schedule-item"})
+        if record:
+            for frame in self.stack:
+                frame["nested"] = True
+            self.stack.append({"tag": tag, "depth": 0, "text": [], "nested": False})
+        for frame in self.stack:
+            if tag == frame["tag"]:
+                frame["depth"] += 1
+            if tag in {"td", "th", "p", "div", "h1", "h2", "h3", "h4", "br", "time"}:
+                frame["text"].append("\n")
+            if tag == "time" and attributes.get("datetime"):
+                frame["text"].extend([str(attributes["datetime"]), "\n"])
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag in {"script", "style", "noscript"}:
+            self.ignored = max(0, self.ignored - 1)
+            return
+        if self.ignored:
+            return
+        for frame in self.stack[:]:
+            if tag in {"td", "th", "p", "div", "h1", "h2", "h3", "h4", "time"}:
+                frame["text"].append("\n")
+            if tag == frame["tag"]:
+                frame["depth"] -= 1
+                if frame["depth"] == 0:
+                    if not frame["nested"]:
+                        self.blocks.append("".join(frame["text"]))
+                    self.stack.remove(frame)
+
+    def handle_data(self, data: str) -> None:
+        if not self.ignored:
+            for frame in self.stack:
+                frame["text"].append(re.sub(r"\s+", " ", data))
+
+
+def _cbc_fixture_state(html: str, event: dict[str, Any], timezone_name: str,
+                       aliases: dict[str, Any]) -> str | None:
+    """CBC opt-in: same record, exact team sides, full date and competition.
+
+    Missing clocks yield a candidate, never match confirmation. This does not
+    verify streaming access and does not use historical availability evidence.
+    """
+    try:
+        zone = ZoneInfo(timezone_name)
+        kickoff = _event_datetime(event)
+        if kickoff.tzinfo is None:
+            return None
+        local = kickoff.astimezone(zone)
+    except (ValueError, KeyError):
+        return None
+    parser = _CBCProgrammeBlocks()
+    parser.feed(html)
+    family = _competition_family(str(event.get("competition") or ""))
+    competitions = {
+        "champions-league": ("UEFA Champions League", "UEFA Çempionlar Liqası"),
+        "europa-league": ("UEFA Europa League", "UEFA Avropa Liqası"),
+        "conference-league": ("UEFA Conference League", "UEFA Konfrans Liqası"),
+    }
+    home = _team_broadcast_aliases(str(event.get("home_team") or ""), aliases)
+    away = _team_broadcast_aliases(str(event.get("away_team") or ""), aliases)
+    if not home or not away or home & away:
+        return None
+    pending = False
+    for block in parser.blocks:
+        def local_timestamp(match: re.Match[str]) -> str:
+            value = datetime.fromisoformat(match.group().replace("Z", "+00:00"))
+            if value.tzinfo is None:
+                value = value.replace(tzinfo=zone)
+            return value.astimezone(zone).strftime("%Y-%m-%d %H:%M")
+
+        try:
+            block = re.sub(
+                r"\b20\d{2}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:\d{2})?",
+                local_timestamp, block)
+        except ValueError:
+            continue
+        normalized = _normalize(block)
+        if re.search(r"(?:^|-)(?:u-?\d{1,2}|under-\d{1,2})(?:-|$)", normalized) or any(
+            re.search(r"(?:^|-)" + re.escape(_normalize(marker)) + r"(?:-|$)", normalized)
+            for marker in (*EXCLUDED_SQUADS, "youth", "ladies", "qadinlar", "qadin", "qadınlar", "qadın",
+                           "replay", "repeat", "highlights", "icmal", "təkrar")):
+            continue
+        families = {key for key, terms in competitions.items()
+                    if any(_normalize(term) in normalized for term in terms)}
+        if families != {family}:
+            continue
+        pair_found = False
+        for field in block.splitlines():
+            sides = re.split(r"\s*(?:[–—]|\s-\s|\s+vs\.?\s+)\s*", field.strip(), flags=re.I)
+            if len(sides) != 2:
+                continue
+            left, right = (_team_match_key(re.sub(r"\([^()]*\)", "", side).strip()) for side in sides)
+            if (left in home and right in away) or (left in away and right in home):
+                pair_found = True
+        if not pair_found:
+            continue
+        dates: set[date] = set()
+        try:
+            for year, month, day in re.findall(r"\b(20\d{2})-(\d{2})-(\d{2})\b", block):
+                dates.add(date(int(year), int(month), int(day)))
+            for day, month, year in re.findall(r"\b(\d{1,2})[./-](\d{1,2})[./-](20\d{2})\b", block):
+                dates.add(date(int(year), int(month), int(day)))
+            months = {"yanvar": 1, "fevral": 2, "mart": 3, "aprel": 4,
+                      "may": 5, "iyun": 6, "iyul": 7, "avqust": 8,
+                      "sentyabr": 9, "oktyabr": 10, "noyabr": 11, "dekabr": 12}
+            for day, month, year in re.findall(r"\b(\d{1,2})\s+([a-z]+)\s+(20\d{2})\b", block.casefold()):
+                if month in months:
+                    dates.add(date(int(year), months[month], int(day)))
+        except ValueError:
+            continue
+        if dates != {local.date()}:
+            continue
+        # Mask numeric dates before reading clocks, so 22.10 is never 22:10.
+        clocks_text = re.sub(r"\b\d{1,4}[./-]\d{1,2}[./-]\d{1,4}\b", " ", block)
+        clocks = set(re.findall(r"(?<![\d:])([01]?\d|2[0-3])[:.]([0-5]\d)(?!\d)", clocks_text))
+        if not clocks or event.get("all_day"):
+            pending = True
+            continue
+        if {(int(hour), int(minute)) for hour, minute in clocks} == {(local.hour, local.minute)}:
+            return "confirmed"
+    return "pending" if pending else None
 
 
 def parse_servus_epg(html: str) -> list[dict[str, Any]]:
@@ -1904,6 +2052,12 @@ def apply_verified_broadcasts(
                 continue
 
             timezone_name = str(source.get("timezone") or "Europe/Rome")
+            strict_programme = source.get("fixture_validation") == "cbc_programme"
+            if strict_programme and _cbc_fixture_state(
+                response.text, target, timezone_name, source.get("team_aliases") or {}
+            ) == "pending":
+                evidence_by_broadcaster.setdefault(
+                    source_key, {"source": deepcopy(source), "evidence": []})
             if page_confirms_fixture(
                 response.text,
                 target,
@@ -1911,6 +2065,7 @@ def apply_verified_broadcasts(
                 timezone_name,
                 bool(source.get("require_kickoff_time")),
                 source.get("team_aliases") or {},
+                strict_programme=strict_programme,
             ):
                 refined = _source_with_page_channels(source, response.text)
                 add_evidence(
