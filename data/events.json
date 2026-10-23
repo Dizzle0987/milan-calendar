@@ -2268,6 +2268,7 @@
       "broadcast_international_tbc": true,
       "broadcast_it": "Sky Sport e NOW",
       "broadcast_italy_tbc": true,
+      "broadcast_notes_compact": true,
       "broadcast_options": [],
       "broadcast_source_url": "https://www.nowtv.it/sport/calcio/milan",
       "broadcast_source_urls": [
@@ -2324,7 +2325,7 @@
       "free_italian_broadcasts": [],
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-22T19:11:47Z",
+      "last_modified": "2026-10-23T21:29:56Z",
       "location": "",
       "neutral": false,
       "opponent_country": "Ungheria",
@@ -2332,7 +2333,7 @@
       "opponent_country_source": "broadcast source registry",
       "primary_italian_broadcast": null,
       "round": "4",
-      "sequence": 5,
+      "sequence": 6,
       "source": "AC Milan",
       "source_id": "e64ut8qw4eckzlr4vbm0ln3f8",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -3157,7 +3158,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-23T19:08:36Z",
+  "last_changed": "2026-10-23T21:29:56Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -3212,7 +3213,7 @@
     "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
     "Sky Sport: nessun orario esplicito per il Milan",
     "Mediaset: 404 Client Error: Not Found for url: https://mediasetinfinity.mediaset.it/sport",
-    "Prime Video: HTTPSConnectionPool(host='www.primevideo.com', port=443): Max retries exceeded with url: /sports (Caused by ResponseError('too many 503 error responses'))",
+    "Prime Video: nessun orario esplicito per il Milan",
     "Broadcast CBC Sport (None): 403 Client Error: Forbidden for url: https://cbcsport.az/tv_program_schedule",
     "Broadcast RTL+ (None): 404 Client Error: Not Found for url: https://plus.rtl.de/video-tv/sport",
     "Broadcast MacEkran (None): HTTPSConnectionPool(host='macekran.com', port=443): Read timed out. (read timeout=10)",
