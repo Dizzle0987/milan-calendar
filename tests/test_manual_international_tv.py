@@ -29,23 +29,23 @@ def fixture():
     }
 
 
-def test_qazsport_manual_tv_option_is_not_a_free_stream_confirmation():
+def test_qazsport_user_confirmation_is_limited_to_the_specific_fixture():
     event = fixture()
     before = deepcopy(event)
     result, = apply_manual_international_tv_options([event], configuration())
     option, ictimai = result["foreign_tv_broadcasts"]
     assert option["broadcaster"] == "Qazsport"
     assert option["country_code"] == "KZ"
-    assert option["status"] == "POSSIBLE_FREE"
+    assert option["status"] == "CONFIRMED_FREE"
     assert option["confidence"] == 95
     assert option["confidence_scope"] == "television_schedule"
     assert ictimai["status"] == "UNKNOWN"
     assert ictimai["web_stream_free"] == "unknown"
     assert ictimai["watch_url"] == "https://itv.az/live"
-    assert option["access"] == "unknown"
+    assert option["access"] == "free"
     assert option["match_confirmed"] is True
-    assert option["web_match_confirmed"] is False
-    assert option["web_stream_free"] == "unknown"
+    assert option["web_match_confirmed"] is True
+    assert option["web_stream_free"] is True
     assert option["broadcast_free"] == "unknown"
     assert option["watch_url"] == "https://qazsporttv.kz/ru/live"
     assert option["source_schedule"].endswith("/2026-10-22")
@@ -135,8 +135,8 @@ def test_normal_generation_keeps_qazsport_after_fresh_broadcast_resolution(tmp_p
     second = generator.update_calendar(tmp_path)
     assert first == second
     saved = json.loads((data / "events.json").read_text())["events"][0]
-    assert saved["foreign_tv_broadcasts"][0]["status"] == "POSSIBLE_FREE"
-    assert saved["foreign_tv_broadcasts"][0]["web_stream_free"] == "unknown"
+    assert saved["foreign_tv_broadcasts"][0]["status"] == "CONFIRMED_FREE"
+    assert saved["foreign_tv_broadcasts"][0]["web_stream_free"] is True
     assert saved["start"] == event["start"]
     assert saved["uid"] == event["uid"]
     assert saved["broadcast_options"] == event["broadcast_options"]
@@ -173,6 +173,42 @@ def test_compact_notes_deduplicate_and_hide_unverified_rights_and_paid_streams()
 def test_manual_note_cannot_promote_a_confirmed_free_stream():
     payload = configuration()
     payload["international_tv_options"][0].update(status="CONFIRMED_FREE", web_stream_free=True)
+    payload["international_tv_options"][0].pop("availability_evidence")
     result, = apply_manual_international_tv_options([fixture()], payload)
     assert result["foreign_tv_broadcasts"][0]["status"] == "UNKNOWN"
     assert result["foreign_tv_broadcasts"][0]["web_stream_free"] == "unknown"
+
+
+@pytest.mark.parametrize("field,value", [
+    ("fixture_start", "2026-10-29T21:00:00+01:00"),
+    ("fixture_home_team", "Salzburg"),
+    ("competition", "UEFA Champions League"),
+    ("source_type", "official_web"),
+    ("web_match_confirmed", False),
+    ("web_stream_free", "unknown"),
+    ("subscription_required", True),
+    ("territories", ["IT"]),
+])
+def test_unrelated_or_incomplete_user_confirmation_cannot_promote_stream(field, value):
+    payload = configuration()
+    payload["international_tv_options"][0]["availability_evidence"][0][field] = value
+    result, = apply_manual_international_tv_options([fixture()], payload)
+    assert result["foreign_tv_broadcasts"][0]["status"] == "UNKNOWN"
+    assert result["foreign_tv_broadcasts"][0]["web_stream_free"] == "unknown"
+
+
+def test_user_confirmation_does_not_change_ics_or_ictimai():
+    confirmed = configuration()
+    pending = deepcopy(confirmed)
+    pending["international_tv_options"][0]["status"] = "POSSIBLE_FREE"
+    pending["international_tv_options"][0].pop("availability_evidence")
+    before, = apply_manual_international_tv_options([fixture()], pending)
+    after, = apply_manual_international_tv_options([fixture()], confirmed)
+    assert before["foreign_tv_broadcasts"][1] == after["foreign_tv_broadcasts"][1]
+    assert build_ical([before]) == build_ical([after])
+    # Even copying the configuration to a future date cannot reuse past proof.
+    for option in confirmed["international_tv_options"]:
+        option["date"] = "2026-10-29"
+    future = {**fixture(), "start": "2026-10-29T21:00:00+01:00"}
+    event, = apply_manual_international_tv_options([future], confirmed)
+    assert event["foreign_tv_broadcasts"][0]["status"] == "UNKNOWN"

@@ -11,14 +11,30 @@
       "source_schedule": "https://qazsporttv.kz/kz/program/2026-10-22",
       "watch_url": "https://qazsporttv.kz/ru/live",
       "official_domains": ["qazsporttv.kz"],
-      "status": "POSSIBLE_FREE",
+      "status": "CONFIRMED_FREE",
       "confidence": 95,
       "confidence_scope": "television_schedule",
       "vpn_required": true,
       "compact_notes": true,
       "broadcast_start_rome": "20:50",
-      "player_user_report": "2026-10-21: calcio visibile con VPN kazaka; senza VPN pubblicità di 30 secondi in loop. Partita specifica non verificata.",
-      "availability_label": "TV confermata · Streaming web della partita da verificare"
+      "player_user_report": "Conferma utente del 2026-10-23: Bournemouth–Milan del 22/10/2026 vista sul player ufficiale tramite VPN Kazakistan, gratuitamente e senza abbonamento. Conferma limitata a questa partita.",
+      "availability_label": "Streaming web gratuito confermato dall'utente per questa partita",
+      "availability_evidence": [
+        {
+          "source_type": "user_confirmation",
+          "source_url": "https://qazsporttv.kz/ru/live",
+          "scope": "fixture",
+          "verified_at": "2026-10-23",
+          "fixture_start": "2026-10-22T21:00:00+02:00",
+          "fixture_home_team": "AFC Bournemouth",
+          "fixture_away_team": "AC Milan",
+          "competition": "UEFA Europa League",
+          "web_match_confirmed": true,
+          "web_stream_free": true,
+          "subscription_required": false,
+          "territories": ["KZ"]
+        }
+      ]
     },
     {
       "home_team": "AFC Bournemouth",

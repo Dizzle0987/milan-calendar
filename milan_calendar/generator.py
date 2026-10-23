@@ -3337,7 +3337,7 @@ def load_manual_events(path: Path) -> list[dict[str, Any]]:
 def apply_manual_international_tv_options(
     events: list[dict[str, Any]], payload: Any,
 ) -> list[dict[str, Any]]:
-    """Attach fixture-scoped TV notes, never a free-web confirmation or discovery."""
+    """Attach fixture notes and explicit user evidence; never discover web access."""
     result = deepcopy(events)
     options = payload.get("international_tv_options", []) if isinstance(payload, dict) else []
     for event in result:
@@ -3355,12 +3355,28 @@ def apply_manual_international_tv_options(
                     or not _verified_official_url(option, "watch_url")
                     or not _verified_official_url(option, "source_schedule")):
                 continue
+            user_confirmed = option.get("status") == "CONFIRMED_FREE" and any(
+                row.get("source_type") == "user_confirmation"
+                and row.get("scope") == "fixture"
+                and row.get("source_url") == option.get("watch_url")
+                and row.get("fixture_start") == _event_datetime(event).astimezone(ROME).isoformat()
+                and all(_team_match_key(str(row.get("fixture_" + key) or ""))
+                        == _team_match_key(str(event.get(key) or "")) for key in ("home_team", "away_team"))
+                and _competition_family(str(row.get("competition") or ""))
+                == _competition_family(str(event.get("competition") or ""))
+                and row.get("web_match_confirmed") is True
+                and row.get("web_stream_free") is True
+                and row.get("subscription_required") is False
+                and option["country_code"] in (row.get("territories") or [])
+                for row in option.get("availability_evidence") or []
+            )
             selected.append({
                 **deepcopy(option),
-                "status": "POSSIBLE_FREE" if option.get("status") == "POSSIBLE_FREE" else "UNKNOWN",
-                "access": "unknown",
-                "match_confirmed": True, "web_match_confirmed": False,
-                "broadcast_free": "unknown", "web_stream_free": "unknown",
+                "status": "CONFIRMED_FREE" if user_confirmed else (
+                    "POSSIBLE_FREE" if option.get("status") == "POSSIBLE_FREE" else "UNKNOWN"),
+                "access": "free" if user_confirmed else "unknown",
+                "match_confirmed": True, "web_match_confirmed": user_confirmed,
+                "broadcast_free": "unknown", "web_stream_free": True if user_confirmed else "unknown",
             })
         if selected:
             event["foreign_tv_broadcasts"] = selected

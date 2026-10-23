@@ -1735,8 +1735,26 @@
       "competition": "UEFA Europa League",
       "foreign_tv_broadcasts": [
         {
-          "access": "unknown",
-          "availability_label": "TV confermata · Streaming web della partita da verificare",
+          "access": "free",
+          "availability_evidence": [
+            {
+              "competition": "UEFA Europa League",
+              "fixture_away_team": "AC Milan",
+              "fixture_home_team": "AFC Bournemouth",
+              "fixture_start": "2026-10-22T21:00:00+02:00",
+              "scope": "fixture",
+              "source_type": "user_confirmation",
+              "source_url": "https://qazsporttv.kz/ru/live",
+              "subscription_required": false,
+              "territories": [
+                "KZ"
+              ],
+              "verified_at": "2026-10-23",
+              "web_match_confirmed": true,
+              "web_stream_free": true
+            }
+          ],
+          "availability_label": "Streaming web gratuito confermato dall'utente per questa partita",
           "away_team": "AC Milan",
           "broadcast_free": "unknown",
           "broadcast_start_rome": "20:50",
@@ -1753,13 +1771,13 @@
           "official_domains": [
             "qazsporttv.kz"
           ],
-          "player_user_report": "2026-10-21: calcio visibile con VPN kazaka; senza VPN pubblicità di 30 secondi in loop. Partita specifica non verificata.",
+          "player_user_report": "Conferma utente del 2026-10-23: Bournemouth–Milan del 22/10/2026 vista sul player ufficiale tramite VPN Kazakistan, gratuitamente e senza abbonamento. Conferma limitata a questa partita.",
           "source_schedule": "https://qazsporttv.kz/kz/program/2026-10-22",
-          "status": "POSSIBLE_FREE",
+          "status": "CONFIRMED_FREE",
           "vpn_required": true,
           "watch_url": "https://qazsporttv.kz/ru/live",
-          "web_match_confirmed": false,
-          "web_stream_free": "unknown"
+          "web_match_confirmed": true,
+          "web_stream_free": true
         },
         {
           "access": "unknown",
