@@ -70,6 +70,99 @@
       "url": "https://www.tv8.it/programmazione",
       "public_url": "https://www.tv8.it/programmazione",
       "endpoint": "https://www.tv8.it/api/programmingCarousel", "source_type": "tv8_api",
+      "watch_url": "https://www.tv8.it/streaming", "watch_url_type": "live_page",
+      "official_domains": ["tv8.it"], "broadcast_free": true, "web_stream_free": "unknown",
+      "lookahead_days": 21, "priority": 110
+    },
+    {
+      "country": "Italia", "country_code": "IT", "broadcaster": "Rai 1",
+      "access": "unknown", "platforms": "TV/streaming da verificare", "language": "italiano",
+      "url": "https://www.raiplay.it/guidatv", "source_type": "registry_only",
+      "watch_url": "https://www.raiplay.it/dirette/rai1", "watch_url_type": "live_page",
+      "official_domains": ["raiplay.it"], "match_terms": ["Rai 1", "Rai Uno", "Rai1"],
+      "broadcast_free": "unknown", "web_stream_free": "unknown", "market_tier": 1,
+      "lookahead_days": 21, "priority": 110
+    },
+    {
+      "country": "Italia", "country_code": "IT", "broadcaster": "Rai 2",
+      "access": "unknown", "platforms": "TV/streaming da verificare", "language": "italiano",
+      "url": "https://www.raiplay.it/guidatv", "source_type": "registry_only",
+      "watch_url": "https://www.raiplay.it/dirette/rai2", "watch_url_type": "live_page",
+      "official_domains": ["raiplay.it"], "match_terms": ["Rai 2", "Rai Due", "Rai2"],
+      "broadcast_free": "unknown", "web_stream_free": "unknown", "market_tier": 1,
+      "lookahead_days": 21, "priority": 110
+    },
+    {
+      "country": "Italia", "country_code": "IT", "broadcaster": "Rai Sport",
+      "access": "unknown", "platforms": "TV/streaming da verificare", "language": "italiano",
+      "url": "https://www.raiplay.it/guidatv", "source_type": "registry_only",
+      "watch_url": "https://www.raiplay.it/dirette/raisport", "watch_url_type": "live_page",
+      "official_domains": ["raiplay.it"], "match_terms": ["Rai Sport", "RaiSport"],
+      "broadcast_free": "unknown", "web_stream_free": "unknown", "market_tier": 1,
+      "lookahead_days": 21, "priority": 110
+    },
+    {
+      "country": "Italia", "country_code": "IT", "broadcaster": "Canale 5",
+      "access": "unknown", "platforms": "TV/streaming da verificare", "language": "italiano",
+      "url": "https://mediasetinfinity.mediaset.it/guidatv", "source_type": "registry_only",
+      "watch_url": "https://mediasetinfinity.mediaset.it/diretta/canale5_cC5", "watch_url_type": "live_page",
+      "official_domains": ["mediasetinfinity.mediaset.it"], "match_terms": ["Canale 5", "Canale5"],
+      "broadcast_free": "unknown", "web_stream_free": "unknown", "market_tier": 1,
+      "lookahead_days": 21, "priority": 110
+    },
+    {
+      "country": "Italia", "country_code": "IT", "broadcaster": "Italia 1",
+      "access": "unknown", "platforms": "TV/streaming da verificare", "language": "italiano",
+      "url": "https://mediasetinfinity.mediaset.it/guidatv", "source_type": "registry_only",
+      "watch_url": "https://mediasetinfinity.mediaset.it/diretta/italia1_cI1", "watch_url_type": "live_page",
+      "official_domains": ["mediasetinfinity.mediaset.it"], "match_terms": ["Italia 1", "Italia1"],
+      "broadcast_free": "unknown", "web_stream_free": "unknown", "market_tier": 1,
+      "lookahead_days": 21, "priority": 110
+    },
+    {
+      "country": "Italia", "country_code": "IT", "broadcaster": "Rete 4",
+      "access": "unknown", "platforms": "TV/streaming da verificare", "language": "italiano",
+      "url": "https://mediasetinfinity.mediaset.it/guidatv", "source_type": "registry_only",
+      "watch_url": "https://mediasetinfinity.mediaset.it/diretta/rete4_cR4", "watch_url_type": "live_page",
+      "official_domains": ["mediasetinfinity.mediaset.it"], "match_terms": ["Rete 4", "Rete4"],
+      "broadcast_free": "unknown", "web_stream_free": "unknown", "market_tier": 1,
+      "lookahead_days": 21, "priority": 110
+    },
+    {
+      "country": "Italia", "country_code": "IT", "broadcaster": "20 Mediaset",
+      "access": "unknown", "platforms": "TV/streaming da verificare", "language": "italiano",
+      "url": "https://mediasetinfinity.mediaset.it/guidatv", "source_type": "registry_only",
+      "watch_url": "https://mediasetinfinity.mediaset.it/diretta/20mediaset_cLB", "watch_url_type": "live_page",
+      "official_domains": ["mediasetinfinity.mediaset.it"], "match_terms": ["20 Mediaset", "Mediaset 20", "Canale 20"],
+      "broadcast_free": "unknown", "web_stream_free": "unknown", "market_tier": 1,
+      "lookahead_days": 21, "priority": 110
+    },
+    {
+      "country": "Austria", "country_code": "AT", "broadcaster": "ORF 1",
+      "access": "unknown", "platforms": "TV/streaming da verificare", "language": "tedesco",
+      "url": "https://on.orf.at/livestreams", "source_type": "registry_only",
+      "watch_url": "https://on.orf.at/livestreams", "watch_url_type": "live_page",
+      "official_domains": ["on.orf.at"], "match_terms": ["ORF 1", "ORF1"],
+      "broadcast_free": "unknown", "web_stream_free": "unknown", "market_tier": 1,
+      "lookahead_days": 21, "priority": 110
+    },
+    {
+      "country": "Austria", "country_code": "AT", "broadcaster": "ORF Sport+",
+      "access": "unknown", "platforms": "TV/streaming da verificare", "language": "tedesco",
+      "url": "https://on.orf.at/livestreams", "source_type": "registry_only",
+      "watch_url": "https://on.orf.at/livestreams", "watch_url_type": "live_page",
+      "official_domains": ["on.orf.at"], "match_terms": ["ORF Sport+", "ORF SPORT PLUS", "ORF Sport Plus"],
+      "broadcast_free": "unknown", "web_stream_free": "unknown", "market_tier": 1,
+      "lookahead_days": 21, "priority": 110
+    },
+    {
+      "country": "Kazakistan", "country_code": "KZ", "broadcaster": "Qazsport",
+      "access": "unknown", "platforms": "TV/streaming da verificare", "language": "kazako",
+      "monitor_international": true,
+      "url": "https://qazsporttv.kz/ru/live", "source_type": "registry_only",
+      "watch_url": "https://qazsporttv.kz/ru/live", "watch_url_type": "live_page",
+      "official_domains": ["qazsporttv.kz"], "match_terms": ["Qazsport", "QAZSPORT"],
+      "broadcast_free": "unknown", "web_stream_free": "unknown", "market_tier": 1,
       "lookahead_days": 21, "priority": 110
     },
     {
@@ -207,9 +300,13 @@
     },
     {
       "country": "Austria", "country_code": "AT", "broadcaster": "ServusTV / ServusTV On",
-      "access": "free", "platforms": "TV + streaming", "language": "tedesco",
+      "access": "unknown", "platforms": "TV/streaming da verificare", "language": "tedesco",
       "url": "https://www.servustv.com/de/epg", "public_url": "https://www.servustv.com/de/sport/",
-      "endpoint": "https://www.servustv.com/de/epg", "source_type": "servus_epg",
+      "endpoint": "https://www.servustv.com/de/epg", "source_type": "registry_only",
+      "epg_identity_verified": false,
+      "broadcaster_home_url": "https://www.servustv.com/", "official_domains": ["servustv.com"],
+      "watch_url": "https://www.servustv.com/jetzt-live/", "watch_url_type": "live_page",
+      "broadcast_free": "unknown", "web_stream_free": "unknown", "match_terms": ["ServusTV", "ServusTV On"],
       "competition_families": ["europa-league", "conference-league"],
       "team_keywords": ["salzburg", "sturm-graz"],
       "rights_from_season": 2024, "rights_through_season": 2026,

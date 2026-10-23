@@ -653,6 +653,8 @@ def _fetch_epg_rows(
     source_type = str(source.get("source_type") or "page")
     url = str(source.get("endpoint") or source["url"])
     if source_type == "servus_epg":
+        if source.get("epg_identity_verified") is not True:
+            raise ValueError("Identità del palinsesto ServusTV Austria non verificata")
         response = requester.get(url, timeout=10)
         response.raise_for_status()
         return parse_servus_epg(response.text), url
@@ -1540,6 +1542,10 @@ def apply_verified_broadcasts(
     if target is None:
         return result, []
 
+    # Presentation only, for newly resolved international fixtures. Historical
+    # entries and domestic competitions retain their existing descriptions.
+    target["broadcast_notes_compact"] = True
+
     # This first rollout is deliberately scoped to one fixture. Fresh remote data
     # does not contain our enrichment fields, so retain them for every other event
     # instead of making unrelated calendar entries look changed.
@@ -1608,7 +1614,8 @@ def apply_verified_broadcasts(
             for source in sources
             if str(source.get("source_type") or "page")
             not in BROADCAST_GUIDE_SOURCE_TYPES | BROADCAST_ACCESS_SOURCE_TYPES
-            and str(source.get("country_code") or "").upper() in allowed_countries
+            and (str(source.get("country_code") or "").upper() in allowed_countries
+                 or source.get("monitor_international") is True)
         ]
 
         def add_evidence(
@@ -1637,7 +1644,7 @@ def apply_verified_broadcasts(
         )
         for source in ordered_sources:
             country_code = str(source.get("country_code") or "").upper()
-            if country_code not in allowed_countries:
+            if country_code not in allowed_countries and source.get("monitor_international") is not True:
                 continue
             competition_families = {
                 _normalize(str(item)) for item in source.get("competition_families") or []
@@ -1658,6 +1665,9 @@ def apply_verified_broadcasts(
             ):
                 continue
             source_type = str(source.get("source_type") or "page")
+            if source_type == "registry_only":
+                # Identity/link metadata for guide reconciliation, not a schedule.
+                continue
             source_key = (country_code, _normalize(str(source["broadcaster"])))
             if (
                 source.get("rights_confirmed")
