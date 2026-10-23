@@ -676,6 +676,24 @@
       "away_team": "AC Milan",
       "broadcast_candidates": [
         {
+          "availability_evidence": [
+            {
+              "source_type": "user_confirmation",
+              "source_url": "https://www.cbcsport.az/live/",
+              "scope": "fixture",
+              "verified_at": "2026-10-23",
+              "fixture_start": "2026-10-15T18:45:00+02:00",
+              "fixture_home_team": "Salzburg",
+              "fixture_away_team": "AC Milan",
+              "competition": "UEFA Europa League",
+              "web_match_confirmed": true,
+              "web_stream_free": true,
+              "subscription_required": false,
+              "territories": [
+                "AZ"
+              ]
+            }
+          ],
           "broadcast_free": true,
           "broadcast_start": "2026-10-15T18:45:00+02:00",
           "broadcast_start_rome": "18:45",
@@ -705,6 +723,7 @@
           "match": "Salzburg - AC Milan",
           "match_confirmed": true,
           "platforms": "TV in chiaro + streaming",
+          "player_user_report": "Conferma utente del 2026-10-23: Salzburg–AC Milan vista gratuitamente sul player ufficiale CBC Sport tramite VPN, senza abbonamento. Conferma limitata a questa partita.",
           "priority": 110,
           "reason": "exact fixture found in match-specific schedule",
           "registration": "not_required",
@@ -720,12 +739,17 @@
           "source_schedule": "https://www.sporekrani.com/",
           "source_type": "guide",
           "source_url": "https://www.sporekrani.com/",
-          "status": "POSSIBLE_FREE",
-          "url": "https://cbcsport.az/live/",
+          "status": "CONFIRMED_FREE",
+          "url": "https://www.cbcsport.az/live/",
           "verified_at": "2026-10-14T21:47:16Z",
-          "watch_url": "https://cbcsport.az/live/",
+          "watch_url": "https://www.cbcsport.az/live/",
           "watch_url_type": "live_page",
-          "web_stream_free": "unknown"
+          "web_match_confirmed": true,
+          "web_stream_free": true,
+          "web_subscription_required": false,
+          "web_territories": [
+            "AZ"
+          ]
         },
         {
           "broadcast_free": false,
