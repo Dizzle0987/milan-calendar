@@ -14,12 +14,15 @@ from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import quote, urlencode, urljoin, urlparse
+from urllib.robotparser import RobotFileParser
 from zoneinfo import ZoneInfo
 
 import requests
 from icalendar import Alarm, Calendar, Event
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+
+from .qazsport import ALMATY, parse_qazsport_epg, qazsport_fixture_start
 
 LOGGER = logging.getLogger(__name__)
 ROME = ZoneInfo("Europe/Rome")
@@ -652,6 +655,36 @@ def _fetch_epg_rows(
 ) -> tuple[list[dict[str, Any]], str]:
     source_type = str(source.get("source_type") or "page")
     url = str(source.get("endpoint") or source["url"])
+    if source_type == "qazsport_epg":
+        # Public dated GET pages contain the schedule as embedded JSON. Do not
+        # call Livewire POST endpoints, fetch players or follow redirects.
+        robots = requester.get("https://qazsporttv.kz/robots.txt", timeout=10,
+                               allow_redirects=False)
+        robots.raise_for_status()
+        if robots.status_code != 200 or "<" in robots.text:
+            raise ValueError("Qazsport robots.txt non verificabile")
+        policy = RobotFileParser()
+        policy.parse(robots.text.splitlines())
+        rows: list[dict[str, Any]] = []
+        urls: list[str] = []
+        days = set()
+        for event in relevant:
+            local = _event_datetime(event).astimezone(ALMATY)
+            days.add(local.date())
+            if local.hour < 6:
+                days.add(local.date() - timedelta(days=1))
+        for day in sorted(days):
+            page_url = f"https://qazsporttv.kz/kz/program/{day.isoformat()}"
+            if not policy.can_fetch("milan-calendar", page_url):
+                raise ValueError("Qazsport palinsesto escluso da robots.txt")
+            response = requester.get(page_url, timeout=10, allow_redirects=False)
+            response.raise_for_status()
+            if response.status_code != 200:
+                raise ValueError("Qazsport palinsesto non disponibile senza redirect")
+            rows.extend({**row, "source_url": page_url}
+                        for row in parse_qazsport_epg(response.text, day))
+            urls.append(page_url)
+        return rows, urls[0]
     if source_type == "servus_epg":
         if source.get("epg_identity_verified") is not True:
             raise ValueError("Identità del palinsesto ServusTV Austria non verificata")
@@ -1678,7 +1711,7 @@ def apply_verified_broadcasts(
                 evidence_by_broadcaster.setdefault(
                     source_key, {"source": deepcopy(source), "evidence": []}
                 )
-            if source_type in {"servus_epg", "tv8_api"}:
+            if source_type in {"servus_epg", "tv8_api", "qazsport_epg"}:
                 try:
                     programmes, guide_url = _fetch_epg_rows(
                         requester, source, [target]
@@ -1686,6 +1719,20 @@ def apply_verified_broadcasts(
                 except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
                     errors.append(f"{source['broadcaster']}: {exc}")
                     failed_broadcasters.add(source_key)
+                    continue
+                if source_type == "qazsport_epg":
+                    for programme in programmes:
+                        start = qazsport_fixture_start(
+                            programme, target, source,
+                            _competition_family(str(target.get("competition") or "")))
+                        if start:
+                            add_evidence(source, {
+                                "source_type": "official_epg",
+                                "source_url": programme["source_url"],
+                                "verified_at": checked_at,
+                                "programme_start": start.isoformat(),
+                                "schedule_date": programme["schedule_date"],
+                            })
                     continue
                 starts = [
                     start
@@ -1941,7 +1988,12 @@ def apply_verified_broadcasts(
             target, str(source["country_code"])
         )
         broadcast_free = resolved_availability(
-            "broadcast_free", bool(source.get("broadcast_free", access == "free"))
+            "broadcast_free",
+            # A Qazsport TV listing proves carriage, not free TV access.
+            # In particular, bool("unknown") must not turn this into True.
+            source.get("broadcast_free", "unknown")
+            if source.get("source_type") == "qazsport_epg"
+            else bool(source.get("broadcast_free", access == "free"))
         )
         web_stream_free = resolved_availability(
             "web_stream_free", source.get("web_stream_free", "unknown")

@@ -39,13 +39,17 @@ def session_for(channel, code):
 
     class Response:
         text = html
+        status_code = 200
         def raise_for_status(self): pass
         def json(self): return []
 
     class Session:
         def get(self, url, **kwargs):
             assert "servustv.com" not in url
-            assert "qazsporttv.kz" not in url
+            if "qazsporttv.kz" in url:
+                response = Response()
+                response.text = "User-agent: *\nDisallow:\n" if url.endswith("robots.txt") else ""
+                return response
             return Response()
 
     return Session()

@@ -33,7 +33,8 @@ def test_official_channels_are_unique_and_do_not_infer_free_web_access():
     for source in registry:
         if source["broadcaster"] not in ADDED:
             continue
-        assert source["source_type"] == "registry_only"
+        assert source["source_type"] == (
+            "qazsport_epg" if source["broadcaster"] == "Qazsport" else "registry_only")
         assert source["access"] == "unknown"
         assert source["web_stream_free"] == "unknown"
         assert source["priority"] == 110

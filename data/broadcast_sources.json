@@ -159,7 +159,19 @@
       "country": "Kazakistan", "country_code": "KZ", "broadcaster": "Qazsport",
       "access": "unknown", "platforms": "TV/streaming da verificare", "language": "kazako",
       "monitor_international": true,
-      "url": "https://qazsporttv.kz/ru/live", "source_type": "registry_only",
+      "url": "https://qazsporttv.kz/ru/live", "source_type": "qazsport_epg",
+      "timezone": "Asia/Almaty",
+      "team_aliases": {
+        "AC Milan": ["Milan", "Милан"],
+        "AFC Bournemouth": ["Bournemouth", "Борнмут", "Борнмут AFC"],
+        "Salzburg": ["RB Salzburg", "Зальцбург"],
+        "Porto": ["FC Porto", "Порту"]
+      },
+      "competition_terms": {
+        "champions-league": ["УЕФА Чемпиондар Лигасы", "Лига чемпионов УЕФА"],
+        "europa-league": ["УЕФА Еуропа Лигасы", "Лига Европы УЕФА"],
+        "conference-league": ["УЕФА Конференция Лигасы", "Лига конференций УЕФА"]
+      },
       "watch_url": "https://qazsporttv.kz/ru/live", "watch_url_type": "live_page",
       "official_domains": ["qazsporttv.kz"], "match_terms": ["Qazsport", "QAZSPORT"],
       "broadcast_free": "unknown", "web_stream_free": "unknown", "market_tier": 1,
