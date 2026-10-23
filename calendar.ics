@@ -388,18 +388,19 @@ BEGIN:VEVENT
 SUMMARY:⚽ Udinese - AC Milan
 DTSTART;TZID=Europe/Rome:20261025T204500
 DTEND;TZID=Europe/Rome:20261025T224500
-DTSTAMP:20261019T203327Z
+DTSTAMP:20261023T050121Z
 UID:ed011e560d0939fa19ee726a@milan-calendar
-SEQUENCE:15
+SEQUENCE:16
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 25/10/
- 2026 20:45\nTurno: 8\nStadio: Bluenergy Stadium\nDove vederla in Italia: D
- AZN\nFonte orario: AC Milan\nClassifica Serie A aggiornata — giornata co
- mpletata:\n  2. Lazio — 19 pt\n  3. Roma — 17 pt\n▶ 4. Milan — 15 
- pt — 7 PG — DR +7\n  5. Como — 14 pt\n  6. Frosinone — 13 pt\nClas
- sifica aggiornata: 19/10/2026 22:33\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20261019T203327Z
-LOCATION:Bluenergy Stadium
+ 2026 20:45\nTurno: 8\nStadio: Bluenergy Stadium\nLocalità: Italy\nDove ve
+ derla in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A aggiorna
+ ta — giornata completata:\n  2. Lazio — 19 pt\n  3. Roma — 17 pt\n
+ ▶ 4. Milan — 15 pt — 7 PG — DR +7\n  5. Como — 14 pt\n  6. Frosi
+ none — 13 pt\nClassifica aggiornata: 19/10/2026 22:33\nFonte classifica:
+  Lega Serie A
+LAST-MODIFIED:20261023T050121Z
+LOCATION:Bluenergy Stadium\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
