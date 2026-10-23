@@ -678,20 +678,20 @@
         {
           "availability_evidence": [
             {
+              "competition": "UEFA Europa League",
+              "fixture_away_team": "AC Milan",
+              "fixture_home_team": "Salzburg",
+              "fixture_start": "2026-10-15T18:45:00+02:00",
+              "scope": "fixture",
               "source_type": "user_confirmation",
               "source_url": "https://www.cbcsport.az/live/",
-              "scope": "fixture",
-              "verified_at": "2026-10-23",
-              "fixture_start": "2026-10-15T18:45:00+02:00",
-              "fixture_home_team": "Salzburg",
-              "fixture_away_team": "AC Milan",
-              "competition": "UEFA Europa League",
-              "web_match_confirmed": true,
-              "web_stream_free": true,
               "subscription_required": false,
               "territories": [
                 "AZ"
-              ]
+              ],
+              "verified_at": "2026-10-23",
+              "web_match_confirmed": true,
+              "web_stream_free": true
             }
           ],
           "broadcast_free": true,
