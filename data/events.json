@@ -1154,11 +1154,11 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-19T20:33:27Z",
+      "last_modified": "2026-10-23T19:08:36Z",
       "location": "Milano",
       "neutral": false,
       "round": "7",
-      "sequence": 23,
+      "sequence": 24,
       "serie_a_standing": {
         "context": [
           {
@@ -1195,13 +1195,14 @@
         "draws": 3,
         "goal_difference": 7,
         "losses": 0,
+        "pending_recoveries": [],
         "played": 7,
         "points": 15,
         "position": 4,
-        "provisional": false,
+        "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-19T20:33:27Z",
+        "updated_at": "2026-10-23T19:08:36Z",
         "wins": 4
       },
       "source": "AC Milan",
@@ -1859,11 +1860,11 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Udinese",
-      "last_modified": "2026-10-23T05:01:21Z",
+      "last_modified": "2026-10-23T19:08:36Z",
       "location": "Italy",
       "neutral": false,
       "round": "8",
-      "sequence": 16,
+      "sequence": 17,
       "serie_a_standing": {
         "context": [
           {
@@ -1900,13 +1901,14 @@
         "draws": 3,
         "goal_difference": 7,
         "losses": 0,
+        "pending_recoveries": [],
         "played": 7,
         "points": 15,
         "position": 4,
-        "provisional": false,
+        "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-19T20:33:27Z",
+        "updated_at": "2026-10-23T19:08:36Z",
         "wins": 4
       },
       "source": "AC Milan",
@@ -3155,7 +3157,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-23T05:01:21Z",
+  "last_changed": "2026-10-23T19:08:36Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -3193,22 +3195,24 @@
     "draws": 3,
     "goal_difference": 7,
     "losses": 0,
+    "pending_recoveries": [],
     "played": 7,
     "points": 15,
     "position": 4,
-    "provisional": false,
+    "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-10-19T20:33:27Z",
+    "updated_at": "2026-10-23T19:08:36Z",
     "wins": 4
   },
   "source_errors": [
+    "ESPN recuperi Serie A: 400 Client Error: Bad Request for url: https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20260801-20270630&limit=1000",
     "AC Milan: nessun orario esplicito per il Milan",
     "Gazzetta dello Sport: 404 Client Error: Not Found for url: https://www.gazzetta.it/Calcio/Serie-A/Milan/",
     "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
     "Sky Sport: nessun orario esplicito per il Milan",
     "Mediaset: 404 Client Error: Not Found for url: https://mediasetinfinity.mediaset.it/sport",
-    "Prime Video: nessun orario esplicito per il Milan",
+    "Prime Video: HTTPSConnectionPool(host='www.primevideo.com', port=443): Max retries exceeded with url: /sports (Caused by ResponseError('too many 503 error responses'))",
     "Broadcast CBC Sport (None): 403 Client Error: Forbidden for url: https://cbcsport.az/tv_program_schedule",
     "Broadcast RTL+ (None): 404 Client Error: Not Found for url: https://plus.rtl.de/video-tv/sport",
     "Broadcast MacEkran (None): HTTPSConnectionPool(host='macekran.com', port=443): Read timed out. (read timeout=10)",
