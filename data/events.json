@@ -1154,42 +1154,42 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-24T13:14:28Z",
+      "last_modified": "2026-10-24T16:03:22Z",
       "location": "Milano",
       "neutral": false,
       "round": "7",
-      "sequence": 25,
+      "sequence": 26,
       "serie_a_standing": {
         "context": [
           {
-            "played": 7,
-            "points": 19,
-            "position": 2,
-            "team": "Lazio"
-          },
-          {
-            "played": 7,
-            "points": 17,
+            "played": 8,
+            "points": 18,
             "position": 3,
             "team": "Roma"
           },
           {
-            "played": 7,
-            "points": 15,
-            "position": 4,
-            "team": "Milan"
-          },
-          {
             "played": 8,
-            "points": 15,
-            "position": 5,
+            "points": 17,
+            "position": 4,
             "team": "Como"
           },
           {
-            "played": 8,
-            "points": 14,
+            "played": 7,
+            "points": 15,
+            "position": 5,
+            "team": "Milan"
+          },
+          {
+            "played": 7,
+            "points": 13,
             "position": 6,
-            "team": "Cagliari"
+            "team": "Frosinone"
+          },
+          {
+            "played": 8,
+            "points": 13,
+            "position": 7,
+            "team": "Torino"
           }
         ],
         "draws": 3,
@@ -1198,11 +1198,11 @@
         "pending_recoveries": [],
         "played": 7,
         "points": 15,
-        "position": 4,
+        "position": 5,
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-24T13:14:28Z",
+        "updated_at": "2026-10-24T16:03:22Z",
         "wins": 4
       },
       "source": "AC Milan",
@@ -1860,42 +1860,42 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Udinese",
-      "last_modified": "2026-10-24T13:14:28Z",
+      "last_modified": "2026-10-24T16:03:22Z",
       "location": "Italy",
       "neutral": false,
       "round": "8",
-      "sequence": 18,
+      "sequence": 19,
       "serie_a_standing": {
         "context": [
           {
-            "played": 7,
-            "points": 19,
-            "position": 2,
-            "team": "Lazio"
-          },
-          {
-            "played": 7,
-            "points": 17,
+            "played": 8,
+            "points": 18,
             "position": 3,
             "team": "Roma"
           },
           {
-            "played": 7,
-            "points": 15,
-            "position": 4,
-            "team": "Milan"
-          },
-          {
             "played": 8,
-            "points": 15,
-            "position": 5,
+            "points": 17,
+            "position": 4,
             "team": "Como"
           },
           {
-            "played": 8,
-            "points": 14,
+            "played": 7,
+            "points": 15,
+            "position": 5,
+            "team": "Milan"
+          },
+          {
+            "played": 7,
+            "points": 13,
             "position": 6,
-            "team": "Cagliari"
+            "team": "Frosinone"
+          },
+          {
+            "played": 8,
+            "points": 13,
+            "position": 7,
+            "team": "Torino"
           }
         ],
         "draws": 3,
@@ -1904,11 +1904,11 @@
         "pending_recoveries": [],
         "played": 7,
         "points": 15,
-        "position": 4,
+        "position": 5,
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-24T13:14:28Z",
+        "updated_at": "2026-10-24T16:03:22Z",
         "wins": 4
       },
       "source": "AC Milan",
@@ -3158,39 +3158,39 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-24T13:14:28Z",
+  "last_changed": "2026-10-24T16:03:22Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
       {
-        "played": 7,
-        "points": 19,
-        "position": 2,
-        "team": "Lazio"
-      },
-      {
-        "played": 7,
-        "points": 17,
+        "played": 8,
+        "points": 18,
         "position": 3,
         "team": "Roma"
       },
       {
-        "played": 7,
-        "points": 15,
-        "position": 4,
-        "team": "Milan"
-      },
-      {
         "played": 8,
-        "points": 15,
-        "position": 5,
+        "points": 17,
+        "position": 4,
         "team": "Como"
       },
       {
-        "played": 8,
-        "points": 14,
+        "played": 7,
+        "points": 15,
+        "position": 5,
+        "team": "Milan"
+      },
+      {
+        "played": 7,
+        "points": 13,
         "position": 6,
-        "team": "Cagliari"
+        "team": "Frosinone"
+      },
+      {
+        "played": 8,
+        "points": 13,
+        "position": 7,
+        "team": "Torino"
       }
     ],
     "draws": 3,
@@ -3199,11 +3199,11 @@
     "pending_recoveries": [],
     "played": 7,
     "points": 15,
-    "position": 4,
+    "position": 5,
     "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-10-24T13:14:28Z",
+    "updated_at": "2026-10-24T16:03:22Z",
     "wins": 4
   },
   "source_errors": [
