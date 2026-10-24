@@ -1154,16 +1154,16 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-24T16:39:38Z",
+      "last_modified": "2026-10-24T18:04:55Z",
       "location": "Milano",
       "neutral": false,
       "round": "7",
-      "sequence": 27,
+      "sequence": 28,
       "serie_a_standing": {
         "context": [
           {
             "played": 8,
-            "points": 17,
+            "points": 18,
             "position": 3,
             "team": "Roma"
           },
@@ -1189,7 +1189,7 @@
             "played": 8,
             "points": 13,
             "position": 7,
-            "team": "Napoli"
+            "team": "Torino"
           }
         ],
         "draws": 3,
@@ -1202,7 +1202,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-24T16:39:38Z",
+        "updated_at": "2026-10-24T18:04:55Z",
         "wins": 4
       },
       "source": "AC Milan",
@@ -1860,16 +1860,16 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Udinese",
-      "last_modified": "2026-10-24T16:39:38Z",
+      "last_modified": "2026-10-24T18:04:55Z",
       "location": "Italy",
       "neutral": false,
       "round": "8",
-      "sequence": 20,
+      "sequence": 21,
       "serie_a_standing": {
         "context": [
           {
             "played": 8,
-            "points": 17,
+            "points": 18,
             "position": 3,
             "team": "Roma"
           },
@@ -1895,7 +1895,7 @@
             "played": 8,
             "points": 13,
             "position": 7,
-            "team": "Napoli"
+            "team": "Torino"
           }
         ],
         "draws": 3,
@@ -1908,7 +1908,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-24T16:39:38Z",
+        "updated_at": "2026-10-24T18:04:55Z",
         "wins": 4
       },
       "source": "AC Milan",
@@ -3158,13 +3158,13 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-24T16:39:38Z",
+  "last_changed": "2026-10-24T18:04:55Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
       {
         "played": 8,
-        "points": 17,
+        "points": 18,
         "position": 3,
         "team": "Roma"
       },
@@ -3190,7 +3190,7 @@
         "played": 8,
         "points": 13,
         "position": 7,
-        "team": "Napoli"
+        "team": "Torino"
       }
     ],
     "draws": 3,
@@ -3203,7 +3203,7 @@
     "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-10-24T16:39:38Z",
+    "updated_at": "2026-10-24T18:04:55Z",
     "wins": 4
   },
   "source_errors": [
