@@ -1814,11 +1814,11 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Udinese",
-      "last_modified": "2026-10-25T20:57:18Z",
+      "last_modified": "2026-10-25T21:42:31Z",
       "location": "Italy",
       "neutral": false,
       "round": "8",
-      "sequence": 24,
+      "sequence": 25,
       "serie_a_standing": {
         "context": [
           {
@@ -1853,7 +1853,7 @@
           }
         ],
         "draws": 3,
-        "goal_difference": 8,
+        "goal_difference": 9,
         "losses": 0,
         "played": 8,
         "points": 18,
@@ -1861,14 +1861,14 @@
         "provisional": false,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-25T20:57:18Z",
+        "updated_at": "2026-10-25T21:42:31Z",
         "wins": 5
       },
       "source": "AC Milan",
       "source_id": "7idw4m4yhge2zekdmq1h7jjtg",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-10-25T20:45:00+01:00",
-      "status": "Playing",
+      "status": "Played",
       "time_source": "AC Milan",
       "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "title": "Udinese - AC Milan",
@@ -1883,11 +1883,11 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-25T20:57:18Z",
+      "last_modified": "2026-10-25T21:42:31Z",
       "location": "",
       "neutral": false,
       "round": "9",
-      "sequence": 13,
+      "sequence": 14,
       "serie_a_standing": {
         "context": [
           {
@@ -1922,7 +1922,7 @@
           }
         ],
         "draws": 3,
-        "goal_difference": 8,
+        "goal_difference": 9,
         "losses": 0,
         "played": 8,
         "points": 18,
@@ -1930,7 +1930,7 @@
         "provisional": false,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-25T20:57:18Z",
+        "updated_at": "2026-10-25T21:42:31Z",
         "wins": 5
       },
       "source": "AC Milan",
@@ -3156,7 +3156,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-25T20:57:18Z",
+  "last_changed": "2026-10-25T21:42:31Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -3192,7 +3192,7 @@
       }
     ],
     "draws": 3,
-    "goal_difference": 8,
+    "goal_difference": 9,
     "losses": 0,
     "played": 8,
     "points": 18,
@@ -3200,7 +3200,7 @@
     "provisional": false,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-10-25T20:57:18Z",
+    "updated_at": "2026-10-25T21:42:31Z",
     "wins": 5
   },
   "source_errors": [
