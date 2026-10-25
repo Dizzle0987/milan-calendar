@@ -1814,13 +1814,19 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Udinese",
-      "last_modified": "2026-10-25T17:40:44Z",
+      "last_modified": "2026-10-25T20:57:18Z",
       "location": "Italy",
       "neutral": false,
       "round": "8",
-      "sequence": 23,
+      "sequence": 24,
       "serie_a_standing": {
         "context": [
+          {
+            "played": 8,
+            "points": 22,
+            "position": 2,
+            "team": "Lazio"
+          },
           {
             "played": 8,
             "points": 18,
@@ -1829,47 +1835,40 @@
           },
           {
             "played": 8,
-            "points": 17,
+            "points": 18,
             "position": 4,
-            "team": "Como"
+            "team": "Milan"
           },
           {
-            "played": 7,
-            "points": 15,
+            "played": 8,
+            "points": 17,
             "position": 5,
-            "team": "Milan"
+            "team": "Como"
           },
           {
             "played": 8,
             "points": 14,
             "position": 6,
             "team": "Frosinone"
-          },
-          {
-            "played": 8,
-            "points": 14,
-            "position": 7,
-            "team": "Juventus"
           }
         ],
         "draws": 3,
-        "goal_difference": 7,
+        "goal_difference": 8,
         "losses": 0,
-        "pending_recoveries": [],
-        "played": 7,
-        "points": 15,
-        "position": 5,
-        "provisional": true,
+        "played": 8,
+        "points": 18,
+        "position": 4,
+        "provisional": false,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-25T17:40:44Z",
-        "wins": 4
+        "updated_at": "2026-10-25T20:57:18Z",
+        "wins": 5
       },
       "source": "AC Milan",
       "source_id": "7idw4m4yhge2zekdmq1h7jjtg",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-10-25T20:45:00+01:00",
-      "status": "Fixture",
+      "status": "Playing",
       "time_source": "AC Milan",
       "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "title": "Udinese - AC Milan",
@@ -1884,13 +1883,19 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-25T17:40:44Z",
+      "last_modified": "2026-10-25T20:57:18Z",
       "location": "",
       "neutral": false,
       "round": "9",
-      "sequence": 12,
+      "sequence": 13,
       "serie_a_standing": {
         "context": [
+          {
+            "played": 8,
+            "points": 22,
+            "position": 2,
+            "team": "Lazio"
+          },
           {
             "played": 8,
             "points": 18,
@@ -1899,41 +1904,34 @@
           },
           {
             "played": 8,
-            "points": 17,
+            "points": 18,
             "position": 4,
-            "team": "Como"
+            "team": "Milan"
           },
           {
-            "played": 7,
-            "points": 15,
+            "played": 8,
+            "points": 17,
             "position": 5,
-            "team": "Milan"
+            "team": "Como"
           },
           {
             "played": 8,
             "points": 14,
             "position": 6,
             "team": "Frosinone"
-          },
-          {
-            "played": 8,
-            "points": 14,
-            "position": 7,
-            "team": "Juventus"
           }
         ],
         "draws": 3,
-        "goal_difference": 7,
+        "goal_difference": 8,
         "losses": 0,
-        "pending_recoveries": [],
-        "played": 7,
-        "points": 15,
-        "position": 5,
-        "provisional": true,
+        "played": 8,
+        "points": 18,
+        "position": 4,
+        "provisional": false,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-25T17:40:44Z",
-        "wins": 4
+        "updated_at": "2026-10-25T20:57:18Z",
+        "wins": 5
       },
       "source": "AC Milan",
       "source_id": "7jmn1b8xv75554dmmgoc9mdck",
@@ -3158,10 +3156,16 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-25T17:40:44Z",
+  "last_changed": "2026-10-25T20:57:18Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
+      {
+        "played": 8,
+        "points": 22,
+        "position": 2,
+        "team": "Lazio"
+      },
       {
         "played": 8,
         "points": 18,
@@ -3170,44 +3174,36 @@
       },
       {
         "played": 8,
-        "points": 17,
+        "points": 18,
         "position": 4,
-        "team": "Como"
+        "team": "Milan"
       },
       {
-        "played": 7,
-        "points": 15,
+        "played": 8,
+        "points": 17,
         "position": 5,
-        "team": "Milan"
+        "team": "Como"
       },
       {
         "played": 8,
         "points": 14,
         "position": 6,
         "team": "Frosinone"
-      },
-      {
-        "played": 8,
-        "points": 14,
-        "position": 7,
-        "team": "Juventus"
       }
     ],
     "draws": 3,
-    "goal_difference": 7,
+    "goal_difference": 8,
     "losses": 0,
-    "pending_recoveries": [],
-    "played": 7,
-    "points": 15,
-    "position": 5,
-    "provisional": true,
+    "played": 8,
+    "points": 18,
+    "position": 4,
+    "provisional": false,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-10-25T17:40:44Z",
-    "wins": 4
+    "updated_at": "2026-10-25T20:57:18Z",
+    "wins": 5
   },
   "source_errors": [
-    "ESPN recuperi Serie A: 400 Client Error: Bad Request for url: https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20260801-20270630&limit=1000",
     "AC Milan: nessun orario esplicito per il Milan",
     "Gazzetta dello Sport: 404 Client Error: Not Found for url: https://www.gazzetta.it/Calcio/Serie-A/Milan/",
     "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
@@ -3218,8 +3214,7 @@
     "Broadcast RTL+ (None): 404 Client Error: Not Found for url: https://plus.rtl.de/video-tv/sport",
     "Broadcast MacEkran (None): HTTPSConnectionPool(host='macekran.com', port=443): Read timed out. (read timeout=10)",
     "Broadcast bTV (None): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
-    "Broadcast DAZN Portugal (None): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l",
-    "Broadcast Futebol na TV (None): HTTPSConnectionPool(host='www.futebolnatv.pt', port=443): Read timed out. (read timeout=10)"
+    "Broadcast DAZN Portugal (None): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l"
   ],
   "sources_used": [
     "AC Milan",
