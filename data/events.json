@@ -1814,11 +1814,11 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Udinese",
-      "last_modified": "2026-10-25T21:42:31Z",
-      "location": "Italy",
+      "last_modified": "2026-10-25T23:37:59Z",
+      "location": "Udine",
       "neutral": false,
       "round": "8",
-      "sequence": 25,
+      "sequence": 26,
       "serie_a_standing": {
         "context": [
           {
@@ -3156,7 +3156,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-25T21:42:31Z",
+  "last_changed": "2026-10-25T23:37:59Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
