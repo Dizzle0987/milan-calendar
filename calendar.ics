@@ -384,18 +384,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ Udinese - AC Milan
 DTSTART;TZID=Europe/Rome:20261025T204500
 DTEND;TZID=Europe/Rome:20261025T224500
-DTSTAMP:20261025T141538Z
+DTSTAMP:20261025T174044Z
 UID:ed011e560d0939fa19ee726a@milan-calendar
-SEQUENCE:22
+SEQUENCE:23
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 25/10/
  2026 20:45\nTurno: 8\nStadio: Bluenergy Stadium\nLocalità: Italy\nDove ve
  derla in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provviso
  ria — giornata in corso:\n  3. Roma — 18 pt\n  4. Como — 17 pt\n▶ 
- 5. Milan — 15 pt — 7 PG — DR +7\n  6. Frosinone — 14 pt\n  7. Tori
- no — 13 pt\nClassifica aggiornata: 25/10/2026 15:15\nFonte classifica: L
- ega Serie A
-LAST-MODIFIED:20261025T141538Z
+ 5. Milan — 15 pt — 7 PG — DR +7\n  6. Frosinone — 14 pt\n  7. Juve
+ ntus — 14 pt\nClassifica aggiornata: 25/10/2026 18:40\nFonte classifica:
+  Lega Serie A
+LAST-MODIFIED:20261025T174044Z
 LOCATION:Bluenergy Stadium\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -409,17 +409,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Bologna
 DTSTART;TZID=Europe/Rome:20261028T183000
 DTEND;TZID=Europe/Rome:20261028T203000
-DTSTAMP:20261025T141538Z
+DTSTAMP:20261025T174044Z
 UID:14204818a1863bef3d12592f@milan-calendar
-SEQUENCE:11
+SEQUENCE:12
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 28/10/2026 
  18:30\nTurno: 9\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nFo
  nte orario: AC Milan\nClassifica Serie A provvisoria — giornata in corso
  :\n  3. Roma — 18 pt\n  4. Como — 17 pt\n▶ 5. Milan — 15 pt — 7 
- PG — DR +7\n  6. Frosinone — 14 pt\n  7. Torino — 13 pt\nClassifica 
- aggiornata: 25/10/2026 15:15\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20261025T141538Z
+ PG — DR +7\n  6. Frosinone — 14 pt\n  7. Juventus — 14 pt\nClassific
+ a aggiornata: 25/10/2026 18:40\nFonte classifica: Lega Serie A
+LAST-MODIFIED:20261025T174044Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
