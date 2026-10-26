@@ -1883,11 +1883,11 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-25T21:42:31Z",
-      "location": "",
+      "last_modified": "2026-10-26T04:57:30Z",
+      "location": "Italy",
       "neutral": false,
       "round": "9",
-      "sequence": 14,
+      "sequence": 15,
       "serie_a_standing": {
         "context": [
           {
@@ -3156,7 +3156,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-25T23:37:59Z",
+  "last_changed": "2026-10-26T04:57:30Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -3212,6 +3212,7 @@
     "Prime Video: nessun orario esplicito per il Milan",
     "Broadcast CBC Sport (None): 403 Client Error: Forbidden for url: https://cbcsport.az/tv_program_schedule",
     "Broadcast RTL+ (None): 404 Client Error: Not Found for url: https://plus.rtl.de/video-tv/sport",
+    "Broadcast Sport TV Guide (None): HTTPSConnectionPool(host='sport-tv-guide.live', port=443): Read timed out. (read timeout=10)",
     "Broadcast MacEkran (None): HTTPSConnectionPool(host='macekran.com', port=443): Read timed out. (read timeout=10)",
     "Broadcast bTV (None): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
     "Broadcast DAZN Portugal (None): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l"

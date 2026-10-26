@@ -409,18 +409,19 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Bologna
 DTSTART;TZID=Europe/Rome:20261028T183000
 DTEND;TZID=Europe/Rome:20261028T203000
-DTSTAMP:20261025T214231Z
+DTSTAMP:20261026T045730Z
 UID:14204818a1863bef3d12592f@milan-calendar
-SEQUENCE:14
+SEQUENCE:15
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 28/10/2026 
- 18:30\nTurno: 9\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nFo
- nte orario: AC Milan\nClassifica Serie A aggiornata — giornata completat
- a:\n  2. Lazio — 22 pt\n  3. Roma — 18 pt\n▶ 4. Milan — 18 pt — 
- 8 PG — DR +9\n  5. Como — 17 pt\n  6. Frosinone — 14 pt\nClassifica 
- aggiornata: 25/10/2026 22:42\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20261025T214231Z
-LOCATION:Stadio San Siro
+ 18:30\nTurno: 9\nStadio: Stadio San Siro\nLocalità: Italy\nDove vederla i
+ n Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A aggiornata — 
+ giornata completata:\n  2. Lazio — 22 pt\n  3. Roma — 18 pt\n▶ 4. Mi
+ lan — 18 pt — 8 PG — DR +9\n  5. Como — 17 pt\n  6. Frosinone — 
+ 14 pt\nClassifica aggiornata: 25/10/2026 22:42\nFonte classifica: Lega Ser
+ ie A
+LAST-MODIFIED:20261026T045730Z
+LOCATION:Stadio San Siro\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
