@@ -1814,22 +1814,22 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Udinese",
-      "last_modified": "2026-10-25T23:37:59Z",
+      "last_modified": "2026-10-27T20:39:17Z",
       "location": "Udine",
       "neutral": false,
       "round": "8",
-      "sequence": 26,
+      "sequence": 27,
       "serie_a_standing": {
         "context": [
           {
             "played": 8,
             "points": 22,
             "position": 2,
-            "team": "Lazio"
+            "team": "Inter"
           },
           {
-            "played": 8,
-            "points": 18,
+            "played": 9,
+            "points": 21,
             "position": 3,
             "team": "Roma"
           },
@@ -1840,28 +1840,29 @@
             "team": "Milan"
           },
           {
-            "played": 8,
+            "played": 9,
             "points": 17,
             "position": 5,
             "team": "Como"
           },
           {
-            "played": 8,
-            "points": 14,
+            "played": 9,
+            "points": 16,
             "position": 6,
-            "team": "Frosinone"
+            "team": "Torino"
           }
         ],
         "draws": 3,
         "goal_difference": 9,
         "losses": 0,
+        "pending_recoveries": [],
         "played": 8,
         "points": 18,
         "position": 4,
-        "provisional": false,
+        "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-25T21:42:31Z",
+        "updated_at": "2026-10-27T20:39:17Z",
         "wins": 5
       },
       "source": "AC Milan",
@@ -1883,22 +1884,22 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-26T04:57:30Z",
+      "last_modified": "2026-10-27T20:39:17Z",
       "location": "Italy",
       "neutral": false,
       "round": "9",
-      "sequence": 15,
+      "sequence": 16,
       "serie_a_standing": {
         "context": [
           {
             "played": 8,
             "points": 22,
             "position": 2,
-            "team": "Lazio"
+            "team": "Inter"
           },
           {
-            "played": 8,
-            "points": 18,
+            "played": 9,
+            "points": 21,
             "position": 3,
             "team": "Roma"
           },
@@ -1909,28 +1910,29 @@
             "team": "Milan"
           },
           {
-            "played": 8,
+            "played": 9,
             "points": 17,
             "position": 5,
             "team": "Como"
           },
           {
-            "played": 8,
-            "points": 14,
+            "played": 9,
+            "points": 16,
             "position": 6,
-            "team": "Frosinone"
+            "team": "Torino"
           }
         ],
         "draws": 3,
         "goal_difference": 9,
         "losses": 0,
+        "pending_recoveries": [],
         "played": 8,
         "points": 18,
         "position": 4,
-        "provisional": false,
+        "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-25T21:42:31Z",
+        "updated_at": "2026-10-27T20:39:17Z",
         "wins": 5
       },
       "source": "AC Milan",
@@ -3156,7 +3158,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-26T04:57:30Z",
+  "last_changed": "2026-10-27T20:39:17Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -3164,11 +3166,11 @@
         "played": 8,
         "points": 22,
         "position": 2,
-        "team": "Lazio"
+        "team": "Inter"
       },
       {
-        "played": 8,
-        "points": 18,
+        "played": 9,
+        "points": 21,
         "position": 3,
         "team": "Roma"
       },
@@ -3179,31 +3181,33 @@
         "team": "Milan"
       },
       {
-        "played": 8,
+        "played": 9,
         "points": 17,
         "position": 5,
         "team": "Como"
       },
       {
-        "played": 8,
-        "points": 14,
+        "played": 9,
+        "points": 16,
         "position": 6,
-        "team": "Frosinone"
+        "team": "Torino"
       }
     ],
     "draws": 3,
     "goal_difference": 9,
     "losses": 0,
+    "pending_recoveries": [],
     "played": 8,
     "points": 18,
     "position": 4,
-    "provisional": false,
+    "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-10-25T21:42:31Z",
+    "updated_at": "2026-10-27T20:39:17Z",
     "wins": 5
   },
   "source_errors": [
+    "ESPN recuperi Serie A: 400 Client Error: Bad Request for url: https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20260801-20270630&limit=1000",
     "AC Milan: nessun orario esplicito per il Milan",
     "Gazzetta dello Sport: 404 Client Error: Not Found for url: https://www.gazzetta.it/Calcio/Serie-A/Milan/",
     "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
