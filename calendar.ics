@@ -384,18 +384,14 @@ BEGIN:VEVENT
 SUMMARY:⚽ Udinese - AC Milan
 DTSTART;TZID=Europe/Rome:20261025T204500
 DTEND;TZID=Europe/Rome:20261025T224500
-DTSTAMP:20261027T222321Z
+DTSTAMP:20261028T000543Z
 UID:ed011e560d0939fa19ee726a@milan-calendar
-SEQUENCE:28
+SEQUENCE:29
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 25/10/
  2026 20:45\nTurno: 8\nStadio: Bluenergy Stadium\nLocalità: Udine\nDove ve
- derla in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provviso
- ria — giornata in corso:\n  3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 
- 5. Milan — 18 pt — 8 PG — DR +9\n  6. Frosinone — 14 pt\n  7. Juve
- ntus — 14 pt\nClassifica aggiornata: 27/10/2026 23:23\nFonte classifica:
-  Lega Serie A
-LAST-MODIFIED:20261027T222321Z
+ derla in Italia: DAZN\nFonte orario: AC Milan
+LAST-MODIFIED:20261028T000543Z
 LOCATION:Bluenergy Stadium\, Udine
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -434,14 +430,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Inter
 DTSTART;TZID=Europe/Rome:20261031T204500
 DTEND;TZID=Europe/Rome:20261031T224500
-DTSTAMP:20260917T045927Z
+DTSTAMP:20261028T000543Z
 UID:8131b669c6acbfebbf8a5c63@milan-calendar
-SEQUENCE:10
+SEQUENCE:11
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 31/10/2026 
  20:45\nTurno: 10\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nF
- onte orario: NOW
-LAST-MODIFIED:20260917T045927Z
+ onte orario: NOW\nClassifica Serie A provvisoria — giornata in corso:\n 
+  3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 5. Milan — 18 pt — 8 PG 
+ — DR +9\n  6. Frosinone — 14 pt\n  7. Juventus — 14 pt\nClassifica a
+ ggiornata: 27/10/2026 23:23\nFonte classifica: Lega Serie A
+LAST-MODIFIED:20261028T000543Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
