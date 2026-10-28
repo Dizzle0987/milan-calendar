@@ -405,18 +405,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Bologna
 DTSTART;TZID=Europe/Rome:20261028T183000
 DTEND;TZID=Europe/Rome:20261028T203000
-DTSTAMP:20261028T205958Z
+DTSTAMP:20261028T224050Z
 UID:14204818a1863bef3d12592f@milan-calendar
-SEQUENCE:18
+SEQUENCE:19
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 28/10/2026 
  18:30\nTurno: 9\nStadio: Stadio San Siro\nLocalità: Milano\nDove vederla 
  in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provvisoria 
  — giornata in corso:\n  3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 5. M
- ilan — 18 pt — 9 PG — DR +7\n  6. Frosinone — 14 pt\n  7. Napoli 
- — 14 pt\nClassifica aggiornata: 28/10/2026 21:59\nFonte classifica: Lega
+ ilan — 18 pt — 9 PG — DR +7\n  6. Napoli — 14 pt\n  7. Frosinone 
+ — 14 pt\nClassifica aggiornata: 28/10/2026 23:40\nFonte classifica: Lega
   Serie A
-LAST-MODIFIED:20261028T205958Z
+LAST-MODIFIED:20261028T224050Z
 LOCATION:Stadio San Siro\, Milano
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -430,17 +430,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Inter
 DTSTART;TZID=Europe/Rome:20261031T204500
 DTEND;TZID=Europe/Rome:20261031T224500
-DTSTAMP:20261028T205958Z
+DTSTAMP:20261028T224050Z
 UID:8131b669c6acbfebbf8a5c63@milan-calendar
-SEQUENCE:12
+SEQUENCE:13
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 31/10/2026 
  20:45\nTurno: 10\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nF
  onte orario: NOW\nClassifica Serie A provvisoria — giornata in corso:\n 
   3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 5. Milan — 18 pt — 9 PG 
- — DR +7\n  6. Frosinone — 14 pt\n  7. Napoli — 14 pt\nClassifica agg
- iornata: 28/10/2026 21:59\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20261028T205958Z
+ — DR +7\n  6. Napoli — 14 pt\n  7. Frosinone — 14 pt\nClassifica agg
+ iornata: 28/10/2026 23:40\nFonte classifica: Lega Serie A
+LAST-MODIFIED:20261028T224050Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
