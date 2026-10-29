@@ -405,18 +405,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Bologna
 DTSTART;TZID=Europe/Rome:20261028T183000
 DTEND;TZID=Europe/Rome:20261028T203000
-DTSTAMP:20261028T224050Z
+DTSTAMP:20261029T210315Z
 UID:14204818a1863bef3d12592f@milan-calendar
-SEQUENCE:19
+SEQUENCE:20
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 28/10/2026 
  18:30\nTurno: 9\nStadio: Stadio San Siro\nLocalità: Milano\nDove vederla 
- in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provvisoria 
- — giornata in corso:\n  3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 5. M
- ilan — 18 pt — 9 PG — DR +7\n  6. Napoli — 14 pt\n  7. Frosinone 
- — 14 pt\nClassifica aggiornata: 28/10/2026 23:40\nFonte classifica: Lega
+ in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A aggiornata —
+  giornata completata:\n  3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 5. Mi
+ lan — 18 pt — 9 PG — DR +7\n  6. Frosinone — 17 pt\n  7. Napoli 
+ — 14 pt\nClassifica aggiornata: 29/10/2026 22:03\nFonte classifica: Lega
   Serie A
-LAST-MODIFIED:20261028T224050Z
+LAST-MODIFIED:20261029T210315Z
 LOCATION:Stadio San Siro\, Milano
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -430,18 +430,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Inter
 DTSTART;TZID=Europe/Rome:20261031T204500
 DTEND;TZID=Europe/Rome:20261031T224500
-DTSTAMP:20261029T005134Z
+DTSTAMP:20261029T210315Z
 UID:8131b669c6acbfebbf8a5c63@milan-calendar
-SEQUENCE:14
+SEQUENCE:15
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 31/10/2026 
  20:45\nTurno: 10\nStadio: Stadio San Siro\nLocalità: Italy\nDove vederla 
- in Italia: DAZN\nFonte orario: NOW\nClassifica Serie A provvisoria — gio
- rnata in corso:\n  3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 5. Milan 
- — 18 pt — 9 PG — DR +7\n  6. Napoli — 14 pt\n  7. Frosinone — 14
-  pt\nClassifica aggiornata: 28/10/2026 23:40\nFonte classifica: Lega Serie
+ in Italia: DAZN\nFonte orario: NOW\nClassifica Serie A aggiornata — gior
+ nata completata:\n  3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 5. Milan 
+ — 18 pt — 9 PG — DR +7\n  6. Frosinone — 17 pt\n  7. Napoli — 14
+  pt\nClassifica aggiornata: 29/10/2026 22:03\nFonte classifica: Lega Serie
   A
-LAST-MODIFIED:20261029T005134Z
+LAST-MODIFIED:20261029T210315Z
 LOCATION:Stadio San Siro\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
