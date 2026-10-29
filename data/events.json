@@ -1912,11 +1912,11 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-28T22:40:50Z",
-      "location": "",
+      "last_modified": "2026-10-29T00:51:34Z",
+      "location": "Italy",
       "neutral": false,
       "round": "10",
-      "sequence": 13,
+      "sequence": 14,
       "serie_a_standing": {
         "context": [
           {
@@ -3158,7 +3158,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-28T22:40:50Z",
+  "last_changed": "2026-10-29T00:51:34Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [

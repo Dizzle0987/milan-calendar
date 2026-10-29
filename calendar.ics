@@ -430,18 +430,19 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Inter
 DTSTART;TZID=Europe/Rome:20261031T204500
 DTEND;TZID=Europe/Rome:20261031T224500
-DTSTAMP:20261028T224050Z
+DTSTAMP:20261029T005134Z
 UID:8131b669c6acbfebbf8a5c63@milan-calendar
-SEQUENCE:13
+SEQUENCE:14
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 31/10/2026 
- 20:45\nTurno: 10\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nF
- onte orario: NOW\nClassifica Serie A provvisoria — giornata in corso:\n 
-  3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 5. Milan — 18 pt — 9 PG 
- — DR +7\n  6. Napoli — 14 pt\n  7. Frosinone — 14 pt\nClassifica agg
- iornata: 28/10/2026 23:40\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20261028T224050Z
-LOCATION:Stadio San Siro
+ 20:45\nTurno: 10\nStadio: Stadio San Siro\nLocalità: Italy\nDove vederla 
+ in Italia: DAZN\nFonte orario: NOW\nClassifica Serie A provvisoria — gio
+ rnata in corso:\n  3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 5. Milan 
+ — 18 pt — 9 PG — DR +7\n  6. Napoli — 14 pt\n  7. Frosinone — 14
+  pt\nClassifica aggiornata: 28/10/2026 23:40\nFonte classifica: Lega Serie
+  A
+LAST-MODIFIED:20261029T005134Z
+LOCATION:Stadio San Siro\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
