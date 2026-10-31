@@ -426,18 +426,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Inter
 DTSTART;TZID=Europe/Rome:20261031T204500
 DTEND;TZID=Europe/Rome:20261031T224500
-DTSTAMP:20261031T154115Z
+DTSTAMP:20261031T193406Z
 UID:8131b669c6acbfebbf8a5c63@milan-calendar
-SEQUENCE:16
+SEQUENCE:17
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 31/10/2026 
  20:45\nTurno: 10\nStadio: Stadio San Siro\nLocalità: Italy\nDove vederla 
  in Italia: DAZN\nFonte orario: NOW\nClassifica Serie A provvisoria — gio
- rnata in corso:\n  3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 5. Milan 
+ rnata in corso:\n  3. Roma — 24 pt\n  4. Como — 20 pt\n▶ 5. Milan 
  — 18 pt — 9 PG — DR +7\n  6. Frosinone — 17 pt\n  7. Napoli — 14
-  pt\nClassifica aggiornata: 31/10/2026 16:41\nFonte classifica: Lega Serie
+  pt\nClassifica aggiornata: 31/10/2026 20:34\nFonte classifica: Lega Serie
   A
-LAST-MODIFIED:20261031T154115Z
+LAST-MODIFIED:20261031T193406Z
 LOCATION:Stadio San Siro\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -472,17 +472,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Genoa - AC Milan
 DTSTART;TZID=Europe/Rome:20261108T150000
 DTEND;TZID=Europe/Rome:20261108T170000
-DTSTAMP:20261031T154115Z
+DTSTAMP:20261031T193406Z
 UID:4bcf433e05672498eda803a5@milan-calendar
-SEQUENCE:11
+SEQUENCE:12
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 08/11/
  2026 15:00\nTurno: 11\nStadio: Stadio Ferraris\nDove vederla in Italia: DA
  ZN\nFonte orario: AC Milan\nClassifica Serie A provvisoria — giornata in
-  corso:\n  3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 5. Milan — 18 pt 
+  corso:\n  3. Roma — 24 pt\n  4. Como — 20 pt\n▶ 5. Milan — 18 pt 
  — 9 PG — DR +7\n  6. Frosinone — 17 pt\n  7. Napoli — 14 pt\nClass
- ifica aggiornata: 31/10/2026 16:41\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20261031T154115Z
+ ifica aggiornata: 31/10/2026 20:34\nFonte classifica: Lega Serie A
+LAST-MODIFIED:20261031T193406Z
 LOCATION:Stadio Ferraris
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
