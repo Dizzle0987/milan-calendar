@@ -1866,13 +1866,19 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-10-31T19:34:06Z",
+      "last_modified": "2026-10-31T19:55:17Z",
       "location": "Italy",
       "neutral": false,
       "round": "10",
-      "sequence": 17,
+      "sequence": 18,
       "serie_a_standing": {
         "context": [
+          {
+            "played": 10,
+            "points": 25,
+            "position": 2,
+            "team": "Inter"
+          },
           {
             "played": 10,
             "points": 24,
@@ -1880,48 +1886,42 @@
             "team": "Roma"
           },
           {
-            "played": 9,
-            "points": 20,
+            "played": 10,
+            "points": 21,
             "position": 4,
-            "team": "Como"
+            "team": "Milan"
           },
           {
             "played": 9,
-            "points": 18,
+            "points": 20,
             "position": 5,
-            "team": "Milan"
+            "team": "Como"
           },
           {
             "played": 9,
             "points": 17,
             "position": 6,
             "team": "Frosinone"
-          },
-          {
-            "played": 9,
-            "points": 14,
-            "position": 7,
-            "team": "Napoli"
           }
         ],
         "draws": 3,
-        "goal_difference": 7,
+        "goal_difference": 8,
         "losses": 1,
         "pending_recoveries": [],
-        "played": 9,
-        "points": 18,
-        "position": 5,
+        "played": 10,
+        "points": 21,
+        "position": 4,
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-31T19:34:06Z",
-        "wins": 5
+        "updated_at": "2026-10-31T19:55:17Z",
+        "wins": 6
       },
       "source": "AC Milan",
       "source_id": "7nzu7j1c3kifpvs6qb9t7rd3o",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-10-31T20:45:00+01:00",
-      "status": "Fixture",
+      "status": "Playing",
       "time_source": "NOW",
       "time_source_url": "https://www.nowtv.it/sport/calcio/milan",
       "title": "AC Milan - Inter",
@@ -2307,13 +2307,19 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Genoa",
-      "last_modified": "2026-10-31T19:34:06Z",
+      "last_modified": "2026-10-31T19:55:17Z",
       "location": "",
       "neutral": false,
       "round": "11",
-      "sequence": 12,
+      "sequence": 13,
       "serie_a_standing": {
         "context": [
+          {
+            "played": 10,
+            "points": 25,
+            "position": 2,
+            "team": "Inter"
+          },
           {
             "played": 10,
             "points": 24,
@@ -2321,42 +2327,36 @@
             "team": "Roma"
           },
           {
-            "played": 9,
-            "points": 20,
+            "played": 10,
+            "points": 21,
             "position": 4,
-            "team": "Como"
+            "team": "Milan"
           },
           {
             "played": 9,
-            "points": 18,
+            "points": 20,
             "position": 5,
-            "team": "Milan"
+            "team": "Como"
           },
           {
             "played": 9,
             "points": 17,
             "position": 6,
             "team": "Frosinone"
-          },
-          {
-            "played": 9,
-            "points": 14,
-            "position": 7,
-            "team": "Napoli"
           }
         ],
         "draws": 3,
-        "goal_difference": 7,
+        "goal_difference": 8,
         "losses": 1,
         "pending_recoveries": [],
-        "played": 9,
-        "points": 18,
-        "position": 5,
+        "played": 10,
+        "points": 21,
+        "position": 4,
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-10-31T19:34:06Z",
-        "wins": 5
+        "updated_at": "2026-10-31T19:55:17Z",
+        "wins": 6
       },
       "source": "AC Milan",
       "source_id": "7pj0r9gg3y38td7qaeu7sha8k",
@@ -3158,10 +3158,16 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-10-31T19:34:06Z",
+  "last_changed": "2026-10-31T19:55:17Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
+      {
+        "played": 10,
+        "points": 25,
+        "position": 2,
+        "team": "Inter"
+      },
       {
         "played": 10,
         "points": 24,
@@ -3169,42 +3175,36 @@
         "team": "Roma"
       },
       {
-        "played": 9,
-        "points": 20,
+        "played": 10,
+        "points": 21,
         "position": 4,
-        "team": "Como"
+        "team": "Milan"
       },
       {
         "played": 9,
-        "points": 18,
+        "points": 20,
         "position": 5,
-        "team": "Milan"
+        "team": "Como"
       },
       {
         "played": 9,
         "points": 17,
         "position": 6,
         "team": "Frosinone"
-      },
-      {
-        "played": 9,
-        "points": 14,
-        "position": 7,
-        "team": "Napoli"
       }
     ],
     "draws": 3,
-    "goal_difference": 7,
+    "goal_difference": 8,
     "losses": 1,
     "pending_recoveries": [],
-    "played": 9,
-    "points": 18,
-    "position": 5,
+    "played": 10,
+    "points": 21,
+    "position": 4,
     "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-10-31T19:34:06Z",
-    "wins": 5
+    "updated_at": "2026-10-31T19:55:17Z",
+    "wins": 6
   },
   "source_errors": [
     "ESPN recuperi Serie A: 400 Client Error: Bad Request for url: https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20260801-20270630&limit=1000",
