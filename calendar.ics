@@ -405,18 +405,14 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Bologna
 DTSTART;TZID=Europe/Rome:20261028T183000
 DTEND;TZID=Europe/Rome:20261028T203000
-DTSTAMP:20261029T210315Z
+DTSTAMP:20261031T001105Z
 UID:14204818a1863bef3d12592f@milan-calendar
-SEQUENCE:20
+SEQUENCE:21
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 28/10/2026 
  18:30\nTurno: 9\nStadio: Stadio San Siro\nLocalità: Milano\nDove vederla 
- in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A aggiornata —
-  giornata completata:\n  3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 5. Mi
- lan — 18 pt — 9 PG — DR +7\n  6. Frosinone — 17 pt\n  7. Napoli 
- — 14 pt\nClassifica aggiornata: 29/10/2026 22:03\nFonte classifica: Lega
-  Serie A
-LAST-MODIFIED:20261029T210315Z
+ in Italia: DAZN\nFonte orario: AC Milan
+LAST-MODIFIED:20261031T001105Z
 LOCATION:Stadio San Siro\, Milano
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -476,14 +472,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Genoa - AC Milan
 DTSTART;TZID=Europe/Rome:20261108T150000
 DTEND;TZID=Europe/Rome:20261108T170000
-DTSTAMP:20260917T045927Z
+DTSTAMP:20261031T001105Z
 UID:4bcf433e05672498eda803a5@milan-calendar
-SEQUENCE:9
+SEQUENCE:10
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 08/11/
  2026 15:00\nTurno: 11\nStadio: Stadio Ferraris\nDove vederla in Italia: DA
- ZN\nFonte orario: AC Milan
-LAST-MODIFIED:20260917T045927Z
+ ZN\nFonte orario: AC Milan\nClassifica Serie A aggiornata — giornata com
+ pletata:\n  3. Roma — 21 pt\n  4. Como — 20 pt\n▶ 5. Milan — 18 pt
+  — 9 PG — DR +7\n  6. Frosinone — 17 pt\n  7. Napoli — 14 pt\nClas
+ sifica aggiornata: 29/10/2026 22:03\nFonte classifica: Lega Serie A
+LAST-MODIFIED:20261031T001105Z
 LOCATION:Stadio Ferraris
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
