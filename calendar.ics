@@ -451,9 +451,9 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Ferencváros
 DTSTART;TZID=Europe/Rome:20261105T184500
 DTEND;TZID=Europe/Rome:20261105T204500
-DTSTAMP:20261103T193516Z
+DTSTAMP:20261103T214306Z
 UID:7104e20380283c03c6625881@milan-calendar
-SEQUENCE:10
+SEQUENCE:11
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  05/11/2026 18:45\nTurno: 4\nStadio: San Siro Stadium\nLocalità: Italy\nDo
@@ -462,7 +462,7 @@ DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma):
  Azerbaijan — VPN — https://cbcsport.az/live/ — TV confermata · Stre
  aming web da verificare\nM4 Sport — Ungheria — VPN — https://mediakl
  ikk.hu/elo/mtv4live — TV confermata · Streaming web da verificare
-LAST-MODIFIED:20261103T193516Z
+LAST-MODIFIED:20261103T214306Z
 LOCATION:San Siro Stadium\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
