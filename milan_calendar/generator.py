@@ -4078,12 +4078,19 @@ def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
                         or access in {"paid", "included"} or not url.startswith("https://")
                         or (urlparse(url).hostname or "").lower() in {"youtube.com", "www.youtube.com", "youtu.be"}
                         or option.get("status") not in {"POSSIBLE_FREE", "UNKNOWN"}
-                        or (option.get("status") == "UNKNOWN" and option.get("match_confirmed") is not True)):
+                        or option.get("match_confirmed") is not True):
                     continue
                 seen.add(key)
                 vpn = "VPN" if option.get("vpn_required", True) else ""
+                availability = (
+                    "TV confermata · Streaming web da verificare"
+                    if option.get("web_stream_free") not in (True, False)
+                    else "TV confermata · Streaming web non gratuito"
+                    if option.get("web_stream_free") is False
+                    else "TV confermata · Streaming web gratuito"
+                )
                 possible_lines.append(" — ".join(str(v) for v in (
-                    option["broadcaster"], option["country"], vpn, url) if v))
+                    option["broadcaster"], option["country"], vpn, url, availability) if v))
             if possible_lines:
                 lines.extend(["Possibili alternative estere — da confermare:", *possible_lines[:3]])
         return lines

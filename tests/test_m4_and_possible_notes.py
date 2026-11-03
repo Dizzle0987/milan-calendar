@@ -118,6 +118,7 @@ def test_runtime_m4_tv_confirmation_stays_unknown_web_and_appears_as_possible(mo
     text = '\n'.join(g._broadcast_description_lines(result[0]))
     assert 'Possibili alternative estere — da confermare:' in text
     assert 'M4 Sport — Ungheria — VPN — https://mediaklikk.hu/elo/mtv4live' in text
+    assert 'TV confermata · Streaming web da verificare' in text
     assert text.index('Sky Sport') < text.index('M4 Sport')
 
 
@@ -152,7 +153,7 @@ def test_m4_restrictions_errors_and_missing_results_fail_closed(monkeypatch, kin
         assert errors
 
 
-def test_rights_only_cbc_is_shown_once_as_possible_not_as_confirmed():
+def test_rights_only_cbc_hidden_until_match_confirmation_without_mutating_data():
     event = fixture(broadcast_notes_compact=True, broadcast_show_possible=True)
     cbc = {'broadcaster': 'CBC Sport', 'country': 'Azerbaijan', 'country_code': 'AZ',
            'free_or_pay': 'free', 'status': 'POSSIBLE_FREE', 'match_confirmed': False,
@@ -162,11 +163,14 @@ def test_rights_only_cbc_is_shown_once_as_possible_not_as_confirmed():
         {**cbc, 'broadcaster': 'YouTube', 'watch_url': 'https://www.youtube.com/watch?v=video'}]
     before = deepcopy(event)
     text = str(Calendar.from_ical(g.build_ical([event])).walk('VEVENT')[0]['description'])
-    assert text.count('CBC Sport') == 1
-    assert text.index('Possibili alternative estere — da confermare:') < text.index('CBC Sport')
+    assert 'CBC Sport' not in text
     assert 'Premium' not in text and 'YouTube' not in text
     assert 'confidence' not in text and 'POSSIBLE_FREE' not in text
     assert event == before
+    cbc['match_confirmed'] = True
+    text = str(Calendar.from_ical(g.build_ical([event])).walk('VEVENT')[0]['description'])
+    assert text.count('CBC Sport') == 1
+    assert 'TV confermata · Streaming web da verificare' in text
 
 
 def test_no_new_notes_for_historical_events_without_opt_in():

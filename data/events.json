@@ -2331,7 +2331,7 @@
       "free_italian_broadcasts": [],
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-11-03T07:50:55Z",
+      "last_modified": "2026-11-03T08:30:57Z",
       "location": "Italy",
       "neutral": false,
       "opponent_country": "Ungheria",
@@ -2339,7 +2339,7 @@
       "opponent_country_source": "broadcast source registry",
       "primary_italian_broadcast": null,
       "round": "4",
-      "sequence": 8,
+      "sequence": 9,
       "source": "AC Milan",
       "source_id": "e64ut8qw4eckzlr4vbm0ln3f8",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -3209,7 +3209,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-11-03T07:50:55Z",
+  "last_changed": "2026-11-03T08:30:57Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [

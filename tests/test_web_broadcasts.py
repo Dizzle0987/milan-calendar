@@ -27,12 +27,14 @@ const event = {broadcast_it: "Sky Sport e NOW", broadcast_notes_compact: true, b
   {...m4, broadcaster: "YouTube", watch_url: "https://www.youtube.com/watch?v=x"}]};
 const before = JSON.stringify(event);
 const result = broadcastElement(event), rendered = text(result);
-assert.equal((rendered.match(/CBC Sport/g) || []).length, 1);
-assert.ok(rendered.includes("Da confermare: M4 Sport — Ungheria — VPN"));
-assert.ok(rendered.indexOf("Sky Sport e NOW") < rendered.indexOf("CBC Sport"));
+assert.ok(!rendered.includes("CBC Sport"));
+assert.ok(rendered.includes("M4 Sport — Ungheria — VPN · TV confermata · Streaming web da verificare"));
+assert.ok(rendered.indexOf("Sky Sport e NOW") < rendered.indexOf("M4 Sport"));
 for (const forbidden of ["Paid", "Unconfirmed", "Unknown country", "YouTube", "Streaming web gratuito", "UNKNOWN", "POSSIBLE_FREE"]) assert.ok(!rendered.includes(forbidden));
-assert.deepEqual(links(result), [cbc.watch_url, m4.watch_url]);
+assert.deepEqual(links(result), [m4.watch_url]);
 assert.equal(JSON.stringify(event), before);
+cbc.match_confirmed = true;
+assert.equal((text(broadcastElement(event)).match(/CBC Sport/g) || []).length, 1);
 assert.equal(text(broadcastElement({broadcast_it: "DAZN"})), "Dove vederla: 🇮🇹 DAZN🌍 In chiaro all'estero — Da confermare");
 '''
     subprocess.run([shutil.which("node"), "-e", script], check=True, capture_output=True, text=True)
