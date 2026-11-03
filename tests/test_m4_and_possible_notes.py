@@ -304,3 +304,15 @@ def test_all_automatic_generations_are_followed_by_success_gated_pages_deploy():
     assert 'ref: main' in pages
     for filename in ['update.yml', 'standings.yml']:
         assert 'python update_calendar.py' in (ROOT / '.github/workflows' / filename).read_text()
+
+
+def test_raw_feed_without_title_logs_team_names(monkeypatch, caplog):
+    event = fixture()
+    del event['title']
+    with caplog.at_level('INFO', logger=g.__name__):
+        result, errors = resolve(monkeypatch, Session(), [event])
+    assert not errors
+    assert 'Broadcast result AC Milan - Ferencváros [' in caplog.text
+    assert 'Broadcast EPG M4 Sport [AC Milan - Ferencváros]' in caplog.text
+    assert 'Broadcast result None' not in caplog.text
+    assert 'title' not in result[0]  # Logging must not alter raw fixture metadata.

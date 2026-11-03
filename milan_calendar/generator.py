@@ -1913,11 +1913,12 @@ def apply_verified_broadcasts(
                 requester, result, previous, sources, checked_at, now, index)
             errors.extend(fixture_errors)
             target = result[index]
+            label = target.get("title") or f"{target.get('home_team', '')} - {target.get('away_team', '')}"
             confirmed = [c["broadcaster"] for c in target.get("broadcast_candidates", []) if c.get("match_confirmed")]
             LOGGER.info("Broadcast result %s [%s]: confirmed_tv=%s; source_errors=%d",
-                        target.get("title"), target.get("start"), confirmed or "none", len(fixture_errors))
+                        label, target.get("start"), confirmed or "none", len(fixture_errors))
             for error in fixture_errors:
-                LOGGER.warning("Broadcast source error [%s]: %s", target.get("title"), error)
+                LOGGER.warning("Broadcast source error [%s]: %s", label, error)
     finally:
         if optional is not None:
             optional.close()
@@ -1936,6 +1937,7 @@ def _apply_verified_broadcast_fixture(
     """Existing resolver, unchanged scoring, applied to one selected fixture."""
     result = deepcopy(events)
     target = result[target_index]
+    label = target.get("title") or f"{target.get('home_team', '')} - {target.get('away_team', '')}"
 
     # Presentation only, for newly resolved international fixtures. Historical
     # entries and domestic competitions retain their existing descriptions.
@@ -2043,14 +2045,14 @@ def _apply_verified_broadcast_fixture(
                 )
             ):
                 LOGGER.info("Broadcast source %s [%s]: skipped (date/season/competition outside scope)",
-                            source["broadcaster"], target.get("title"))
+                            source["broadcaster"], label)
                 continue
             source_type = str(source.get("source_type") or "page")
             if source_type == "registry_only":
                 # Identity/link metadata for guide reconciliation, not a schedule.
                 continue
             LOGGER.info("Broadcast source %s [%s]: checking %s", source["broadcaster"],
-                        target.get("title"), source_type)
+                        label, source_type)
             source_key = (country_code, _normalize(str(source["broadcaster"])))
             if (
                 source.get("rights_confirmed")
@@ -2100,7 +2102,7 @@ def _apply_verified_broadcast_fixture(
                         },
                     )
                 LOGGER.info("Broadcast EPG %s [%s]: %d programmes; match_confirmed=%s",
-                            source["broadcaster"], target.get("title"), len(programmes), bool(starts))
+                            source["broadcaster"], label, len(programmes), bool(starts))
                 continue
 
             if source_type in BROADCAST_ACCESS_SOURCE_TYPES:
@@ -2153,7 +2155,7 @@ def _apply_verified_broadcast_fixture(
                 try:
                     documents = _fetch_guide_documents(requester, source, target)
                     LOGGER.info("Broadcast guide %s [%s]: %d documents (not necessarily match-confirmed)",
-                                source["broadcaster"], target.get("title"), len(documents))
+                                source["broadcaster"], label, len(documents))
                 except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
                     errors.append(f"{source['broadcaster']} ({target.get('title')}): {exc}")
                     continue
