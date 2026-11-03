@@ -121,6 +121,7 @@ BROADCAST_EVIDENCE_MARKERS = {
     "programmazione", "broadcast", "ubertragung", "transmissao", "ao-vivo",
 }
 BROADCAST_GUIDE_HORIZON_DAYS = 21
+BROADCAST_FIXTURE_LIMIT = 3
 TV8_PROGRAMMING_API = "https://www.tv8.it/api/programmingCarousel"
 TEAM_COUNTRY_LOOKUP_URL = (
     "https://www.thesportsdb.com/api/v1/json/123/searchteams.php"
@@ -1837,6 +1838,39 @@ def _broadcast_cache_keys(
     )
 
 
+class _BroadcastRequestCache:
+    """Run-local cache of read-only guide requests, including HTTP failures.
+
+    POST is used only by existing read-only EPG adapters. Its body is part of
+    the key, so dates/channels never share responses accidentally.
+    """
+    def __init__(self, requester: Any) -> None:
+        self.requester = requester
+        self.cache: dict[str, Any] = {}
+
+    def _request(self, method: str, url: str, **kwargs: Any) -> Any:
+        key = json.dumps([method, url, kwargs], sort_keys=True, default=str)
+        if key not in self.cache:
+            try:
+                response = getattr(self.requester, method)(url, **kwargs)
+                LOGGER.info("Broadcast HTTP %s %s -> %s", method.upper(), url,
+                            getattr(response, "status_code", "unknown"))
+                self.cache[key] = response
+            except requests.RequestException as exc:
+                LOGGER.warning("Broadcast HTTP %s %s -> %s", method.upper(), url, exc)
+                self.cache[key] = exc
+        cached = self.cache[key]
+        if isinstance(cached, requests.RequestException):
+            raise cached
+        return cached
+
+    def get(self, url: str, **kwargs: Any) -> Any:
+        return self._request("get", url, **kwargs)
+
+    def post(self, url: str, **kwargs: Any) -> Any:
+        return self._request("post", url, **kwargs)
+
+
 def apply_verified_broadcasts(
     session: requests.Session,
     events: list[dict[str, Any]],
@@ -1845,35 +1879,69 @@ def apply_verified_broadcasts(
     checked_at: str,
     now: datetime,
 ) -> tuple[list[dict[str, Any]], list[str]]:
-    """Verify broadcasters for the next international fixture only."""
+    """Recheck up to three upcoming international fixtures within 21 days.
+
+    Source-specific (shorter) horizons still apply. Cache lifetime is one run,
+    never a permanent negative result: new schedules are retried on every run.
+    """
     result = deepcopy(events)
-    target = next_international_match(result, now)
-    if target is None:
-        return result, []
+    for event in result:
+        if not _is_official_international_match(event):
+            continue
+        old = next((item for item in previous if _same_long_range_fixture(item, event)), None) or next(
+            (item for item in previous if _same_fixture(item, event, unordered=True)), None)
+        if old:
+            for key, value in old.items():
+                if (key.startswith(("broadcast_", "opponent_country")) or key in {
+                    "primary_italian_broadcast", "free_italian_broadcasts",
+                    "foreign_free_broadcasts", "foreign_possible_broadcasts", "foreign_tv_broadcasts",
+                }):
+                    event.setdefault(key, deepcopy(value))
+    pending = sorted((i for i, event in enumerate(result)
+                      if next_international_match([event], now) is not None
+                      and _event_datetime(event).astimezone(ROME).date()
+                      <= now.astimezone(ROME).date() + timedelta(days=BROADCAST_GUIDE_HORIZON_DAYS)),
+                     key=lambda i: _event_datetime(result[i]))[:BROADCAST_FIXTURE_LIMIT]
+    optional = requests.Session() if isinstance(session, requests.Session) else None
+    if optional is not None:
+        optional.headers.update(session.headers)
+    requester = _BroadcastRequestCache(optional if optional is not None else session)
+    errors: list[str] = []
+    try:
+        for index in pending:
+            result, fixture_errors = _apply_verified_broadcast_fixture(
+                requester, result, previous, sources, checked_at, now, index)
+            errors.extend(fixture_errors)
+            target = result[index]
+            confirmed = [c["broadcaster"] for c in target.get("broadcast_candidates", []) if c.get("match_confirmed")]
+            LOGGER.info("Broadcast result %s [%s]: confirmed_tv=%s; source_errors=%d",
+                        target.get("title"), target.get("start"), confirmed or "none", len(fixture_errors))
+            for error in fixture_errors:
+                LOGGER.warning("Broadcast source error [%s]: %s", target.get("title"), error)
+    finally:
+        if optional is not None:
+            optional.close()
+    return result, errors
+
+
+def _apply_verified_broadcast_fixture(
+    session: requests.Session,
+    events: list[dict[str, Any]],
+    previous: list[dict[str, Any]],
+    sources: list[dict[str, Any]],
+    checked_at: str,
+    now: datetime,
+    target_index: int,
+) -> tuple[list[dict[str, Any]], list[str]]:
+    """Existing resolver, unchanged scoring, applied to one selected fixture."""
+    result = deepcopy(events)
+    target = result[target_index]
 
     # Presentation only, for newly resolved international fixtures. Historical
     # entries and domestic competitions retain their existing descriptions.
     target["broadcast_notes_compact"] = True
     # Opt in only freshly resolved international fixtures, preserving old notes.
     target["broadcast_show_possible"] = True
-
-    # This first rollout is deliberately scoped to one fixture. Fresh remote data
-    # does not contain our enrichment fields, so retain them for every other event
-    # instead of making unrelated calendar entries look changed.
-    for event in result:
-        if event is target:
-            continue
-        previous_event = next(
-            (item for item in previous if _same_long_range_fixture(item, event)), None
-        ) or next(
-            (item for item in previous if _same_fixture(item, event, unordered=True)),
-            None,
-        )
-        if not previous_event:
-            continue
-        for key, value in previous_event.items():
-            if key.startswith("broadcast_") or key.startswith("opponent_country"):
-                event[key] = deepcopy(value)
 
     errors: list[str] = []
     evidence_by_broadcaster: dict[tuple[str, str], dict[str, Any]] = {}
@@ -1974,11 +2042,15 @@ def apply_verified_broadcasts(
                     not in competition_families
                 )
             ):
+                LOGGER.info("Broadcast source %s [%s]: skipped (date/season/competition outside scope)",
+                            source["broadcaster"], target.get("title"))
                 continue
             source_type = str(source.get("source_type") or "page")
             if source_type == "registry_only":
                 # Identity/link metadata for guide reconciliation, not a schedule.
                 continue
+            LOGGER.info("Broadcast source %s [%s]: checking %s", source["broadcaster"],
+                        target.get("title"), source_type)
             source_key = (country_code, _normalize(str(source["broadcaster"])))
             if (
                 source.get("rights_confirmed")
@@ -2027,6 +2099,8 @@ def apply_verified_broadcasts(
                             "programme_start": min(starts).isoformat(),
                         },
                     )
+                LOGGER.info("Broadcast EPG %s [%s]: %d programmes; match_confirmed=%s",
+                            source["broadcaster"], target.get("title"), len(programmes), bool(starts))
                 continue
 
             if source_type in BROADCAST_ACCESS_SOURCE_TYPES:
@@ -2078,6 +2152,8 @@ def apply_verified_broadcasts(
             if source_type in BROADCAST_GUIDE_SOURCE_TYPES:
                 try:
                     documents = _fetch_guide_documents(requester, source, target)
+                    LOGGER.info("Broadcast guide %s [%s]: %d documents (not necessarily match-confirmed)",
+                                source["broadcaster"], target.get("title"), len(documents))
                 except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
                     errors.append(f"{source['broadcaster']} ({target.get('title')}): {exc}")
                     continue

@@ -9,7 +9,7 @@ on:
       - data/events.json
       - .github/workflows/pages.yml
   workflow_run:
-    workflows: ["Update calendar"]
+    workflows: ["Update calendar", "Refresh Serie A standings"]
     types: [completed]
   workflow_dispatch:
 

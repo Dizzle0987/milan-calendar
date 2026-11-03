@@ -184,3 +184,123 @@ def test_mixed_calendar_national_events_unchanged(monkeypatch):
     domestic = fixture(competition='Serie A', away_team='Roma', start='2026-11-08T20:45:00+01:00')
     result, _ = resolve(monkeypatch, Session(), [domestic, fixture()])
     assert result[0] == domestic
+
+
+class MultiDateSession(Session):
+    """Local M4 fixture: the second schedule can be published between runs."""
+    def __init__(self, missing=(), status=200):
+        super().__init__(status)
+        self.missing = set(missing)
+        self.days = []
+
+    def post(self, url, **kw):
+        self.calls.append(('POST', url))
+        day = kw['data']['Date']
+        self.days.append(day)
+        return Response('' if day in self.missing else guide().replace('2026-11-05', day), self.status)
+
+
+def test_three_future_fixtures_rechecked_with_shared_reads_and_hard_limits(monkeypatch, caplog):
+    monkeypatch.setattr(g, 'identify_opponent_country', lambda *a: ({'country': 'Ungheria', 'country_code': 'HU', 'source': 'fixture'}, None))
+    now = datetime(2026, 11, 3, 8, tzinfo=timezone.utc)
+    events = [fixture(start=f'2026-11-{day:02}T18:45:00+01:00', uid=f'fixture-{day}') for day in (5, 8, 12, 15, 27)]
+    domestic = fixture(competition='Serie A', away_team='Roma')
+    historic = fixture(start='2026-10-05T18:45:00+02:00', broadcast_candidates=[{'broadcaster': 'Historical'}])
+    session = MultiDateSession()
+    with caplog.at_level('INFO', logger=g.__name__):
+        result, errors = g.apply_verified_broadcasts(session, [domestic, historic, *events], [], [source()], now.isoformat(), now)
+    assert not errors and session.days == ['2026-11-05', '2026-11-08', '2026-11-12']
+    assert len(session.calls) == 5  # robots + guide once; one dated POST per fixture
+    assert result[:2] == [domestic, historic]
+    assert result[-2:] == events[-2:]
+    for event in result[2:5]:
+        candidate, = event['broadcast_candidates']
+        assert candidate['match_confirmed'] and candidate['confidence'] == 95
+        assert candidate['status'] == 'UNKNOWN' and candidate['web_stream_free'] == 'unknown'
+    assert caplog.text.count('Broadcast result ') == 3
+    assert 'Broadcast HTTP POST' in caplog.text
+
+
+def test_unpublished_second_fixture_is_retried_next_run_and_becomes_confirmed(monkeypatch):
+    monkeypatch.setattr(g, 'identify_opponent_country', lambda *a: ({'country': 'Ungheria', 'country_code': 'HU', 'source': 'fixture'}, None))
+    now = datetime(2026, 11, 3, 8, tzinfo=timezone.utc)
+    events = [fixture(uid='first'), fixture(start='2026-11-12T18:45:00+01:00', uid='second')]
+    first, errors = g.apply_verified_broadcasts(MultiDateSession(missing=['2026-11-12']), events, [], [source()], now.isoformat(), now)
+    assert not errors and not first[1]['broadcast_candidates']
+    second_session = MultiDateSession()
+    second, errors = g.apply_verified_broadcasts(second_session, events, first, [source()], now.isoformat(), now)
+    assert not errors and '2026-11-12' in second_session.days
+    assert second[1]['broadcast_candidates'][0]['match_confirmed']
+    assert first[0] == second[0]
+
+
+def test_source_window_is_respected_and_logged_not_mistaken_for_no_listing(monkeypatch, caplog):
+    monkeypatch.setattr(g, 'identify_opponent_country', lambda *a: ({'country': 'Ungheria', 'country_code': 'HU', 'source': 'fixture'}, None))
+    now = datetime(2026, 11, 3, 8, tzinfo=timezone.utc)
+    session = MultiDateSession()
+    with caplog.at_level('INFO', logger=g.__name__):
+        result, errors = g.apply_verified_broadcasts(session, [fixture(start='2026-11-19T18:45:00+01:00')], [], [source()], now.isoformat(), now)
+    assert not errors and not session.calls and not result[0]['broadcast_candidates']
+    assert 'outside scope' in caplog.text
+
+
+def test_failure_cached_within_run_but_retried_next_run(monkeypatch, caplog):
+    monkeypatch.setattr(g, 'identify_opponent_country', lambda *a: ({'country': 'Ungheria', 'country_code': 'HU', 'source': 'fixture'}, None))
+    now = datetime(2026, 11, 3, 8, tzinfo=timezone.utc)
+    class Blocked(Session):
+        def get(self, url, **kwargs):
+            self.calls.append(('GET', url))
+            return Response('', 403)
+    events = [fixture(), fixture(start='2026-11-12T18:45:00+01:00')]
+    session = Blocked()
+    with caplog.at_level('INFO', logger=g.__name__):
+        result, errors = g.apply_verified_broadcasts(session, events, [], [source()], now.isoformat(), now)
+    assert len(session.calls) == 1 and len(errors) == 2
+    assert all(not e['broadcast_candidates'] for e in result)
+    assert '403' in caplog.text and 'Broadcast source error' in caplog.text
+    g.apply_verified_broadcasts(session, events, result, [source()], now.isoformat(), now)
+    assert len(session.calls) == 2
+
+
+def test_previous_international_enrichment_preserved_outside_window_only():
+    now = datetime(2026, 11, 3, 8, tzinfo=timezone.utc)
+    future = fixture(start='2026-12-03T18:45:00+01:00')
+    old = {**future, 'foreign_tv_broadcasts': [{'broadcaster': 'Verified fixture annotation'}],
+           'foreign_possible_broadcasts': [], 'broadcast_notes_compact': True}
+    domestic = fixture(competition='Serie A')
+    old_domestic = {**domestic, 'broadcast_it': 'Obsolete value'}
+    result, errors = g.apply_verified_broadcasts(Session(), [future, domestic], [old, old_domestic], [], now.isoformat(), now)
+    assert not errors and result == [old, domestic]
+
+
+def test_broken_source_does_not_block_later_official_confirmation(monkeypatch):
+    monkeypatch.setattr(g, 'identify_opponent_country', lambda *a: ({'country': 'Ungheria', 'country_code': 'HU', 'source': 'fixture'}, None))
+    now = datetime(2026, 11, 3, 8, tzinfo=timezone.utc)
+    class SessionWithBrokenSource(MultiDateSession):
+        def get(self, url, **kwargs):
+            if url == 'https://blocked.example/schedule':
+                return Response('', 403)
+            return super().get(url, **kwargs)
+    broken = {**source(), 'broadcaster': 'Broken', 'url': 'https://blocked.example/schedule',
+              'source_type': 'fixture_page', 'priority': 999}
+    result, errors = g.apply_verified_broadcasts(SessionWithBrokenSource(), [fixture()], [], [broken, source()], now.isoformat(), now)
+    assert len(errors) == 1 and 'Broken' in errors[0]
+    assert result[0]['broadcast_candidates'][0]['broadcaster'] == 'M4 Sport'
+    assert result[0]['broadcast_candidates'][0]['match_confirmed']
+
+
+def test_post_cache_separates_dates_and_reuses_identical_requests():
+    session = MultiDateSession()
+    cached = g._BroadcastRequestCache(session)
+    for day in ['2026-11-05', '2026-11-05', '2026-11-12']:
+        cached.post(ENDPOINT, data={'Date': day}, timeout=10, allow_redirects=False)
+    assert session.days == ['2026-11-05', '2026-11-12']
+
+
+def test_all_automatic_generations_are_followed_by_success_gated_pages_deploy():
+    pages = (ROOT / '.github/workflows/pages.yml').read_text()
+    assert 'workflows: ["Update calendar", "Refresh Serie A standings"]' in pages
+    assert "github.event.workflow_run.conclusion == 'success'" in pages
+    assert 'ref: main' in pages
+    for filename in ['update.yml', 'standings.yml']:
+        assert 'python update_calendar.py' in (ROOT / '.github/workflows' / filename).read_text()
