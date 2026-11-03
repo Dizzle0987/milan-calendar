@@ -309,20 +309,33 @@
         const confirmed = event.broadcast_options || [];
         const italian = confirmed.filter(option => option.country_code === "IT" && option.status === "confirmed");
         const foreign = confirmed.filter(option => option.country_code !== "IT" && option.access === "free" && option.status === "confirmed");
-        const possible = (event.foreign_possible_broadcasts || []).slice(0, 3);
+        const seen = new Set([...foreign, ...(event.foreign_tv_broadcasts || [])].map(option => `${option.country_code}:${option.broadcaster.toLowerCase()}`));
+        const possible = [...(event.foreign_possible_broadcasts || []), ...(event.broadcast_candidates || [])].filter(option => {
+          const key = `${option.country_code}:${String(option.broadcaster || "").toLowerCase()}`;
+          const access = option.access ?? option.free_or_pay;
+          let url;
+          try { url = new URL(option.watch_url); } catch { return false; }
+          if (seen.has(key) || !option.country_code || ["IT", "ZZ"].includes(option.country_code)
+              || ["paid", "included"].includes(access) || url.protocol !== "https:"
+              || ["youtube.com", "www.youtube.com", "youtu.be"].includes(url.hostname)
+              || !["POSSIBLE_FREE", "UNKNOWN"].includes(option.status)
+              || (option.status === "UNKNOWN" && option.match_confirmed !== true)) return false;
+          seen.add(key);
+          return true;
+        }).slice(0, 3);
         const rows = [];
         if (italian.length) rows.push(...italian.map(option => ({ label: `🇮🇹 ${option.broadcaster}`, option })));
         else rows.push({ label: `🇮🇹 ${broadcastText(event)}` });
         if (foreign.length) rows.push(...foreign.map(option => ({ label: `🌍 ${option.broadcaster} — ${option.country} ✓`, option })));
-        else if (possible.length) rows.push(...possible.map(option => ({ label: `🌍 Possibile: ${option.broadcaster} — ${option.country}` })));
-        else rows.push({ label: "🌍 In chiaro all'estero — Da confermare" });
+        if (possible.length) rows.push(...possible.map(option => ({ label: `🌍 Da confermare: ${option.broadcaster} — ${option.country}${option.vpn_required === false ? "" : " — VPN"}`, option, possible: true })));
+        else if (!foreign.length) rows.push({ label: "🌍 In chiaro all'estero — Da confermare" });
         rows.push(...(event.foreign_tv_broadcasts || []).map(option => ({ label: `🌍 TV confermata: ${option.broadcaster} — ${option.country}`, option })));
 
         element.append(document.createTextNode("Dove vederla: "));
         rows.forEach((row, index) => {
           if (index) element.append(document.createElement("br"));
           element.append(document.createTextNode(row.label));
-          if (row.option) {
+          if (row.option && !row.possible) {
             element.append(document.createTextNode(` · ${broadcastAvailabilityText(row.option)}`));
           }
           const url = row.option && (row.option.watch_url || row.option.broadcaster_home_url);
