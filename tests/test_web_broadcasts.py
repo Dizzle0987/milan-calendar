@@ -20,7 +20,7 @@ function links(n) { return [...(n.href ? [n.href] : []), ...n.children.flatMap(l
 '''+functions+r'''
 const cbc = {broadcaster: "CBC Sport", country: "Azerbaijan", country_code: "AZ", status: "POSSIBLE_FREE", match_confirmed: false, free_or_pay: "free", watch_url: "https://cbcsport.az/live/"};
 const m4 = {broadcaster: "M4 Sport", country: "Ungheria", country_code: "HU", status: "UNKNOWN", match_confirmed: true, access: "unknown", watch_url: "https://mediaklikk.hu/elo/mtv4live"};
-const event = {broadcast_it: "Sky Sport e NOW", foreign_possible_broadcasts: [cbc], broadcast_candidates: [cbc, m4,
+const event = {broadcast_it: "Sky Sport e NOW", broadcast_notes_compact: true, broadcast_italy_tbc: true, foreign_possible_broadcasts: [cbc], broadcast_candidates: [cbc, m4,
   {...m4, broadcaster: "Paid", access: "paid"},
   {...m4, broadcaster: "Unconfirmed", match_confirmed: false},
   {...m4, broadcaster: "Unknown country", country_code: "ZZ"},

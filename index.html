@@ -284,6 +284,8 @@
       function broadcastText(event) {
         const italian = (event.broadcast_options || []).filter(option => option.country_code === "IT" && option.status === "confirmed");
         if (italian.length) return italian.map(option => option.broadcaster).join(" · ");
+        // Compact international notes use this same resolved label in the ICS.
+        if (event.broadcast_notes_compact && event.broadcast_it && !["Da definire", "Da confermare"].includes(event.broadcast_it)) return event.broadcast_it;
         if (event.broadcast_italy_tbc) return "TV italiana da confermare";
         return event.broadcast_it && event.broadcast_it !== "Da definire" ? event.broadcast_it : "TV da confermare";
       }
