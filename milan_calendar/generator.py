@@ -796,6 +796,95 @@ def _broadcast_option(
     return option
 
 
+class _M4Programmes(HTMLParser):
+    """Only programme rows for the configured channel; ignore hidden labels."""
+    def __init__(self, source: dict[str, Any]) -> None:
+        super().__init__()
+        self.code = str(source["channel_code"])
+        self.prefix = "pg" + str(source["channel_id"]) + "d"
+        self.row: dict[str, Any] | None = None
+        self.field: str | None = None
+        self.hidden = 0
+        self.rows: list[dict[str, Any]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attrs = dict(attrs)
+        if tag == "li":
+            classes = set(str(attrs.get("class") or "").split())
+            self.row = ({"start": attrs.get("data-from"), "end": attrs.get("data-till"),
+                         "title": "", "teams": ""}
+                        if {"program_body", self.code} <= classes else None)
+            self.field, self.hidden = None, 0
+        if self.row is None:
+            return
+        if tag == "span":
+            self.hidden += 1
+        if tag in {"h1", "p"} and str(attrs.get("id") or "").startswith(self.prefix):
+            self.field = "title" if tag == "h1" else "teams"
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "span":
+            self.hidden = max(0, self.hidden - 1)
+        if tag in {"h1", "p"}:
+            self.field = None
+        if tag == "li" and self.row is not None:
+            self.rows.append(self.row)
+            self.row, self.field = None, None
+
+    def handle_data(self, data: str) -> None:
+        if self.row is not None and self.field and not self.hidden:
+            self.row[self.field] += data
+
+
+def parse_m4_epg(html: str, event: dict[str, Any], source: dict[str, Any]) -> list[dict[str, Any]]:
+    parser = _M4Programmes(source)
+    parser.feed(html)
+    if _competition_family(str(event.get("competition") or "")) != "europa-league":
+        return []
+    aliases = source.get("team_aliases") or {}
+    home = _team_broadcast_aliases(str(event.get("home_team") or ""), aliases)
+    away = _team_broadcast_aliases(str(event.get("away_team") or ""), aliases)
+    if not home or not away or home & away or event.get("all_day"):
+        return []
+    kickoff = _event_datetime(event).astimezone(ROME)
+    matches = []
+    for row in parser.rows:
+        title = _normalize(row["title"])
+        text = _normalize(row["title"] + " " + row["teams"])
+        if "uefa-labdarugo-europa-liga" not in title:
+            continue
+        if any(word in text for word in ["osszefoglalo", "ismetles", "-ism", "noi", "u19", "u-19", "u21", "u23"]):
+            continue
+        teams = re.sub(r"\s+mérkőzés\s*$", "", row["teams"].strip(), flags=re.I)
+        sides = re.split(r"\s*[-–—]\s*", teams)
+        if len(sides) != 2:
+            continue
+        left, right = map(_team_match_key, sides)
+        if not ((left in home and right in away) or (left in away and right in home)):
+            continue
+        try:
+            start = datetime.fromisoformat(str(row["start"]))
+            end = datetime.fromisoformat(str(row["end"]))
+            if start.tzinfo is None or end.tzinfo is None or end <= start:
+                continue
+            # Explicit source offsets must agree with the broadcaster's zone.
+            if any(t.utcoffset() != t.astimezone(ZoneInfo(source["timezone"])).utcoffset() for t in (start, end)):
+                continue
+        except (ValueError, KeyError):
+            continue
+        matches.append((start.astimezone(ROME), end.astimezone(ROME)))
+    merged: list[list[datetime]] = []
+    for start, end in sorted(set(matches)):
+        if merged and merged[-1][0] <= start <= merged[-1][1]:
+            merged[-1][1] = max(merged[-1][1], end)
+        else:
+            merged.append([start, end])
+    return [{"title": f"{event['home_team']} - {event['away_team']}",
+             "start": start.isoformat(), "end": end.isoformat()}
+            for start, end in merged
+            if kickoff - timedelta(minutes=20) <= start <= kickoff + timedelta(minutes=10)]
+
+
 def _fetch_epg_rows(
     requester: Any,
     source: dict[str, Any],
@@ -803,6 +892,45 @@ def _fetch_epg_rows(
 ) -> tuple[list[dict[str, Any]], str]:
     source_type = str(source.get("source_type") or "page")
     url = str(source.get("endpoint") or source["url"])
+    if source_type == "m4_epg":
+        robots = requester.get("https://m4sport.hu/robots.txt", timeout=10, allow_redirects=False)
+        robots.raise_for_status()
+        if robots.status_code != 200 or "<" in robots.text:
+            raise ValueError("M4 robots.txt non verificabile")
+        policy = RobotFileParser()
+        policy.parse(robots.text.splitlines())
+        if not policy.can_fetch("milan-calendar", url):
+            raise ValueError("M4 guida esclusa da robots.txt")
+        response = requester.get(url, timeout=10, allow_redirects=False)
+        response.raise_for_status()
+        response.encoding = "utf-8"
+        if response.status_code != 200:
+            raise ValueError("M4 guida non disponibile senza redirect")
+        match = re.search(r"programGuideController\s*=\s*programGuide\(", response.text)
+        if not match:
+            return [], url
+        settings, _ = json.JSONDecoder().raw_decode(response.text[match.end():])
+        endpoint = str(settings.get("programGuideInterfaceUrl") or "")
+        parsed = urlparse(endpoint)
+        if (parsed.scheme != "https" or parsed.hostname != "m4sport.hu"
+                or parsed.path != "/wp-content/plugins/hms-global-widgets/widgets/programGuide/programGuideInterface.php"
+                or parsed.query or parsed.fragment or not policy.can_fetch("milan-calendar", endpoint)):
+            raise ValueError("M4 endpoint non approvato")
+        rows = []
+        for event in relevant:
+            day = _event_datetime(event).astimezone(ZoneInfo(source["timezone"])).date()
+            response = requester.post(endpoint, data={
+                "ChannelIds": str(source["channel_id"]) + ",",
+                "ShortCodes": str(source["channel_code"]) + ",",
+                "Names": str(source["broadcaster"]) + ",", "Date": day.isoformat(),
+                "Type": "0", "buttonType": "text_type", "videoPageUrl": "https://m4sport.hu/videok", "newDesign": "1",
+            }, timeout=10, allow_redirects=False)
+            response.raise_for_status()
+            response.encoding = "utf-8"
+            if response.status_code != 200:
+                raise ValueError("M4 palinsesto non disponibile senza redirect")
+            rows.extend(parse_m4_epg(response.text, event, source))
+        return rows, url
     if source_type == "qazsport_epg":
         # Public dated GET pages contain the schedule as embedded JSON. Do not
         # call Livewire POST endpoints, fetch players or follow redirects.
@@ -1726,6 +1854,8 @@ def apply_verified_broadcasts(
     # Presentation only, for newly resolved international fixtures. Historical
     # entries and domestic competitions retain their existing descriptions.
     target["broadcast_notes_compact"] = True
+    # Opt in only freshly resolved international fixtures, preserving old notes.
+    target["broadcast_show_possible"] = True
 
     # This first rollout is deliberately scoped to one fixture. Fresh remote data
     # does not contain our enrichment fields, so retain them for every other event
@@ -1859,7 +1989,7 @@ def apply_verified_broadcasts(
                 evidence_by_broadcaster.setdefault(
                     source_key, {"source": deepcopy(source), "evidence": []}
                 )
-            if source_type in {"servus_epg", "tv8_api", "qazsport_epg"}:
+            if source_type in {"servus_epg", "tv8_api", "qazsport_epg", "m4_epg"}:
                 try:
                     programmes, guide_url = _fetch_epg_rows(
                         requester, source, [target]
@@ -2147,7 +2277,7 @@ def apply_verified_broadcasts(
             # A Qazsport TV listing proves carriage, not free TV access.
             # In particular, bool("unknown") must not turn this into True.
             source.get("broadcast_free", "unknown")
-            if source.get("source_type") == "qazsport_epg"
+            if source.get("source_type") in {"qazsport_epg", "m4_epg"}
             else bool(source.get("broadcast_free", access == "free"))
         )
         web_stream_free = resolved_availability(
@@ -3927,6 +4057,7 @@ def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
         foreign = list(data.get("foreign_tv_broadcasts") or []) + [
             o for o in (data.get("broadcast_options") or []) + (data.get("foreign_possible_broadcasts") or [])
             if o.get("country_code") != "IT" and o.get("match_confirmed") is True
+            and not (data.get("broadcast_show_possible") and o.get("status") == "POSSIBLE_FREE")
         ]
         for option in foreign:
             key = (option.get("country_code"), _normalize(str(option.get("broadcaster") or "")))
@@ -3937,6 +4068,24 @@ def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
             seen.add(key)
             vpn = "VPN" if option.get("vpn_required", True) else ""
             lines.append(" — ".join(str(v) for v in (option["broadcaster"], option["country"], vpn, url) if v))
+        if data.get("broadcast_show_possible"):
+            possible_lines = []
+            for option in (data.get("foreign_possible_broadcasts") or []) + (data.get("broadcast_candidates") or []):
+                key = (option.get("country_code"), _normalize(str(option.get("broadcaster") or "")))
+                url = str(option.get("watch_url") or "")
+                access = option.get("access", option.get("free_or_pay"))
+                if (key in seen or key[0] in {None, "", "IT", "ZZ"}
+                        or access in {"paid", "included"} or not url.startswith("https://")
+                        or (urlparse(url).hostname or "").lower() in {"youtube.com", "www.youtube.com", "youtu.be"}
+                        or option.get("status") not in {"POSSIBLE_FREE", "UNKNOWN"}
+                        or (option.get("status") == "UNKNOWN" and option.get("match_confirmed") is not True)):
+                    continue
+                seen.add(key)
+                vpn = "VPN" if option.get("vpn_required", True) else ""
+                possible_lines.append(" — ".join(str(v) for v in (
+                    option["broadcaster"], option["country"], vpn, url) if v))
+            if possible_lines:
+                lines.extend(["Possibili alternative estere — da confermare:", *possible_lines[:3]])
         return lines
     options = data.get("broadcast_options") or []
     italian = [option for option in options if option.get("country_code") == "IT"]

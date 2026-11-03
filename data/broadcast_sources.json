@@ -412,11 +412,17 @@
     },
     {
       "country": "Ungheria", "country_code": "HU", "broadcaster": "M4 Sport",
-      "access": "free", "platforms": "TV + streaming", "language": "ungherese",
-      "url": "https://m4sport.hu/musorujsag/", "competition_families": ["europa-league"],
+      "access": "unknown", "platforms": "TV/streaming da verificare", "language": "ungherese",
+      "url": "https://m4sport.hu/musor", "source_type": "m4_epg",
+      "timezone": "Europe/Budapest", "channel_id": "30", "channel_code": "m4",
+      "watch_url": "https://mediaklikk.hu/elo/mtv4live", "watch_url_type": "live_page",
+      "official_domains": ["m4sport.hu", "mediaklikk.hu"],
+      "broadcast_free": "unknown", "web_stream_free": "unknown",
+      "team_aliases": {"ferencvaros": ["Ferencvárosi TC", "Ferencváros", "Ferencvarosi"], "milan": ["AC Milan"]},
+      "competition_families": ["europa-league"],
       "team_keywords": ["ferencvaros", "ferencvarosi"],
       "rights_from_season": 2024, "rights_through_season": 2026,
-      "lookahead_days": 21, "priority": 100
+      "lookahead_days": 14, "priority": 100
     },
     {
       "country": "Grecia", "country_code": "GR", "broadcaster": "ANT1",
