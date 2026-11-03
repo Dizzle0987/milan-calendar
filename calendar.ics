@@ -426,18 +426,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Inter
 DTSTART;TZID=Europe/Rome:20261031T204500
 DTEND;TZID=Europe/Rome:20261031T224500
-DTSTAMP:20261102T214621Z
+DTSTAMP:20261103T094415Z
 UID:8131b669c6acbfebbf8a5c63@milan-calendar
-SEQUENCE:24
+SEQUENCE:25
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 31/10/2026 
  20:45\nTurno: 10\nStadio: Stadio San Siro\nLocalità: Milano\nDove vederla
-  in Italia: DAZN\nFonte orario: NOW\nClassifica Serie A aggiornata — gio
- rnata completata:\n  3. Roma — 24 pt\n  4. Como — 23 pt\n▶ 5. Milan 
- — 21 pt — 10 PG — DR +9\n  6. Frosinone — 20 pt\n  7. Juventus —
-  17 pt\nClassifica aggiornata: 02/11/2026 22:46\nFonte classifica: Lega Se
- rie A
-LAST-MODIFIED:20261102T214621Z
+  in Italia: DAZN\; Sky Sport e NOW\nFonte orario: NOW\nClassifica Serie A 
+ aggiornata — giornata completata:\n  3. Roma — 24 pt\n  4. Como — 23
+  pt\n▶ 5. Milan — 21 pt — 10 PG — DR +9\n  6. Frosinone — 20 pt\
+ n  7. Juventus — 17 pt\nClassifica aggiornata: 02/11/2026 22:46\nFonte c
+ lassifica: Lega Serie A
+LAST-MODIFIED:20261103T094415Z
 LOCATION:Stadio San Siro\, Milano
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -520,15 +520,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Olympiacos - AC Milan
 DTSTART;TZID=Europe/Rome:20261126T184500
 DTEND;TZID=Europe/Rome:20261126T204500
-DTSTAMP:20260917T045927Z
+DTSTAMP:20261103T094415Z
 UID:716d30d10cd2a53f2b53c687@milan-calendar
-SEQUENCE:3
+SEQUENCE:4
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 26/11/2026 18:45\nTurno: 5\nStadio: Stadio Georgios Karaiskákis\nDov
  e vederla:\n🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero 
  — Nessuna emittente gratuita confermata al momento\nFonte orario: NOW
-LAST-MODIFIED:20260917T045927Z
+LAST-MODIFIED:20261103T094415Z
 LOCATION:Stadio Georgios Karaiskákis
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -584,15 +584,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Sunderland FC
 DTSTART;TZID=Europe/Rome:20261210T210000
 DTEND;TZID=Europe/Rome:20261210T230000
-DTSTAMP:20260917T045927Z
+DTSTAMP:20261103T094415Z
 UID:97982c44b5b8526e3dfb5444@milan-calendar
-SEQUENCE:3
+SEQUENCE:4
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  10/12/2026 21:00\nTurno: 6\nStadio: San Siro Stadium\nDove vederla:\n🇮
  🇹 Italia — Da confermare\n🌍 In chiaro all'estero — Nessuna emitt
  ente gratuita confermata al momento\nFonte orario: NOW
-LAST-MODIFIED:20260917T045927Z
+LAST-MODIFIED:20261103T094415Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all

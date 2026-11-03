@@ -1857,8 +1857,8 @@
     {
       "all_day": false,
       "away_team": "Inter",
-      "broadcast_it": "DAZN",
-      "broadcast_source_url": "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
+      "broadcast_it": "DAZN; Sky Sport e NOW",
+      "broadcast_source_url": "https://www.nowtv.it/sport/calcio/milan",
       "broadcast_source_urls": [
         "https://www.dazn.com/it-IT/help/articles/19177098524573-modello-di-organizzazione-gestione-e-controllo-modello-231",
         "https://www.nowtv.it/sport/calcio/milan"
@@ -1866,11 +1866,11 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-11-02T21:46:21Z",
+      "last_modified": "2026-11-03T09:44:15Z",
       "location": "Milano",
       "neutral": false,
       "round": "10",
-      "sequence": 24,
+      "sequence": 25,
       "serie_a_standing": {
         "context": [
           {
@@ -2451,7 +2451,7 @@
       "broadcast_it": "Sky Sport e NOW",
       "broadcast_italy_tbc": true,
       "broadcast_options": [],
-      "broadcast_source_url": "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
+      "broadcast_source_url": "https://www.nowtv.it/sport/calcio/milan",
       "broadcast_source_urls": [
         "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
         "https://www.nowtv.it/sport/calcio/milan"
@@ -2459,11 +2459,11 @@
       "competition": "UEFA Europa League",
       "home_away": "Trasferta",
       "home_team": "Olympiacos",
-      "last_modified": "2026-09-17T04:59:27Z",
+      "last_modified": "2026-11-03T09:44:15Z",
       "location": "",
       "neutral": false,
       "round": "5",
-      "sequence": 3,
+      "sequence": 4,
       "source": "AC Milan",
       "source_id": "e9m2maghftf0rxhxrddw3sjro",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -2530,7 +2530,7 @@
       "broadcast_it": "Sky Sport e NOW",
       "broadcast_italy_tbc": true,
       "broadcast_options": [],
-      "broadcast_source_url": "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
+      "broadcast_source_url": "https://www.nowtv.it/sport/calcio/milan",
       "broadcast_source_urls": [
         "https://sport.sky.it/calcio/champions-league/2025/11/20/champions-league-2027-2031-su-sky",
         "https://www.nowtv.it/sport/calcio/milan"
@@ -2538,11 +2538,11 @@
       "competition": "UEFA Europa League",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-09-17T04:59:27Z",
+      "last_modified": "2026-11-03T09:44:15Z",
       "location": "",
       "neutral": false,
       "round": "6",
-      "sequence": 3,
+      "sequence": 4,
       "source": "AC Milan",
       "source_id": "ehuhpaea5au1xwmjpgxouwys4",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -3209,7 +3209,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-11-03T08:30:57Z",
+  "last_changed": "2026-11-03T09:44:15Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -3264,6 +3264,7 @@
     "Mediaset: 404 Client Error: Not Found for url: https://mediasetinfinity.mediaset.it/sport",
     "Prime Video: nessun orario esplicito per il Milan",
     "Broadcast CBC Sport (None): 403 Client Error: Forbidden for url: https://cbcsport.az/tv_program_schedule",
+    "Broadcast RTL / NITRO (None): 503 Server Error: Service Unavailable for url: https://www.rtl.de/sport/fussball/europa-league/",
     "Broadcast RTL+ (None): 404 Client Error: Not Found for url: https://plus.rtl.de/video-tv/sport",
     "Broadcast MacEkran (None): HTTPSConnectionPool(host='macekran.com', port=443): Read timed out. (read timeout=10)",
     "Broadcast bTV (None): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
