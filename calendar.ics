@@ -451,9 +451,9 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Ferencváros
 DTSTART;TZID=Europe/Rome:20261105T184500
 DTEND;TZID=Europe/Rome:20261105T204500
-DTSTAMP:20261104T214956Z
+DTSTAMP:20261105T015557Z
 UID:7104e20380283c03c6625881@milan-calendar
-SEQUENCE:13
+SEQUENCE:14
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  05/11/2026 18:45\nTurno: 4\nStadio: San Siro Stadium\nLocalità: Italy\nDo
@@ -462,7 +462,7 @@ DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma):
  Azerbaijan — VPN — https://cbcsport.az/live/ — TV confermata · Stre
  aming web da verificare\nM4 Sport — Ungheria — VPN — https://mediakl
  ikk.hu/elo/mtv4live — TV confermata · Streaming web da verificare
-LAST-MODIFIED:20261104T214956Z
+LAST-MODIFIED:20261105T015557Z
 LOCATION:San Siro Stadium\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -521,15 +521,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Olympiacos - AC Milan
 DTSTART;TZID=Europe/Rome:20261126T184500
 DTEND;TZID=Europe/Rome:20261126T204500
-DTSTAMP:20261103T094415Z
+DTSTAMP:20261105T015557Z
 UID:716d30d10cd2a53f2b53c687@milan-calendar
-SEQUENCE:4
+SEQUENCE:5
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 26/11/2026 18:45\nTurno: 5\nStadio: Stadio Georgios Karaiskákis\nDov
- e vederla:\n🇮🇹 Italia — Da confermare\n🌍 In chiaro all'estero 
- — Nessuna emittente gratuita confermata al momento\nFonte orario: NOW
-LAST-MODIFIED:20261103T094415Z
+ e vederla:\nSky Sport e NOW — Italia — https://www.nowtv.it/sport/calc
+ io/milan
+LAST-MODIFIED:20261105T015557Z
 LOCATION:Stadio Georgios Karaiskákis
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
