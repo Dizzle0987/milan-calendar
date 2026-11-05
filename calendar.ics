@@ -451,19 +451,19 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Ferencváros
 DTSTART;TZID=Europe/Rome:20261105T184500
 DTEND;TZID=Europe/Rome:20261105T204500
-DTSTAMP:20261105T065851Z
+DTSTAMP:20261105T200415Z
 UID:7104e20380283c03c6625881@milan-calendar
-SEQUENCE:15
+SEQUENCE:16
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
- 05/11/2026 18:45\nTurno: 4\nStadio: San Siro Stadium\nLocalità: Italy\nDo
- ve vederla:\nSky Sport e NOW — Italia — https://www.nowtv.it/sport/cal
- cio/milan\nPossibili alternative estere — da confermare:\nCBC Sport — 
- Azerbaijan — VPN — https://cbcsport.az/live/ — TV confermata · Stre
- aming web da verificare\nM4 Sport — Ungheria — VPN — https://mediakl
- ikk.hu/elo/mtv4live — TV confermata · Streaming web da verificare
-LAST-MODIFIED:20261105T065851Z
-LOCATION:San Siro Stadium\, Italy
+ 05/11/2026 18:45\nTurno: 4\nStadio: San Siro Stadium\nLocalità: Milano\nD
+ ove vederla:\nSky Sport e NOW — Italia — https://www.nowtv.it/sport/ca
+ lcio/milan\nPossibili alternative estere — da confermare:\nCBC Sport —
+  Azerbaijan — VPN — https://cbcsport.az/live/ — TV confermata · Str
+ eaming web da verificare\nM4 Sport — Ungheria — VPN — https://mediak
+ likk.hu/elo/mtv4live — TV confermata · Streaming web da verificare
+LAST-MODIFIED:20261105T200415Z
+LOCATION:San Siro Stadium\, Milano
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
@@ -521,15 +521,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Olympiacos - AC Milan
 DTSTART;TZID=Europe/Rome:20261126T184500
 DTEND;TZID=Europe/Rome:20261126T204500
-DTSTAMP:20261105T065851Z
+DTSTAMP:20261105T200415Z
 UID:716d30d10cd2a53f2b53c687@milan-calendar
-SEQUENCE:6
+SEQUENCE:7
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 26/11/2026 18:45\nTurno: 5\nStadio: Stadio Georgios Karaiskákis\nDov
  e vederla:\nSky Sport e NOW — Italia — https://www.nowtv.it/sport/calc
  io/milan
-LAST-MODIFIED:20261105T065851Z
+LAST-MODIFIED:20261105T200415Z
 LOCATION:Stadio Georgios Karaiskákis
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
