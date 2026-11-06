@@ -2323,11 +2323,11 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Genoa",
-      "last_modified": "2026-11-02T21:46:21Z",
-      "location": "",
+      "last_modified": "2026-11-06T02:22:02Z",
+      "location": "Italy",
       "neutral": false,
       "round": "11",
-      "sequence": 18,
+      "sequence": 19,
       "serie_a_standing": {
         "context": [
           {
@@ -3522,7 +3522,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-11-05T20:04:15Z",
+  "last_changed": "2026-11-06T02:22:02Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
