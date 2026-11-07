@@ -1866,18 +1866,18 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-11-07T16:17:45Z",
+      "last_modified": "2026-11-07T20:11:32Z",
       "location": "Milano",
       "neutral": false,
       "round": "10",
-      "sequence": 27,
+      "sequence": 28,
       "serie_a_standing": {
         "context": [
           {
             "played": 10,
-            "points": 24,
+            "points": 25,
             "position": 3,
-            "team": "Roma"
+            "team": "Inter"
           },
           {
             "played": 10,
@@ -1914,7 +1914,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-11-07T16:17:45Z",
+        "updated_at": "2026-11-07T20:11:32Z",
         "wins": 6
       },
       "source": "AC Milan",
@@ -2324,18 +2324,18 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Genoa",
-      "last_modified": "2026-11-07T16:17:45Z",
+      "last_modified": "2026-11-07T20:11:32Z",
       "location": "Italy",
       "neutral": false,
       "round": "11",
-      "sequence": 21,
+      "sequence": 22,
       "serie_a_standing": {
         "context": [
           {
             "played": 10,
-            "points": 24,
+            "points": 25,
             "position": 3,
-            "team": "Roma"
+            "team": "Inter"
           },
           {
             "played": 10,
@@ -2372,7 +2372,7 @@
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-11-07T16:17:45Z",
+        "updated_at": "2026-11-07T20:11:32Z",
         "wins": 6
       },
       "source": "AC Milan",
@@ -3524,15 +3524,15 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-11-07T16:17:45Z",
+  "last_changed": "2026-11-07T20:11:32Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
       {
         "played": 10,
-        "points": 24,
+        "points": 25,
         "position": 3,
-        "team": "Roma"
+        "team": "Inter"
       },
       {
         "played": 10,
@@ -3569,7 +3569,7 @@
     "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-11-07T16:17:45Z",
+    "updated_at": "2026-11-07T20:11:32Z",
     "wins": 6
   },
   "source_errors": [
