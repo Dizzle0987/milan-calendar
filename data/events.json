@@ -1866,57 +1866,11 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-11-07T20:11:32Z",
+      "last_modified": "2026-11-07T23:43:03Z",
       "location": "Milano",
       "neutral": false,
       "round": "10",
-      "sequence": 28,
-      "serie_a_standing": {
-        "context": [
-          {
-            "played": 10,
-            "points": 25,
-            "position": 3,
-            "team": "Inter"
-          },
-          {
-            "played": 10,
-            "points": 23,
-            "position": 4,
-            "team": "Como"
-          },
-          {
-            "played": 10,
-            "points": 21,
-            "position": 5,
-            "team": "Milan"
-          },
-          {
-            "played": 11,
-            "points": 20,
-            "position": 6,
-            "team": "Frosinone"
-          },
-          {
-            "played": 10,
-            "points": 17,
-            "position": 7,
-            "team": "Juventus"
-          }
-        ],
-        "draws": 3,
-        "goal_difference": 9,
-        "losses": 1,
-        "pending_recoveries": [],
-        "played": 10,
-        "points": 21,
-        "position": 5,
-        "provisional": true,
-        "source": "Lega Serie A",
-        "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-11-07T20:11:32Z",
-        "wins": 6
-      },
+      "sequence": 29,
       "source": "AC Milan",
       "source_id": "7nzu7j1c3kifpvs6qb9t7rd3o",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -2394,11 +2348,57 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-09-25T19:13:41Z",
+      "last_modified": "2026-11-07T23:43:03Z",
       "location": "",
       "neutral": false,
       "round": "12",
-      "sequence": 10,
+      "sequence": 11,
+      "serie_a_standing": {
+        "context": [
+          {
+            "played": 10,
+            "points": 25,
+            "position": 3,
+            "team": "Inter"
+          },
+          {
+            "played": 10,
+            "points": 23,
+            "position": 4,
+            "team": "Como"
+          },
+          {
+            "played": 10,
+            "points": 21,
+            "position": 5,
+            "team": "Milan"
+          },
+          {
+            "played": 11,
+            "points": 20,
+            "position": 6,
+            "team": "Frosinone"
+          },
+          {
+            "played": 10,
+            "points": 17,
+            "position": 7,
+            "team": "Juventus"
+          }
+        ],
+        "draws": 3,
+        "goal_difference": 9,
+        "losses": 1,
+        "pending_recoveries": [],
+        "played": 10,
+        "points": 21,
+        "position": 5,
+        "provisional": true,
+        "source": "Lega Serie A",
+        "source_url": "https://www.legaseriea.it/serie-a/classifica",
+        "updated_at": "2026-11-07T20:11:32Z",
+        "wins": 6
+      },
       "source": "AC Milan",
       "source_id": "7tihhdch6myqobao6oexk4gt0",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -3524,7 +3524,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-11-07T20:11:32Z",
+  "last_changed": "2026-11-07T23:43:03Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
