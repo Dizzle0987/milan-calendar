@@ -472,19 +472,19 @@ BEGIN:VEVENT
 SUMMARY:⚽ Genoa - AC Milan
 DTSTART;TZID=Europe/Rome:20261108T150000
 DTEND;TZID=Europe/Rome:20261108T170000
-DTSTAMP:20261107T201132Z
+DTSTAMP:20261108T163608Z
 UID:4bcf433e05672498eda803a5@milan-calendar
-SEQUENCE:22
+SEQUENCE:23
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 08/11/
- 2026 15:00\nTurno: 11\nStadio: Stadio Ferraris\nLocalità: Italy\nDove ved
- erla in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provvisor
- ia — giornata in corso:\n  3. Inter — 25 pt\n  4. Como — 23 pt\n▶ 
- 5. Milan — 21 pt — 10 PG — DR +9\n  6. Frosinone — 20 pt\n  7. Juv
- entus — 17 pt\nClassifica aggiornata: 07/11/2026 21:11\nFonte classifica
- : Lega Serie A
-LAST-MODIFIED:20261107T201132Z
-LOCATION:Stadio Ferraris\, Italy
+ 2026 15:00\nTurno: 11\nStadio: Stadio Ferraris\nLocalità: Genova\nDove ve
+ derla in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provviso
+ ria — giornata in corso:\n  2. Roma — 27 pt\n  3. Inter — 25 pt\n▶
+  4. Milan — 24 pt — 11 PG — DR +10\n  5. Como — 23 pt\n  6. Frosin
+ one — 20 pt\nClassifica aggiornata: 08/11/2026 17:36\nFonte classifica: 
+ Lega Serie A
+LAST-MODIFIED:20261108T163608Z
+LOCATION:Stadio Ferraris\, Genova
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
@@ -497,17 +497,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Frosinone
 DTSTART;TZID=Europe/Rome:20261122T180000
 DTEND;TZID=Europe/Rome:20261122T200000
-DTSTAMP:20261107T234303Z
+DTSTAMP:20261108T163608Z
 UID:e0c247e803a33255e6ebefa8@milan-calendar
-SEQUENCE:11
+SEQUENCE:12
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 22/11/2026 
  18:00\nTurno: 12\nStadio: Stadio San Siro\nDove vederla in Italia: DAZN\nF
  onte orario: AC Milan\nClassifica Serie A provvisoria — giornata in cors
- o:\n  3. Inter — 25 pt\n  4. Como — 23 pt\n▶ 5. Milan — 21 pt — 
- 10 PG — DR +9\n  6. Frosinone — 20 pt\n  7. Juventus — 17 pt\nClassi
- fica aggiornata: 07/11/2026 21:11\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20261107T234303Z
+ o:\n  2. Roma — 27 pt\n  3. Inter — 25 pt\n▶ 4. Milan — 24 pt — 
+ 11 PG — DR +10\n  5. Como — 23 pt\n  6. Frosinone — 20 pt\nClassific
+ a aggiornata: 08/11/2026 17:36\nFonte classifica: Lega Serie A
+LAST-MODIFIED:20261108T163608Z
 LOCATION:Stadio San Siro
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
