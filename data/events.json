@@ -3578,7 +3578,7 @@
     "Prime Video: nessun orario esplicito per il Milan",
     "Broadcast CBC Sport (None): 403 Client Error: Forbidden for url: https://cbcsport.az/tv_program_schedule",
     "Broadcast RTL+ (None): 404 Client Error: Not Found for url: https://plus.rtl.de/video-tv/sport",
-    "Broadcast MacEkran (None): HTTPSConnectionPool(host='macekran.com', port=443): Read timed out. (read timeout=10)",
+    "Broadcast MacEkran (None): 521 Server Error: <none> for url: https://macekran.com/mac/olympiacos-vs-ac-milan-2026-11-26",
     "Broadcast FootAz Germania (None): 410 Client Error: Gone for url: https://www.footaz.de/spiel/olympiacos-vs-ac-milan/",
     "Broadcast FootAz Austria (None): 410 Client Error: Gone for url: https://www.footaz.at/spiel/olympiacos-vs-ac-milan/",
     "Broadcast bTV (None): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
