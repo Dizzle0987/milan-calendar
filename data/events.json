@@ -3580,6 +3580,7 @@
     "Broadcast RTL+ (None): 404 Client Error: Not Found for url: https://plus.rtl.de/video-tv/sport",
     "Broadcast MacEkran (None): 521 Server Error: <none> for url: https://macekran.com/mac/olympiacos-vs-ac-milan-2026-11-26",
     "Broadcast FootAz Germania (None): 410 Client Error: Gone for url: https://www.footaz.de/spiel/olympiacos-vs-ac-milan/",
+    "Broadcast Sportkritik (None): HTTPSConnectionPool(host='sportkritik.az', port=443): Max retries exceeded with url: /wp-json/wp/v2/search?search=A.C.%20Milan%20Olympiacos (Caused by NewConnectionError(\"HTTPSConnection(host='sportkritik.az', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
     "Broadcast FootAz Austria (None): 410 Client Error: Gone for url: https://www.footaz.at/spiel/olympiacos-vs-ac-milan/",
     "Broadcast bTV (None): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
     "Broadcast DAZN Portugal (None): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l",
