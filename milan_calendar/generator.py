@@ -1119,6 +1119,8 @@ def _guide_document_confirms_fixture(
     source: dict[str, Any],
 ) -> bool:
     """Verify that a guide document contains the exact dated fixture."""
+    if source.get("guide_parser") == "sporekrani":
+        return bool(parse_sporekrani_guide(html, event, source))
     timezone_name = str(source.get("timezone") or "Europe/Rome")
     windows = _fixture_windows(
         html, event, timezone_name, source.get("team_aliases") or {}
@@ -1129,6 +1131,68 @@ def _guide_document_confirms_fixture(
     return any(
         any(marker in window for marker in time_markers) for window in windows
     )
+
+
+def parse_sporekrani_guide(
+    html: str, event: dict[str, Any], source: dict[str, Any]
+) -> list[dict[str, Any]]:
+    """Read only the current structured football event, never navigation names."""
+    marker = re.search(r"window\.__INITIAL_STATE__\s*=\s*", html)
+    if not marker:
+        return []
+    try:
+        state, _ = json.JSONDecoder().raw_decode(html[marker.end():])
+        current = state["common"]["curr"]["event"]
+        if (not isinstance(current, dict) or current.get("sport_id") != 1
+                or current.get("event_type_name") != "match"):
+            return []
+        home, away = str(current["home_name"]), str(current["away_name"])
+        if not _valid_first_team_fixture(home, away):
+            # Localised aliases are checked below; squad qualifiers must still
+            # be rejected even when names differ from the canonical club name.
+            if any(marker in f"{home} {away}".lower() for marker in EXCLUDED_SQUADS):
+                return []
+        aliases = source.get("team_aliases") or {}
+        wanted_home = _team_broadcast_aliases(str(event.get("home_team") or ""), aliases)
+        wanted_away = _team_broadcast_aliases(str(event.get("away_team") or ""), aliases)
+        if not ((_team_match_key(home) in wanted_home and _team_match_key(away) in wanted_away)
+                or (_team_match_key(away) in wanted_home and _team_match_key(home) in wanted_away)):
+            return []
+        family = _competition_family(str(event.get("competition") or ""))
+        terms = (source.get("competition_terms") or {}).get(family) or []
+        if _normalize(str(current.get("league_name") or "")) not in {_normalize(str(t)) for t in terms}:
+            return []
+        if event.get("all_day") or not source.get("timezone"):
+            return []
+        listed = datetime.fromisoformat(str(current["date_time"]))
+        zone = ZoneInfo(source["timezone"])
+        if listed.tzinfo is None:
+            listed = listed.replace(tzinfo=zone)
+        if listed.astimezone(ROME) != _event_datetime(event).astimezone(ROME):
+            return []
+        channels = current["channels"]
+        if not isinstance(channels, list):
+            return []
+        return [{"broadcaster": str(c["name"]).strip(), "country_code": "ZZ",
+                 "programme_start": listed.astimezone(ROME).isoformat()}
+                for c in channels if isinstance(c, dict) and c.get("active") == 1
+                and isinstance(c.get("name"), str) and c["name"].strip()]
+    except (KeyError, TypeError, ValueError):
+        return []
+
+
+def _guide_permalink_matches_teams(url: str, event: dict[str, Any], source: dict[str, Any]) -> bool:
+    """Prefilter real links before the request cap; never a confirmation itself."""
+    path = urlparse(url).path
+    dated = re.search(r"/(20\d{2})/(\d{2})/(\d{2})/", path)
+    if dated:
+        expected = _event_datetime(event).astimezone(ZoneInfo(source.get("timezone") or "Europe/Rome"))
+        if "-".join(dated.groups()) != expected.date().isoformat():
+            return False
+    slug = _normalize(path)
+    return all(any(re.search(r"(?:^|-)" + re.escape(alias) + r"(?:-|$)", slug)
+                   for alias in _team_broadcast_aliases(str(event.get(key) or ""), source.get("team_aliases") or {}))
+               for key in ("home_team", "away_team"))
 
 
 def _match_permalink_candidates(
@@ -1334,12 +1398,18 @@ def _fetch_guide_documents(
         return documents
 
     last_query_error: requests.RequestException | None = None
+    last_match_error: requests.RequestException | None = None
     successful_query = False
+    seen_permalinks: set[str] = set()
+    fetched_permalinks = 0
+    permalink_limit = max(1, min(int(source.get("permalink_limit") or 3), 6))
     for query_url in query_urls:
         try:
             response = requester.get(query_url, timeout=10)
             response.raise_for_status()
         except requests.RequestException as exc:
+            if exc.response is not None and exc.response.status_code in {403, 429}:
+                raise
             last_query_error = exc
             continue
         successful_query = True
@@ -1365,27 +1435,39 @@ def _fetch_guide_documents(
         listing_confirms_fixture = _guide_document_confirms_fixture(
             response.text, event, source
         )
-        permalink_limit = max(1, min(int(source.get("permalink_limit") or 3), 6))
         permalinks = _match_permalink_candidates(response.text, query_url, source)
+        if source.get("filter_fixture_permalinks"):
+            permalinks = [url for url in permalinks if _guide_permalink_matches_teams(url, event, source)]
         if not listing_confirms_fixture and not source.get("discover_match_permalinks"):
             continue
-        for permalink in permalinks[:permalink_limit]:
+        for permalink in permalinks:
+            if permalink in seen_permalinks or fetched_permalinks >= permalink_limit:
+                continue
+            seen_permalinks.add(permalink)
             if permalink == query_url:
                 if listing_confirms_fixture:
                     return [(response.text, query_url)]
                 continue
             try:
+                fetched_permalinks += 1
                 match_page = requester.get(permalink, timeout=10)
                 match_page.raise_for_status()
-            except requests.RequestException:
+            except requests.RequestException as exc:
+                if exc.response is not None and exc.response.status_code in {403, 429}:
+                    raise
+                last_match_error = exc
                 continue
             if _guide_document_confirms_fixture(match_page.text, event, source):
                 return [(match_page.text, permalink)]
+            if source.get("guide_parser") == "sporekrani" and "window.__INITIAL_STATE__" not in match_page.text:
+                raise ValueError("pagina partita Spor Ekranı priva dei dati strutturati attesi")
         # The listing itself is still exact evidence, but an unverified link is not.
         if listing_confirms_fixture:
             return [(response.text, query_url)]
     if not successful_query and last_query_error is not None:
         raise last_query_error
+    if last_match_error is not None:
+        raise last_match_error
     return []
 
 
@@ -2112,7 +2194,7 @@ def _apply_verified_broadcast_fixture(
                     )
                 except requests.RequestException as exc:
                     errors.append(
-                        f"{source['broadcaster']} ({target.get('title')}): {exc}"
+                        f"{source['broadcaster']} ({label}): {exc}"
                     )
                     continue
                 for availability in availabilities:
@@ -2157,12 +2239,14 @@ def _apply_verified_broadcast_fixture(
                     LOGGER.info("Broadcast guide %s [%s]: %d documents (not necessarily match-confirmed)",
                                 source["broadcaster"], label, len(documents))
                 except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
-                    errors.append(f"{source['broadcaster']} ({target.get('title')}): {exc}")
+                    errors.append(f"{source['broadcaster']} ({label}): {exc}")
                     continue
                 timezone_name = str(source.get("timezone") or "Europe/Rome")
                 for html, document_url in documents:
                     if source.get("discover_broadcasters"):
-                        if source.get("guide_parser") == "sport_tv_guide":
+                        if source.get("guide_parser") == "sporekrani":
+                            discovered_broadcasters = parse_sporekrani_guide(html, target, source)
+                        elif source.get("guide_parser") == "sport_tv_guide":
                             discovered_broadcasters = parse_sport_tv_guide(
                                 html,
                                 target,
@@ -2225,7 +2309,7 @@ def _apply_verified_broadcast_fixture(
                                     "programme_start": discovered.get("programme_start"),
                                 },
                             )
-                    if source.get("guide_parser") != "sport_tv_guide":
+                    if source.get("guide_parser") not in {"sport_tv_guide", "sporekrani"}:
                         for broadcaster in _guide_broadcasters(
                             html,
                             target,
@@ -2255,7 +2339,7 @@ def _apply_verified_broadcast_fixture(
                 response = requester.get(url, timeout=10)
                 response.raise_for_status()
             except requests.RequestException as exc:
-                errors.append(f"{source['broadcaster']} ({target.get('title')}): {exc}")
+                errors.append(f"{source['broadcaster']} ({label}): {exc}")
                 failed_broadcasters.add(source_key)
                 continue
 

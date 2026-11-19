@@ -18,6 +18,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  broadcast-sources:
+    if: github.event.workflow_run.conclusion == 'success' && (github.event.workflow_run.name == 'Update calendar' || github.event.workflow_run.name == 'Refresh Serie A standings')
+    runs-on: ubuntu-latest
+    concurrency:
+      group: broadcast-source-health
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - name: Check partial international discovery failures
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_URL: ${{ github.event.workflow_run.html_url }}
+        run: python3 scripts/broadcast_health.py --notify
+
   notify:
     runs-on: ubuntu-latest
     env:
