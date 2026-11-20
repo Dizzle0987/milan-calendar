@@ -155,16 +155,16 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Torino",
-      "last_modified": "2026-11-20T07:28:20Z",
+      "last_modified": "2026-11-20T20:30:24Z",
       "location": "Torino",
       "neutral": false,
       "round": "1",
-      "sequence": 14,
+      "sequence": 15,
       "source": "AC Milan",
       "source_id": "6w3tljosjb0q1hvcb08eo33tg",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-08-23T20:45:00+02:00",
-      "status": "Fixture",
+      "status": "Played",
       "time_source": "AC Milan",
       "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "title": "Torino - AC Milan",
@@ -4032,7 +4032,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-11-20T07:28:20Z",
+  "last_changed": "2026-11-20T20:30:24Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
@@ -4082,7 +4082,7 @@
   "source_errors": [
     "AC Milan: nessun orario esplicito per il Milan",
     "Gazzetta dello Sport: 404 Client Error: Not Found for url: https://www.gazzetta.it/Calcio/Serie-A/Milan/",
-    "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
+    "DAZN: nessun orario esplicito per il Milan",
     "Sky Sport: nessun orario esplicito per il Milan",
     "Mediaset: 404 Client Error: Not Found for url: https://mediasetinfinity.mediaset.it/sport",
     "Prime Video: nessun orario esplicito per il Milan",
@@ -4092,14 +4092,12 @@
     "Broadcast FootAz Germania (Olympiacos - AC Milan): 410 Client Error: Gone for url: https://www.footaz.de/spiel/olympiacos-vs-ac-milan/",
     "Broadcast FootAz Austria (Olympiacos - AC Milan): 410 Client Error: Gone for url: https://www.footaz.at/spiel/olympiacos-vs-ac-milan/",
     "Broadcast bTV (Olympiacos - AC Milan): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
-    "Broadcast DAZN Portugal (Olympiacos - AC Milan): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l",
     "Broadcast FootAz (Olympiacos - AC Milan): 410 Client Error: Gone for url: https://www.footaz.pt/jogo/olympiacos-vs-ac-milan/",
     "Broadcast CBC Sport (AC Milan - Sunderland FC): 403 Client Error: Forbidden for url: https://cbcsport.az/tv_program_schedule",
     "Broadcast RTL+ (AC Milan - Sunderland FC): 404 Client Error: Not Found for url: https://plus.rtl.de/video-tv/sport",
     "Broadcast MacEkran (AC Milan - Sunderland FC): 521 Server Error: <none> for url: https://macekran.com/mac/ac-milan-vs-sunderland-2026-12-10",
     "Broadcast TV8: 500 Server Error: Internal Server Error for url: https://www.tv8.it/api/programmingCarousel?from=2026-12-09T23%3A00%3A00.000Z&to=2026-12-10T22%3A59%3A59.999Z",
     "Broadcast bTV (AC Milan - Sunderland FC): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
-    "Broadcast DAZN Portugal (AC Milan - Sunderland FC): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l",
     "Broadcast HBO Max (AC Milan - Sunderland FC): 403 Client Error: Forbidden for url: https://www.hbomax.com/gb/en/sports"
   ],
   "sources_used": [
