@@ -155,16 +155,16 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Torino",
-      "last_modified": "2026-09-17T04:59:27Z",
+      "last_modified": "2026-11-20T07:28:20Z",
       "location": "Torino",
       "neutral": false,
       "round": "1",
-      "sequence": 13,
+      "sequence": 14,
       "source": "AC Milan",
       "source_id": "6w3tljosjb0q1hvcb08eo33tg",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-08-23T20:45:00+02:00",
-      "status": "Played",
+      "status": "Fixture",
       "time_source": "AC Milan",
       "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "title": "Torino - AC Milan",
@@ -4032,7 +4032,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-11-19T09:18:51Z",
+  "last_changed": "2026-11-20T07:28:20Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
