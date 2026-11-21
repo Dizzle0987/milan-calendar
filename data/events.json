@@ -2278,54 +2278,55 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Genoa",
-      "last_modified": "2026-11-08T20:25:20Z",
+      "last_modified": "2026-11-21T17:19:34Z",
       "location": "Genova",
       "neutral": false,
       "round": "11",
-      "sequence": 24,
+      "sequence": 25,
       "serie_a_standing": {
         "context": [
           {
             "played": 11,
             "points": 28,
-            "position": 2,
+            "position": 3,
             "team": "Inter"
           },
           {
-            "played": 11,
-            "points": 27,
-            "position": 3,
-            "team": "Roma"
+            "played": 12,
+            "points": 26,
+            "position": 4,
+            "team": "Como"
           },
           {
             "played": 11,
             "points": 24,
-            "position": 4,
-            "team": "Milan"
-          },
-          {
-            "played": 11,
-            "points": 23,
             "position": 5,
-            "team": "Como"
+            "team": "Milan"
           },
           {
             "played": 11,
             "points": 20,
             "position": 6,
             "team": "Frosinone"
+          },
+          {
+            "played": 11,
+            "points": 18,
+            "position": 7,
+            "team": "Juventus"
           }
         ],
         "draws": 3,
         "goal_difference": 10,
         "losses": 1,
+        "pending_recoveries": [],
         "played": 11,
         "points": 24,
-        "position": 4,
-        "provisional": false,
+        "position": 5,
+        "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-11-08T20:25:20Z",
+        "updated_at": "2026-11-21T17:19:34Z",
         "wins": 7
       },
       "source": "AC Milan",
@@ -2347,54 +2348,55 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-11-09T06:49:15Z",
+      "last_modified": "2026-11-21T17:19:34Z",
       "location": "Italy",
       "neutral": false,
       "round": "12",
-      "sequence": 14,
+      "sequence": 15,
       "serie_a_standing": {
         "context": [
           {
             "played": 11,
             "points": 28,
-            "position": 2,
+            "position": 3,
             "team": "Inter"
           },
           {
-            "played": 11,
-            "points": 27,
-            "position": 3,
-            "team": "Roma"
+            "played": 12,
+            "points": 26,
+            "position": 4,
+            "team": "Como"
           },
           {
             "played": 11,
             "points": 24,
-            "position": 4,
-            "team": "Milan"
-          },
-          {
-            "played": 11,
-            "points": 23,
             "position": 5,
-            "team": "Como"
+            "team": "Milan"
           },
           {
             "played": 11,
             "points": 20,
             "position": 6,
             "team": "Frosinone"
+          },
+          {
+            "played": 11,
+            "points": 18,
+            "position": 7,
+            "team": "Juventus"
           }
         ],
         "draws": 3,
         "goal_difference": 10,
         "losses": 1,
+        "pending_recoveries": [],
         "played": 11,
         "points": 24,
-        "position": 4,
-        "provisional": false,
+        "position": 5,
+        "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-11-08T20:25:20Z",
+        "updated_at": "2026-11-21T17:19:34Z",
         "wins": 7
       },
       "source": "AC Milan",
@@ -2505,6 +2507,56 @@
           "status": "UNKNOWN",
           "url": "https://www.sporekrani.com/home/match/491830/2026/11/26/olympiakos-milan-uefa-avrupa-ligi-hangi-kanalda",
           "verified_at": "2026-11-19T09:18:51Z",
+          "watch_url": null,
+          "watch_url_type": null,
+          "web_stream_free": "unknown"
+        },
+        {
+          "availability_evidence": [],
+          "availability_label": "A pagamento",
+          "broadcast_free": false,
+          "broadcaster": "Blue Sport",
+          "broadcaster_home_url": null,
+          "competition": "UEFA Europa League",
+          "confidence": 70,
+          "country": "Svizzera",
+          "country_code": "CH",
+          "date": "2026-11-26",
+          "discovered_dynamically": false,
+          "evidence": [
+            {
+              "guide": "Fußball im TV Schweiz",
+              "source_type": "guide",
+              "source_url": "https://www.fussball-im-tv.ch/wettbewerbe/europa-league",
+              "verified_at": "2026-11-21T17:19:34Z"
+            }
+          ],
+          "fixture_cache_key": "europa-league|2026/27|2026-11-26|olympiacos|milan",
+          "free_or_pay": "paid",
+          "italian_primary": false,
+          "language": "tedesco",
+          "market_tier": 1,
+          "match": "Olympiacos - AC Milan",
+          "match_confirmed": true,
+          "platforms": "TV + streaming",
+          "priority": 80,
+          "reason": "exact fixture found in match-specific schedule",
+          "registration": "not_required",
+          "requires_registration": false,
+          "rights_cache_key": "europa-league|2026/27|CH",
+          "rights_confirmed": false,
+          "rights_cycle": null,
+          "rights_valid_from": null,
+          "rights_valid_to": null,
+          "season": "2026/27",
+          "season_start": 2026,
+          "source_rights": null,
+          "source_schedule": "https://www.fussball-im-tv.ch/wettbewerbe/europa-league",
+          "source_type": "guide",
+          "source_url": "https://www.fussball-im-tv.ch/wettbewerbe/europa-league",
+          "status": "UNKNOWN",
+          "url": "https://www.fussball-im-tv.ch/wettbewerbe/europa-league",
+          "verified_at": "2026-11-21T17:19:34Z",
           "watch_url": null,
           "watch_url_type": null,
           "web_stream_free": "unknown"
@@ -2740,7 +2792,7 @@
       "free_italian_broadcasts": [],
       "home_away": "Trasferta",
       "home_team": "Olympiacos",
-      "last_modified": "2026-11-21T07:22:57Z",
+      "last_modified": "2026-11-21T17:19:34Z",
       "location": "",
       "neutral": false,
       "opponent_country": "Grecia",
@@ -2780,7 +2832,7 @@
         "web_stream_free": "unknown"
       },
       "round": "5",
-      "sequence": 9,
+      "sequence": 10,
       "source": "AC Milan",
       "source_id": "e9m2maghftf0rxhxrddw3sjro",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -2983,6 +3035,56 @@
           "status": "UNKNOWN",
           "url": "https://www.footaz.at/spiel/ac-milan-vs-sunderland/",
           "verified_at": "2026-11-19T07:37:22Z",
+          "watch_url": null,
+          "watch_url_type": null,
+          "web_stream_free": "unknown"
+        },
+        {
+          "availability_evidence": [],
+          "availability_label": "A pagamento",
+          "broadcast_free": false,
+          "broadcaster": "Blue Sport",
+          "broadcaster_home_url": null,
+          "competition": "UEFA Europa League",
+          "confidence": 70,
+          "country": "Svizzera",
+          "country_code": "CH",
+          "date": "2026-12-10",
+          "discovered_dynamically": false,
+          "evidence": [
+            {
+              "guide": "Fußball im TV Schweiz",
+              "source_type": "guide",
+              "source_url": "https://www.fussball-im-tv.ch/wettbewerbe/europa-league",
+              "verified_at": "2026-11-21T17:19:34Z"
+            }
+          ],
+          "fixture_cache_key": "europa-league|2026/27|2026-12-10|milan|sunderland",
+          "free_or_pay": "paid",
+          "italian_primary": false,
+          "language": "tedesco",
+          "market_tier": 1,
+          "match": "AC Milan - Sunderland FC",
+          "match_confirmed": true,
+          "platforms": "TV + streaming",
+          "priority": 80,
+          "reason": "exact fixture found in match-specific schedule",
+          "registration": "not_required",
+          "requires_registration": false,
+          "rights_cache_key": "europa-league|2026/27|CH",
+          "rights_confirmed": false,
+          "rights_cycle": null,
+          "rights_valid_from": null,
+          "rights_valid_to": null,
+          "season": "2026/27",
+          "season_start": 2026,
+          "source_rights": null,
+          "source_schedule": "https://www.fussball-im-tv.ch/wettbewerbe/europa-league",
+          "source_type": "guide",
+          "source_url": "https://www.fussball-im-tv.ch/wettbewerbe/europa-league",
+          "status": "UNKNOWN",
+          "url": "https://www.fussball-im-tv.ch/wettbewerbe/europa-league",
+          "verified_at": "2026-11-21T17:19:34Z",
           "watch_url": null,
           "watch_url_type": null,
           "web_stream_free": "unknown"
@@ -3225,7 +3327,7 @@
       "free_italian_broadcasts": [],
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-11-21T07:22:57Z",
+      "last_modified": "2026-11-21T17:19:34Z",
       "location": "",
       "neutral": false,
       "opponent_country": "Regno Unito",
@@ -3265,7 +3367,7 @@
         "web_stream_free": "unknown"
       },
       "round": "6",
-      "sequence": 6,
+      "sequence": 7,
       "source": "AC Milan",
       "source_id": "ehuhpaea5au1xwmjpgxouwys4",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -3932,54 +4034,56 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-11-21T07:22:57Z",
+  "last_changed": "2026-11-21T17:19:34Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
       {
         "played": 11,
         "points": 28,
-        "position": 2,
+        "position": 3,
         "team": "Inter"
       },
       {
-        "played": 11,
-        "points": 27,
-        "position": 3,
-        "team": "Roma"
+        "played": 12,
+        "points": 26,
+        "position": 4,
+        "team": "Como"
       },
       {
         "played": 11,
         "points": 24,
-        "position": 4,
-        "team": "Milan"
-      },
-      {
-        "played": 11,
-        "points": 23,
         "position": 5,
-        "team": "Como"
+        "team": "Milan"
       },
       {
         "played": 11,
         "points": 20,
         "position": 6,
         "team": "Frosinone"
+      },
+      {
+        "played": 11,
+        "points": 18,
+        "position": 7,
+        "team": "Juventus"
       }
     ],
     "draws": 3,
     "goal_difference": 10,
     "losses": 1,
+    "pending_recoveries": [],
     "played": 11,
     "points": 24,
-    "position": 4,
-    "provisional": false,
+    "position": 5,
+    "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-11-08T20:25:20Z",
+    "updated_at": "2026-11-21T17:19:34Z",
     "wins": 7
   },
   "source_errors": [
+    "ESPN recuperi Serie A: 400 Client Error: Bad Request for url: https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20260801-20270630&limit=1000",
     "AC Milan: nessun orario esplicito per il Milan",
     "Gazzetta dello Sport: 404 Client Error: Not Found for url: https://www.gazzetta.it/Calcio/Serie-A/Milan/",
     "DAZN: 403 Client Error: Forbidden for url: https://www.dazn.com/it-IT/schedule",
@@ -3991,14 +4095,12 @@
     "Broadcast MacEkran (Olympiacos - AC Milan): 521 Server Error: <none> for url: https://macekran.com/mac/olympiacos-vs-ac-milan-2026-11-26",
     "Broadcast FootAz Germania (Olympiacos - AC Milan): 410 Client Error: Gone for url: https://www.footaz.de/spiel/olympiacos-vs-ac-milan/",
     "Broadcast FootAz Austria (Olympiacos - AC Milan): 410 Client Error: Gone for url: https://www.footaz.at/spiel/olympiacos-vs-ac-milan/",
-    "Broadcast Fußball im TV Schweiz (Olympiacos - AC Milan): HTTPSConnectionPool(host='www.fussball-im-tv.ch', port=443): Read timed out. (read timeout=10)",
     "Broadcast bTV (Olympiacos - AC Milan): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
     "Broadcast DAZN Portugal (Olympiacos - AC Milan): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l",
     "Broadcast FootAz (Olympiacos - AC Milan): 410 Client Error: Gone for url: https://www.footaz.pt/jogo/olympiacos-vs-ac-milan/",
     "Broadcast CBC Sport (AC Milan - Sunderland FC): 403 Client Error: Forbidden for url: https://cbcsport.az/tv_program_schedule",
     "Broadcast RTL+ (AC Milan - Sunderland FC): 404 Client Error: Not Found for url: https://plus.rtl.de/video-tv/sport",
     "Broadcast MacEkran (AC Milan - Sunderland FC): 521 Server Error: <none> for url: https://macekran.com/mac/ac-milan-vs-sunderland-2026-12-10",
-    "Broadcast Fußball im TV Schweiz (AC Milan - Sunderland FC): HTTPSConnectionPool(host='www.fussball-im-tv.ch', port=443): Read timed out. (read timeout=10)",
     "Broadcast TV8: 500 Server Error: Internal Server Error for url: https://www.tv8.it/api/programmingCarousel?from=2026-12-09T23%3A00%3A00.000Z&to=2026-12-10T22%3A59%3A59.999Z",
     "Broadcast bTV (AC Milan - Sunderland FC): 403 Client Error: Forbidden for url: https://www.btv.bg/programata/",
     "Broadcast DAZN Portugal (AC Milan - Sunderland FC): 403 Client Error: Forbidden for url: https://www.dazn.com/pt-PT/competitor/Competitor%3A9dntj5dioj5ex52yrgwzxrq9l",
