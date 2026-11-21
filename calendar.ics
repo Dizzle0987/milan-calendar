@@ -472,18 +472,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ Genoa - AC Milan
 DTSTART;TZID=Europe/Rome:20261108T150000
 DTEND;TZID=Europe/Rome:20261108T170000
-DTSTAMP:20261121T171934Z
+DTSTAMP:20261121T213700Z
 UID:4bcf433e05672498eda803a5@milan-calendar
-SEQUENCE:25
+SEQUENCE:26
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 08/11/
  2026 15:00\nTurno: 11\nStadio: Stadio Ferraris\nLocalità: Genova\nDove ve
  derla in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provviso
  ria — giornata in corso:\n  3. Inter — 28 pt\n  4. Como — 26 pt\n▶
-  5. Milan — 24 pt — 11 PG — DR +10\n  6. Frosinone — 20 pt\n  7. J
- uventus — 18 pt\nClassifica aggiornata: 21/11/2026 18:19\nFonte classifi
- ca: Lega Serie A
-LAST-MODIFIED:20261121T171934Z
+  5. Milan — 24 pt — 11 PG — DR +10\n  6. Frosinone — 20 pt\n  7. N
+ apoli — 18 pt\nClassifica aggiornata: 21/11/2026 22:37\nFonte classifica
+ : Lega Serie A
+LAST-MODIFIED:20261121T213700Z
 LOCATION:Stadio Ferraris\, Genova
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -497,18 +497,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Frosinone
 DTSTART;TZID=Europe/Rome:20261122T180000
 DTEND;TZID=Europe/Rome:20261122T200000
-DTSTAMP:20261121T171934Z
+DTSTAMP:20261121T213700Z
 UID:e0c247e803a33255e6ebefa8@milan-calendar
-SEQUENCE:15
+SEQUENCE:16
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 22/11/2026 
  18:00\nTurno: 12\nStadio: Stadio San Siro\nLocalità: Italy\nDove vederla 
  in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provvisoria 
  — giornata in corso:\n  3. Inter — 28 pt\n  4. Como — 26 pt\n▶ 5. 
- Milan — 24 pt — 11 PG — DR +10\n  6. Frosinone — 20 pt\n  7. Juven
- tus — 18 pt\nClassifica aggiornata: 21/11/2026 18:19\nFonte classifica: 
- Lega Serie A
-LAST-MODIFIED:20261121T171934Z
+ Milan — 24 pt — 11 PG — DR +10\n  6. Frosinone — 20 pt\n  7. Napol
+ i — 18 pt\nClassifica aggiornata: 21/11/2026 22:37\nFonte classifica: Le
+ ga Serie A
+LAST-MODIFIED:20261121T213700Z
 LOCATION:Stadio San Siro\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -586,14 +586,14 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Sunderland FC
 DTSTART;TZID=Europe/Rome:20261210T210000
 DTEND;TZID=Europe/Rome:20261210T230000
-DTSTAMP:20261121T192717Z
+DTSTAMP:20261121T213700Z
 UID:97982c44b5b8526e3dfb5444@milan-calendar
-SEQUENCE:8
+SEQUENCE:9
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  10/12/2026 21:00\nTurno: 6\nStadio: San Siro Stadium\nDove vederla:\nSky S
  port e NOW — Italia — https://www.nowtv.it/sport/calcio/milan
-LAST-MODIFIED:20261121T192717Z
+LAST-MODIFIED:20261121T213700Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
