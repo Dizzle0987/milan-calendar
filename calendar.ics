@@ -522,15 +522,15 @@ BEGIN:VEVENT
 SUMMARY:⚽ Olympiacos - AC Milan
 DTSTART;TZID=Europe/Rome:20261126T184500
 DTEND;TZID=Europe/Rome:20261126T204500
-DTSTAMP:20261119T091851Z
+DTSTAMP:20261121T072257Z
 UID:716d30d10cd2a53f2b53c687@milan-calendar
-SEQUENCE:8
+SEQUENCE:9
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
  ma): 26/11/2026 18:45\nTurno: 5\nStadio: Stadio Georgios Karaiskákis\nDov
  e vederla:\nSky Sport e NOW — Italia — https://www.nowtv.it/sport/calc
  io/milan
-LAST-MODIFIED:20261119T091851Z
+LAST-MODIFIED:20261121T072257Z
 LOCATION:Stadio Georgios Karaiskákis
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -586,14 +586,14 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Sunderland FC
 DTSTART;TZID=Europe/Rome:20261210T210000
 DTEND;TZID=Europe/Rome:20261210T230000
-DTSTAMP:20261119T073722Z
+DTSTAMP:20261121T072257Z
 UID:97982c44b5b8526e3dfb5444@milan-calendar
-SEQUENCE:5
+SEQUENCE:6
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  10/12/2026 21:00\nTurno: 6\nStadio: San Siro Stadium\nDove vederla:\nSky S
  port e NOW — Italia — https://www.nowtv.it/sport/calcio/milan
-LAST-MODIFIED:20261119T073722Z
+LAST-MODIFIED:20261121T072257Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
