@@ -2302,13 +2302,19 @@
       "competition": "Serie A",
       "home_away": "Casa",
       "home_team": "AC Milan",
-      "last_modified": "2026-11-21T21:37:00Z",
+      "last_modified": "2026-11-22T17:44:37Z",
       "location": "Italy",
       "neutral": false,
       "round": "12",
-      "sequence": 16,
+      "sequence": 17,
       "serie_a_standing": {
         "context": [
+          {
+            "played": 12,
+            "points": 30,
+            "position": 2,
+            "team": "Roma"
+          },
           {
             "played": 11,
             "points": 28,
@@ -2317,47 +2323,41 @@
           },
           {
             "played": 12,
-            "points": 26,
+            "points": 27,
             "position": 4,
-            "team": "Como"
-          },
-          {
-            "played": 11,
-            "points": 24,
-            "position": 5,
             "team": "Milan"
           },
           {
-            "played": 11,
-            "points": 20,
-            "position": 6,
-            "team": "Frosinone"
+            "played": 12,
+            "points": 26,
+            "position": 5,
+            "team": "Como"
           },
           {
             "played": 12,
-            "points": 18,
-            "position": 7,
-            "team": "Napoli"
+            "points": 21,
+            "position": 6,
+            "team": "Juventus"
           }
         ],
         "draws": 3,
-        "goal_difference": 10,
+        "goal_difference": 11,
         "losses": 1,
         "pending_recoveries": [],
-        "played": 11,
-        "points": 24,
-        "position": 5,
+        "played": 12,
+        "points": 27,
+        "position": 4,
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-11-21T21:37:00Z",
-        "wins": 7
+        "updated_at": "2026-11-22T17:44:37Z",
+        "wins": 8
       },
       "source": "AC Milan",
       "source_id": "7tihhdch6myqobao6oexk4gt0",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "start": "2026-11-22T18:00:00+01:00",
-      "status": "Fixture",
+      "status": "Playing",
       "time_source": "AC Milan",
       "time_source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
       "title": "AC Milan - Frosinone",
@@ -2806,13 +2806,19 @@
       "competition": "Serie A",
       "home_away": "Trasferta",
       "home_team": "Cagliari",
-      "last_modified": "2026-11-22T01:35:04Z",
+      "last_modified": "2026-11-22T17:44:37Z",
       "location": "",
       "neutral": false,
       "round": "13",
-      "sequence": 10,
+      "sequence": 11,
       "serie_a_standing": {
         "context": [
+          {
+            "played": 12,
+            "points": 30,
+            "position": 2,
+            "team": "Roma"
+          },
           {
             "played": 11,
             "points": 28,
@@ -2821,41 +2827,35 @@
           },
           {
             "played": 12,
-            "points": 26,
+            "points": 27,
             "position": 4,
-            "team": "Como"
-          },
-          {
-            "played": 11,
-            "points": 24,
-            "position": 5,
             "team": "Milan"
           },
           {
-            "played": 11,
-            "points": 20,
-            "position": 6,
-            "team": "Frosinone"
+            "played": 12,
+            "points": 26,
+            "position": 5,
+            "team": "Como"
           },
           {
             "played": 12,
-            "points": 18,
-            "position": 7,
-            "team": "Napoli"
+            "points": 21,
+            "position": 6,
+            "team": "Juventus"
           }
         ],
         "draws": 3,
-        "goal_difference": 10,
+        "goal_difference": 11,
         "losses": 1,
         "pending_recoveries": [],
-        "played": 11,
-        "points": 24,
-        "position": 5,
+        "played": 12,
+        "points": 27,
+        "position": 4,
         "provisional": true,
         "source": "Lega Serie A",
         "source_url": "https://www.legaseriea.it/serie-a/classifica",
-        "updated_at": "2026-11-21T21:37:00Z",
-        "wins": 7
+        "updated_at": "2026-11-22T17:44:37Z",
+        "wins": 8
       },
       "source": "AC Milan",
       "source_id": "7v1indse0cqvt4pdx8grfe3v8",
@@ -4034,10 +4034,16 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-11-22T01:35:04Z",
+  "last_changed": "2026-11-22T17:44:37Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [
+      {
+        "played": 12,
+        "points": 30,
+        "position": 2,
+        "team": "Roma"
+      },
       {
         "played": 11,
         "points": 28,
@@ -4046,41 +4052,35 @@
       },
       {
         "played": 12,
-        "points": 26,
+        "points": 27,
         "position": 4,
-        "team": "Como"
-      },
-      {
-        "played": 11,
-        "points": 24,
-        "position": 5,
         "team": "Milan"
       },
       {
-        "played": 11,
-        "points": 20,
-        "position": 6,
-        "team": "Frosinone"
+        "played": 12,
+        "points": 26,
+        "position": 5,
+        "team": "Como"
       },
       {
         "played": 12,
-        "points": 18,
-        "position": 7,
-        "team": "Napoli"
+        "points": 21,
+        "position": 6,
+        "team": "Juventus"
       }
     ],
     "draws": 3,
-    "goal_difference": 10,
+    "goal_difference": 11,
     "losses": 1,
     "pending_recoveries": [],
-    "played": 11,
-    "points": 24,
-    "position": 5,
+    "played": 12,
+    "points": 27,
+    "position": 4,
     "provisional": true,
     "source": "Lega Serie A",
     "source_url": "https://www.legaseriea.it/serie-a/classifica",
-    "updated_at": "2026-11-21T21:37:00Z",
-    "wins": 7
+    "updated_at": "2026-11-22T17:44:37Z",
+    "wins": 8
   },
   "source_errors": [
     "ESPN recuperi Serie A: 400 Client Error: Bad Request for url: https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/scoreboard?dates=20260801-20270630&limit=1000",

@@ -493,18 +493,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Frosinone
 DTSTART;TZID=Europe/Rome:20261122T180000
 DTEND;TZID=Europe/Rome:20261122T200000
-DTSTAMP:20261121T213700Z
+DTSTAMP:20261122T174437Z
 UID:e0c247e803a33255e6ebefa8@milan-calendar
-SEQUENCE:16
+SEQUENCE:17
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 22/11/2026 
  18:00\nTurno: 12\nStadio: Stadio San Siro\nLocalità: Italy\nDove vederla 
  in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provvisoria 
- — giornata in corso:\n  3. Inter — 28 pt\n  4. Como — 26 pt\n▶ 5. 
- Milan — 24 pt — 11 PG — DR +10\n  6. Frosinone — 20 pt\n  7. Napol
- i — 18 pt\nClassifica aggiornata: 21/11/2026 22:37\nFonte classifica: Le
- ga Serie A
-LAST-MODIFIED:20261121T213700Z
+ — giornata in corso:\n  2. Roma — 30 pt\n  3. Inter — 28 pt\n▶ 4. 
+ Milan — 27 pt — 12 PG — DR +11\n  5. Como — 26 pt\n  6. Juventus 
+ — 21 pt\nClassifica aggiornata: 22/11/2026 18:44\nFonte classifica: Lega
+  Serie A
+LAST-MODIFIED:20261122T174437Z
 LOCATION:Stadio San Siro\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -540,17 +540,17 @@ BEGIN:VEVENT
 SUMMARY:⚽ Cagliari - AC Milan
 DTSTART;TZID=Europe/Rome:20261130T204500
 DTEND;TZID=Europe/Rome:20261130T224500
-DTSTAMP:20261122T013504Z
+DTSTAMP:20261122T174437Z
 UID:dbfe00a983f6937f6ba0d38d@milan-calendar
-SEQUENCE:10
+SEQUENCE:11
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 30/11/
  2026 20:45\nTurno: 13\nStadio: Unipol Domus\nDove vederla in Italia: DAZN\
  nFonte orario: AC Milan\nClassifica Serie A provvisoria — giornata in co
- rso:\n  3. Inter — 28 pt\n  4. Como — 26 pt\n▶ 5. Milan — 24 pt 
- — 11 PG — DR +10\n  6. Frosinone — 20 pt\n  7. Napoli — 18 pt\nCla
- ssifica aggiornata: 21/11/2026 22:37\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20261122T013504Z
+ rso:\n  2. Roma — 30 pt\n  3. Inter — 28 pt\n▶ 4. Milan — 27 pt 
+ — 12 PG — DR +11\n  5. Como — 26 pt\n  6. Juventus — 21 pt\nClassi
+ fica aggiornata: 22/11/2026 18:44\nFonte classifica: Lega Serie A
+LAST-MODIFIED:20261122T174437Z
 LOCATION:Unipol Domus
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
