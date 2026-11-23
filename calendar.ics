@@ -518,16 +518,16 @@ BEGIN:VEVENT
 SUMMARY:⚽ Olympiacos - AC Milan
 DTSTART;TZID=Europe/Rome:20261126T184500
 DTEND;TZID=Europe/Rome:20261126T204500
-DTSTAMP:20261121T171934Z
+DTSTAMP:20261123T020138Z
 UID:716d30d10cd2a53f2b53c687@milan-calendar
-SEQUENCE:10
+SEQUENCE:11
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Trasferta\nOrario (Ro
- ma): 26/11/2026 18:45\nTurno: 5\nStadio: Stadio Georgios Karaiskákis\nDov
- e vederla:\nSky Sport e NOW — Italia — https://www.nowtv.it/sport/calc
- io/milan
-LAST-MODIFIED:20261121T171934Z
-LOCATION:Stadio Georgios Karaiskákis
+ ma): 26/11/2026 18:45\nTurno: 5\nStadio: Stadio Georgios Karaiskákis\nLoc
+ alità: Piraeus\, Greece\nDove vederla:\nSky Sport e NOW — Italia — ht
+ tps://www.nowtv.it/sport/calcio/milan
+LAST-MODIFIED:20261123T020138Z
+LOCATION:Stadio Georgios Karaiskákis\, Piraeus\, Greece
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
