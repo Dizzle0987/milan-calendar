@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: update-calendar
@@ -31,6 +32,7 @@ jobs:
       - name: Refresh official standings
         run: python update_calendar.py
       - name: Commit standings change
+        id: commit
         run: |
           if git diff --quiet -- calendar.ics data/events.json; then
             echo "Standings already up to date"
@@ -41,3 +43,9 @@ jobs:
           git add calendar.ics data/events.json
           git commit -m "chore: refresh Serie A standings"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Publish changed calendar
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main --repo "$GITHUB_REPOSITORY"

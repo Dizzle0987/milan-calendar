@@ -1,7 +1,10 @@
 from copy import deepcopy
 from datetime import datetime, timezone
 import json
+import os
 from pathlib import Path
+import subprocess
+import textwrap
 
 import pytest
 import requests
@@ -297,13 +300,43 @@ def test_post_cache_separates_dates_and_reuses_identical_requests():
     assert session.days == ['2026-11-05', '2026-11-12']
 
 
-def test_all_automatic_generations_are_followed_by_success_gated_pages_deploy():
+def test_pages_has_two_jobs_and_updates_dispatch_only_after_successful_data_push():
     pages = (ROOT / '.github/workflows/pages.yml').read_text()
-    assert 'workflows: ["Update calendar", "Refresh Serie A standings"]' in pages
-    assert "github.event.workflow_run.conclusion == 'success'" in pages
+    assert 'workflow_run:' not in pages
+    assert '  push:' in pages and '  workflow_dispatch:' in pages
+    assert '  build:' in pages and '  deploy:' in pages and 'needs: build' in pages
+    assert 'cancel-in-progress: false' in pages and 'run: sleep 10' in pages
+    assert 'artifact_name: ${{ needs.build.outputs.artifact_name }}' in pages
     assert 'ref: main' in pages
     for filename in ['update.yml', 'standings.yml']:
-        assert 'python update_calendar.py' in (ROOT / '.github/workflows' / filename).read_text()
+        workflow = (ROOT / '.github/workflows' / filename).read_text()
+        assert 'python update_calendar.py' in workflow
+        assert 'actions: write' in workflow
+        assert "if: steps.commit.outputs.changed == 'true'" in workflow
+        assert workflow.index('git push') < workflow.index('echo "changed=true"') < workflow.index('gh workflow run pages.yml')
+        assert 'gh workflow run pages.yml --ref main --repo "$GITHUB_REPOSITORY"' in workflow
+
+
+@pytest.mark.parametrize('filename,step_name', [('update.yml', 'Commit changed data'), ('standings.yml', 'Commit standings change')])
+@pytest.mark.parametrize('mode', ['unchanged', 'changed', 'push_failed'])
+def test_calendar_publish_signal_requires_changes_and_successful_push(tmp_path, filename, step_name, mode):
+    workflow = (ROOT / '.github/workflows' / filename).read_text()
+    step = workflow.split('      - name: ' + step_name, 1)[1].split('      - name: Publish changed calendar', 1)[0]
+    script = textwrap.dedent(step.split('        run: |\n', 1)[1])
+    output = tmp_path / 'outputs'
+    # Execute the actual workflow shell body with a harmless git stand-in.
+    # No repository, commit, push, generator or calendar is touched by this test.
+    stub = '''set -e
+git() {
+  if [ "$1" = diff ]; then [ "$MODE" = unchanged ]; return; fi
+  if [ "$1" = push ] && [ "$MODE" = push_failed ]; then return 17; fi
+  return 0
+}
+'''
+    result = subprocess.run(['bash', '-c', stub + script], capture_output=True, text=True,
+                            env={**os.environ, 'GITHUB_OUTPUT': str(output), 'MODE': mode})
+    assert result.returncode == (17 if mode == 'push_failed' else 0)
+    assert (output.read_text() if output.exists() else '') == ('changed=true\n' if mode == 'changed' else '')
 
 
 def test_raw_feed_without_title_logs_team_names(monkeypatch, caplog):
