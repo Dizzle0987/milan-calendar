@@ -585,14 +585,14 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Sunderland FC
 DTSTART;TZID=Europe/Rome:20261210T210000
 DTEND;TZID=Europe/Rome:20261210T230000
-DTSTAMP:20261121T213700Z
+DTSTAMP:20261124T025242Z
 UID:97982c44b5b8526e3dfb5444@milan-calendar
-SEQUENCE:9
+SEQUENCE:10
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  10/12/2026 21:00\nTurno: 6\nStadio: San Siro Stadium\nDove vederla:\nSky S
  port e NOW — Italia — https://www.nowtv.it/sport/calcio/milan
-LAST-MODIFIED:20261121T213700Z
+LAST-MODIFIED:20261124T025242Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
