@@ -101,13 +101,23 @@ def test_existing_calendar_only_gets_the_target_annotation():
         event.pop("foreign_tv_broadcasts", None)
     result = apply_manual_international_tv_options(events, configuration())
     changed = [(old, new) for old, new in zip(events, result) if old != new]
-    assert len(changed) == 1
-    old, new = changed[0]
+    assert len(changed) == 2
+    old, new = next(pair for pair in changed if "Bournemouth" in pair[0]["home_team"])
     assert "Bournemouth" in old["home_team"]
     assert old["start"].startswith("2026-10-22")
     assert {k: v for k, v in new.items() if k not in {"foreign_tv_broadcasts", "broadcast_notes_compact"}} == {k: v for k, v in old.items() if k != "broadcast_notes_compact"}
-    unchanged_old = [e for e in events if e != old]
-    unchanged_new = [e for e in result if e != new]
+    olympiacos, refreshed = next(pair for pair in changed if "Olympiacos" in pair[0]["home_team"])
+    ant1, = refreshed["foreign_tv_broadcasts"]
+    assert ant1["broadcaster"] == "ANT1" and ant1["match_confirmed"] is True
+    assert ant1["web_stream_free"] == "unknown"
+    assert refreshed["uid"] == olympiacos["uid"] and refreshed["start"] == olympiacos["start"]
+    rendered = str(Calendar.from_ical(build_ical([refreshed])).walk("VEVENT")[0]["description"])
+    assert "ANT1 — Grecia" in rendered and "TV confermata · Streaming web da verificare" in rendered
+    postponed = {**refreshed, "start": "2026-11-26T21:00:00+01:00"}
+    assert not apply_manual_international_tv_options([postponed], configuration())[0]["foreign_tv_broadcasts"]
+    changed_uids = {old_event["uid"] for old_event, _ in changed}
+    unchanged_old = [e for e in events if e["uid"] not in changed_uids]
+    unchanged_new = [e for e in result if e["uid"] not in changed_uids]
     assert build_ical(unchanged_old) == build_ical(unchanged_new)
 
 

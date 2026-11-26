@@ -123,6 +123,11 @@ def test_runtime_m4_tv_confirmation_stays_unknown_web_and_appears_as_possible(mo
     assert 'M4 Sport — Ungheria — VPN — https://mediaklikk.hu/elo/mtv4live' in text
     assert 'TV confermata · Streaming web da verificare' in text
     assert text.index('Sky Sport') < text.index('M4 Sport')
+    # A verified schedule is sufficient for visibility without an official player.
+    candidate['watch_url'] = None
+    component, = Calendar.from_ical(g.build_ical(result)).walk('VEVENT')
+    assert 'M4 Sport — Ungheria — https://m4sport.hu/musor — TV confermata' in str(component['description'])
+    assert 'Streaming web gratuito' not in str(component['description'])
 
 
 @pytest.mark.parametrize('status', [403, 404, 429, 500])

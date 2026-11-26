@@ -33,6 +33,11 @@ assert.ok(rendered.indexOf("Sky Sport e NOW") < rendered.indexOf("M4 Sport"));
 for (const forbidden of ["Paid", "Unconfirmed", "Unknown country", "YouTube", "Streaming web gratuito", "UNKNOWN", "POSSIBLE_FREE"]) assert.ok(!rendered.includes(forbidden));
 assert.deepEqual(links(result), [m4.watch_url]);
 assert.equal(JSON.stringify(event), before);
+const scheduleOnly = broadcastElement({...event, broadcast_candidates: [
+  {...m4, watch_url: null, source_schedule: "https://m4sport.hu/musor"}
+]});
+assert.ok(text(scheduleOnly).includes("M4 Sport — Ungheria · TV confermata · Streaming web da verificare · Palinsesto"));
+assert.deepEqual(links(scheduleOnly), ["https://m4sport.hu/musor"]);
 cbc.match_confirmed = true;
 assert.equal((text(broadcastElement(event)).match(/CBC Sport/g) || []).length, 1);
 assert.equal(text(broadcastElement({broadcast_it: "DAZN"})), "Dove vederla: 🇮🇹 DAZN🌍 In chiaro all'estero — Da confermare");

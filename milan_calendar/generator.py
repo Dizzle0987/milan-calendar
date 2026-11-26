@@ -3853,8 +3853,10 @@ def apply_manual_international_tv_options(
         if not _is_official_international_match(event):
             continue
         selected = []
+        fixture_start = _event_datetime(event).astimezone(ROME).isoformat()
         for option in options:
             if (option.get("date") != _event_datetime(event).astimezone(ROME).date().isoformat()
+                    or (option.get("fixture_start") and option["fixture_start"] != fixture_start)
                     or _competition_family(str(option.get("competition") or ""))
                     != _competition_family(str(event.get("competition") or ""))
                     or any(_team_match_key(str(option.get(key) or ""))
@@ -3891,6 +3893,13 @@ def apply_manual_international_tv_options(
             event["foreign_tv_broadcasts"] = selected
             if any(option.get("compact_notes") is True for option in selected):
                 event["broadcast_notes_compact"] = True
+        elif "foreign_tv_broadcasts" in event:
+            # A cached manual confirmation tied to a specific kickoff must
+            # not follow the match when it is rescheduled.
+            event["foreign_tv_broadcasts"] = [
+                option for option in event["foreign_tv_broadcasts"]
+                if not option.get("fixture_start") or option["fixture_start"] == fixture_start
+            ]
     return result
 
 
@@ -4229,21 +4238,27 @@ def _broadcast_description_lines(data: dict[str, Any]) -> list[str]:
                 continue
             seen.add(key)
             vpn = "VPN" if option.get("vpn_required", True) else ""
-            lines.append(" — ".join(str(v) for v in (option["broadcaster"], option["country"], vpn, url) if v))
+            availability = (
+                "TV confermata · Streaming web da verificare"
+                if option.get("show_tv_status") and option.get("web_stream_free") == "unknown"
+                else ""
+            )
+            lines.append(" — ".join(str(v) for v in (option["broadcaster"], option["country"], vpn, url, availability) if v))
         if data.get("broadcast_show_possible"):
             possible_lines = []
             for option in (data.get("foreign_possible_broadcasts") or []) + (data.get("broadcast_candidates") or []):
                 key = (option.get("country_code"), _normalize(str(option.get("broadcaster") or "")))
-                url = str(option.get("watch_url") or "")
+                url = str(option.get("watch_url") or option.get("source_schedule") or "")
                 access = option.get("access", option.get("free_or_pay"))
                 if (key in seen or key[0] in {None, "", "IT", "ZZ"}
                         or access in {"paid", "included"} or not url.startswith("https://")
+                        or not urlparse(url).hostname
                         or (urlparse(url).hostname or "").lower() in {"youtube.com", "www.youtube.com", "youtu.be"}
                         or option.get("status") not in {"POSSIBLE_FREE", "UNKNOWN"}
                         or option.get("match_confirmed") is not True):
                     continue
                 seen.add(key)
-                vpn = "VPN" if option.get("vpn_required", True) else ""
+                vpn = "VPN" if option.get("watch_url") and option.get("vpn_required", True) else ""
                 availability = (
                     "TV confermata · Streaming web da verificare"
                     if option.get("web_stream_free") not in (True, False)

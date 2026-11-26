@@ -2743,10 +2743,35 @@
           "web_stream_free": "unknown"
         }
       ],
+      "foreign_tv_broadcasts": [
+        {
+          "access": "unknown",
+          "away_team": "AC Milan",
+          "broadcast_free": "unknown",
+          "broadcaster": "ANT1",
+          "compact_notes": true,
+          "competition": "UEFA Europa League",
+          "country": "Grecia",
+          "country_code": "GR",
+          "date": "2026-11-26",
+          "fixture_start": "2026-11-26T18:45:00+01:00",
+          "home_team": "Olympiacos",
+          "match_confirmed": true,
+          "official_domains": [
+            "antenna.gr"
+          ],
+          "show_tv_status": true,
+          "source_schedule": "https://cms.antenna.gr/media/article/57/dwzz3mmnh0fnmm3qeu0ji7cj/uefa-europa-league-olympiakos-milan-tin-pempti-26-noembrioy-ston-ant1",
+          "status": "UNKNOWN",
+          "watch_url": "https://www.antenna.gr/live",
+          "web_match_confirmed": false,
+          "web_stream_free": "unknown"
+        }
+      ],
       "free_italian_broadcasts": [],
       "home_away": "Trasferta",
       "home_team": "Olympiacos",
-      "last_modified": "2026-11-23T02:01:38Z",
+      "last_modified": "2026-11-26T07:16:50Z",
       "location": "Piraeus, Greece",
       "neutral": false,
       "opponent_country": "Grecia",
@@ -2786,7 +2811,7 @@
         "web_stream_free": "unknown"
       },
       "round": "5",
-      "sequence": 11,
+      "sequence": 12,
       "source": "AC Milan",
       "source_id": "e9m2maghftf0rxhxrddw3sjro",
       "source_url": "https://www.acmilan.com/en/season/2026/schedule/all",
@@ -3976,7 +4001,7 @@
       "venue": "Stadio San Siro"
     }
   ],
-  "last_changed": "2026-11-26T00:16:09Z",
+  "last_changed": "2026-11-26T07:16:50Z",
   "schema_version": 1,
   "serie_a_standing": {
     "context": [

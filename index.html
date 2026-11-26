@@ -311,12 +311,13 @@
         const confirmed = event.broadcast_options || [];
         const italian = confirmed.filter(option => option.country_code === "IT" && option.status === "confirmed");
         const foreign = confirmed.filter(option => option.country_code !== "IT" && option.access === "free" && option.status === "confirmed");
-        const seen = new Set([...foreign, ...(event.foreign_tv_broadcasts || [])].map(option => `${option.country_code}:${option.broadcaster.toLowerCase()}`));
+        const manual = event.foreign_tv_broadcasts || [];
+        const seen = new Set([...foreign, ...manual].map(option => `${option.country_code}:${option.broadcaster.toLowerCase()}`));
         const possible = [...(event.foreign_possible_broadcasts || []), ...(event.broadcast_candidates || [])].filter(option => {
           const key = `${option.country_code}:${String(option.broadcaster || "").toLowerCase()}`;
           const access = option.access ?? option.free_or_pay;
           let url;
-          try { url = new URL(option.watch_url); } catch { return false; }
+          try { url = new URL(option.watch_url || option.source_schedule); } catch { return false; }
           if (seen.has(key) || !option.country_code || ["IT", "ZZ"].includes(option.country_code)
               || ["paid", "included"].includes(access) || url.protocol !== "https:"
               || ["youtube.com", "www.youtube.com", "youtu.be"].includes(url.hostname)
@@ -329,9 +330,9 @@
         if (italian.length) rows.push(...italian.map(option => ({ label: `🇮🇹 ${option.broadcaster}`, option })));
         else rows.push({ label: `🇮🇹 ${broadcastText(event)}` });
         if (foreign.length) rows.push(...foreign.map(option => ({ label: `🌍 ${option.broadcaster} — ${option.country} ✓`, option })));
-        if (possible.length) rows.push(...possible.map(option => ({ label: `🌍 ${option.broadcaster} — ${option.country}${option.vpn_required === false ? "" : " — VPN"} · TV confermata · ${option.web_stream_free === true ? "Streaming web gratuito" : option.web_stream_free === false ? "Streaming web non gratuito" : "Streaming web da verificare"}`, option, possible: true })));
-        else if (!foreign.length) rows.push({ label: "🌍 In chiaro all'estero — Da confermare" });
-        rows.push(...(event.foreign_tv_broadcasts || []).map(option => ({ label: `🌍 TV confermata: ${option.broadcaster} — ${option.country}`, option })));
+        if (possible.length) rows.push(...possible.map(option => ({ label: `🌍 ${option.broadcaster} — ${option.country}${option.watch_url && option.vpn_required !== false ? " — VPN" : ""} · TV confermata · ${option.web_stream_free === true ? "Streaming web gratuito" : option.web_stream_free === false ? "Streaming web non gratuito" : "Streaming web da verificare"}`, option, possible: true })));
+        else if (!foreign.length && !manual.length) rows.push({ label: "🌍 In chiaro all'estero — Da confermare" });
+        rows.push(...manual.map(option => ({ label: `🌍 TV confermata: ${option.broadcaster} — ${option.country}${option.show_tv_status && option.web_stream_free === "unknown" ? " · Streaming web da verificare" : ""}`, option, possible: !!option.show_tv_status })));
 
         element.append(document.createTextNode("Dove vederla: "));
         rows.forEach((row, index) => {
@@ -340,7 +341,7 @@
           if (row.option && !row.possible) {
             element.append(document.createTextNode(` · ${broadcastAvailabilityText(row.option)}`));
           }
-          const url = row.option && (row.option.watch_url || row.option.broadcaster_home_url);
+          const url = row.option && (row.option.watch_url || row.option.broadcaster_home_url || (row.possible && row.option.source_schedule));
           if (url) {
             element.append(document.createTextNode(" · "));
             const link = document.createElement("a");
@@ -348,6 +349,7 @@
             link.target = "_blank";
             link.rel = "noopener noreferrer";
             link.textContent = row.option.watch_url && row.option.web_stream_free === true ? "Streaming ufficiale" : "Sito ufficiale";
+            if (url === row.option.source_schedule && !row.option.watch_url) link.textContent = "Palinsesto";
             element.append(link);
           }
         });
