@@ -541,18 +541,19 @@ BEGIN:VEVENT
 SUMMARY:⚽ Cagliari - AC Milan
 DTSTART;TZID=Europe/Rome:20261130T204500
 DTEND;TZID=Europe/Rome:20261130T224500
-DTSTAMP:20261124T000130Z
+DTSTAMP:20261127T003229Z
 UID:dbfe00a983f6937f6ba0d38d@milan-calendar
-SEQUENCE:13
+SEQUENCE:14
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 30/11/
- 2026 20:45\nTurno: 13\nStadio: Unipol Domus\nDove vederla in Italia: DAZN\
- nFonte orario: AC Milan\nClassifica Serie A aggiornata — giornata comple
- tata:\n  2. Roma — 30 pt\n  3. Inter — 29 pt\n▶ 4. Milan — 27 pt 
- — 12 PG — DR +14\n  5. Como — 26 pt\n  6. Juventus — 21 pt\nClassi
- fica aggiornata: 24/11/2026 01:01\nFonte classifica: Lega Serie A
-LAST-MODIFIED:20261124T000130Z
-LOCATION:Unipol Domus
+ 2026 20:45\nTurno: 13\nStadio: Unipol Domus\nLocalità: Italy\nDove vederl
+ a in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A aggiornata 
+ — giornata completata:\n  2. Roma — 30 pt\n  3. Inter — 29 pt\n▶ 4
+ . Milan — 27 pt — 12 PG — DR +14\n  5. Como — 26 pt\n  6. Juventus
+  — 21 pt\nClassifica aggiornata: 24/11/2026 01:01\nFonte classifica: Leg
+ a Serie A
+LAST-MODIFIED:20261127T003229Z
+LOCATION:Unipol Domus\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
 BEGIN:VALARM
@@ -586,14 +587,14 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Sunderland FC
 DTSTART;TZID=Europe/Rome:20261210T210000
 DTEND;TZID=Europe/Rome:20261210T230000
-DTSTAMP:20261126T083439Z
+DTSTAMP:20261127T003229Z
 UID:97982c44b5b8526e3dfb5444@milan-calendar
-SEQUENCE:13
+SEQUENCE:14
 CATEGORIES:UEFA Europa League,AC Milan
 DESCRIPTION:Competizione: UEFA Europa League\nMilan: Casa\nOrario (Roma): 
  10/12/2026 21:00\nTurno: 6\nStadio: San Siro Stadium\nDove vederla:\nSky S
  port e NOW — Italia — https://www.nowtv.it/sport/calcio/milan
-LAST-MODIFIED:20261126T083439Z
+LAST-MODIFIED:20261127T003229Z
 LOCATION:San Siro Stadium
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
