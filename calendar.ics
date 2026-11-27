@@ -493,18 +493,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ AC Milan - Frosinone
 DTSTART;TZID=Europe/Rome:20261122T180000
 DTEND;TZID=Europe/Rome:20261122T200000
-DTSTAMP:20261124T000130Z
+DTSTAMP:20261127T212637Z
 UID:e0c247e803a33255e6ebefa8@milan-calendar
-SEQUENCE:19
+SEQUENCE:20
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Casa\nOrario (Roma): 22/11/2026 
  18:00\nTurno: 12\nStadio: Stadio San Siro\nLocalità: Milano\nDove vederla
-  in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A aggiornata 
- — giornata completata:\n  2. Roma — 30 pt\n  3. Inter — 29 pt\n▶ 4
- . Milan — 27 pt — 12 PG — DR +14\n  5. Como — 26 pt\n  6. Juventus
-  — 21 pt\nClassifica aggiornata: 24/11/2026 01:01\nFonte classifica: Leg
- a Serie A
-LAST-MODIFIED:20261124T000130Z
+  in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provvisoria 
+ — giornata in corso:\n  2. Roma — 30 pt\n  3. Inter — 29 pt\n▶ 4. 
+ Milan — 27 pt — 12 PG — DR +14\n  5. Como — 26 pt\n  6. Juventus 
+ — 21 pt\nClassifica aggiornata: 27/11/2026 22:26\nFonte classifica: Lega
+  Serie A
+LAST-MODIFIED:20261127T212637Z
 LOCATION:Stadio San Siro\, Milano
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
@@ -541,18 +541,18 @@ BEGIN:VEVENT
 SUMMARY:⚽ Cagliari - AC Milan
 DTSTART;TZID=Europe/Rome:20261130T204500
 DTEND;TZID=Europe/Rome:20261130T224500
-DTSTAMP:20261127T003229Z
+DTSTAMP:20261127T212637Z
 UID:dbfe00a983f6937f6ba0d38d@milan-calendar
-SEQUENCE:14
+SEQUENCE:15
 CATEGORIES:Serie A,AC Milan
 DESCRIPTION:Competizione: Serie A\nMilan: Trasferta\nOrario (Roma): 30/11/
  2026 20:45\nTurno: 13\nStadio: Unipol Domus\nLocalità: Italy\nDove vederl
- a in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A aggiornata 
- — giornata completata:\n  2. Roma — 30 pt\n  3. Inter — 29 pt\n▶ 4
- . Milan — 27 pt — 12 PG — DR +14\n  5. Como — 26 pt\n  6. Juventus
-  — 21 pt\nClassifica aggiornata: 24/11/2026 01:01\nFonte classifica: Leg
- a Serie A
-LAST-MODIFIED:20261127T003229Z
+ a in Italia: DAZN\nFonte orario: AC Milan\nClassifica Serie A provvisoria 
+ — giornata in corso:\n  2. Roma — 30 pt\n  3. Inter — 29 pt\n▶ 4. 
+ Milan — 27 pt — 12 PG — DR +14\n  5. Como — 26 pt\n  6. Juventus 
+ — 21 pt\nClassifica aggiornata: 27/11/2026 22:26\nFonte classifica: Lega
+  Serie A
+LAST-MODIFIED:20261127T212637Z
 LOCATION:Unipol Domus\, Italy
 TRANSP:OPAQUE
 URL:https://www.acmilan.com/en/season/2026/schedule/all
